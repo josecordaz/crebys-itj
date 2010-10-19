@@ -1,0 +1,79 @@
+Insumos
+Partidas
+Usuaios
+APOA
+prePOA
+detalleprePOA
+Procesos Estratégicos
+Procesos Clave
+Concentrado Proceso Clave Estratégico
+detalle Concentrado Proceso Clave Estratégico
+Metas
+Acciónes
+
+
+---- Tabla Insumos
+
+	- Id_Insumo
+	- In_Nombre
+	- In_Und_Mda
+	- In_Prc_Unt
+
+---- Tabla Partidas
+
+	- Id_Partida
+	- Pa_Num
+	- Pa_Descriptión
+
+---- Tabla Usuarios
+
+	- Id_Usuaio
+	- Us_Nombre
+
+---- Tabla POA
+
+	- Id_POA
+	- Po_Nombre
+	- Po_Fecha
+
+---- Prepoa
+
+
+---- detallePrepoa
+
+	- Subtotal
+	- 
+
+
+---- Proc_Estrategicos
+
+	- Id_Proc_Estrategico
+	- Pe_Nombre
+
+---- Proc_Clave
+
+	- Id_Proc_Clave
+	- Pc_Nombre
+	- Pc_GF
+	- Pc_FN
+	- Pc_SF
+	- Pc_AI
+	- Pc_PP
+	- Pc_Cod
+
+---- Conc_Proc_Clave_Estrategico
+
+	- Id_Conc_Proc_Clave_Estrategico
+	- Cp_Total
+
+---- Detalle Conc_Proc_Clave_Estrategico
+
+---- Metas
+	
+	- Id_Meta
+	- Me_Nombre
+
+---- Acciones
+
+	- Id_Accion
+	- Ac_Nombre

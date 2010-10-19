@@ -1,0 +1,123 @@
+ 
+	Lineas de Acción --- Seguimiento
+	    Proyecto CREBYS--ITJ
+
+Dibujando sendero...
+
+Proceso Contenuente: 9
+
+				Fecha: 07/Oct/2010
+1.- Seguimiento: Se corrigieron todas las observaciones.
+			- Pendiente "Descripción de la tecnología que se utilizará"
+	Acciones:
+			- Terminar "Descripción de la 
+			  tecnología". Fecha: Miercoles
+			  13 de Oct. 09:00 hrs.
+			- Encontrar referencia de la 
+			  información de ITJ.
+													
+8.- Elaboración detallada de Seguimiento de 
+	Requisiciónes:
+	
+	Acciones:
+	
+		- Elaborar documento...				Seguimiento: Esperar a terminar (7)
+															  
+7.- Elaboración detallada de PTA institucional
+
+	Antecedentes:
+
+		- Se requiere de este documento por que de él depende 
+		  en gran parte la automatización del sistema para
+		  el momento de elaborar los prePOA por cada uno de los
+		  departamentos. 
+		  
+		- En el PTA Institucional se describen las metas, quienes
+		  las llevaran a cabo, a que proceso estratégico y clave 
+		  pertenece cada una.
+	
+	Acciones: 
+		
+		- Se prepara entrevista a PPP acerca del PTA......	Seguimiento: Se imprimió entrevista.			Seguimiento: Se realizó exitosamente.
+		- Abrir documentos																								 La elaboración del PTA será
+															Acciones: Se llevara acabo. Fecha tentativa:				 un módulo en el mismo sistema.
+																	  Martes 12 de Ocutubre, 11:30 hrs.					- Pedir archivo "Desgloce metas clave"
+5.- Diagrama de elaboración de POA.																						  a PPP.
+																														- Sacar cita para conocer elaboración
+																														  de PTA.
+
+	Acciones:
+		
+		- Editar documento que contenga 			:Seguimiento: Se elabora documento: "Flujo de Elaboración 
+		  todas las especificaciones para		  				  de POA (DETALLADO)". Su ubicación se 
+		  llevar a cabo el proceso:			  					  encuentra dentro del Análisis del proyecto.
+			> Formatos
+				- Como se llena cada campo	 		 Continuación-> Detallando secuencia de documentos
+			> Ejemplos												que integraran el POA........
+			> Diagrama para visualizar el flujo	 	 Observación->  - Existen nuevos lineamientos para
+			  de información. Se puede utilizar                       POA 2011.
+			  el programa StarUML(6)								- Se observa la necesidad de saber
+																	  con detalle la elaboracion del PTA
+																	  institucional.(7)
+	
+		- Investigar Calendario de Entrega de 		Seguimiento->En calendario 2010 no viene actualizado con		  		  
+		  información 2010.										 los nuevos lineamientos.
+
+
+4.- Determinación correcta de Análisis
+
+	Acciónes:
+
+		- Conocer el proceso excato de como
+		  se lleva a cabo la elaboración de
+		  POA (5)
+		- Conocer el proceso exacto del proceso
+		  de requisiciónes.(8)
+		- Saber qué se necesita para cada uno
+		  de esos documentos.
+		- Elaborar un diagrama de cómo son los 
+		  procesos investigando los documentos 
+		  necesarios para llevarlos a cabo.(5)
+
+3.- Conocimientos de conexión de MySQL con PHP
+
+	Acciónes:
+
+		- Determinación correcta de Análisis (4)
+		- Elaborar Base de Datos.
+		- Comunicarnos con la maestra Monroy
+		  para asesoramiento.
+
+2.- En la programación de la página se necesita la 
+    practica del lenguaje PHP. Cookies, CSS, PHP-MySQL
+
+	Antecedentes:
+
+		- Se investigó material didactico.
+		- Se pidió un espacio físico con 
+		  acceso a Internet.
+
+	Acciones:
+		
+		- Se iniciará con un curso básico del			: Seguimiento-> Se inició con curso  					2.- Se prosiguió con el curso en linea
+		  lenguaje PHP.				 									"PHP 21 Días"								"Manual de PHP 5". Herencia
+		- Se continuará con conexión de Base	  
+		  de datos (MySQL)(3)		  	  				  Continuación-> curso_php_cap_04.pdf pag.: 5...			
+																		 Fecha tentativa: Martes 12 de Octubre,
+																		 18:30 hrs.																		 
+6.- Conocimiento de programa Star UML. 															
+
+	Antecendentes:
+		
+		- Se descargo el software
+		- Se descargó Tutorial de Instalación
+		  y Utilización en Ingles.
+
+	Acciones: 
+
+		- Visualizar los ejemplos contenidos	: Seguimiento-> Se encontró una página donde se describen 
+		  en el proyecto de residencias del	  					los modelos que se pueden hacer con StartUML.
+		  colega Ricardo Santillán.		  						Ejemplo: Diagrama de Secuencia.
+		- Investigar Manual del Programa en 
+		  Español.
+
