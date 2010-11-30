@@ -146,16 +146,20 @@
                             <td>&nbsp;</td>
                       </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td>Iniciojfjfj1</td>
+                        	<td>Iniciojfjfj2</td>
+                        	<td>Iniciojfjfj3</td>
                         </tr>
+
                     </table>
               	</td>
             </tr>
             <tr>
-                <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
-                <!-- InstanceEndEditable -->Menu 2</td>
+                <td class="style2" bgcolor="#FF9900">
+                <!-- InstanceBeginEditable name="menu" -->
+                  Iniciar Sesi&oacute;n
+                <!-- InstanceEndEditable -->
+                </td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td>
@@ -164,9 +168,9 @@
 										<td>  					
 											<!-- #BeginEditable "RE" -->
 <?php 
-	echo "Mentira mentira1";
-	echo "Mentira mentira2";
-	echo "Mentira mentira3";
+	// Cuerpo de la página principal CREBYS
+	echo "";	
+
 ?>
 <!-- #EndEditable -->
             				</td>

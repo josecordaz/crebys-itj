@@ -1,10 +1,7 @@
 <?php 
 	// Incluimos la libreria para hacer la conexion con la base de datos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_datos.php');
-?>
 
-
-<?php 
 	// Variables
 		
 		// Errores [Arreglo]
