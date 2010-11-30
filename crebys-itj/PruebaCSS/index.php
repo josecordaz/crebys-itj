@@ -1,12 +1,10 @@
-<?php
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- #BeginEditable "doctitle" -->
-<title>Documento sin t&iacute;tulo</title>
+<!-- #BeginEditable "doctitle" --><title>Untitled Document</title>
+
+
 <!-- #EndEditable -->
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
 </head>
@@ -19,31 +17,31 @@
                 	<table cellpadding="0" cellspacing="0" class="FondoTabla">
                       	<tr>
                         	<td class="style6" rowspan="2">
-                            	<img alt="" class="style5" src="recursos/Img/BannerSup/izq.png" />
+                            	<img alt="" class="style5" src="../recursos/Img/BannerSup/izq.png" />
                           </td>
                             <td class="style9" colspan="2">
-                            	<img alt="" class="style8" src="recursos/Img/BannerSup/centrosup.png" />
+                            	<img alt="" class="style8" src="../recursos/Img/BannerSup/centrosup.png" />
                           </td>
                             <td rowspan="2">
-                            	<img alt="" class="style7" src="recursos/Img/BannerSup/der.png" />
+                            	<img alt="" class="style7" src="../recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
+                            	<img src="../recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
                           <td>&nbsp;</td>
                       </tr>
                   	</table>
                   	<table>
                     	<tr>
                         	<td>
-                            	<img src="recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
+                            	<img src="../recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
                     </table>
                     <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
-                        	<td rowspan="2" class="style17"><img alt="" src="recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
+                        	<td rowspan="2" class="style17"><img alt="" src="../recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
                       </tr>
@@ -60,29 +58,29 @@
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
-            	<td>
-								<table width="85%">
+            	<td align="center">
+								<table width="85%" >
             			<tr>
-										<td>  					
+										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
-	
-	<div class='principal'>
-	
-		<p>Esto es el dido </p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
-	
-	
-	<!-- #EndEditable -->
+
+<div id="principal">
+
+	<div id="logo"><img src="/crebys-itj/recursos/Img/logo.JPG" id="imagen"/></div>
+    
+    <div id="texto">
+    	<p id="desc">Bienvenido al Sistema Crebys (Control de Requisiciones de Bienes y Servicios del ITJ)
+Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones
+<br/></p>
+    </div>
+    
+    Esta es la ultima versión
+
+</div>
+
+
+
+<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>
