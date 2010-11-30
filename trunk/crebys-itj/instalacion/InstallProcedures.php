@@ -1,7 +1,10 @@
 <?php 
 	// Incluimos la libreria para hacer la conexion con la base de datos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_datos.php');
+?>
 
+
+<?php 
 	// Variables
 		
 		// Errores [Arreglo]
@@ -74,7 +77,7 @@
 			} // Vefiricamos si se creo correctamente el procedimiento
 			elseif (strlen($arr_errores[$i])==0){
 				// Mensaje de procedimiento creado correctamente
-				echo "[+] Procedimiento creado correctamente<p>";
+				echo "Creado correctamente<p>";
 				// Incrementamos contador
 				$crt_proc++;
 			} // Si entra aquí es que ocurrió algun error
