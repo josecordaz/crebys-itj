@@ -1,0 +1,97 @@
+@CHARSET "ISO-8859-1";
+.blur{
+   	background-color: #ccc; /*shadow color*/
+	  color: inherit;
+  	margin-left: 4px;
+	  margin-top: 4px;
+	}
+
+	.shadow, .content{
+   	position: relative;
+   	bottom: 2px;
+   	right: 2px;
+	}
+
+	.shadow{
+   	background-color: #666; /*shadow color*/
+   	color: inherit;
+	}
+
+	.content{
+  	background-color: #fff; /*background color of content*/
+  	color: #000; /*text color of content*/
+  	border: 1px solid #000; /*border color*/
+  	padding: .5em 2ex;
+	} 
+	#form1{
+    	height: 23px;
+    }
+    body{
+    	font-family: Verdana;
+    	font-size: 11px;
+    	font-weight: normal;
+    	font-style: normal;
+    	font-variant: normal;
+    	text-transform: none;
+    	color: #000000;
+    	background-color: #293563;
+    }
+    .nuevoEstilo1{
+    }
+    .style1{
+    	padding: 4px 0 4 0;
+    	width: 900px;
+    	height: 135px;
+    	text-align: center; 
+    }
+    .style2{
+		height: 24px;
+    }
+           
+    .FondoTabla{
+    	width: 900px;
+    	vertical-align: middle;
+    	height: 90px;
+    	background-color: #666666;
+    }
+    .style5{
+    	width: 139px;
+    	height: 89px;
+	}
+    .style6{
+    	text-align: center;
+    }
+    .style7{
+    	width: 103px;
+    	height: 90px;
+    }
+    .style8{
+    	width: 658px;
+    	height: 42px;
+    }
+    .style9{
+    	height: 39px;
+    	background:white;
+    }
+    .style11{
+    	text-align: right;
+    }
+    .style12{
+    	float: left;
+    	height: 43px;
+    }
+    .style13{
+    	width: 900px;
+    	text-align: center;
+    }
+    .style16{
+    	width: 900px;
+    	height: 56px;
+    }
+    .style17{
+    	width: 492px;
+    	font-family: Arial;
+    }
+    .style19{
+    	width: 73px;
+    }

@@ -1,5 +1,5 @@
 <?php
-
+//		include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_datos.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -9,104 +9,6 @@
 <title>Documento sin t&iacute;tulo</title>
 <!-- #EndEditable -->
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-	.blur{
-   	background-color: #ccc; /*shadow color*/
-	  color: inherit;
-  	margin-left: 4px;
-	  margin-top: 4px;
-	}
-
-	.shadow, .content{
-   	position: relative;
-   	bottom: 2px;
-   	right: 2px;
-	}
-
-	.shadow{
-   	background-color: #666; /*shadow color*/
-   	color: inherit;
-	}
-
-	.content{
-  	background-color: #fff; /*background color of content*/
-  	color: #000; /*text color of content*/
-  	border: 1px solid #000; /*border color*/
-  	padding: .5em 2ex;
-	} 
-	#form1{
-    	height: 23px;
-    }
-    body{
-    	font-family: Verdana;
-    	font-size: 11px;
-    	font-weight: normal;
-    	font-style: normal;
-    	font-variant: normal;
-    	text-transform: none;
-    	color: #000000;
-    	background-color: #293563;
-    }
-    .nuevoEstilo1{
-    }
-    .style1{
-    	padding: 4px 0 4 0;
-    	width: 900px;
-    	height: 135px;
-    	text-align: center; 
-    }
-    .style2{
-		height: 24px;
-    }
-           
-    .FondoTabla{
-    	width: 900px;
-    	vertical-align: middle;
-    	height: 90px;
-    	background-color: #666666;
-    }
-    .style5{
-    	width: 139px;
-    	height: 89px;
-	}
-    .style6{
-    	text-align: center;
-    }
-    .style7{
-    	width: 103px;
-    	height: 90px;
-    }
-    .style8{
-    	width: 658px;
-    	height: 42px;
-    }
-    .style9{
-    	height: 39px;
-    	background:white;
-    }
-    .style11{
-    	text-align: right;
-    }
-    .style12{
-    	float: left;
-    	height: 43px;
-    }
-    .style13{
-    	width: 900px;
-    	text-align: center;
-    }
-    .style16{
-    	width: 900px;
-    	height: 56px;
-    }
-    .style17{
-    	width: 492px;
-    	font-family: Arial;
-    }
-    .style19{
-    	width: 73px;
-    }
-</style>
 </head>
 
 <body>
@@ -146,32 +48,49 @@
                             <td>&nbsp;</td>
                       </tr>
                         <tr>
-                        	<td>Iniciojfjfj1</td>
-                        	<td>Iniciojfjfj2</td>
-                        	<td>Iniciojfjfj3</td>
+                        	<td>Inicio</td>
                         </tr>
-
                     </table>
               	</td>
             </tr>
             <tr>
-                <td class="style2" bgcolor="#FF9900">
-                <!-- InstanceBeginEditable name="menu" -->
+                <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
                   Iniciar Sesi&oacute;n
-                <!-- InstanceEndEditable -->
-                </td>
+                <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
-            	<td>
-								<table width="85%">
+            	<td align="center">
+								<table width="85%" >
             			<tr>
-										<td>  					
+										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 <?php 
-	// Cuerpo de la página principal CREBYS
+	// Cuerpo de la pï¿½gina principal CREBYS
 	echo "";	
+	
 
-?>
+	?>
+	
+	<div id="logo">
+		<img src="/CREBYS-ITJ/recursos/img/logo.jpg"/>
+	</div> 
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <!-- #EndEditable -->
             				</td>
             			</tr>
