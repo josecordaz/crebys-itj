@@ -60,10 +60,10 @@
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
-            	<td>
-								<table width="85%">
+            	<td align="center">
+								<table width="85%" >
             			<tr>
-										<td>  					
+										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 	
 	<div class='principal'>
