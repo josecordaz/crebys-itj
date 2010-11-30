@@ -17,7 +17,8 @@
 		// le continue otro caracter puede tener la 
 		//cantidad de caracteres que le mande $longitud
 		function validarCadena($cadena,$longitud){
-			$patron="(^[a-zA-Z]([\s][a-zA-Z]|[a-zA-Z])*$)";
+			//$patron="(^[a-zA-Z]([\s][a-zA-Z]|[a-zA-Z])*$)";
+			$patron="(^([a-zA-Z]|é|á|í|ó|ú)([^\S][a-zA-Z]|[a-zA-Z]|[é|á|í|ó|ú])*$)";
 			if(ereg($patron, $cadena))
 				if(strlen($cadena)<=$longitud)
 					return true;

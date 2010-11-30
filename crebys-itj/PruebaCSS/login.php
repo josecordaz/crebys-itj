@@ -1,10 +1,13 @@
+<?php
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- #BeginEditable "doctitle" --><title>Crebys-ITJ - Crontrol de requisiciones de bienes y servicios del ITJ </title>
-
-
+<!-- #BeginEditable "doctitle" -->
+<title>Crebys-ITJ Crontrol de requisiciones de bienes y servicios del ITJ </title>
 <!-- #EndEditable -->
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
 </head>
@@ -53,7 +56,7 @@
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p><a href="/crebys-itj/PruebaCSS/login.php">Iniciar Sesión</a></p>
+
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
@@ -63,22 +66,55 @@
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 
-		<div id="principal">
+<div class="content">
 
-			<div id="logo"><img src="/crebys-itj/recursos/Img/logo.JPG" id="imagen"/></div>
-    
-		    <div id="texto">
+
+<?php
+	if (isset($_POST['usuario'])) {
+		$validar=new Validar();
+		
+		if(!$validar->validarCadena($_POST['usuario'],30))
+	  		echo "El nombre de usuario que escribió es incorrecto";
+		else{
+			echo "Usuario:=[".$_POST['usuario']."]<br/>";
+			echo "Contraseña:=[".$_POST['password']."]";
+		}
+	 }
+	else
+	{?>
+    	<div align="center">
+        	
+                <form ACTION="login.php" METHOD="POST">	
+                
+                    <hr/>        
+                    
+                    <br/>
+                    
+                    <div class="caja">
+                    	Usuario: <input TYPE="text" NAME="usuario"/><br/>
+                    </div>
             
-    			<p id="desc">Bienvenido al Sistema Crebys (Control de Requisiciones de Bienes y Servicios del ITJ)
-				Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones
-				<br/></p>
-		    </div>
-    
-
-
+                    <br/>
+                    
+                    <div class="caja">
+	                    Contraseña: <input TYPE="text" NAME="password"/><br/>
+                    </div>
+                    
+                    <br/>
+                    
+                    <input TYPE="submit" NAME="proc" value="Iniciar Sesión"/>
+                
+                    <hr/>
+            
+                </form>
 		</div>
+	<?php
+	}
+?>
 
-<!-- #EndEditable -->
+</div>
+
+											<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>
