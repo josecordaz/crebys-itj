@@ -11,11 +11,12 @@
 <!-- #BeginEditable "doctitle" -->
 <title>Documento sin t&iacute;tulo</title>
 <!-- #EndEditable -->
-<link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
-	<div>
+
+<div>
     	<table align="center" class="style1">
         	<tr>
             	<td>
@@ -51,7 +52,7 @@
                             <td>&nbsp;</td>
                       </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td></td>
                         </tr>
                     </table>
               	</td>
@@ -65,7 +66,7 @@
             <tr bgcolor="#FFFFFF">
             	<td align="center">
 								<table width="85%" >
-            			<tr>
+            			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 											<div class="blur">

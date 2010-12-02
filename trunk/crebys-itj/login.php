@@ -1,5 +1,5 @@
 <?php
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -8,48 +8,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- #BeginEditable "doctitle" -->
 <title>Crebys-ITJ Crontrol de requisiciones de bienes y servicios del ITJ </title>
-<!-- #EndEditable -->
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+<!-- #EndEditable -->
+
 </head>
 
 <body>
-	<div>
+
+<div>
     	<table align="center" class="style1">
         	<tr>
             	<td>
                 	<table cellpadding="0" cellspacing="0" class="FondoTabla">
                       	<tr>
                         	<td class="style6" rowspan="2">
-                            	<img alt="" class="style5" src="../recursos/Img/BannerSup/izq.png" />
-                          </td>
+                            	<img alt="" class="style5" src="recursos/Img/BannerSup/izq.png" />
+                          	</td>
                             <td class="style9" colspan="2">
-                            	<img alt="" class="style8" src="../recursos/Img/BannerSup/centrosup.png" />
-                          </td>
+                            	<img alt="" class="style8" src="recursos/Img/BannerSup/centrosup.png" />
+                          	</td>
                             <td rowspan="2">
-                            	<img alt="" class="style7" src="../recursos/Img/BannerSup/der.png" />
+                            	<img alt="" class="style7" src="recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="../recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
-                          <td>&nbsp;</td>
-                      </tr>
-                  	</table>
-                  	<table>
+                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" /></td>
+                          	<td>&nbsp;</td>
+                      	</tr>
+                   </table>
+                   <table>
                     	<tr>
                         	<td>
-                            	<img src="../recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
+                            	<img src="recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
-                    </table>
-                    <table class="style16" bgcolor="#FFFFFF" border="0">
+                   </table>
+                   <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
-                        	<td rowspan="2" class="style17"><img alt="" src="../recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
+                        	<td rowspan="2" class="style17"><img alt="" src="recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
-                      </tr>
+                        </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td></td>
                         </tr>
                     </table>
               	</td>
@@ -62,29 +64,25 @@
             <tr bgcolor="#FFFFFF">
             	<td align="center">
 								<table width="85%" >
-            			<tr>
+            			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 
 <div class="content">
 
 
-<?php
-	if (isset($_POST['usuario'])) {
-		$validar=new Validar();
-		
-		if(!$validar->validarCadena($_POST['usuario'],30))
-	  		echo "El nombre de usuario que escribió es incorrecto";
-		else{
-			echo "Usuario:=[".$_POST['usuario']."]<br/>";
-			echo "Contraseña:=[".$_POST['password']."]";
-		}
-	 }
-	else
-	{?>
-    	<div align="center">
+
+    	<div >
+        
+        		<?php
+                
+				if(isset($_COOKIE['error'])){
+					echo $_COOKIE['error']."<br/>";
+				}
+				
+				?>
         	
-                <form ACTION="login.php" METHOD="POST">	
+                <form ACTION="admin.php" METHOD="post">	
                 
                     <hr/>        
                     
@@ -97,7 +95,7 @@
                     <br/>
                     
                     <div class="caja">
-	                    Contraseña: <input TYPE="text" NAME="password"/><br/>
+	                    Contraseña: <input TYPE="password" NAME="password"/><br/>
                     </div>
                     
                     <br/>
@@ -108,9 +106,7 @@
             
                 </form>
 		</div>
-	<?php
-	}
-?>
+
 
 </div>
 

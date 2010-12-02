@@ -10,7 +10,7 @@
 		//Guardamos el nombre de la base de datos
 		//a la que nos conectaremos
 		private $bd="";
-		//Guardamos la conexión conexión con el 
+		//Guardamos la conexión con el 
 		//servidor de Base de Datos
 		private $conexion;
 		//Guardamos la consulta SQL 
@@ -58,7 +58,7 @@
 		}
 		//Establecemos y ejecutamos una consulta SQL
 		function executeSQL($sql){
-			//echo "La consulta es(".$sql.")<br>";
+			"La consulta es(".$sql.")<br>";
 			$res=$this->conexion->multi_query($sql);
 //			$this->error=@mysqli_error($this->conexion);
 			//$this->error=mysqli_error(mysqli_multi_query($sql,$this->conexion));
@@ -79,6 +79,22 @@
 				}while ($this->conexion->next_result());
 			}
 		}
+		// Validamos los datos de inicio de sesion
+		function iniciarSesion($us_nick,$us_password){
+				$this->executeSQL("call iniciarSesion('$us_nick','".md5($us_password)."',@error); select @error");
+				switch($this->error()){
+					case 0:
+						return "Error en la consulta";
+					case 1:
+						return true;
+					case 2:
+						return "No existe el usuario:=[$us_nick]";
+					case 3:
+						return "La contraseña es incorrecta";;
+				}
+		}
+		
+		
 		//Mostramos el resultado de la consulta SQL
 		function mostrarResSQL(){
 			for($fila=0;$fila<count($this->resArray);$fila++){
@@ -104,7 +120,6 @@
 		//Error raiz
 		public  function erroraiz(){
 			$var=mysqli_error($this->conexion);
-			//echo mysqli_error($this->conexion);
 			return $var;
 		}
 		function getCxn(){
@@ -121,7 +136,10 @@
 	//echo mysqli_error($conexion->getCxn());
 	
 	//echo $conexion->isConectado();
-	//$conexion->executeSQL('CREATE PROCEDURE insPartida(IN Id_Partid INT,IN Pa_Nombr VARCHAR(30),OUT error INT) BEGIN SET error=1; IF(select count(*)from Partidas where Id_Partida=Id_Partid)>0 THEN SET error=2; ELSE INSERT INTO Partidas VALUES(Id_Partid,Pa_Nombr); END IF; END;');
+	//echo $conexion->iniciarSesion("sony_karl","20021605035");
+	
+
+	
 	
 	//$conexion->mostrarResSQL();
 	//echo ($conexion->erroraiz());

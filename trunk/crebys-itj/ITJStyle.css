@@ -4,24 +4,24 @@
 	  color: inherit;
   	margin-left: 4px;
 	  margin-top: 4px;
-	}
-
-	.shadow, .content{
-   	position: relative;
-   	bottom: 2px;
-   	right: 2px;
+	  float:left;
 	}
 
 	.shadow{
-   	background-color: #666; /*shadow color*/
+   	position: relative;
+   	bottom: 2px;
+   	right: 2px;
+ 	background-color: #666; /*shadow color*/
    	color: inherit;
 	}
 
 	.content{
-  	background-color: #fff; /*background color of content*/
-  	color: #000; /*text color of content*/
-  	border: 1px solid #000; /*border color*/
-  	padding: .5em 2ex;
+	background-color: #fff; /*background color of content*/
+	color: #000; /*text color of content*/
+	border: 1px solid #000; /*border color*/
+	padding: .5em 2ex;
+	float:left;
+	width: 70em;
 	} 
 	#form1{
     	height: 23px;
@@ -94,10 +94,4 @@
     }
     .style19{
     	width: 73px;
-		
     }
-#logo{
-	background-image: url(back_all.jpg);
-}
-	
-	

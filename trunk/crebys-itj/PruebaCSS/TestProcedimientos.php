@@ -2,8 +2,8 @@
 	
 	//Incluimos las clases que vamos 
 	//a utilizar
-	include_once 'includes/Procedimientos.php';
-	include_once 'includes/Base_de_Datos.php';
+	include_once '../includes/Procedimientos.php';
+	include_once '../includes/Base_de_Datos.php';
 	
 	//Inicializamos conexión a la 
 	//base de datos
