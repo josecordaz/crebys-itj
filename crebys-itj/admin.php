@@ -1,18 +1,68 @@
 <?php
+	// Libreria para la facilitacion de validaciones
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
+	// Libreria para el manejo de la Base de Datos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
+	
 
+
+		// Inicializamos las variables para en redireccionamiento
+		// Guardamos el nombre del servidor
+		$host  = $_SERVER['HTTP_HOST'];
+		// Guardamos la carpeta
+		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		// Guardamos el nombre del archivo
+		$extra = 'login.php';
+		
+	if(isset($_POST['usuario'])){	
+		// Inicializamos el objeto para validar
+		$validar=new Validar();
+		// Validamos que el nombre de usuario sea válido
+		if($validar->validarCadena($_POST['usuario'],30)){
+			// Creamos la conexión a la base de datos
+			$conexion=new Base_de_Datos("localhost","root","","crebys-itj");
+			// Guardamos el resultado e intentamos iniciar sesion
+			$sesion=$conexion->iniciarSesion($_POST['usuario'],$_POST['password']);
+			// Comprobamos el resultado del inicio de sesion
+			if(!is_bool($sesion)){
+				// Guardamos el tipo de error para mostrarlo en la pagin de inicio de sesion
+				setcookie("error",$sesion, time()+20);
+				// Redireccionamos a la pagina de login.php
+				header("Location: http://$host$uri/$extra");
+				// Terminamos la ejecucion
+				exit;
+				}
+			//Error de validacion	
+		}else{
+			// Guardamos cookie de nombre no válido
+			setcookie("error","El nombre de usuario que escribió es incorrecto", time()+20);
+			// Redireccionamos a la pagina de login.php
+			header("Location: http://$host$uri/$extra");
+			// Terminamos la ejecucion
+			exit;
+		}
+		
+	}else{
+		// Redireccionamos a la pagina de login.php
+		header("Location: http://$host$uri/$extra");
+		// Terminamos la ejecucion
+		exit;
+		}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- #BeginEditable "doctitle" -->
-<title>Documento sin t&iacute;tulo</title>
-<!-- #EndEditable -->
+<title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+<!-- #EndEditable -->
+
 </head>
 
 <body>
-	<div>
+
+<div>
     	<table align="center" class="style1">
         	<tr>
             	<td>
@@ -20,69 +70,82 @@
                       	<tr>
                         	<td class="style6" rowspan="2">
                             	<img alt="" class="style5" src="recursos/Img/BannerSup/izq.png" />
-                          </td>
+                          	</td>
                             <td class="style9" colspan="2">
                             	<img alt="" class="style8" src="recursos/Img/BannerSup/centrosup.png" />
-                          </td>
+                          	</td>
                             <td rowspan="2">
                             	<img alt="" class="style7" src="recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
-                          <td>&nbsp;</td>
-                      </tr>
-                  	</table>
-                  	<table>
+                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" /></td>
+                          	<td>&nbsp;</td>
+                      	</tr>
+                   </table>
+                   <table>
                     	<tr>
                         	<td>
                             	<img src="recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
-                    </table>
-                    <table class="style16" bgcolor="#FFFFFF" border="0">
+                   </table>
+                   <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
                         	<td rowspan="2" class="style17"><img alt="" src="recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
-                      </tr>
+                        </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
+	<?php
+		// Bienvenido al usuario
+    	echo "Bienvenido ".$_POST['usuario'];
+		// Eliminamos las variables
+		unset($_POST['usuario']);
+		unset($_POST['password']);    	
+	?>
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
 								<table width="85%" >
-            			<tr>
+            			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
-	
-	<div class='principal'>
-	
-		<p>Esto es el dido </p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
-	
-	
-	<!-- #EndEditable -->
+											
+
+                                            
+
+                                            
+                                            
+											<div class="content">                                            
+<div id="principal">
+
+		<div id="uno">uno</div>
+   		<div id="dos">dos</div>
+        
+</div>
+
+											</div>
+
+
+
+
+
+
+
+
+
+
+                                         	<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>

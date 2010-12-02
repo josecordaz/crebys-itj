@@ -152,3 +152,23 @@ a	!-- PARTIDAS
 		SET error=1;
 		update Proc_Estrategicos set Pe_Nombre=Pe_Nombr where Id_Proc_Estrategico=Id_Proc_Estrategic;
 	END;&
+	
+	!-- Validamos los datos de sesión
+		!-- error 0 Error en la consulta
+		!-- error 1 Los datos son correctos
+		!-- error 2 No existe el usuario
+		!-- error 3 Contraseña incorrecta
+	&CREATE PROCEDURE iniciarSesion(IN Us_Nic varchar(25),IN Us_Passwor varchar(32),OUT error INT)
+	BEGIN
+		IF(select count(*) from usuarios where Us_Nick=Us_Nic)>0 THEN
+			IF(select count(*) from usuarios where Us_Nick=Us_Nic and Us_Password=Us_Passwor)>0 THEN
+				SET error=1;
+			ELSE
+				SET error=3;
+			END IF;
+		ELSE
+			SET error=2;	
+		END IF;
+	END;&
+	
+	

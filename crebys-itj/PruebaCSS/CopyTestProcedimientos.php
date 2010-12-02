@@ -1,16 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
+<?php
+	
+	//Incluimos las clases que vamos 
+	//a utilizar
+	include_once '../includes/Procedimientos.php';
+	include_once '../includes/Base_de_Datos.php';
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- #BeginEditable "doctitle" --><title>Crebys-ITJ - Crontrol de requisiciones de bienes y servicios del ITJ </title>
-
-
+<!-- #BeginEditable "doctitle" -->
+<title>Documento sin t&iacute;tulo</title>
 <!-- #EndEditable -->
-<link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
-	<div>
+
+<div>
     	<table align="center" class="style1">
         	<tr>
             	<td>
@@ -46,38 +54,44 @@
                             <td>&nbsp;</td>
                       </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p><a href="/crebys-itj/PruebaCSS/login.php">Iniciar Sesión</a></p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
 								<table width="85%" >
-            			<tr>
+            			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
 
-		<div id="principal">
+<?php
 
-			<div id="logo"><img src="/crebys-itj/recursos/Img/logo.JPG" id="imagen"/></div>
-    
-		    <div id="texto">
-            
-    			<p id="desc">Bienvenido al Sistema Crebys (Control de Requisiciones de Bienes y Servicios del ITJ)
-				Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones
-				<br/></p>
-		    </div>
-    
+	//Inicializamos conexión a la 
+	//base de datos
+	$conexion=new Base_de_datos('localhost','root','','crebys-itj');
+	
+	//Inicializamos la clase
+	//de procedimientos
+	$procedimiento=new Procedimientos($conexion);
+	
+	//Probamos los procedimientos
+	$procedimiento->modProcEst(60,"Vinculacion");
+	echo $procedimiento->mostrarError();
+		
+	//Terminamos la conexión
+	$conexion->desconectar();
+	
 
-
-		</div>
-
+	
+	?>
 <!-- #EndEditable -->
             				</td>
             			</tr>

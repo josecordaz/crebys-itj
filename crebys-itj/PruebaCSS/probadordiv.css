@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+#principal {
+	border: 3px solid #0F3;
+	width: 300px;
+	float: left;
+}
+#uno {
+	border: 3px solid #00F;
+	width: 34px;
+	height: 100px;
+	vertical-align: 23px;
+	float: left;
+}
+#dos {
+	border: 3px solid #606;
+	width: 50px;
+	vertical-align: 23px;
+	float: left;
+}
+#centrador {
+	border-top-color: #F00;
+	border-right-color: #F00;
+	border-bottom-color: #F00;
+	border-left-color: #F00;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	height: inherit;
+	float: left;
+}

@@ -1,18 +1,17 @@
-<?php
-//		include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_datos.php');
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- #BeginEditable "doctitle" -->
-<title>Documento sin t&iacute;tulo</title>
-<!-- #EndEditable -->
+<!-- #BeginEditable "doctitle" --><title>Crebys-ITJ - Crontrol de requisiciones de bienes y servicios del ITJ </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+
+<!-- #EndEditable -->
+
 </head>
 
 <body>
-	<div>
+
+<div>
     	<table align="center" class="style1">
         	<tr>
             	<td>
@@ -20,77 +19,66 @@
                       	<tr>
                         	<td class="style6" rowspan="2">
                             	<img alt="" class="style5" src="recursos/Img/BannerSup/izq.png" />
-                          </td>
+                          	</td>
                             <td class="style9" colspan="2">
                             	<img alt="" class="style8" src="recursos/Img/BannerSup/centrosup.png" />
-                          </td>
+                          	</td>
                             <td rowspan="2">
                             	<img alt="" class="style7" src="recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
-                          <td>&nbsp;</td>
-                      </tr>
-                  	</table>
-                  	<table>
+                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" /></td>
+                          	<td>&nbsp;</td>
+                      	</tr>
+                   </table>
+                   <table>
                     	<tr>
                         	<td>
                             	<img src="recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
-                    </table>
-                    <table class="style16" bgcolor="#FFFFFF" border="0">
+                   </table>
+                   <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
                         	<td rowspan="2" class="style17"><img alt="" src="recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
-                      </tr>
+                        </tr>
                         <tr>
-                        	<td>Inicio</td>
+                        	<td></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  Iniciar Sesi&oacute;n
+                  <p><a href="/crebys-itj/login.php">Iniciar Sesión</a></p>
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
 								<table width="85%" >
-            			<tr>
+            			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
-<?php 
-	// Cuerpo de la p�gina principal CREBYS
-	echo "";	
-	
 
-	?>
-	
-	<div id="logo">
-		<img src="/CREBYS-ITJ/recursos/img/logo.jpg"/>
-	</div> 
+		<div id="caja">
+
+			<div id="logo"><img src="/crebys-itj/recursos/Img/logo.JPG" id="imagen"/></div>
+    
+		    <div id="texto">
+            
+    			<p id="desc">Bienvenido al Sistema Crebys (Control de Requisiciones de Bienes y Servicios del ITJ)
+				Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones
+				<br/></p>
+		    </div>
+    
 
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+		</div>
+
 <!-- #EndEditable -->
             				</td>
             			</tr>
