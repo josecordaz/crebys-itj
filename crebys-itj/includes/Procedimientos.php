@@ -235,6 +235,7 @@
 				$this->error="[-] Pe_Nombre no válido";
 			return 0;
 		}
+		// Procedimiento para modificar un proceso estratégico
 		function modProcEst($Id_Proc_Estrategico,$Pe_Nombre){
 			if($this->validar->validarNumero($Id_Proc_Estrategico)){
 				if($this->validar->validarCadena($Pe_Nombre, $this->sacarLongitud("proc_estrategicos","Pe_Nombre"))){
@@ -253,7 +254,37 @@
 				$this->error="[-] Id_Proc_Estrategico no válido";
 			return 0;
 		}
-		
+		// Procedimiento para insertar un usuario
+		function insUsuario($Id_Departamento_Puesto,$Us_Password,$Us_Nombre,$Us_Apellidop,$Us_Apellidom,$Us_Nick){
+			if($this->validar->validarCadena($Us_Password, $this->sacarLongitud("usuarios","Us_Password"))){
+				if($this->validar->validarCadena($Us_Nombre, $this->sacarLongitud("usuarios","Us_Nombre"))){
+					if($this->validar->validarCadena($Us_Apellidop, $this->sacarLongitud("usuarios","Us_Apellidop"))){
+						if($this->validar->validarCadena($Us_Apellidom, $this->sacarLongitud("usuarios","Us_Apellidom"))){
+							if($this->validar->validarCadena($Us_Nick, $this->sacarLongitud("usuarios","Us_Nick"))){
+								$this->conexion->executeSQL("call insUsuario(".$Id_Departamento_Puesto.",".$Us_Password.",".$Us_Nombre.",".$Us_Apellidop.",".$Us_Apellidom.",".$Us_Nick.", @error); select error");
+								switch ($this->conexion->error()){
+									case 0:
+										return "[-] Error de consulta";
+									case 1:
+										return true;
+									case 2:
+										return "[-] Nick repetido";
+									case 3:
+										return "[-] Nombre repetido";
+									case 4:
+										return "[-] No existe el departamento puesto[".$Id_Departamento_Puesto."]";
+								}		
+							}else
+								return "[-] Nick no válido";	
+						}else
+							return "[-] Apellido materno no válido";	
+					}else
+						return "[-] Apellido paterno no válido";	
+				}else
+					return "[-] Nombre de usuario no válido";	
+			}else
+				return "[-] Error en la longitud de la contraseña";
+		}
 		//Sacamos la longitud de cualquier campo
 		// en la tabla especificada
 		//PE: cadena varchar(30)
@@ -282,4 +313,5 @@
 			return false;	
 		}
 	}
+	
 ?>

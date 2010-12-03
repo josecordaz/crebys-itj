@@ -103,3 +103,40 @@
 	text-decoration: underline;
 	color: #000;
 }
+#principal {
+	float: left;
+	height: auto;
+	width: auto;
+}
+#uno {
+	float: left;
+	width: 20em;
+	height: 22em;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+	margin: 5px;
+	text-align: left;
+}
+#dos {
+	float: left;
+	width: 45em;
+	height: 20em;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+	margin: 5px;
+	text-align: left;
+	padding: 1em;
+	overflow: scroll;
+}

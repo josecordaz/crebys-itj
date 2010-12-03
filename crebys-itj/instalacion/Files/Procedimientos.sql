@@ -171,4 +171,40 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 	
+	!-- Insertamos un nuevo usuario
+		!-- error 0 Error en consulta
+		!-- error 1 Inserción correcta
+		!-- error 2 Nick repetido
+		!-- error 3 Nombre repetido
+		!-- error 4 Departamento_Puesto inexistente
+		
+	&CREATE PROCEDURE insUsuario(IN Id_Departamento_Puest INT,IN Us_Passwor VARCHAR(32),IN Us_Nombr VARCHAR(25), IN Us_Apellido_p VARCHAR(15),IN Us_Apellido_m VARCHAR(15),IN Us_Nic VARCHAR(20),OUT error INT)
+	BEGIN
+		DECLARE Id_Usuari INT default(0);
+		SET error=1;
+		IF(select count(*) from usuarios)>0 THEN
+			SET Id_Usuari=(select max(Id_Usuario) from usuarios)+3;
+		ELSE
+			SET Id_Usuari=20;
+		END IF;
+		
+		IF(select count(*) from usuarios where Us_Nick=Us_Nic)=0 THEN
+			IF(select count(*) from usuarios where Us_Nombre=Us_Nombr AND Us_Apellidop=Us_Apellido_p AND Us_Apellidom=Us_Apellido_m)=0 THEN
+				IF(select count(*) from departamentos_puestos where Id_Departamento_Puesto=Id_Departamento_Puest)>0 THEN
+					insert into usuarios values(Id_Usuari,Id_Departamento_Puest,Us_Passwor,Us_Nombr,Us_Apellido_p,Us_Apellido_m,Us_Nic);
+				ELSE
+					SET error=4;
+				END IF;
+			ELSE
+				SET error=3;
+			END IF;
+		ELSE
+			SET error=2;
+		END IF;
+		
+	END;&
+
+
+	
+		
 	

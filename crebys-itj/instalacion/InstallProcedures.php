@@ -70,23 +70,23 @@
 			// Verificamos si el error que devolvió fue de ya creado
 			if (strpos($arr_errores[$i], "already exists")){
 				// Mostramos que en procedimiento ya existia
-				echo "[+] Procedimiento ya existente<p>";
+				echo "[+] Procedimiento ya existente<p><p/>";
 			} // Vefiricamos si se creo correctamente el procedimiento
 			elseif (strlen($arr_errores[$i])==0){
 				// Mensaje de procedimiento creado correctamente
-				echo "Creado correctamente<p>";
+				echo "Creado correctamente<p><p/>";
 				// Incrementamos contador
 				$crt_proc++;
 			} // Si entra aquí es que ocurrió algun error
 			else{
 				// Mostramos mensaje de error
-				echo "<br>[-] Error:= {$arr_errores[$i]}";
+				echo "<p></p>[-] Error:= {$arr_errores[$i]}<p></p>";
 			} 
 				
 		}
 		// Verificamos si se creo minimo un procedimiento
 		if($crt_proc>0){
 			// Mostramos la cantidad de procedimientos que se crearon
-			echo "[+] $crt_proc Procedimientos creados correctamente<p>";
+			echo "[+] $crt_proc Procedimientos creados correctamente<p></p>";
 		}
 ?>
