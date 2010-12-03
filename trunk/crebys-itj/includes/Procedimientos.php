@@ -261,29 +261,33 @@
 					if($this->validar->validarCadena($Us_Apellidop, $this->sacarLongitud("usuarios","Us_Apellidop"))){
 						if($this->validar->validarCadena($Us_Apellidom, $this->sacarLongitud("usuarios","Us_Apellidom"))){
 							if($this->validar->validarCadena($Us_Nick, $this->sacarLongitud("usuarios","Us_Nick"))){
-								$this->conexion->executeSQL("call insUsuario(".$Id_Departamento_Puesto.",".$Us_Password.",".$Us_Nombre.",".$Us_Apellidop.",".$Us_Apellidom.",".$Us_Nick.", @error); select error");
+								$this->conexion->executeSQL("call insUsuario(".$Id_Departamento_Puesto.",".md5($Us_Password).",".$Us_Nombre.",".$Us_Apellidop.",".$Us_Apellidom.",".$Us_Nick.", @error); select error");
 								switch ($this->conexion->error()){
 									case 0:
-										return "[-] Error de consulta";
+										$this->error="[-] Error de consulta";
+										break;
 									case 1:
 										return true;
 									case 2:
-										return "[-] Nick repetido";
+										$this->error="[-] Nick repetido";
+										break;
 									case 3:
-										return "[-] Nombre repetido";
+										$this->error="[-] Nombre repetido";
+										break;
 									case 4:
-										return "[-] No existe el departamento puesto[".$Id_Departamento_Puesto."]";
+										$this->error="[-] No existe el departamento puesto[".$Id_Departamento_Puesto."]";
 								}		
 							}else
-								return "[-] Nick no válido";	
+								$this->error="[-] Nick no válido";	
 						}else
-							return "[-] Apellido materno no válido";	
+							$this->error="[-] Apellido materno no válido";	
 					}else
-						return "[-] Apellido paterno no válido";	
+						$this->error="[-] Apellido paterno no válido";	
 				}else
-					return "[-] Nombre de usuario no válido";	
+					$this->error="[-] Nombre de usuario no válido";	
 			}else
-				return "[-] Error en la longitud de la contraseña";
+				$this->error="[-] Error en la longitud de la contraseña";
+			return 0;
 		}
 		//Sacamos la longitud de cualquier campo
 		// en la tabla especificada
