@@ -21,35 +21,35 @@
                       	<tr>
                         	<td class="style6" rowspan="2">
                             	<img alt="" class="style5" src="../recursos/Img/BannerSup/izq.png" />
-                          </td>
+                          	</td>
                             <td class="style9" colspan="2">
                             	<img alt="" class="style8" src="../recursos/Img/BannerSup/centrosup.png" />
-                          </td>
+                          	</td>
                             <td rowspan="2">
                             	<img alt="" class="style7" src="../recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="../recursos/Img/BannerSup/centroinf.png" class="style12" />                            </td>
-                          <td>&nbsp;</td>
-                      </tr>
-                  	</table>
-                  	<table>
+                            	<img src="../recursos/Img/BannerSup/centroinf.png" class="style12" /></td>
+                          	<td>&nbsp;</td>
+                      	</tr>
+                   </table>
+                   <table>
                     	<tr>
                         	<td>
                             	<img src="../recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
-                    </table>
-                    <table class="style16" bgcolor="#FFFFFF" border="0">
+                   </table>
+                   <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
                         	<td rowspan="2" class="style17"><img alt="" src="../recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
-                      </tr>
+                        </tr>
                         <tr>
-                        	<td></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" -->Bienvenida<!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
@@ -100,7 +100,7 @@
                             <td>
                                 <span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
                                 	© 2010<span lang="es-mx"> Imágenes y Desarrollo propiedad intelectual del ITJ<br />
-                                    Última Actualización: 7/09/2010
+                                    Última Actualización: 02/12/2010
                                     <br />
                                     webmasteritj@itjiquilpan.edu.mx
                                  </span></span>

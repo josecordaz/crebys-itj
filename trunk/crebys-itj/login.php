@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -51,7 +47,7 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" --><!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
@@ -89,13 +85,13 @@
                     <br/>
                     
                     <div class="caja">
-                    	Usuario: <input TYPE="text" NAME="usuario"/><br/>
+                    	Usuario: <input TYPE="text" NAME="usuario" value=""/><br/>
                     </div>
             
                     <br/>
                     
                     <div class="caja">
-	                    Contraseña: <input TYPE="password" NAME="password"/><br/>
+	                    Contraseña: <input TYPE="password" NAME="password" value=""/><br/>
                     </div>
                     
                     <br/>
@@ -127,7 +123,7 @@
                             <td>
                                 <span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
                                 	© 2010<span lang="es-mx"> Imágenes y Desarrollo propiedad intelectual del ITJ<br />
-                                    Última Actualización: 7/09/2010
+                                    Última Actualización: 02/12/2010
                                     <br />
                                     webmasteritj@itjiquilpan.edu.mx
                                  </span></span>

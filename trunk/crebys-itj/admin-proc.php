@@ -1,12 +1,28 @@
 <?php
-
+	// Iniciamos el manejo de sesiones
+	session_start();
+	
+	// Si alguien recarga esta página despues de haber cerrado sesion
+	if(!isset($_SESSION['nick'])){
+		// Inicializamos las variables para en redireccionamiento
+		// Guardamos el nombre del servidor
+		$host  = $_SERVER['HTTP_HOST'];
+		// Guardamos la carpeta
+		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		// Guardamos el nombre del archivo
+		$extra = 'login.php';
+		// Redireccionamos a la pagina de login.php
+		header("Location: http://$host$uri/$extra");
+	}
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- #BeginEditable "doctitle" -->
-<title>Documento sin t&iacute;tulo</title>
+<title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
+<link href="ITJStyle.css" rel="stylesheet" type="text/css" />
 <!-- #EndEditable -->
 
 </head>
@@ -20,45 +36,79 @@
                 	<table cellpadding="0" cellspacing="0" class="FondoTabla">
                       	<tr>
                         	<td class="style6" rowspan="2">
-                            	<img alt="" class="style5" src="Img/BannerSup/izq.png" />
+                            	<img alt="" class="style5" src="recursos/Img/BannerSup/izq.png" />
                           	</td>
                             <td class="style9" colspan="2">
-                            	<img alt="" class="style8" src="Img/BannerSup/centrosup.png" />
+                            	<img alt="" class="style8" src="recursos/Img/BannerSup/centrosup.png" />
                           	</td>
                             <td rowspan="2">
-                            	<img alt="" class="style7" src="Img/BannerSup/der.png" />
+                            	<img alt="" class="style7" src="recursos/Img/BannerSup/der.png" />
                             </td>
                         </tr>
                         <tr>
                         	<td class="style11">
-                            	<img src="Img/BannerSup/centroinf.png" class="style12" /></td>
+                            	<img src="recursos/Img/BannerSup/centroinf.png" class="style12" /></td>
                           	<td>&nbsp;</td>
                       	</tr>
                    </table>
                    <table>
                     	<tr>
                         	<td>
-                            	<img src="Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
+                            	<img src="recursos/Img/BannerSup/BannerBicentenario.jpg" width="900" height="120" />
                             </td>
                         </tr>
                    </table>
                    <table class="style16" bgcolor="#FFFFFF" border="0">
                     	<tr>
-                        	<td rowspan="2" class="style17"><img alt="" src="Img/Titulo.png" style="width: 510px; height: 50px" /></td>
+                        	<td rowspan="2" class="style17"><img alt="" src="recursos/Img/Titulo.png" style="width: 510px; height: 50px" /></td>
                             <td class="style19" rowspan="2">&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                        	<td><!-- InstanceBeginEditable name="Bienvenida" -->Bienvenida<!-- InstanceEndEditable --></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" -->
+                            
+<?php
+
+		// Bienvenido al usuario
+    	echo "Bienvenido ".$_SESSION['nick'];
+		// Eliminamos la cookie de usuario
+		unset($_POST['usuario']);
+
+?>
+                            
+							<!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
-                <!-- InstanceEndEditable --></td>
+
+<?php
+
+if(strcmp($_SESSION['nick'],'sony_karl')==0){
+		// Mostramos las opciones del administrador
+		?>
+        <!--Mostramos la opcion Procedimientos-->
+        <a href="/crebys-itj/admin.php" class="menu_off">Inicio</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/admin-proc.php" class="menu_on">Procedimientos</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesion</a>
+		
+		<?php
+	}
+
+?>
+
+
+<!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
@@ -66,9 +116,18 @@
             			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
-Este es el contenido de mi página para<p>
-probar mi plantilla
-</p><!-- #EndEditable -->
+
+
+
+											<div class="content"> 
+                                            
+                                            <div>Hola a todos</div>
+                                            
+                                            </div>
+
+ 
+											
+											<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>

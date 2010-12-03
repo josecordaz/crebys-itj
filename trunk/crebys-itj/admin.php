@@ -1,11 +1,15 @@
 <?php
+	// Inicamos la sesion
+	session_start();
+	
 	// Libreria para la facilitacion de validaciones
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
 	// Libreria para el manejo de la Base de Datos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
 	
-
-
+	// Averiguamos si existe esta variable de sesion	
+	//if(!isset($_SESSION['nick'])){
+	
 		// Inicializamos las variables para en redireccionamiento
 		// Guardamos el nombre del servidor
 		$host  = $_SERVER['HTTP_HOST'];
@@ -13,41 +17,47 @@
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		// Guardamos el nombre del archivo
 		$extra = 'login.php';
-		
-	if(isset($_POST['usuario'])){	
-		// Inicializamos el objeto para validar
-		$validar=new Validar();
-		// Validamos que el nombre de usuario sea válido
-		if($validar->validarCadena($_POST['usuario'],30)){
-			// Creamos la conexión a la base de datos
-			$conexion=new Base_de_Datos("localhost","root","","crebys-itj");
-			// Guardamos el resultado e intentamos iniciar sesion
-			$sesion=$conexion->iniciarSesion($_POST['usuario'],$_POST['password']);
-			// Comprobamos el resultado del inicio de sesion
-			if(!is_bool($sesion)){
-				// Guardamos el tipo de error para mostrarlo en la pagin de inicio de sesion
-				setcookie("error",$sesion, time()+20);
+			
+		if(isset($_POST['usuario'])){	
+			// Inicializamos el objeto para validar
+			$validar=new Validar();
+			// Validamos que el nombre de usuario sea válido
+			if($validar->validarCadena($_POST['usuario'],30)){
+				// Creamos la conexión a la base de datos
+				$conexion=new Base_de_Datos("localhost","root","","crebys-itj");
+				// Guardamos el resultado e intentamos iniciar sesion
+				$sesion=$conexion->iniciarSesion($_POST['usuario'],$_POST['password']);
+				// Comprobamos el resultado del inicio de sesion
+				if(!is_bool($sesion)&&(isset($_POST['password']))){
+					// Guardamos el tipo de error para mostrarlo en la pagin de inicio de sesion
+					setcookie("error",$sesion, time()+20);
+					// Redireccionamos a la pagina de login.php
+					header("Location: http://$host$uri/$extra");
+					// Terminamos la ejecucion
+					exit;
+					// Inicializamos las variables de sesion			
+				}else{
+					// Creamos la primer variable de sesion
+					$_SESSION["nick"] = $_POST['usuario'];
+					// Eliminamos la cokkies de password
+					unset($_POST['password']);    	
+				}
+				//Error de validacion	
+			}else{
+				// Guardamos cookie de nombre no válido
+				setcookie("error","El nombre de usuario que escribió es incorrecto", time()+20);
 				// Redireccionamos a la pagina de login.php
 				header("Location: http://$host$uri/$extra");
 				// Terminamos la ejecucion
 				exit;
-				}
-			//Error de validacion	
+			}
 		}else{
-			// Guardamos cookie de nombre no válido
-			setcookie("error","El nombre de usuario que escribió es incorrecto", time()+20);
 			// Redireccionamos a la pagina de login.php
 			header("Location: http://$host$uri/$extra");
 			// Terminamos la ejecucion
 			exit;
 		}
-		
-	}else{
-		// Redireccionamos a la pagina de login.php
-		header("Location: http://$host$uri/$extra");
-		// Terminamos la ejecucion
-		exit;
-		}
+		//}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -98,20 +108,45 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" -->
+<?php
+		// Bienvenido al usuario
+    	echo "Bienvenido ".$_SESSION['nick'];
+		// Eliminamos la cookie de usuario
+		unset($_POST['usuario']);
+
+?>
+
+<!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-	<?php
-		// Bienvenido al usuario
-    	echo "Bienvenido ".$_POST['usuario'];
-		// Eliminamos las variables
-		unset($_POST['usuario']);
-		unset($_POST['password']);    	
-	?>
+
+<?php
+
+	if(strcmp($_SESSION['nick'],'sony_karl')==0){
+		// Mostramos las opciones del administrador
+		?>
+        <!--Mostramos la opcion Procedimientos-->
+        <a href="/crebys-itj/admin.php" class="menu_on">Inicio</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/admin-proc.php" class="menu_off">Procedimientos</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesion</a>
+		
+		<?php
+	}
+?>
+
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
@@ -162,7 +197,7 @@
                             <td>
                                 <span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
                                 	© 2010<span lang="es-mx"> Imágenes y Desarrollo propiedad intelectual del ITJ<br />
-                                    Última Actualización: 7/09/2010
+                                    Última Actualización: 02/12/2010
                                     <br />
                                     webmasteritj@itjiquilpan.edu.mx
                                  </span></span>

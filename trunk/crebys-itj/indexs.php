@@ -47,7 +47,7 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" --><!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
@@ -96,7 +96,7 @@
                             <td>
                                 <span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
                                 	© 2010<span lang="es-mx"> Imágenes y Desarrollo propiedad intelectual del ITJ<br />
-                                    Última Actualización: 7/09/2010
+                                    Última Actualización: 02/12/2010
                                     <br />
                                     webmasteritj@itjiquilpan.edu.mx
                                  </span></span>
