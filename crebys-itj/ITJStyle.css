@@ -95,3 +95,11 @@
     .style19{
     	width: 73px;
     }
+.menu_off {
+	color: #666;
+	text-decoration: none;
+}
+.menu_on {
+	text-decoration: underline;
+	color: #000;
+}
