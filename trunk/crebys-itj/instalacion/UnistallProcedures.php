@@ -18,7 +18,7 @@
 	if(strlen($error)!=0)
 		echo $error."<br>";
 	else
-		echo "[+] Procedimientos borrados con éxito<br>";
+		echo "[+] Procedimientos borrados con &eacute;xito<br>";
 	
 
 ?>

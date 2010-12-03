@@ -1,20 +1,35 @@
 <?php
+
 	// Inicamos la sesion
 	session_start();
-	
-	// Libreria para la facilitacion de validaciones
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
-	// Libreria para el manejo de la Base de Datos
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
-	
-	// Averiguamos si existe esta variable de sesion	
-	//if(!isset($_SESSION['nick'])){
-	
+
+	if(!isset($_SESSION['redir'])){
+		// Iniciamos variable de sesion redir
+		$_SESSION['redir']=1;
+		
 		// Inicializamos las variables para en redireccionamiento
 		// Guardamos el nombre del servidor
 		$host  = $_SERVER['HTTP_HOST'];
 		// Guardamos la carpeta
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		// Guardamos el nombre del archivo
+		$extra = 'admin.php';
+		// Redireccionamos a la misma página para limpiar todo rastro de \$_POST[]
+		header("Location: http://$host$uri/$extra");
+	}else
+		unset($_SESSION['redir']);
+
+	// Libreria para la facilitacion de validaciones
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
+	// Libreria para el manejo de la Base de Datos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
+	
+	
+	
+	
+	// Averiguamos si existe esta variable de sesion	
+	if(!isset($_SESSION['nick'])){
+	
 		// Guardamos el nombre del archivo
 		$extra = 'login.php';
 			
@@ -26,6 +41,12 @@
 				// Creamos la conexión a la base de datos
 				$conexion=new Base_de_Datos("localhost","root","","crebys-itj");
 				// Guardamos el resultado e intentamos iniciar sesion
+				
+				// Mostramos las variables de usuario y password
+				$msg_name="\$usuario:=[".$_POST['usuario']."]<br/>";	
+				$msg_pass="\$contraseña:=[".$_POST['password']."]<br/>";
+								
+				
 				$sesion=$conexion->iniciarSesion($_POST['usuario'],$_POST['password']);
 				// Comprobamos el resultado del inicio de sesion
 				if(!is_bool($sesion)&&(isset($_POST['password']))){
@@ -57,7 +78,7 @@
 			// Terminamos la ejecucion
 			exit;
 		}
-		//}
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -164,8 +185,8 @@
 											<div class="content">                                            
 <div id="principal">
 
-		<div id="uno">uno</div>
-   		<div id="dos">dos</div>
+		<div id="uno">uno <?php echo $msg_name?></div>
+   		<div id="dos">dos <?php echo $msg_pass?></div>
         
 </div>
 

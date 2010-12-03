@@ -1,4 +1,9 @@
 <?php
+	// Libreria para el manejo de la Base de Datos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
+	// Libreria para el manejo de la Base de Datos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+	
 	// Iniciamos el manejo de sesiones
 	session_start();
 	
@@ -126,12 +131,20 @@ if(strcmp($_SESSION['nick'],'sony_karl')==0){
                                             	<div id="uno">
                                                 
                                                 	<p/>
-                                                    <a class="menu_off" href="/crebys-itj/admin-proc-insproc.php">  [+] Instalar procedimientos</a><p/>
+                                                    <a class="menu_on" href="/crebys-itj/admin-proc-insproc.php">  [+] Instalar procedimientos</a><p/>
                                                     
                                                     <a class="menu_off" href="/crebys-itj/admin-proc-unsproc.php">  [+] Eliminar todos los procedimientos</a>
                                                 
                                                 </div>
-												<div id="dos"></div>
+                                                
+												<div id="dos">
+                                                
+
+                                     	<?php
+                                                        require($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/instalacion/InstallProcedures.php');
+													?>
+
+                                                </div>
                                             
                                             </div>
                                             
