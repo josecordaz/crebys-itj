@@ -140,3 +140,8 @@
 	padding: 1em;
 	overflow: scroll;
 }
+#desc {
+	font-family: "Arno Pro Caption";
+	font-size: 20px;
+	text-align: justify;
+}

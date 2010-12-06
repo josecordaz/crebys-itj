@@ -11,6 +11,8 @@
 	$proc=new Procedimientos($conexion);
 	
 	// Probamos procedimientos insUsuario
-	if(!$proc->insUsuario(123,"dsdfsdffd","Jose Carlos","Ordaz","Crizantos","sonykarl"))
+	if(!$proc->insUsuario(123,"dsdfsdffd","Jose Carlos","Ordaz","Crizantos","sonykarl",400,366))
 		echo $proc->mostrarError();
+		
+	
 ?>

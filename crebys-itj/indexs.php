@@ -70,8 +70,8 @@
     
 		    <div id="texto">
             
-    			<p id="desc">Bienvenido al Sistema Crebys (Control de Requisiciones de Bienes y Servicios del ITJ)
-				Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones
+    			<p id="desc">Bienvenido al Sistema Crebys-ITJ (Control de Requisiciones de Bienes y Servicios del ITJ)
+				Crebys le ayudará en la elaboración del POA así como en el seguimiento y creación de requisiciones.
 				<br/></p>
 		    </div>
     

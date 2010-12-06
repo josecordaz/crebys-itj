@@ -46,16 +46,6 @@
 					die($e->getMessage()."".mysqli_connect_error());
 			 }
 		}
-		//Establecemos la base de datos que vamos a utilizar
-		function usarBd($bd){
-			$this->bd=$bd;
-			try { 
-				if(!($this->enlace=@mysql_select_db($this->bd,$this->conexion)))
-					throw new Exception('No se pudo usar la base de datos'); 
-			}catch(Exception $e) {
-					die($e->getMessage().' ~ '.$this->bd.' ~ ');
-			 }
-		}
 		//Establecemos y ejecutamos una consulta SQL
 		function executeSQL($sql){
 			"La consulta es(".$sql.")<br>";
