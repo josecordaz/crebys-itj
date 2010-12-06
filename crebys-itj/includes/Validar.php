@@ -17,6 +17,7 @@
 		// le continue otro caracter puede tener la 
 		//cantidad de caracteres que le mande $longitud
 		function validarCadena($cadena,$longitud){
+			//echo "Longitud de:=[$cadena] :=[$longitud]<br/>";
 			//$patron="(^[a-zA-Z]([\s][a-zA-Z]|[a-zA-Z])*$)";
 			$patron="(^([a-zA-Z]|é|á|í|ó|ú)([^\S][a-zA-Z]|[a-zA-Z]|[é|á|í|ó|ú])*$)";
 			if(ereg($patron, $cadena))
@@ -35,6 +36,15 @@
 				return true;
 			else
 				return false;
+		}
+		// Validamos la contraseña
+		function validarPassword($cadena,$longitud){
+			echo "Longitud de:=[$cadena] :=[$longitud]<br/>";
+			//$patron="(^[a-zA-Z]([\s][a-zA-Z]|[a-zA-Z])*$)";
+			if(strlen($cadena)<=$longitud)
+					return true;
+				else
+					return false;
 		}
 	}
 

@@ -192,10 +192,10 @@ a	!-- PARTIDAS
 			SET Id_Usuari=20;
 		END IF;
 		
-		IF(select count(*) from Depatamentos_Puestos)>0 THEN
+		IF(select count(*) from Departamentos_Puestos)>0 THEN
 			SET Id_Departamento_Puest=(select max(Id_Departamento_Puesto) from Departamentos_Puestos)+5;
 		ELSE
-			SET Id_Usuari=50;
+			SET Id_Departamento_Puest=50;
 		END IF;
 		
 		IF(select count(*) from usuarios where Us_Nick=Us_Nic)=0 THEN
