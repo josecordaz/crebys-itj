@@ -255,13 +255,13 @@
 			return 0;
 		}
 		// Procedimiento para insertar un usuario
-		function insUsuario($Id_Departamento_Puesto,$Us_Password,$Us_Nombre,$Us_Apellidop,$Us_Apellidom,$Us_Nick){
-			if($this->validar->validarCadena($Us_Password, $this->sacarLongitud("usuarios","Us_Password"))){
+		function insUsuario($Id_Departamento_Puesto,$Us_Password,$Us_Nombre,$Us_Apellidop,$Us_Apellidom,$Us_Nick,$Id_Puesto,$Id_Departamento){
+			if($this->validar->validarPassword($Us_Password, $this->sacarLongitud("usuarios","Us_Password"))){
 				if($this->validar->validarCadena($Us_Nombre, $this->sacarLongitud("usuarios","Us_Nombre"))){
 					if($this->validar->validarCadena($Us_Apellidop, $this->sacarLongitud("usuarios","Us_Apellidop"))){
 						if($this->validar->validarCadena($Us_Apellidom, $this->sacarLongitud("usuarios","Us_Apellidom"))){
 							if($this->validar->validarCadena($Us_Nick, $this->sacarLongitud("usuarios","Us_Nick"))){
-								$this->conexion->executeSQL("call insUsuario(".$Id_Departamento_Puesto.",".md5($Us_Password).",".$Us_Nombre.",".$Us_Apellidop.",".$Us_Apellidom.",".$Us_Nick.", @error); select error");
+								$this->conexion->executeSQL("call insUsuario(".$Id_Departamento_Puesto.",'".md5($Us_Password)."','".$Us_Nombre."','".$Us_Apellidop."','".$Us_Apellidom."','".$Us_Nick."',".$Id_Puesto.",".$Id_Departamento.",@error); select @error");
 								switch ($this->conexion->error()){
 									case 0:
 										$this->error="[-] Error de consulta";
