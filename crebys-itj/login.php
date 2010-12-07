@@ -78,7 +78,7 @@
 				
 				?>
         	
-                <form ACTION="admin.php" METHOD="post">	
+                <form ACTION="redir.php" METHOD="post">	
                 
                     <hr/>        
                     
