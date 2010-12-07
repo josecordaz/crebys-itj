@@ -91,7 +91,7 @@
 
 <?php
 
-if(strcmp($_SESSION['nick'],'sony_karl')==0){
+if(strcmp($_SESSION['nick'],'admin')==0){
 		// Mostramos las opciones del administrador
 		?>
         <!--Mostramos la opcion Procedimientos-->

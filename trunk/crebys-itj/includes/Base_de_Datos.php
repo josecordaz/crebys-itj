@@ -48,7 +48,7 @@
 		}
 		//Establecemos y ejecutamos una consulta SQL
 		function executeSQL($sql){
-			// echo "La consulta es(".$sql.")<br>";
+			//echo "La consulta es(".$sql.")<br>";
 			$res=$this->conexion->multi_query($sql);
 //			$this->error=@mysqli_error($this->conexion);
 			//$this->error=mysqli_error(mysqli_multi_query($sql,$this->conexion));

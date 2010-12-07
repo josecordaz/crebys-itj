@@ -1,6 +1,4 @@
 <?php
-	
-
 	// Página que nos ayudará a redireccionar según el usuario
 	// que inicie sesión
 	
@@ -13,12 +11,10 @@
 		[+] Secretaria de departamento		secretaria.php
 	*/
 	
-	// Libreria para la facilitacion de validaciones
+	// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 	// Libreria para el manejo de la Base de Datos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
-	// Objeto de la clase para redireccionar
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/pagina.php');
 	
 	// Iniciamos la sesión
 	session_start();
@@ -30,44 +26,52 @@
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	
 	// Creamos objeto para redireccionar
-	$pagina=new pagina($host,$uri);
 	
 	// Verificamos si se accedió directamente a este archivo
-	if(!isset($_POST['usuario'])&&!isset($_POST['password'])&&!isset($_SESSION['nick'])){
+	if(!isset($_POST['usuario'])){
+		// Mostramos en login.php el error de acceso
+		setcookie("error","Escriba su nombre de usuario y contraseña", time()+20);
 		// Redireccionamos a login
-		//echo "3<br>";
-		echo $pagina->redir("login.php");
-		//header($pagina->redir("login.php"));
-		echo "4";
+		header("Location: http://$host$uri/login.php");
 		// Terminamos la ejecución
 		exit;		
-		echo "5";
 		// Se accedió de buen modo
 	} else{
-		// Verificamos si viene de login.php
-		if(isset($_POST['usuario'])){
-			// Creamos objeto de base de datos
-			$conexion=new Base_de_Datos($host,"root","","crebys-itj");
-			// Creamos objeto para manejar procedimientos
-			$proc=new Procedimientos($conexion);
+		// Creamos objeto de base de datos
+		$conexion=new Base_de_Datos($host,"root","","crebys-itj");
+		// Creamos objeto para manejar procedimientos
+		$proc=new Procedimientos($conexion);
+		// Validamos los datos del usuario
+		$res=$proc->iniciarSesion($_POST['usuario'],$_POST['password']);
+		// Si se puede iniciarsesion
+		if($res===true){
 			// Verificamos el nombre de usuario
-			switch($_POST['usuario']){
+			switch($proc->saberTipoUsuario($_POST['usuario'])){
 				// Caso de administración
-				case "admin":
-					if($proc->iniciarSesion($_POST['usuario'],$_POST['password'])){
-						// Guardamos el nick como variable de sesión
-						$_SESSION['nick']=$_POST['usuario'];
-						// Redireccionamos a admin
-						$pagina->redir("admin.php");
-					}else
-						$pagina->redir("login.php");
-				// Case de los jefes de departamento
-				case "jefe":
-					// usuario.php
-					$pagina->redir("usuario.php");
-			}
-		}
-	}
-	
+				case "Administrador":
+					// Guardamos el nick como variable de sesión
+					$_SESSION['nick']=$_POST['usuario'];
+					// Redireccionamos a admin
+					header("Location: http://$host$uri/admin.php");
+					// Terminamos la ejecucion
+					exit;
 
+				// Case de los jefes de departamento												
+				case "Jefe":
+					// Guardamos el nick como variable de sesión
+					$_SESSION['nick']=$_POST['usuario'];
+					// jefe.php
+					header("Location: http://$host$uri/jefe.php");
+					// Terminamos la ejecucion
+					exit;
+			}
+		}else{
+			// Mostramos en login.php el error de acceso
+			setcookie("error",$res, time()+20);
+			// Redireccionamos a login
+			header("Location: http://$host$uri/login.php");
+			// Terminamos la ejecución
+			exit;
+		}		
+	}
 ?>
