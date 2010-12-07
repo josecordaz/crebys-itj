@@ -19,6 +19,20 @@
 			//Creamos el objetos para validar las entradas de tipos de datos
 			$this->validar=new Validar();
 		}
+		// Validamos los datos de inicio de sesion
+		function iniciarSesion($us_nick,$us_password){
+				$this->conexion->executeSQL("call iniciarSesion('$us_nick','".md5($us_password)."',@error); select @error");
+				switch($this->conexion->error()){
+					case 0:
+						return "Error en la consulta";
+					case 1:
+						return true;
+					case 2:
+						return "No existe el usuario:=[$us_nick]";
+					case 3:
+						return "La contraseña es incorrecta";;
+				}
+		}
 		//Función para insertar una Partida
 		function insPartida($Id_Partida,$Pa_Nombre){
 			if($this->validar->validarNumero($Id_Partida)){

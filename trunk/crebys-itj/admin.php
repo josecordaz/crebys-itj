@@ -1,38 +1,34 @@
 <?php
-
 	// Inicamos la sesion
 	session_start();
+	
+	// Inicializamos las variables para en redireccionamiento
+	// Guardamos el nombre del servidor
+	$host  = $_SERVER['HTTP_HOST'];
+	// Guardamos la carpeta
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
-	if(!isset($_SESSION['redir'])){
-		// Iniciamos variable de sesion redir
-		$_SESSION['redir']=1;
-		
-		// Inicializamos las variables para en redireccionamiento
-		// Guardamos el nombre del servidor
-		$host  = $_SERVER['HTTP_HOST'];
-		// Guardamos la carpeta
-		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	// Si no existe la variable de sesión redir
+	if(!isset($_SESSION['nick'])){
 		// Guardamos el nombre del archivo
-		$extra = 'admin.php';
+		$extra = 'login.php';
 		// Redireccionamos a la misma página para limpiar todo rastro de \$_POST[]
 		header("Location: http://$host$uri/$extra");
-	}else
-		unset($_SESSION['redir']);
+	}
+
 
 	// Libreria para la facilitacion de validaciones
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
 	// Libreria para el manejo de la Base de Datos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
-	
-	
-	
+
+
 	
 	// Averiguamos si existe esta variable de sesion	
-	if(!isset($_SESSION['nick'])){
-	
+	/*if(!isset($_SESSION['nick'])){
 		// Guardamos el nombre del archivo
 		$extra = 'login.php';
-			
+	
 		if(isset($_POST['usuario'])){	
 			// Inicializamos el objeto para validar
 			$validar=new Validar();
@@ -40,14 +36,10 @@
 			if($validar->validarCadena($_POST['usuario'],30)){
 				// Creamos la conexión a la base de datos
 				$conexion=new Base_de_Datos("localhost","root","","crebys-itj");
-				// Guardamos el resultado e intentamos iniciar sesion
 				
-				// Mostramos las variables de usuario y password
-				$msg_name="\$usuario:=[".$_POST['usuario']."]<br/>";	
-				$msg_pass="\$contraseña:=[".$_POST['password']."]<br/>";
-								
-				
+				// Verificamos si existe tal usuario con tal contraseña
 				$sesion=$conexion->iniciarSesion($_POST['usuario'],$_POST['password']);
+				
 				// Comprobamos el resultado del inicio de sesion
 				if(!is_bool($sesion)&&(isset($_POST['password']))){
 					// Guardamos el tipo de error para mostrarlo en la pagin de inicio de sesion
@@ -58,10 +50,20 @@
 					exit;
 					// Inicializamos las variables de sesion			
 				}else{
-					// Creamos la primer variable de sesion
-					$_SESSION["nick"] = $_POST['usuario'];
-					// Eliminamos la cokkies de password
-					unset($_POST['password']);    	
+					if(strcmp($_POST['usuario'],'sony_karl')==0){
+						// Creamos la primer variable de sesion
+						$_SESSION["nick"] = $_POST['usuario'];
+						// Eliminamos la cokkies de password
+						unset($_POST['password']);    	
+					} // Si no es el adiministrador redireccionamos a quien pertenezca
+					else {
+						// Guardamos el nombre del archivo
+						$extra = 'usuario.php';
+						// Redireccionamos a la pagina de usuario.php
+						header("Location: http://$host$uri/$extra");
+						// Terminamos la ejecucion
+						exit;
+					}
 				}
 				//Error de validacion	
 			}else{
@@ -78,7 +80,7 @@
 			// Terminamos la ejecucion
 			exit;
 		}
-	}
+	}*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -148,7 +150,7 @@
 
 <?php
 
-	if(strcmp($_SESSION['nick'],'sony_karl')==0){
+	if(strcmp($_SESSION['nick'],'admin')==0){
 		// Mostramos las opciones del administrador
 		?>
         <!--Mostramos la opcion Procedimientos-->
@@ -185,8 +187,8 @@
 											<div class="content">                                            
 <div id="principal">
 
-		<div id="uno">uno <?php echo $msg_name?></div>
-   		<div id="dos">dos <?php echo $msg_pass?></div>
+		<div id="uno">uno <?php ?></div>
+   		<div id="dos">dos <?php ?></div>
         
 </div>
 
