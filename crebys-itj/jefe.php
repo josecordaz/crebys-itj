@@ -1,21 +1,24 @@
 <?php
-	// Iniciamos el manejo de sesiones
+	// Inicamos la sesion
 	session_start();
 	
-	// Si alguien recarga esta página despues de haber cerrado sesion
-	if(!isset($_SESSION['nick'])){
-		// Inicializamos las variables para en redireccionamiento
-		// Guardamos el nombre del servidor
-		$host  = $_SERVER['HTTP_HOST'];
-		// Guardamos la carpeta
-		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		// Guardamos el nombre del archivo
-		$extra = 'login.php';
-		// Redireccionamos a la pagina de login.php
-		header("Location: http://$host$uri/$extra");
-	}
-?>
+	// Inicializamos las variables para en redireccionamiento
+	// Guardamos el nombre del servidor
+	$host  = $_SERVER['HTTP_HOST'];
+	// Guardamos la carpeta
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
+	// Si no existe la variable de sesión redir
+	if(!isset($_SESSION['nick'])){
+		// Redireccionamos a login.php
+		header("Location: http://$host$uri/login.php");
+	}
+	// Libreria para la utilización de procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+	// Libreria para el manejo de la Base de Datos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -66,17 +69,15 @@
                         </tr>
                         <tr>
                         	<td><!-- InstanceBeginEditable name="Bienvenida" -->
-                            
 <?php
-
 		// Bienvenido al usuario
     	echo "Bienvenido ".$_SESSION['nick'];
 		// Eliminamos la cookie de usuario
 		unset($_POST['usuario']);
 
 ?>
-                            
-							<!-- InstanceEndEditable --></td>
+
+<!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
@@ -84,31 +85,26 @@
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
-<?php
-
-if(strcmp($_SESSION['nick'],'admin')==0){
-		// Mostramos las opciones del administrador
-		?>
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu_off">Inicio</a>
+        <a href="/crebys-itj/admin.php" class="menu_on">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu_on">Procedimientos</a>
+		<a href="/crebys-itj/poa.php" class="menu_off">POA</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesion</a>
+		<a href="/crebys-itj/requisiciones.php" class="menu_off">Requisiciones</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a></strong>
 		
-		<?php
-	}
 
-?>
-
-
-<!-- InstanceEndEditable --></td>
+                <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
@@ -116,30 +112,24 @@ if(strcmp($_SESSION['nick'],'admin')==0){
             			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
-
-
-
-											<div class="content"> 
-                                            
-                                            <div id="principal">
-                                            
-                                            	<div id="uno">
-                                                
-                                                	<p/>
-                                                    <a class="menu_off" href="/crebys-itj/admin-proc-insproc.php">  [+] Instalar procedimientos</a><p/>
-                                                    
-                                                    <a class="menu_off" href="/crebys-itj/admin-proc-unsproc.php">  [+] Eliminar todos los procedimientos</a>
-                                                
-                                                </div>
-												<div id="dos"></div>
-                                            
-                                            </div>
-                                            
-                                            </div>
-
- 
 											
-											<!-- #EndEditable -->
+
+                                            
+
+                                            
+                                            
+Bienvenido al sistema Usted ha iniciado sesión como jefe del departamento de <?php echo ?>
+
+
+
+
+
+
+
+
+
+
+                                         	<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>

@@ -158,6 +158,7 @@ a	!-- PARTIDAS
 		!-- error 1 Los datos son correctos
 		!-- error 2 No existe el usuario
 		!-- error 3 Contraseña incorrecta
+		
 	&CREATE PROCEDURE iniciarSesion(IN Us_Nic varchar(25),IN Us_Passwor varchar(32),OUT error INT)
 	BEGIN
 		IF(select count(*) from usuarios where Us_Nick=Us_Nic)>0 THEN
@@ -171,6 +172,18 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 	
+	!-- Conocemos que puesto tiene el usuario de entrada
+	&CREATE PROCEDURE saberTipoUsuario(IN Us_Nic varchar(25),OUT tipo varchar(15))
+	BEGIN
+		set tipo=(select Pu_Nombre 
+			      from puestos 
+					inner join( 
+						departamentos_puestos 
+							inner join usuarios on usuarios.Id_Departamento_Puesto=departamentos_puestos.Id_Departamento_Puesto
+					) on departamentos_puestos.Id_Puesto=puestos.Id_Puesto
+					  where Us_Nick=Us_Nic);
+	END;&
+	
 	!-- Insertamos un nuevo usuario
 		!-- error 0 Error en consulta
 		!-- error 1 Inserción correcta
@@ -178,6 +191,7 @@ a	!-- PARTIDAS
 		!-- error 3 Nombre repetido
 		!-- error 4 Puesto inexistente
 		!-- error 5 Departamento inexistente
+		!-- error 6 Ya existe un usuario se creó el usuario jefe para este departamento
 		
 	&CREATE PROCEDURE insUsuario(IN Id_Departamento_Puest INT,IN Us_Passwor VARCHAR(32),IN Us_Nombr VARCHAR(25), IN Us_Apellido_p VARCHAR(15),IN Us_Apellido_m VARCHAR(15),IN Us_Nic VARCHAR(20),IN Id_Puest INT,IN Id_Departament INT,OUT error INT)
 	BEGIN
@@ -202,12 +216,16 @@ a	!-- PARTIDAS
 			IF(select count(*) from usuarios where Us_Nombre=Us_Nombr AND Us_Apellidop=Us_Apellido_p AND Us_Apellidom=Us_Apellido_m)=0 THEN
 				IF(select count(*) from puestos where Id_Puesto=Id_Puest)>0 THEN
 					IF(select count(*) from departamentos where Id_Departamento=Id_Departament)>0 THEN
-						BEGIN
-							START TRANSACTION;
-								insert into usuarios values(Id_Usuari,Id_Departamento_Puest,Us_Passwor,Us_Nombr,Us_Apellido_p,Us_Apellido_m,Us_Nic);
-								insert into departamentos_puestos values(Id_Departamento_Puest,Id_Puest,Id_Departament);
-							COMMIT;
-						END;
+						If(select count(*) from departamentos_puestos where Id_Departamento=Id_Departament and Id_Puesto=Id_Puest)=0 THEN
+							BEGIN
+								START TRANSACTION;
+									insert into usuarios values(Id_Usuari,Id_Departamento_Puest,Us_Passwor,Us_Nombr,Us_Apellido_p,Us_Apellido_m,Us_Nic);
+									insert into departamentos_puestos values(Id_Departamento_Puest,Id_Puest,Id_Departament);
+								COMMIT;
+							END;
+						ELSE
+							SET error=6;
+						END IF;
 					ELSE
 						SET error=5;
 					END IF;
@@ -222,7 +240,8 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 
-
-	
+	!-- Saber nombre del departamento a partir del nick
+	&CREATE PROCEDURE saberDepartamento(IN)
+	END&
 		
 	

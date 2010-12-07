@@ -19,9 +19,14 @@
 			//Creamos el objetos para validar las entradas de tipos de datos
 			$this->validar=new Validar();
 		}
+		// Saber el tipo de usuario
+		function saberTipoUsuario($Us_Nick){
+			$this->conexion->executeSQL("call saberTipoUsuario('$Us_Nick',@tipo);select @tipo");	
+			return $this->conexion->error();
+		}
 		// Validamos los datos de inicio de sesion
 		function iniciarSesion($us_nick,$us_password){
-				$this->conexion->executeSQL("call iniciarSesion('$us_nick','".md5($us_password)."',@error); select @error");
+				$this->conexion->executeSQL("call iniciarSesion('$us_nick',md5('$us_password'),@error); select @error");
 				switch($this->conexion->error()){
 					case 0:
 						return "Error en la consulta";
@@ -289,7 +294,14 @@
 										$this->error="[-] Nombre repetido";
 										break;
 									case 4:
-										$this->error="[-] No existe el departamento puesto[".$Id_Departamento_Puesto."]";
+										$this->error="[-] No existe el puesto[".$Id_Puesto."]";
+										break;
+									case 5:
+										$this->error="[-] No existe el departamento[".$Id_Departamento."]";
+										break;
+									case 6:
+										$this->error="[-] Ya existe el usuario Jefe para el departamento[".$Id_Departamento."]";
+										break;
 								}		
 							}else
 								$this->error="[-] Nick no válido";	

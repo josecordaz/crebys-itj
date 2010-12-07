@@ -74,6 +74,7 @@
                 
 				if(isset($_COOKIE['error'])){
 					echo $_COOKIE['error']."<br/>";
+					unset($_COOKIE['error']);
 				}
 				
 				?>
