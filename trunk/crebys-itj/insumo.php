@@ -121,7 +121,61 @@
                                             
 
                                             
-<div id="tres">ff</div>
+<div id="tres">
+	<span id="titulo">Insumo</span>                 
+	<hr id="corta"/>
+    
+    <form action="redir.php" method="post">	                
+    	<br/>
+        <div id="caja-pequez">
+                        
+            <div class="caja-left">
+                Partida:
+                <select name="partida">
+                    <option value="0">1301</option>
+                    <option value="5">2201</option>
+                    <option value="7">5074</option>
+                    <option value="10">1312</option>
+                </select>
+            </div>
+            <br/>
+            <div class="caja-left">
+                Nombre:
+                <select name="nombre">
+                    <option value="0">Lápiz</option>
+                    <option value="5">Borrador</option>
+                    <option value="7">Cinta</option>
+                    <option value="10">Pegamento</option>
+                </select>
+            </div>
+            <br/>
+            <div class="caja-left">
+                Unidad de Medida:
+                <select name="medida">
+                    <option value="0">Caja</option>
+                    <option value="5">Pieza</option>
+                    <option value="7">Rollo</option>
+                    <option value="10">Paquete</option>
+                </select>
+            </div>
+            <br/>
+            <div class="caja-left">
+                Precio:
+                <input name="precio"/>
+
+            </div>
+            <br/>
+        </div>
+        <hr id="corta"/>
+        <br/>
+        <div class="caja">
+            <input type="submit" name="proce" value="Agregar"/>
+
+			<input type="submit" name="proceder" value="Cancelar"/>
+        </div>
+        <br/>                    
+         </form>
+</div>
 
 
 
