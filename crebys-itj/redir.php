@@ -13,8 +13,6 @@
 	
 	// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
-	// Libreria para el manejo de la Base de Datos
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
 	
 	// Iniciamos la sesión
 	session_start();
@@ -38,9 +36,8 @@
 		// Se accedió de buen modo
 	} else{
 		// Creamos objeto de base de datos
-		$conexion=new Base_de_Datos($host,"root","","crebys-itj");
-		// Creamos objeto para manejar procedimientos
-		$proc=new Procedimientos($conexion);
+		$proc=new Procedimientos();
+
 		// Validamos los datos del usuario
 		$res=$proc->iniciarSesion($_POST['usuario'],$_POST['password']);
 		// Si se puede iniciarsesion

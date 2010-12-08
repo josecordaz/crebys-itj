@@ -241,7 +241,13 @@ a	!-- PARTIDAS
 	END;&
 
 	!-- Saber nombre del departamento a partir del nick
-	&CREATE PROCEDURE saberDepartamento(IN)
-	END&
+	&CREATE PROCEDURE saberDepartamento(IN Us_Nic varchar(20),OUT dep varchar(45))
+	BEGIN
+		SET dep=(select De_Nombre
+				  from departamentos inner join(
+						departamentos_puestos inner join usuarios on usuarios.Id_Departamento_Puesto=departamentos_puestos.Id_Departamento_Puesto
+				  ) on departamentos_puestos.Id_Departamento=departamentos.Id_Departamento
+				  where Us_Nick=Us_Nic);
+	END;&
 		
 	
