@@ -149,3 +149,20 @@
 	font-family: "Arno Pro Caption";
 	font-size: 5em;
 }
+#tres {
+	border: 1px ridge #000;
+	text-align: inherit;
+}
+#corta {
+	width:20em;
+}
+.caja-left {
+
+	width: 20em;
+	position: static;
+	text-align: left;
+}
+#caja-peque {
+	border: 1px ridge #00F;
+	text-align: center;
+}
