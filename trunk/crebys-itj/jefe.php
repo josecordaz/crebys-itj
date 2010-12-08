@@ -8,21 +8,22 @@
 	// Guardamos la carpeta
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
-	// Si no existe la variable de sesiÃ³n redir
+	// Si no existe la variable de sesión redir
 	if(!isset($_SESSION['nick'])){
 		// Redireccionamos a login.php
 		header("Location: http://$host$uri/login.php");
 	}
-	// Libreria para la utilizaciÃ³n de procedimientos
+	
+	// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
-	// Libreria para el manejo de la Base de Datos
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
 
+	// Objeto para la manipulación de procedimientos
+	$proc=new Procedimientos();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <!-- #BeginEditable "doctitle" -->
 <title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
@@ -71,7 +72,10 @@
                         	<td><!-- InstanceBeginEditable name="Bienvenida" -->
 <?php
 		// Bienvenido al usuario
-    	echo "Bienvenido ".$_SESSION['nick'];
+    	echo "Bienvenido ".$_SESSION['nick']."<p>";
+		echo "Jefe del departamento de ";
+		// Mostramos el departamento al cual pertenece el usuario a partir de su nick
+		echo $proc->saberDepartamento($_SESSION['nick']);
 		// Eliminamos la cookie de usuario
 		unset($_POST['usuario']);
 
@@ -86,7 +90,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu_on">Inicio</a>
+        <a href="/crebys-itj/jefe.php" class="menu_on">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -117,8 +121,12 @@
                                             
 
                                             
-                                            
-Bienvenido al sistema Usted ha iniciado sesiÃ³n como jefe del departamento de <?php echo ?>
+<span id="titulo">Crebys-ITJ</span>
+
+<p id="desc"> El sistema Crebys-ITJ le permitirá elaborar el POA 
+que se lleva anualmente apartir de la fecha en que se solicite solicitude su departamento
+además también podrá elaborar requisiciones con el mismo a partir de que su POA halla sido aceptado</p>
+
 
 
 
@@ -137,16 +145,16 @@ Bienvenido al sistema Usted ha iniciado sesiÃ³n como jefe del departamento de <?
                     	<tr>
                          	<td>
                             	<span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
-                                	INSTITUTO TECNOLÃ“GICO DE JIQUILPAN<br />
-                                    Av. Carr. Nacional s/n Km. 202 Jiquilpan de JuÃ¡rez, MichoacÃ¡n <span lang="es-mx">
+                                	INSTITUTO TECNOL&Oacute;GICO DE JIQUILPAN<br />
+                                    Av. Carr. Nacional s/n Km. 202 Jiquilpan de Ju&aacute;rez, Michoac&aacute;n <span lang="es-mx">
                                     C.P. 59510</span><br />
                                     Tels: 01(353) 533 11 26, 533 05 74, 533 23 48, 533 36 08, 533 11 26 y 533 30 91
                                 </span>
                             </td>
                             <td>
                                 <span style="font-size: 7pt; color: #000099; vertical-align: top; text-align: center;">
-                                	Â© 2010<span lang="es-mx"> ImÃ¡genes y Desarrollo propiedad intelectual del ITJ<br />
-                                    Ãšltima ActualizaciÃ³n: 02/12/2010
+                                	© 2010<span lang="es-mx"> Im&aacute;genes y Desarrollo propiedad intelectual del ITJ<br />
+                                    Última Actualización: 02/12/2010
                                     <br />
                                     webmasteritj@itjiquilpan.edu.mx
                                  </span></span>

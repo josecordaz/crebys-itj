@@ -1,6 +1,7 @@
 <?php
 
 	include_once 'Validar.php';
+	include_once 'Base_de_Datos.php';
 	//Clase para la manipulación de los
 	//procedimientos almacenados de MySQL
 	//con sus respectivos errores
@@ -13,9 +14,9 @@
 		// Objeto de la clase Validar.php para validar los tipos de datos
 		private $validar;
 		// Constructor
-		function __construct($conexion){
+		function __construct(){
 			//Inicializamos la conexión a la base de datos
-			$this->conexion=$conexion;
+			$this->conexion=new Base_de_Datos("localhost","root","","crebys-itj");
 			//Creamos el objetos para validar las entradas de tipos de datos
 			$this->validar=new Validar();
 		}
@@ -314,6 +315,11 @@
 			}else
 				$this->error="[-] Error en la longitud de la contraseña";
 			return 0;
+		}
+		// Saber el departamento a partir del nick
+		function saberDepartamento($Us_Nick){
+				$this->conexion->executeSQL("call saberDepartamento('$Us_Nick',@dep); select @dep");
+				return $this->conexion->error();
 		}
 		//Sacamos la longitud de cualquier campo
 		// en la tabla especificada
