@@ -250,4 +250,23 @@ a	!-- PARTIDAS
 				  where Us_Nick=Us_Nic);
 	END;&
 		
+	!--- Agregar una medida
+		!-- error=0 Error de consulta
+		!-- error=1 Medida agregada con éxito
+		!-- error=2 Medida repetida
+	&CREATE PROCEDURE agregarMedida(IN Un_Nombr VARCHAR(20),OUT error INT)
+	BEGIN
+		DECLARE Id_Unidad_Medid INT;
+		SET error=1;
+		IF(select count(*) from medidas)>0 	THEN
+			SET Id_Unidad_Medid=(select max(Id_Unidad_Medida) from medidas)+8;
+		ELSE
+			SET Id_Unidad_Medid=50;
+		END IF;
+		IF(select count(*) from medidas where Un_Nombre=Un_Nombr)>0 	THEN
+			SET error=2;
+		ELSE
+			insert into medidas values(Id_Unidad_Medid,Un_Nombr);
+		END IF;
+	END;&
 	

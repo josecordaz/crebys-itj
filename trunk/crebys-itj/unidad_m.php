@@ -14,6 +14,8 @@
 		header("Location: http://$host$uri/login.php");
 	}
 	
+	
+	
 	// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 
@@ -90,12 +92,12 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/jefe.php" class="menu_on">Inicio</a>
+        <a href="/crebys-itj/jefe.php" class="menu_off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/poa.php" class="menu_off">POA</a>
+		<a href="/crebys-itj/poa.php" class="menu_on">POA</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -105,7 +107,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a></strong>
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a>
 		
 
                 <!-- InstanceEndEditable --></td>
@@ -121,10 +123,38 @@
                                             
 
                                             
-<span id="titulo">Crebys-ITJ</span>
+<div id="tres">
+	<span id="titulo">Unidad de Medida</span>                 
+	<hr id="corta"/>
+    
+    <form action="redir-insumo.php" method="post">	                
+    	<br/>
+        <div id="caja-peque">
+                        
 
-<p id="desc"> El sistema Crebys-ITJ le permitirá elaborar el Programa Operativo Anual (POA) apartir de la fecha en la que le sea solicitado por la subdirección de Planeación y Vinculación, además también le permitirá elaborar requisiciones cuando dicho POA sea revisado y aceptado.</p>
+            <div class="caja-left">
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                Nombre:
+                <input name="medidaname"/>
 
+            </div>
+            <br/>
+        </div>
+        <hr id="corta"/>
+        <br/>
+        <div class="caja">
+            <input type="submit" name="proce" value="Agregar"/>
+
+			<input type="button" name="proceder" value="Cancelar" onclick="location= 'insumo.php'"/>
+        </div>
+        <br/>                    
+         </form>
+</div>
 
 
 

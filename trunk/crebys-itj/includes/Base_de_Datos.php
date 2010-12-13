@@ -33,7 +33,7 @@
 		private $resArray;
 		public $error;
 		function __construct($server,$usuario,$password,$bd){
-			$this->resArray= array();
+			$this->resArray=array();
 			$this->server=$server;
 			$this->usuario=$usuario;
 			$this->password=$password;
@@ -48,9 +48,10 @@
 		}
 		//Establecemos y ejecutamos una consulta SQL
 		function executeSQL($sql){
+			$this->resArray= array();
 			//echo "La consulta es(".$sql.")<br>";
 			$res=$this->conexion->multi_query($sql);
-//			$this->error=@mysqli_error($this->conexion);
+			//$this->error=@mysqli_error($this->conexion);
 			//$this->error=mysqli_error(mysqli_multi_query($sql,$this->conexion));
 			if($res){
 			$fila=0;
