@@ -14,11 +14,13 @@
 		header("Location: http://$host$uri/login.php");
 	}
 	
-	// Libreria para la utilización de procedimientos
+	
+		// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -105,7 +107,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a></strong>
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a>
 		
 
                 <!-- InstanceEndEditable --></td>
@@ -125,53 +127,77 @@
 	<span id="titulo">Insumo</span>                 
 	<hr id="corta"/>
     
-    <form action="redir.php" method="post">	                
+    <form action="poa.php" method="post">	                
     	<br/>
-        <div id="caja-pequez">
+        <div id="caja-peque">
                         
             <div class="caja-left">
                 Partida:
-                <select name="partida">
-                    <option value="0">1301</option>
-                    <option value="5">2201</option>
-                    <option value="7">5074</option>
-                    <option value="10">1312</option>
+                <select name="partida" class="s-corto" onchange="location = 'redir-insumo.php?partida='+this.value">
+                <option value="0"></option>
+                	<?php
+						$arr=array();
+						$arr=$proc->devolverPartidas();
+						for($i=0;$i<count($arr);$i++)
+							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
+		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+							else
+		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+
+					?>
                 </select>
             </div>
             <br/>
             <div class="caja-left">
                 Nombre:
-                <select name="nombre">
-                    <option value="0">Lápiz</option>
-                    <option value="5">Borrador</option>
-                    <option value="7">Cinta</option>
-                    <option value="10">Pegamento</option>
+                <select name="insumo" onchange="location = 'redir-insumo.php?nombre='+this.value">
+                <?php
+					
+					$arre=array();
+					$arre=$proc->devolverInsumos($_SESSION['partida']);
+					for($i=0;$i<count($arre);$i++)
+						if(isset($_SESSION['nombre'])&&$_SESSION['nombre']==$arre[$i][0])
+						    echo "<option value='".$arre[$i][0]."'selected=\"selected\">".$arre[$i][0]."</option>";
+						else
+						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][0]."</option>";
+				?>
                 </select>
             </div>
             <br/>
             <div class="caja-left">
                 Unidad de Medida:
-                <select name="medida">
-                    <option value="0">Caja</option>
-                    <option value="5">Pieza</option>
-                    <option value="7">Rollo</option>
-                    <option value="10">Paquete</option>
+                <select name="unidad_de_medida" onchange="location = 'redir-insumo.php?medida='+this.value">
+                <option value="0"></option>
+				<?php
+					$arrm=array();
+					$arrm=$proc->devolverMedidas();
+					for($i=0;$i<count($arrm);$i++)
+						if(isset($_SESSION['medida'])&&$_SESSION['medida']==$arrm[$i][0])
+							echo "<option value=\"".$_SESSION['medida']."\" selected=\"selected\">".$_SESSION['medida']."</option>";
+						else
+							echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
+				?>
                 </select>
+	            <input type="button" value="Agregar" onclick="location = 'unidad_m.php'"/>
             </div>
             <br/>
             <div class="caja-left">
                 Precio:
-                <input name="precio"/>
-
+                <?php
+				if(isset($_SESSION['precio']))
+					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value=".$_SESSION['precio'].">";
+				else
+					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
+				?>
             </div>
             <br/>
         </div>
         <hr id="corta"/>
         <br/>
         <div class="caja">
-            <input type="submit" name="proce" value="Agregar"/>
+            <input type="submit" name="aceptar" value="Agregar"/>
 
-			<input type="submit" name="proceder" value="Cancelar"/>
+			<input type="button" name="cancelar" value="Cancelar"/>
         </div>
         <br/>                    
          </form>

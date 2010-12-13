@@ -1,7 +1,7 @@
 <?php
 
-	include_once 'Validar.php';
-	include_once 'Base_de_Datos.php';
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
 	//Clase para la manipulación de los
 	//procedimientos almacenados de MySQL
 	//con sus respectivos errores
@@ -318,8 +318,35 @@
 		}
 		// Saber el departamento a partir del nick
 		function saberDepartamento($Us_Nick){
-				$this->conexion->executeSQL("call saberDepartamento('$Us_Nick',@dep); select @dep");
-				return $this->conexion->error();
+			$this->conexion->executeSQL("call saberDepartamento('$Us_Nick',@dep); select @dep");
+			return $this->conexion->error();
+		}
+
+		// Devuelve todas las partidas existentes
+		function devolverPartidas(){
+			$this->conexion->executeSQL("select * from Partidas");
+			return $this->conexion->getArray();
+		}
+		// Devuelve insumos a partir del Id de la partida
+		function devolverInsumos($Id_Partida){
+			$this->conexion->executeSQL("select In_Nombre from Insumos where Id_Partida=$Id_Partida");
+			return $this->conexion->getArray();
+		}
+		// Develve todas las medidas
+		function devolverMedidas(){
+			$this->conexion->executeSQL("select Un_Nombre from medidas");	
+			return $this->conexion->getArray();
+		}
+		function agregarMedida($Un_Nombre){
+			$this->conexion->executeSQL("call agregarMedida('".$Un_Nombre."',@error); select @error");
+			switch($this->conexion->error()){
+				case 0:
+					return "Error en la consulta";
+				case 1:
+					return true;
+				case 2:
+					return "La medida $Un_Nombre ya existe";					
+			}
 		}
 		//Sacamos la longitud de cualquier campo
 		// en la tabla especificada
