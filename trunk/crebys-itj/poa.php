@@ -105,7 +105,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a></strong>
+		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesi&oacute;n</a>
 		
 
                 <!-- InstanceEndEditable --></td>
@@ -126,19 +126,26 @@
     <div class="menup">
 	<ul>
         <li class="current"><a href="#"><span>M1</span></a></li>
+        <li ><a href="#"><span>M2</span></a></li>
+        <li ><a href="#"><span>M3</span></a></li>
+        <li ><a href="#"><span>M4</span></a></li>
+        <li ><a href="#"><span>M5</span></a></li>        
     </ul>
 	</div>
 	<div style="clear:both"></div>
-    <div id="divmeta">d    
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    Contenido</div>
+    <div id="divmeta">    
+	
+    	<div id="info-meta">
+        	Meta 1:
+			<div id="info">Meta 28. Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
+    	</div>
+        
+       	<div id="insumos-meta">contenido
+        </div>
     
-    </div>
+	</div>
+    
+</div>
 
 
 
