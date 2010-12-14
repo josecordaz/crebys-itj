@@ -125,7 +125,7 @@
     
     <div class="menup">
 	<ul>
-        <li class="current"><a href="#"><span>M1</span></a></li>
+        <li class="current"><a href="#"><span>M1-A1</span></a></li>
         <li ><a href="#"><span>M2</span></a></li>
         <li ><a href="#"><span>M3</span></a></li>
         <li ><a href="#"><span>M4</span></a></li>
@@ -136,11 +136,46 @@
     <div id="divmeta">    
 	
     	<div id="info-meta">
-        	Meta 1:
-			<div id="info">Meta 28. Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
+        	<br/>
+	        Proceso Estratégico:
+            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Académico</div>
+            <br/>
+            Proceso Clave:
+            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formación Docente</div>
+            <br/>
+        	Meta 28:
+			<div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
+            <br/>
+            Acción 1:
+            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordinar,  verificar y administrar que personal directivo, funcionarios docentes y de apoyo participen en eventos de formación y actualización profesional que coadyuve a su desarrollo integral.</div>
+            
     	</div>
         
-       	<div id="insumos-meta">contenido
+       	<div id="insumos-meta">
+        
+        	<div class="menup-partida">
+			<ul>
+        		<li class="current-partida"><a href="#"><span>P1</span></a></li>
+		        <li ><a href="#"><span>P2</span></a></li>
+		        <li ><a href="#"><span>P3</span></a></li>
+		        <li ><a href="#"><span>P4</span></a></li>
+		        <li ><a href="#"><span>P5</span></a></li>        
+		    </ul>
+		</div>
+		<div style="clear:both"></div>
+		<div id="info-partida">
+			Insumos:
+		    <div id="tabla-partida">
+                <div class="ren">
+                  	<div class="celda"><span id="nombre">Nombre</span></div>
+                   	<div class="celda">Unidad de Medida</div>                   	<div class="celda">Precio Unitario</div><div class="celda">Subtotal</div>
+                </div>
+
+	        </div>
+        
+        </div>
+        
+        
         </div>
     
 	</div>
