@@ -176,6 +176,11 @@ BODY
 	color: #666;
 	text-decoration: none;
 }
+.menu_off:hover
+{
+	color: #009;
+	font-style: italic;
+}
 .menu_on
 {
 	text-decoration: underline;
@@ -260,20 +265,46 @@ BODY
 #area
 {
 	float: left;
-	width: 80em;
-	height: 213px;
+	width: 80.4em;
+	height: auto;
 	border-top-color: #000;
 	border-right-color: #000;
 	border-bottom-color: #000;
 	border-left-color: #000;
 	margin: 5px;
 	padding: 1px;
-	overflow: auto;
 }
 #divmeta
 {
-	background-color: #CCF1BD;
+	background-color: #EAE9FD;
 	border-bottom: 2px solid #000098;
 	border-right: 2px solid #000098;
 	border-left: 2px solid #000098;
+	float: left;
+}
+#info-meta
+{
+	width: 20em;
+	height: 28.7em;
+	float: left;
+	border-right: 2px solid #2420F8;
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+#insumos-meta
+{
+	float: left;
+	width: 59.7em;
+	height: 28.7em;
+}
+#info
+{
+	background-color: transparent;
+	border: 2px hidden #000000;
+	overflow: auto;
+	float: none;
+	text-align: justify;
+	margin: 0.5em;
+	font-family: Consolas;
+	font-size: 12px;
 }
