@@ -1,12 +1,12 @@
 .menup-partida
 {
 	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Arial ", "Helvetica ", sans-serif;
 	font-size: 13px;
-	background-color: #EAE9FD;
+	background-color: rgb(234, 233, 253);
 	float: left;
 	width: 100%;
-	border-bottom: 2px solid #0728FC;
+	border-bottom: 2px solid rgb(7, 40, 252);
 	margin-top: 0.3em;
 	margin-right: 0em;
 	margin-bottom: 0em;
@@ -28,7 +28,7 @@
 	float: left;
 	margin: 0 1px 0 0;
 	padding: 0px;
-	color: #000097;
+	color: rgb(0, 0, 151);
 	text-decoration: none;
 }
 .menup-partida A SPAN
@@ -44,7 +44,7 @@
 .menup-partida A:hover SPAN
 {
 	background-position: 0% -75px;
-	color: #000097;
+	color: rgb(0, 0, 151);
 }
 .menup-partida LI.current-partida A
 {
@@ -55,17 +55,17 @@
 .menup-partida LI.current-partida A SPAN
 {
 	background-position: 0% -75px;
-	color: #000097;
+	color: rgb(0, 0, 151);
 }
 .menup
 {
 	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Arial ", "Helvetica ", sans-serif;
 	font-size: 13px;
-	background-color: #FFFFFF;
+	background-color: rgb(255, 255, 255);
 	float: left;
 	width: 100%;
-	border-bottom: 2px solid #155523;
+	border-bottom: 2px solid rgb(21, 85, 35);
 }
 .menup UL
 {
@@ -83,7 +83,7 @@
 	float: left;
 	margin: 0 1px 0 0;
 	padding: 0px;
-	color: #127E29;
+	color: rgb(18, 126, 41);
 	text-decoration: none;
 }
 .menup A SPAN
@@ -99,7 +99,7 @@
 .menup A:hover SPAN
 {
 	background-position: 0% -75px;
-	color: #155523;
+	color: rgb(21, 85, 35);
 }
 .menup LI.current A
 {
@@ -110,11 +110,11 @@
 .menup LI.current A SPAN
 {
 	background-position: 0% -75px;
-	color: #155523;
+	color: rgb(21, 85, 35);
 }
 .blur
 {
-	background-color: #CCC;
+	background-color: rgb(204, 204, 204);
 /*shadow color*/
 	color: inherit;
 	margin-left: 4px;
@@ -126,17 +126,17 @@
 	position: relative;
 	bottom: 2px;
 	right: 2px;
-	background-color: #666;
+	background-color: rgb(102, 102, 102);
 /*shadow color*/
 	color: inherit;
 }
 .content
 {
-	background-color: #FFF;
+	background-color: rgb(255, 255, 255);
 /*background color of content*/
-	color: #000;
+	color: rgb(0, 0, 0);
 /*text color of content*/
-	border: 1px solid #000;
+	border: 1px solid rgb(0, 0, 0);
 /*border color*/
 	padding: 0.5em 2ex;
 	float: left;
@@ -154,8 +154,8 @@ BODY
 	font-style: normal;
 	font-variant: normal;
 	text-transform: none;
-	color: #000000;
-	background-color: #293563;
+	color: rgb(0, 0, 0);
+	background-color: rgb(41, 53, 99);
 }
 .nuevoEstilo1
 {
@@ -176,7 +176,7 @@ BODY
 	width: 900px;
 	vertical-align: middle;
 	height: 90px;
-	background-color: #666666;
+	background-color: rgb(102, 102, 102);
 }
 .style5
 {
@@ -200,7 +200,7 @@ BODY
 .style9
 {
 	height: 39px;
-	background: #FFFFFF;
+	background: rgb(255, 255, 255);
 }
 .style11
 {
@@ -230,20 +230,20 @@ BODY
 {
 	width: 73px;
 }
-.menu_off
+.menu-off
 {
-	color: #666;
+	color: rgb(102, 102, 102);
 	text-decoration: none;
 }
-.menu_off:hover
+.menu-off:hover
 {
-	color: #009;
+	color: rgb(0, 0, 153);
 	font-style: italic;
 }
-.menu_on
+.menu-on
 {
 	text-decoration: underline;
-	color: #000;
+	color: rgb(0, 0, 0);
 }
 #principal
 {
@@ -260,10 +260,10 @@ BODY
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: #000;
-	border-right-color: #000;
-	border-bottom-color: #000;
-	border-left-color: #000;
+	border-top-color: rgb(0, 0, 0);
+	border-right-color: rgb(0, 0, 0);
+	border-bottom-color: rgb(0, 0, 0);
+	border-left-color: rgb(0, 0, 0);
 	margin: 5px;
 	text-align: left;
 }
@@ -276,10 +276,10 @@ BODY
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: #000;
-	border-right-color: #000;
-	border-bottom-color: #000;
-	border-left-color: #000;
+	border-top-color: rgb(0, 0, 0);
+	border-right-color: rgb(0, 0, 0);
+	border-bottom-color: rgb(0, 0, 0);
+	border-left-color: rgb(0, 0, 0);
 	margin: 5px;
 	text-align: left;
 	padding: 1em;
@@ -298,7 +298,7 @@ BODY
 }
 #tres
 {
-	border: 1px ridge #000;
+	border: 1px ridge rgb(0, 0, 0);
 	float: left;
 	width: 80em;
 }
@@ -315,7 +315,7 @@ BODY
 #caja-peque
 {
 	text-align: center;
-	width: 35em;
+	width: 48.7em;
 }
 .s-corto
 {
@@ -326,27 +326,28 @@ BODY
 	float: left;
 	width: 80.4em;
 	height: auto;
-	border-top-color: #000;
-	border-right-color: #000;
-	border-bottom-color: #000;
-	border-left-color: #000;
+	border-top-color: rgb(0, 0, 0);
+	border-right-color: rgb(0, 0, 0);
+	border-bottom-color: rgb(0, 0, 0);
+	border-left-color: rgb(0, 0, 0);
 	margin: 5px;
 	padding: 1px;
 }
 #divmeta
 {
-	background-color: #EAE9FD;
-	border-bottom: 2px solid #000098;
-	border-right: 2px solid #000098;
-	border-left: 2px solid #000098;
+	background-color: rgb(234, 233, 253);
+	border-bottom: 2px solid rgb(0, 0, 152);
+	border-right: 2px solid rgb(0, 0, 152);
+	border-left: 2px solid rgb(0, 0, 152);
 	float: left;
+	height: auto;
+	width: 879px;
 }
 #info-meta
 {
 	width: 20em;
-	height: 28.7em;
+	height: auto;
 	float: left;
-	border-right: 2px solid #2420F8;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	text-align: left;
@@ -356,15 +357,22 @@ BODY
 #insumos-meta
 {
 	float: left;
-	width: 54.1em;
+	width: 567px;
 	height: auto;
-	margin: 0 0 0 9px;
+	margin: 7px 2px 7px 9px;
 	padding: 0 8px 0 0;
+	text-align: left;
+	border-left: 1px solid #000097;
+}
+.sub-titulo
+{
+	font-size: small;
+	font: 1.3em Consolas;
 }
 .info
 {
 	background-color: transparent;
-	border: 2px hidden #000000;
+	border: 2px hidden rgb(0, 0, 0);
 	overflow: auto;
 	float: none;
 	text-align: justify;
@@ -375,10 +383,10 @@ BODY
 }
 #info-partida
 {
-	border-left: 2px solid #0829FD;
-	border-bottom: 2px solid #0829FD;
-	border-right: 2px solid #0829FD;
-	height: 337px;
+	border-left: 2px solid rgb(8, 41, 253);
+	border-bottom: 2px solid rgb(8, 41, 253);
+	border-right: 2px solid rgb(8, 41, 253);
+	height: auto;
 	text-align: left;
 	padding-left: 0.5em;
 	padding-top: 0.5em;
@@ -391,12 +399,26 @@ BODY
 .celda
 {
 	float: left;
-	border: thin solid #000000;
+	border: thin solid rgb(0, 0, 0);
 }
 #tabla-partida
 {
 	float: left;
-	border: 1 solid #000000;
+	border: 1 solid rgb(0, 0, 0);
 	margin: 4px 0 0 0px;
 	width: 581px;
+}
+.cortita
+{
+	width: 8.8em;
+	margin: 0 0 0 5px;
+}
+#textarea
+{
+	width: 469px;
+	height: 135px;
+}
+#unidadmed {
+	height: auto;
+	width: 30em;
 }

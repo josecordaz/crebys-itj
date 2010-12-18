@@ -97,12 +97,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/poa.php" class="menu-on">POA</a>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-		<a href="/crebys-itj/requisiciones.php" class="menu-off">Requisiciones</a>
+		<a href="/crebys-itj/meta-accion.php" class="menu-off">Metas-Acciones</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -124,73 +119,90 @@
 
                                             
 <div id="tres">
-	<span id="titulo">Insumo</span>                 
+	<span id="titulo">Meta</span>
+    	<div>
+    	<?php
+			if(isset($_COOKIE['error'])){
+				echo "<hr id='corta'/>";
+				echo $_COOKIE['error'];
+				unset($_COOKIE['error']);
+			}
+        ?>
+    </div>                    
 	<hr id="corta"/>
-    
-    <form action="poa.php" method="post">	                
+    <form action="redir-meta.php" method="post">	                
     	<br/>
         <div id="caja-peque">
                         
             <div class="caja-left">
-                Partida:
-                <select name="partida" class="s-corto" onchange="location = 'redir-insumo.php?partida='+this.value">
+                Proceso Estratégico:
+                <select name="proc-estr" class="s-cortoddd" onchange="location = 'redir-meta.php?proc-est='+this.value">
                 <option value="0"></option>
                 	<?php
 						$arr=array();
-						$arr=$proc->devolverPartidas();
+						$arr=$proc->devolverProcesos_Estrategicos();
 						for($i=0;$i<count($arr);$i++)
-							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
-		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+							if(isset($_SESSION['proc-est'])&&$_SESSION['proc-est']==$arr[$i][0])
+		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
 							else
-		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][1]."</option>";
 
 					?>
                 </select>
             </div>
             <br/>
             <div class="caja-left">
-                Nombre:
-                <select name="insumo" onchange="location = 'redir-insumo.php?nombre='+this.value">
+                Proceso Clave:
+                <select name="proc-clav">
                 <?php
-					
 					$arre=array();
-					$arre=$proc->devolverInsumos($_SESSION['partida']);
+					$arre=$proc->devolverProcesos_Clave($_SESSION['proc-est']);
 					for($i=0;$i<count($arre);$i++)
-						if(isset($_SESSION['nombre'])&&$_SESSION['nombre']==$arre[$i][0])
-						    echo "<option value='".$arre[$i][0]."'selected=\"selected\">".$arre[$i][0]."</option>";
+						if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1])
+						    echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
 						else
-						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][0]."</option>";
+						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][1]."</option>";
 				?>
                 </select>
             </div>
             <br/>
             <div class="caja-left">
+            	<div>
                 Unidad de Medida:
-                <select name="unidad_de_medida" onchange="location = 'redir-insumo.php?medida='+this.value">
-                <option value="0"></option>
-				<?php
-					$arrm=array();
-					$arrm=$proc->devolverMedidas();
-					for($i=0;$i<count($arrm);$i++)
-						if(isset($_SESSION['medida'])&&$_SESSION['medida']==$arrm[$i][0])
-							echo "<option value=\"".$_SESSION['medida']."\" selected=\"selected\">".$_SESSION['medida']."</option>";
-						else
-							echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
+                </div>
+                <div>
+                <?php
+				if(isset($_SESSION['unidad-meta']))
+					echo "<textarea id=\"unidadmed\" name=\"unidad-m\">".$_SESSION['unidad-meta']."</textarea>";
+				else
+					echo "<textarea id=\"unidadmed\" name=\"unidad-m\"></textarea>";
 				?>
-                </select>
-	            <input type="button" value="Agregar" onclick="location = 'unidad_m.php'"/>
+                </div>
             </div>
             <br/>
             <div class="caja-left">
-                Precio:
-                <?php
-				if(isset($_SESSION['precio']))
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value=".$_SESSION['precio'].">";
+                Cantidad:
+				 <?php
+					if(isset($_SESSION['cantidad-meta']))
+					echo "<input name=\"cantidadmeta\" value=".$_SESSION['cantidad-meta'].">";
 				else
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
+					echo "<input name=\"cantidadmeta\" >";
 				?>
             </div>
             <br/>
+            <div class="caja-left">
+            	<div>
+                Descripción de la meta:
+                </div>
+                <div>
+                 <?php
+					if(isset($_SESSION['desc-meta']))
+					echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$_SESSION['desc-meta']."</textarea>";
+						else	
+					echo "<textarea id=\"textarea\" name=\"descrip-meta\" ></textarea>";
+				?>
+                </div>
+            </div>
         </div>
         <hr id="corta"/>
         <br/>

@@ -337,6 +337,7 @@
 			$this->conexion->executeSQL("select Un_Nombre from medidas");	
 			return $this->conexion->getArray();
 		}
+		// Agregar una medida
 		function agregarMedida($Un_Nombre){
 			$this->conexion->executeSQL("call agregarMedida('".$Un_Nombre."',@error); select @error");
 			switch($this->conexion->error()){
@@ -346,6 +347,28 @@
 					return true;
 				case 2:
 					return "La medida $Un_Nombre ya existe";					
+			}
+		}
+		// Agregar una accion a $_Meta
+		function agregarAccion($Id_Meta,$Ac_Descripcion){
+			$this->conexion->executeSQL("call agregarAccion('".$Id_Meta."','".$Ac_Descripcion."',@error); select @error");
+			switch($this->conexion->error()){
+				case 0:
+					return "Error en la consulta";
+				case 1:
+					return true;
+			}
+		}
+		// Agregar una meta
+		function agregarMeta($Id_Proc_Clave,$Me_Nombre,$Me_Unidad_M,$Me_Cantidad){
+			$this->conexion->executeSQL("call agregarMeta(".$Id_Proc_Clave.",'".$Me_Nombre."','".$Me_Unidad_M."',".$Me_Cantidad.",@error); select @error");
+			switch($this->conexion->error()){
+				case 0:
+					return "Error en la consulta";
+				case 1:
+					return true;
+				case 2:
+					return "Meta ya existente";
 			}
 		}
 		//Sacamos la longitud de cualquier campo
@@ -374,6 +397,16 @@
 					}
 			}
 			return false;	
+		}
+		// Devolvemos los procesos estratégicos
+		function devolverProcesos_Estrategicos(){
+			$this->conexion->executeSQL("select * from proc_estrategicos");
+			return $this->conexion->getArray();
+		}
+		// Devolver procesos clave del proceso estratégico
+		function devolverProcesos_Clave($Id_Proc_Estrategico){
+			$this->conexion->executeSQL("select Id_Proc_Clave,Pc_Nombre from proc_claves where Id_Proc_Estrategico=".$Id_Proc_Estrategico);
+			return $this->conexion->getArray();
 		}
 	}
 	

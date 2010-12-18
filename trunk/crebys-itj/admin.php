@@ -82,17 +82,22 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu_on">Inicio</a>
+        <a href="/crebys-itj/admin.php" class="menu-on">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu_off">Procedimientos</a>
+		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesion</a>
+        <a href="/crebys-itj/meta-accion.php" class="menu-off">Metas - Acciones</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesion</a>
 		
         <!-- InstanceEndEditable --></td>
             </tr>

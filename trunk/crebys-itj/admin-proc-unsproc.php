@@ -91,17 +91,17 @@ if(strcmp($_SESSION['nick'],'admin')==0){
 		// Mostramos las opciones del administrador
 		?>
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu_off">Inicio</a>
+        <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu_on">Procedimientos</a>
+		<a href="/crebys-itj/admin-proc.php" class="menu-on">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu_off">Cerrar Sesion</a>
+		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesion</a>
 		
 		<?php
 	}
