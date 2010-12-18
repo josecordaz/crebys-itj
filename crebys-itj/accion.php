@@ -13,13 +13,6 @@
 		// Redireccionamos a login.php
 		header("Location: http://$host$uri/login.php");
 	}
-	
-	
-		// Libreria para la utilización de procedimientos
-	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
-
-	// Objeto para la manipulación de procedimientos
-	$proc=new Procedimientos();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -74,10 +67,7 @@
                         	<td><!-- InstanceBeginEditable name="Bienvenida" -->
 <?php
 		// Bienvenido al usuario
-    	echo "Bienvenido ".$_SESSION['nick']."<p>";
-		echo "Jefe del departamento de ";
-		// Mostramos el departamento al cual pertenece el usuario a partir de su nick
-		echo $proc->saberDepartamento($_SESSION['nick']);
+    	echo "Bienvenido ".$_SESSION['nick'];
 		// Eliminamos la cookie de usuario
 		unset($_POST['usuario']);
 
@@ -92,25 +82,19 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
+        <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/poa.php" class="menu-on">POA</a>
+		<a href="/crebys-itj/meta-accion.php" class="menu-off">Meta-Accion</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/requisiciones.php" class="menu-off">Requisiciones</a>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesi&oacute;n</a>
+		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesion</a>
 		
-
-                <!-- InstanceEndEditable --></td>
+        <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
             	<td align="center">
@@ -123,79 +107,32 @@
                                             
 
                                             
-<div id="tres">
-	<span id="titulo">Insumo</span>                 
+                                            
+											<div id="tres">
+	<span id="titulo">Acción</span>                 
 	<hr id="corta"/>
     
-    <form action="poa.php" method="post">	                
+    <form action="meta-accion.php" method="post">	                
     	<br/>
         <div id="caja-peque">
                         
-            <div class="caja-left">
-                Partida:
-                <select name="partida" class="s-corto" onchange="location = 'redir-insumo.php?partida='+this.value">
-                <option value="0"></option>
-                	<?php
-						$arr=array();
-						$arr=$proc->devolverPartidas();
-						for($i=0;$i<count($arr);$i++)
-							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
-		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
-							else
-		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+                <textarea id="textarea" name="textarea">
+                <?php
+	                if(isset($_POST['raccion']))
+						echo "r_acción vale:=[".$_POST['raccion']."]";
+					else
+						echo "No existe la variable";
+				?>
+                </textarea>
+           
+            <br/>
 
-					?>
-                </select>
-            </div>
-            <br/>
-            <div class="caja-left">
-                Nombre:
-                <select name="insumo" onchange="location = 'redir-insumo.php?nombre='+this.value">
-                <?php
-					
-					$arre=array();
-					$arre=$proc->devolverInsumos($_SESSION['partida']);
-					for($i=0;$i<count($arre);$i++)
-						if(isset($_SESSION['nombre'])&&$_SESSION['nombre']==$arre[$i][0])
-						    echo "<option value='".$arre[$i][0]."'selected=\"selected\">".$arre[$i][0]."</option>";
-						else
-						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][0]."</option>";
-				?>
-                </select>
-            </div>
-            <br/>
-            <div class="caja-left">
-                Unidad de Medida:
-                <select name="unidad_de_medida" onchange="location = 'redir-insumo.php?medida='+this.value">
-                <option value="0"></option>
-				<?php
-					$arrm=array();
-					$arrm=$proc->devolverMedidas();
-					for($i=0;$i<count($arrm);$i++)
-						if(isset($_SESSION['medida'])&&$_SESSION['medida']==$arrm[$i][0])
-							echo "<option value=\"".$_SESSION['medida']."\" selected=\"selected\">".$_SESSION['medida']."</option>";
-						else
-							echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
-				?>
-                </select>
-	            <input type="button" value="Agregar" onclick="location = 'unidad_m.php'"/>
-            </div>
-            <br/>
-            <div class="caja-left">
-                Precio:
-                <?php
-				if(isset($_SESSION['precio']))
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value=".$_SESSION['precio'].">";
-				else
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
-				?>
-            </div>
             <br/>
         </div>
         <hr id="corta"/>
         <br/>
         <div class="caja">
-            <input type="submit" name="aceptar" value="Agregar"/>
+            <input type="submit" name="aceptar" value="Guardar"/>
 
 			<input type="button" name="cancelar" value="Cancelar"/>
         </div>

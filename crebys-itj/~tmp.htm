@@ -1,0 +1,126 @@
+<head>
+<style type="text/css">
+BODY{
+overflow: auto;
+}
+
+#clase {
+width: 59px;
+}
+</style>
+<SCRIPT LANGUAGE = "JavaScript">
+<!--
+
+function myErrorHandler(errorMessage,url,line) {
+ return true
+}
+
+onerror = myErrorHandler;
+
+document.onmousedown=click;
+document.oncontextmenu = function(){return false}
+
+//-->
+</script>
+</head>
+<body>
+<script language="JavaScript">
+<!--
+
+var px = 0;
+var py = 0;
+var opx = 0;
+var opy = 0;
+
+function setpxy() {
+  clearTimeout(xa)
+  if (window.pageYOffset)
+  {
+        window.pageYOffset = py
+  }
+  else if (document.documentElement && document.documentElement.scrollTop)
+  {
+	document.documentElement.scrollTop = py
+  }
+  else if (document.body)
+  {
+	document.body.scrollTop = py
+  }
+
+  if (window.pageXOffset)
+  {
+        window.pageXOffset = px
+  }
+  else if (document.documentElement && document.documentElement.scrollTop)
+  {
+	document.documentElement.scrollLeft = px
+  }
+  else if (document.body)
+  {
+	document.body.scrollLeft = px
+  }
+  opx = px;
+  opy = py;
+}
+
+function scrollpos() {
+
+  if (window.pageYOffset)
+  {
+        py = window.pageYOffset
+  }
+  else if (document.documentElement && document.documentElement.scrollTop)
+  {
+	py = document.documentElement.scrollTop
+  }
+  else if (document.body)
+  {
+	py = document.body.scrollTop
+  }
+
+  if (window.pageXOffset)
+  {
+        px = window.pageXOffset
+  }
+  else if (document.documentElement && document.documentElement.scrollTop)
+  {
+	px = document.documentElement.scrollLeft
+  }
+  else if (document.body)
+  {
+	px = document.body.scrollLeft
+  }
+
+
+}
+
+function checkpos() {
+   if(timerRunning)
+        stoptimer()
+   scrollpos();
+   if ((opx!=px)||(opy!=py)){
+       opx = px;
+       opy = py;
+       self.location = '|STOPPOS|'+px+'|'+py+'|';
+   }
+   starttimer()
+}
+
+function starttimer() {
+   timerID = setTimeout("checkpos()",800)
+   timerRunning = true
+}
+
+function stoptimer(){
+   if(timerRunning)
+      clearTimeout(timerID)
+   timerRunning = false
+}
+
+xa = setTimeout("setpxy()", 10);
+starttimer();
+
+//-->
+</script>
+<input type="Button" id="clase" value="Button">
+</body>

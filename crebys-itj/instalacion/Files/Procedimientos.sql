@@ -270,3 +270,39 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 	
+	!-- Agregar una accion
+		!-- error=0 Error de consulta
+		!-- error=1 Inserción correcta
+	&CREATE PROCEDURE agregarAccion(IN Id_Met INT,IN Ac_Descripcio VARCHAR(200),OUT error INT)
+	BEGIN
+		DECLARE Id_Accio INT;
+		SET error=1;
+		IF(select count(*) from acciones)>0 THEN
+			SET Id_Accio=(select max(Id_Accio) from Acciones)+8;
+		ELSE
+			SET Id_Accio=50;
+		END IF;
+		insert into Acciones values(Id_Accio,Id_Met,Ac_Descripcio);
+	END;&
+	
+	!-- Agregar una meta
+		!-- error=0 Error de consulta
+		!-- error=1 Inserción correcta
+		!-- error=2 Ya existe esa descripción de meta
+	&CREATE PROCEDURE agregarMeta(IN Id_Proc_Clav INT,IN Me_Nombr VARCHAR(200),IN Me_Unidad VARCHAR(100),IN Me_Cantida INT,OUT error INT)
+	BEGIN
+		DECLARE Id_Met INT;
+		SET error=1;
+		IF(select count(*) from metas)>0 THEN
+			SET Id_Met=(select max(Id_Meta) from metas)+1;
+		ELSE
+			SET Id_Met=1;
+		END IF;
+		IF(select count(*) from metas where Me_Nombre=Me_Nombr)>0 THEN
+			SET error=2;
+		ELSE
+			insert into metas values(Id_Met,Id_Proc_Clav,Me_Nombr,Me_Unidad,Me_Cantida);
+		END IF;
+	END;&
+	
+	
