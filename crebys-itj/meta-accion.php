@@ -14,6 +14,14 @@
 		header("Location: http://$host$uri/login.php");
 	}
 
+	// La siguiente variable se utilizará como temporal
+	// para guardar la meta en la que se está trabajando 
+	// actulmente.
+	$_SESSION['meta']=1;
+	// Librería para Procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+	// Objeto 
+	$proc=new Procedimientos();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -140,49 +148,31 @@
     	</div>
         <form action="accion.php" method="post">
        	<div id="insumos-meta">
-            <input type="radio" name="raccion" value="1" />
-        	<span class="sub-titulo">Accion 1:</span>
+        <?php 
+			$acciones=array();
+			$acciones=$proc->devolverAcciones($_SESSION['meta']);
+			for($i=0;$i<count($acciones);$i++){
+				echo "<input type='radio' name='raccion' value='.".($i+1)."' />";
+				echo "<span class='sub-titulo'>Accion ".($i+1).":</span>";
+		?>
             <div class="cortita">
             	<hr>
             </div>
         	<div class="info">
-        		
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                Coordinar,  verificar y administrar que personal directivo, funcionarios docentes y de apoyo participen en eventos de formación y actualización profesional que coadyuve a su desarrollo integral.
-			        
+        <?php
+           	echo $acciones[$i][0];
+		?>
 	        </div>	
             
             <br/>        
-	        <input type="radio" name="raccion" value="2" /> 
-        	<span class="sub-titulo">Accion 2:</span>
-            <div class="cortita">
-            	<hr>
-            </div>
-        	<div class="info">
-        		
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                Coordinar,  verificar y administrar que personal directivo, funcionarios docentes y de apoyo participen en eventos de formación y actualización profesional que coadyuve a su desarrollo integral.
-			        
-	        </div>	
-            <br/>        
-	        <input type="radio" name="raccion" value="3" /> 
-        	<span class="sub-titulo">Accion 3:</span>
-            <div class="cortita">
-            	<hr>
-            </div>
-        	<div class="info">
-        		
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                Coordinar,  verificar y administrar que personal directivo, funcionarios docentes y de apoyo participen en eventos de formación y actualización profesional que coadyuve a su desarrollo integral.
-			        
-	        </div>	
-            	<div ><input type="submit" value="Editar" /></div>    
+        <?php 
+			}
+	    ?>
+	        	        
+       	<div ><input type="submit" value="Editar" /></div>    
 		</div>
 		
         </form>

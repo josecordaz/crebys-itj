@@ -305,4 +305,19 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 	
+	!-- Saber el Id de la accion numero "uno", "dos"
+	!-- de la meta determinada.
+	&CREATE PROCEDURE saberIdAccion(IN Id_Met INT,IN Id_NumAccion INT, OUT error INT)
+	BEGIN
+		DECLARE ban INT default(0);
+		SET error=0;
+		WHILE ban<Id_NumAccion DO
+			SET error=error+1;
+			IF(select Id_Meta from Acciones where Id_Accion=error)=Id_Met THEN
+				SET ban=ban+1;
+			END IF;
+		END WHILE;
+	END;&
 	
+	
+	!-- Simpre dejar espacion al final para que no marque error
