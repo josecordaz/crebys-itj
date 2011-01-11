@@ -408,6 +408,27 @@
 			$this->conexion->executeSQL("select Id_Proc_Clave,Pc_Nombre from proc_claves where Id_Proc_Estrategico=".$Id_Proc_Estrategico);
 			return $this->conexion->getArray();
 		}
+		// Devuelve el contenido de una alguna accion basandose en determinada meta
+		function devolverAccion($Id_Meta,$Id_Accion){
+			$this->conexion->executeSQL("Select Ac_descripcion from Acciones where Id_Meta=$Id_Meta and Id_Accion=$Id_Accion");
+			return $this->conexion->error();
+		}
+		// Guardar la acción det. de la meta det.
+		function guardarAccion($Id_Meta,$Num_Accion,$Ac_Descripcion){
+			$this->conexion->executeSQL("update Acciones set Ac_Descripcion='".$Ac_Descripcion."' where Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion)."");
+			return $this->conexion->error();
+		}
+		// Saber id de la accion "uno","dos","tres",etc. de la meta determinada
+		// Los indices de las acciones deben empezar desde el registro con Id="1"
+		// puesto que desde ese indice empezará a buscar las coincidencias
+		function saberIdAccion($Id_Meta,$Id_Num_Accion){
+			$this->conexion->executeSQL("call saberIdAccion($Id_Meta,$Id_Num_Accion,@error); select @error");
+			return $this->conexion->error();
+		}
+		// Funsción para devolver todas las Acciones de una Meta
+		function devolverAcciones($Id_Meta){
+			$this->conexion->executeSQL("select Ac_Descripcion from Acciones where Id_Meta=$Id_Meta");
+			return $this->conexion->getArray();
+		}
 	}
-	
 ?>

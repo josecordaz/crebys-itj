@@ -1,4 +1,5 @@
 <?php
+
 // Iniciamos el manejo de sesiones
 session_start();
 
@@ -7,8 +8,12 @@ session_start();
 	$host  = $_SERVER['HTTP_HOST'];
 	// Guardamos la carpeta
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	
 
 // Verificamos que existan las variables necesarias
+if(isset($_POST['cancelar']) and $_POST['cancelar']='cancelar')
+	header("Location: http://$host$uri/meta-accion.php");	
+	
 if(isset($_POST['textarea'])){
 	if(isset($_SESSION['meta'])){
 		// Libreria para la utilización de procedimientos
@@ -18,8 +23,16 @@ if(isset($_POST['textarea'])){
 		$proc=new Procedimientos();
 		
 		// Guardamos la accion
-		$proc->guardarAccion($_SESSION['meta'],$_POST['textarea']);
+		/*
+		echo "Meta:=[".$_SESSION['meta']."]";
+		echo "<br>";
+		echo "Numero de Accion de la meta:=[".$_SESSION['nummeta']."]";
+		echo "<br>";
+		echo "Descripción:=[".$_POST['textarea'].".]";
+		*/
 		
+		$proc->guardarAccion($_SESSION['meta'],$_SESSION['nummeta'],$_POST['textarea']);
+		//echo "contulta:=[".$_SESSION['consulta']."]";
 		// Salimos 
 		header("Location: http://$host$uri/meta-accion.php");
 	}else{

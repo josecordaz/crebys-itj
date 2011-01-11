@@ -1,4 +1,5 @@
 <?php
+session_start();
 	//Clase para el manejo de la Base de datos
 	class Base_de_datos{
 		//Guardamos el nombre del servidor
@@ -49,6 +50,7 @@
 		//Establecemos y ejecutamos una consulta SQL
 		function executeSQL($sql){
 			$this->resArray= array();
+			$_SESSION['consulta']=$sql;
 			//echo "La consulta es(".$sql.")<br>";
 			$res=$this->conexion->multi_query($sql);
 			//$this->error=@mysqli_error($this->conexion);

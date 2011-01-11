@@ -2,17 +2,23 @@
 	// Inicamos la sesion
 	session_start();
 	
+	// Libreria para utilizar procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+	
 	// Inicializamos las variables para en redireccionamiento
 	// Guardamos el nombre del servidor
-	$host  = $_SERVER['HTTP_HOST'];
+	$host = $_SERVER['HTTP_HOST'];
 	// Guardamos la carpeta
-	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
 	// Si no existe la variable de sesión redir
 	if(!isset($_SESSION['nick'])){
 		// Redireccionamos a login.php
 		header("Location: http://$host$uri/login.php");
 	}
+	
+	// Creamos objeto de procedimientos
+	$proc=new Procedimientos();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -112,21 +118,17 @@
 	<span id="titulo">Acción</span>                 
 	<hr id="corta"/>
     
-    <form action="meta-accion.php" method="post">	                
+    <form action="guardar-accion.php" method="post">	                
     	<br/>
         <div id="caja-peque">
                         
-                <textarea id="textarea" name="textarea">
-                <?php
-	                if(isset($_POST['raccion']))
-						echo "r_acción vale:=[".$_POST['raccion']."]";
-					else
-						echo "No existe la variable";
-				?>
-                </textarea>
-           
+                <textarea id="textarea" name="textarea"><?php if(isset($_POST['raccion'])){
+					  	echo $proc->devolverAccion($_SESSION['meta'],$_POST['raccion']);
+						$_SESSION['nummeta']=$_POST['raccion'];
+					  }else 
+					echo "No existe la variable";
+				?></textarea>
             <br/>
-
             <br/>
         </div>
         <hr id="corta"/>
@@ -134,10 +136,10 @@
         <div class="caja">
             <input type="submit" name="aceptar" value="Guardar"/>
 
-			<input type="button" name="cancelar" value="Cancelar"/>
+</form>			<input type="button" name="cancelar" value="Cancelar" onclick="location = 'meta-accion.php'"/>
         </div>
         <br/>                    
-         </form>
+
 </div>
 
 
