@@ -17,7 +17,11 @@
 	// La siguiente variable se utilizará como temporal
 	// para guardar la meta en la que se está trabajando 
 	// actulmente.
-	$_SESSION['meta']=1;
+	if(isset($_GET['meta']))
+		$_SESSION['meta']=$_GET['meta'];
+	else
+		$_SESSION['meta']=1;
+	
 	// Librería para Procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 	// Objeto 
@@ -125,8 +129,16 @@
  
     <div class="menup">
 	<ul>
-        <li class="current"><a href="#"><span>M1</span></a></li>
-        <li ><a href="#"><span>M2</span></a></li>
+    <?php
+		$metas=array();
+		$metas=$proc->devolverMetas();
+		for($e=0;$e<count($metas);$e++){
+			if($metas[$e][0]==$_SESSION['meta'])
+		    	echo "<li class='current'><a href=''><span>M".$metas[$e][0]."</span></a></li>";
+			else
+	    		echo "<li ><a href='meta-accion.php?meta=".$metas[$e][0]."'><span>M".$metas[$e][0]."</span></a></li>";
+		}
+	?>
     </ul>
 	</div>
 	<div style="clear:both"></div>
@@ -135,48 +147,64 @@
     	<div id="info-meta"></font></font>
         	<br/>
 	        Proceso Estratégico:
-            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Académico</div>
+            <div class="info">
+              <?php
+            	$namep=$proc->datosMeta($_SESSION['meta']);
+				echo $namep[0][2];
+			?>
+            </div>
             <br/>
             Proceso Clave:
-            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formación Docente</div>
+            <div class="info">
+              <?php
+				echo $namep[0][1];
+            ?>
+            </div>
             <br/>
-        	Meta 28:
-			<div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
+        	Descripción:
+			<div class="info">
+			  <?php
+				echo $namep[0][0];
+            ?>
+</div>
                         	<div ><input type="button" value="Editar" /></div>
+
             <br/>
 
     	</div>
         <form action="accion.php" method="post">
        	<div id="insumos-meta">
-        <?php 
+		<?php 
 			$acciones=array();
 			$acciones=$proc->devolverAcciones($_SESSION['meta']);
 			for($i=0;$i<count($acciones);$i++){
-				echo "<input type='radio' name='raccion' value='.".($i+1)."' />";
+				echo "<input type='radio' name='raccion' value='".($i+1)."' />";
 				echo "<span class='sub-titulo'>Accion ".($i+1).":</span>";
 		?>
-            <div class="cortita">
-            	<hr>
-            </div>
-        	<div class="info">
-                &nbsp;
-                &nbsp;
-                &nbsp;
-        <?php
-           	echo $acciones[$i][0];
+	            <div class="cortita">
+    	       	<hr>
+        	    </div>
+        		<div class="info">
+                	
+		<?php
+        	   	echo $acciones[$i][0];
 		?>
-	        </div>	
+	        	</div>	
             
-            <br/>        
-        <?php 
+            	<br/>        
+		<?php 
 			}
-	    ?>
+		?>
 	        	        
-       	<div ><input type="submit" value="Editar" /></div>    
+	       	<div >
+                <input type="button" value="Agregar" />
+            	<input type="submit" value="Editar" />
+                <input type="button" value="Eliminar" />
+            </div>    
 		</div>
 		
         </form>
-	</div>
+		</div>
     
 </div>
 

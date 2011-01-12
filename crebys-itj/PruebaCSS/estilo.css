@@ -1,0 +1,25 @@
+#container
+{
+	background-color: #FFF;
+	overflow: hidden;
+	width: 780px;
+	margin: 10px auto 5px;
+	border: 1px solid #000;
+}
+#content
+{
+	background-color: #FFF;
+	width: 580px;
+	border-right: 200px solid #0498FA;
+/*ancho y color del menú*/
+	margin-right: -200px;
+	float: left;
+}
+#menu
+{
+	width: 200px;
+	float: left;
+	color: #FFF;
+	background: #0B9CFE;
+	text-align: left;
+}
