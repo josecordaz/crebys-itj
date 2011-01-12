@@ -409,8 +409,8 @@
 			return $this->conexion->getArray();
 		}
 		// Devuelve el contenido de una alguna accion basandose en determinada meta
-		function devolverAccion($Id_Meta,$Id_Accion){
-			$this->conexion->executeSQL("Select Ac_descripcion from Acciones where Id_Meta=$Id_Meta and Id_Accion=$Id_Accion");
+		function devolverAccion($Id_Meta,$Num_Accion){
+			$this->conexion->executeSQL("Select Ac_descripcion from Acciones where Id_Meta=$Id_Meta and Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion));
 			return $this->conexion->error();
 		}
 		// Guardar la acción det. de la meta det.
@@ -428,6 +428,22 @@
 		// Funsción para devolver todas las Acciones de una Meta
 		function devolverAcciones($Id_Meta){
 			$this->conexion->executeSQL("select Ac_Descripcion from Acciones where Id_Meta=$Id_Meta");
+			return $this->conexion->getArray();
+		}
+		// Devuelve datos básicos para la pagina metas-accioes
+		function datosMeta($Id_Meta){
+			$this->conexion->executeSQL("SELECT Me_Nombre, Pc_Nombre, Pe_Nombre
+										 FROM metas
+											INNER JOIN (
+												proc_claves
+												INNER JOIN proc_estrategicos ON proc_estrategicos.Id_Proc_Estrategico = proc_claves.Id_Proc_Estrategico
+											) ON proc_claves.Id_Proc_Clave = metas.Id_Proc_Clave
+										 WHERE Id_Meta =$Id_Meta");
+			return $this->conexion->getArray();
+		}
+		// Devuelve todas las metas
+		function devolverMetas(){
+			$this->conexion->executeSQL('select Id_Meta from Metas');
 			return $this->conexion->getArray();
 		}
 	}

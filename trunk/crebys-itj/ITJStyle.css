@@ -342,17 +342,18 @@ BODY
 	float: left;
 	height: auto;
 	width: 879px;
+	padding-left: 1px;
 }
 #info-meta
 {
-	width: 20em;
-	height: auto;
-	float: left;
+	width: 20.3em;
 	margin-bottom: 3px;
 	margin-top: 3px;
 	text-align: left;
 	font-size: small;
 	margin-left: 6px;
+	height: auto;
+	float: left;
 }
 #insumos-meta
 {
@@ -378,8 +379,9 @@ BODY
 	text-align: justify;
 	margin: 0.5em;
 	font-family: Consolas;
-	font-size: 12px;
+	font-size: 14px;
 	text-decoration: none;
+	padding-left: 1.3em;
 }
 #info-partida
 {
@@ -418,7 +420,14 @@ BODY
 	width: 469px;
 	height: 135px;
 }
-#unidadmed {
+#unidadmed
+{
 	height: auto;
 	width: 30em;
+}
+#opciones
+{
+	width: 11px;
+	height: 10px;
+	text-align: justify;
 }

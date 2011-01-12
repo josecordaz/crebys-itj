@@ -121,9 +121,9 @@
     <form action="guardar-accion.php" method="post">	                
     	<br/>
         <div id="caja-peque">
-                        
                 <textarea id="textarea" name="textarea"><?php if(isset($_POST['raccion'])){
 					  	echo $proc->devolverAccion($_SESSION['meta'],$_POST['raccion']);
+						//echo "Devolver acción de la meta:=[".$_SESSION['meta']."] Accion:=[".$_POST['raccion']."]<br>";
 						$_SESSION['nummeta']=$_POST['raccion'];
 					  }else 
 					echo "No existe la variable";
