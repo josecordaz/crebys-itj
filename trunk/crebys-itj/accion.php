@@ -19,6 +19,12 @@
 	
 	// Creamos objeto de procedimientos
 	$proc=new Procedimientos();
+	
+	// Checamos si llegamos aquí atravez del botón eliminar
+	if(isset($_POST['eliminar'])){
+		$proc->eliminarAccion($_SESSION['meta'],$_POST['raccion']);
+		header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
+	}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

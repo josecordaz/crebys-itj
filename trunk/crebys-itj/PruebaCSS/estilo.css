@@ -1,4 +1,4 @@
-#container
+#containercolumns
 {
 	background-color: #FFF;
 	overflow: hidden;
@@ -6,7 +6,7 @@
 	margin: 10px auto 5px;
 	border: 1px solid #000;
 }
-#content
+#contentcolumns
 {
 	background-color: #FFF;
 	width: 580px;
@@ -15,7 +15,7 @@
 	margin-right: -200px;
 	float: left;
 }
-#menu
+#menucolumns
 {
 	width: 200px;
 	float: left;

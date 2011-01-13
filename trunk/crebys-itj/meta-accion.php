@@ -127,6 +127,8 @@
                                             
 <div id="area">
  
+ 	
+ 
     <div class="menup">
 	<ul>
     <?php
@@ -145,7 +147,7 @@
     <div id="divmeta">    
 	
     	<div id="info-meta"></font></font>
-        	<br/>
+
 	        Proceso Estratégico:
             <div class="info">
               <?php
@@ -173,7 +175,7 @@
 
     	</div>
         <form action="accion.php" method="post">
-       	<div id="insumos-meta">
+       	<div id="acciones-meta">
 		<?php 
 			$acciones=array();
 			$acciones=$proc->devolverAcciones($_SESSION['meta']);
@@ -197,9 +199,9 @@
 		?>
 	        	        
 	       	<div >
-                <input type="button" value="Agregar" />
-            	<input type="submit" value="Editar" />
-                <input type="button" value="Eliminar" />
+                <input type="submit" name="agregar" value="Agregar" />
+            	<input type="submit" name="editar" value="Editar" />
+                <input type="submit" name="eliminar" value="Eliminar"/>
             </div>    
 		</div>
 		
