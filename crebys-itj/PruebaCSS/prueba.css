@@ -1,0 +1,16 @@
+.link-selected
+{
+	font: normal small-caps normal 12pt Consolas;
+	color: #0803D2;
+	text-decoration: inherit;
+	border-left: thin solid;
+	border-right: thin solid;
+	padding-right: 2px;
+}
+.link-unselected
+{
+	font: normal small-caps normal 12pt Consolas;
+	color: #908DFA;
+	border: inherit solid #000005;
+	text-decoration: inherit;
+}

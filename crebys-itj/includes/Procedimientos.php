@@ -446,5 +446,10 @@
 			$this->conexion->executeSQL('select Id_Meta from Metas');
 			return $this->conexion->getArray();
 		}
+		// Eliminar Accion
+		function eliminarAccion($Id_Meta,$Num_Accion){
+			$this->conexion->executeSQL("call eliminarAccion(".$Id_Meta.",".$Num_Accion.",@error); select @error");
+			return $this->conexion->error();
+		}
 	}
 ?>
