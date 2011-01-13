@@ -20,7 +20,10 @@
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
-
+	
+	// Si recivimos la variable $_get['meta']
+	if(isset($_GET['meta']))
+		$namep=$proc->datosMeta($_GET['meta']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -139,13 +142,17 @@
                 <select name="proc-estr" class="s-cortoddd" onchange="location = 'redir-meta.php?proc-est='+this.value">
                 <option value="0"></option>
                 	<?php
+
 						$arr=array();
 						$arr=$proc->devolverProcesos_Estrategicos();
 						for($i=0;$i<count($arr);$i++)
-							if(isset($_SESSION['proc-est'])&&$_SESSION['proc-est']==$arr[$i][0])
-		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
+							if(isset($namep)&&$namep[0][2]==$arr[$i][1])
+								echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
 							else
-		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][1]."</option>";
+								if(isset($_SESSION['proc-est'])&&$_SESSION['proc-est']==$arr[$i][0])
+			                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
+								else
+		    	                	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][1]."</option>";
 
 					?>
                 </select>
@@ -156,12 +163,19 @@
                 <select name="proc-clav">
                 <?php
 					$arre=array();
-					$arre=$proc->devolverProcesos_Clave($_SESSION['proc-est']);
+					if(isset($namep)){
+						$arre=$proc->devolverProcesos_Clave($namep[0][3]);
+					}
+					else	
+						$arre=$proc->devolverProcesos_Clave($_SESSION['proc-est']);
 					for($i=0;$i<count($arre);$i++)
-						if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1])
-						    echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
+						if(isset($namep)&&$namep[0][1]==$arre[$i][1])
+							echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
 						else
-						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][1]."</option>";
+							if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1])
+								echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
+							else
+								echo "<option value='".$arre[$i][0]."'>".$arre[$i][1]."</option>";
 				?>
                 </select>
             </div>
@@ -172,10 +186,13 @@
                 </div>
                 <div>
                 <?php
-				if(isset($_SESSION['unidad-meta']))
-					echo "<textarea id=\"unidadmed\" name=\"unidad-m\">".$_SESSION['unidad-meta']."</textarea>";
+				if(isset($namep))
+					echo "<textarea id=\"unidadmed\" name=\"unidad-m\">".$namep[0][4]."</textarea>";
 				else
-					echo "<textarea id=\"unidadmed\" name=\"unidad-m\"></textarea>";
+					if(isset($_SESSION['unidad-meta']))
+						echo "<textarea id=\"unidadmed\" name=\"unidad-m\">".$_SESSION['unidad-meta']."</textarea>";
+					else
+						echo "<textarea id=\"unidadmed\" name=\"unidad-m\"></textarea>";
 				?>
                 </div>
             </div>
@@ -183,10 +200,13 @@
             <div class="caja-left">
                 Cantidad:
 				 <?php
-					if(isset($_SESSION['cantidad-meta']))
-					echo "<input name=\"cantidadmeta\" value=".$_SESSION['cantidad-meta'].">";
-				else
-					echo "<input name=\"cantidadmeta\" >";
+				 if(isset($namep))
+				 	echo "<input name=\"cantidadmeta\" value=".$namep[0][5].">";
+				 else
+				 	if(isset($_SESSION['cantidad-meta']))
+						echo "<input name=\"cantidadmeta\" value=".$_SESSION['cantidad-meta'].">";
+					else
+						echo "<input name=\"cantidadmeta\" >";
 				?>
             </div>
             <br/>
@@ -196,10 +216,13 @@
                 </div>
                 <div>
                  <?php
-					if(isset($_SESSION['desc-meta']))
-					echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$_SESSION['desc-meta']."</textarea>";
+				 	if(isset($namep))
+						echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$namep[0][6]."</textarea>";
+					else
+						if(isset($_SESSION['desc-meta']))
+							echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$_SESSION['desc-meta']."</textarea>";
 						else	
-					echo "<textarea id=\"textarea\" name=\"descrip-meta\" ></textarea>";
+							echo "<textarea id=\"textarea\" name=\"descrip-meta\" ></textarea>";
 				?>
                 </div>
             </div>

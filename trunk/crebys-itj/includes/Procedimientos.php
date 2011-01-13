@@ -432,7 +432,7 @@
 		}
 		// Devuelve datos básicos para la pagina metas-accioes
 		function datosMeta($Id_Meta){
-			$this->conexion->executeSQL("SELECT Me_Nombre, Pc_Nombre, Pe_Nombre
+			$this->conexion->executeSQL("SELECT Me_Nombre, Pc_Nombre, Pe_Nombre,proc_estrategicos.Id_Proc_Estrategico,Me_Unidad_M,Me_Cantidad,Me_Nombre
 										 FROM metas
 											INNER JOIN (
 												proc_claves
@@ -444,6 +444,17 @@
 		// Devuelve todas las metas
 		function devolverMetas(){
 			$this->conexion->executeSQL('select Id_Meta from Metas');
+			return $this->conexion->getArray();
+		}
+		// Devuelve todas las metas
+		function devolverMetasPE($Id_Proc_Estrategico){
+			$this->conexion->executeSQL('SELECT Id_Meta
+										 FROM metas
+											INNER JOIN (
+												proc_claves
+												INNER JOIN proc_estrategicos ON proc_estrategicos.Id_Proc_Estrategico = proc_claves.Id_Proc_Estrategico
+											) ON proc_claves.Id_Proc_Clave = metas.Id_Proc_Clave
+										 WHERE proc_estrategicos.Id_Proc_Estrategico ='.$Id_Proc_Estrategico.'');
 			return $this->conexion->getArray();
 		}
 		// Eliminar Accion
