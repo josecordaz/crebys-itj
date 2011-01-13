@@ -1,20 +1,19 @@
 .link-selected
 {
-	font: normal small-caps normal 12pt Consolas;
+	font: normal small-caps normal 15pt Consolas;
 	color: #0803D2;
-	text-decoration: inherit;
-	border-left: thin solid;
-	border-right: thin solid;
-	padding-right: 2px;
+	border-right: thin solid #05038B;
+	border-left: thin solid #04028A;
+	padding: 0 0 0 0px;
+	text-decoration: none;
 }
 .link-unselected
 {
-	font: normal small-caps normal 12pt Consolas;
+	font: normal small-caps normal 15.5pt Consolas;
 	color: #908DFA;
 	border: inherit solid #000005;
-	text-decoration: inherit;
+	text-decoration: underline;
 }
-
 .menup-partida
 {
 	font-weight: bold;
@@ -377,17 +376,17 @@ BODY
 #acciones-meta
 {
 	float: left;
-	width: 567px;
+	width: 589px;
 	height: auto;
 	margin: 7px 2px 7px -1px;
 	text-align: left;
 	border-left: 1px solid #000097;
-	padding-left: 0px;
+	padding-left: 11px;
 }
 .sub-titulo
 {
-	font-size: small;
-	font: 1.3em Consolas;
+	font: normal small-caps bold 2em Corbel;
+	color: #1304BB;
 }
 .info
 {
@@ -431,7 +430,7 @@ BODY
 }
 .cortita
 {
-	width: 8.8em;
+	width: 4.4em;
 	margin: 0 0 0 5px;
 }
 #textarea
@@ -449,4 +448,35 @@ BODY
 	width: 11px;
 	height: 10px;
 	text-align: justify;
+}
+.subtitulo
+{
+	font: normal bolder 16pt monospace;
+	color: #1405BC;
+	border-left: thick groove;
+	padding: 0 0 0 7px;
+}
+.izquierda
+{
+	text-align: left;
+	width: 879px;
+}
+.link-unselected:hover
+{
+	color: #5652FD;
+	text-decoration: none;
+}
+.divtextcentrado
+{
+	text-align: center;
+	width: auto;
+}
+.titaccion
+{
+	font: 10.8pt Consolas;
+}
+.espaciorayado
+{
+	text-decoration: line-through;
+	color: #1203BA;
 }

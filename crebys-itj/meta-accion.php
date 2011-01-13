@@ -126,87 +126,148 @@
                                             
                                             
 <div id="area">
- 
- 	
- 
+    <div class="izquierda"><span class="subtitulo">Procesos Estratégicos:</span></div>
+    <br/>
+	<div>
+    	<?php
+        	$proc_est=$proc->devolverProcesos_Estrategicos();
+				for($i=0;$i<count($proc_est);$i++){
+					if(!isset($_GET['proc-est'])&&$i==0){
+						echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+					}else{
+						if($proc_est[$i][0]==$_GET['proc-est'])
+							echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+						else
+							echo "<a class='link-unselected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+					}
+				}
+
+		?>
+    </div>
+ 	<br/>
+   	<div class="izquierda"><span class="subtitulo">Metas</span></div>
+   	<br/>
+    <?php
+		$metas=array();
+		if(!isset($_GET['proc-est']))
+			$metas=$proc->devolverMetasPE(2);
+		else
+			$metas=$proc->devolverMetasPE($_GET['proc-est']);
+		if(count($metas)==0)
+			echo "No existen metas para este proceso estratégico";
+		else{
+    ?>
     <div class="menup">
 	<ul>
     <?php
-		$metas=array();
-		$metas=$proc->devolverMetas();
+		if(isset($_GET['meta']))
+			$_SESSION['meta']=$_GET['meta'];
 		for($e=0;$e<count($metas);$e++){
-			if($metas[$e][0]==$_SESSION['meta'])
-		    	echo "<li class='current'><a href=''><span>M".$metas[$e][0]."</span></a></li>";
-			else
-	    		echo "<li ><a href='meta-accion.php?meta=".$metas[$e][0]."'><span>M".$metas[$e][0]."</span></a></li>";
+			if(!isset($_GET['meta'])&&$e==0){
+				echo "<li class='current'><a href=''><span>".$metas[$e][0]."</span></a></li>";
+				$_SESSION['meta']=$metas[$e][0];
+			}else{
+				if($metas[$e][0]==$_SESSION['meta'])
+					echo "<li class='current'><a href=''><span>".$metas[$e][0]."</span></a></li>";
+				else
+					echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+			}
 		}
-	?>
-    </ul>
-	</div>
+		?>
+    	</ul>
+		</div>
 	<div style="clear:both"></div>
     <div id="divmeta">    
 	
     	<div id="info-meta"></font></font>
+             <?php
+	           	$namep=$proc->datosMeta($_SESSION['meta']);
+				if(count($metas)==0)
+					echo "No existen metas";
+				else{
+					?>
+					Proceso Estratégico:
+					<div class="info">
+					<?php
+						echo $namep[0][2];
+					?>
+					</div>
+					<br/>
+					Proceso Clave:
+					<div class="info">
+					  <?php
+						echo $namep[0][1];
+					?>
+					</div>
+					<br/>
+					Descripción:
+					<div class="info">
+					  <?php
+						echo $namep[0][0];
+					?>
+		</div>
+                   	<div ><input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>'"/></div>
 
-	        Proceso Estratégico:
-            <div class="info">
-              <?php
-            	$namep=$proc->datosMeta($_SESSION['meta']);
-				echo $namep[0][2];
-			?>
-            </div>
-            <br/>
-            Proceso Clave:
-            <div class="info">
-              <?php
-				echo $namep[0][1];
-            ?>
-            </div>
-            <br/>
-        	Descripción:
-			<div class="info">
-			  <?php
-				echo $namep[0][0];
-            ?>
-</div>
-                        	<div ><input type="button" value="Editar" /></div>
+            		<br/>
 
-            <br/>
-
-    	</div>
-        <form action="accion.php" method="post">
-       	<div id="acciones-meta">
-		<?php 
-			$acciones=array();
-			$acciones=$proc->devolverAcciones($_SESSION['meta']);
-			for($i=0;$i<count($acciones);$i++){
-				echo "<input type='radio' name='raccion' value='".($i+1)."' />";
-				echo "<span class='sub-titulo'>Accion ".($i+1).":</span>";
-		?>
-	            <div class="cortita">
-    	       	<hr>
-        	    </div>
-        		<div class="info">
+    				</div>
+        			<form action="accion.php" method="post">
+   					<div id="acciones-meta">
+                    <div class="divtextcentrado">
+                    	<span class="espaciorayado">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    	<span class="sub-titulo">Acciones</span>
+                       	<span class="espaciorayado">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+					<?php 
+						$acciones=array();
+						$acciones=$proc->devolverAcciones($_SESSION['meta']);
+						if(count($acciones)==0){
+							echo "No existen Acciones para esta meta";
+							echo "<br>";
+							echo "<br>";
+						}
+						else
+						{
+							for($i=0;$i<count($acciones);$i++){
+								echo "<input type='radio' name='raccion' value='".($i+1)."' />";
+								echo "<span class='titaccion'>A-".($i+1).":</span>";
+							
+					?>
+	            	<div class="cortita">
+    	       		<hr>
+        	    	</div>
+        			<div class="info">
                 	
-		<?php
-        	   	echo $acciones[$i][0];
-		?>
-	        	</div>	
+					<?php
+        			   	echo $acciones[$i][0];
+						echo "</div>";
+					}
+					?>
+
             
-            	<br/>        
+            		<br/>        
 		<?php 
-			}
+			}}
 		?>
 	        	        
 	       	<div >
                 <input type="submit" name="agregar" value="Agregar" />
-            	<input type="submit" name="editar" value="Editar" />
-                <input type="submit" name="eliminar" value="Eliminar"/>
+               	<?php
+					if(count($acciones)!=0){
+				       	echo "<input type='submit' name='editar' value='Editar' />";
+						echo "<input type='submit' name='eliminar' value='Eliminar'/>";
+					}
+				?>
+            	
+                
             </div>    
 		</div>
 		
         </form>
 		</div>
+        <?php
+		}
+		?>
     
 </div>
 
