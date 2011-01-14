@@ -145,14 +145,16 @@
 
 						$arr=array();
 						$arr=$proc->devolverProcesos_Estrategicos();
-						for($i=0;$i<count($arr);$i++)
-							if(isset($namep)&&$namep[0][2]==$arr[$i][1])
+						for($i=0;$i<count($arr);$i++){
+							if(isset($namep)&&$namep[0][3]==$arr[$i][0]){
 								echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
+							}
 							else
-								if(isset($_SESSION['proc-est'])&&$_SESSION['proc-est']==$arr[$i][0])
+								if(isset($_SESSION['proc-est'])&&$_SESSION['proc-est']==$arr[$i][0]&&!isset($namep))
 			                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][1]."</option>";
 								else
 		    	                	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][1]."</option>";
+						}
 
 					?>
                 </select>
@@ -169,8 +171,10 @@
 					else	
 						$arre=$proc->devolverProcesos_Clave($_SESSION['proc-est']);
 					for($i=0;$i<count($arre);$i++)
-						if(isset($namep)&&$namep[0][1]==$arre[$i][1])
+						if(isset($namep)&&$namep[0][1]==$arre[$i][1]){
 							echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
+							$_SESSION['proc-clave']=$namep[0][7];
+						}
 						else
 							if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1])
 								echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
@@ -216,8 +220,9 @@
                 </div>
                 <div>
                  <?php
-				 	if(isset($namep))
+				 	if(isset($namep)){
 						echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$namep[0][6]."</textarea>";
+					}
 					else
 						if(isset($_SESSION['desc-meta']))
 							echo "<textarea id=\"textarea\" name=\"descrip-meta\" >".$_SESSION['desc-meta']."</textarea>";
@@ -230,8 +235,12 @@
         <hr id="corta"/>
         <br/>
         <div class="caja">
-            <input type="submit" name="aceptar" value="Agregar"/>
-
+        	<?php
+            	if(isset($namep)||isset($_SESSION['proc-est']))
+					echo "<input type='submit' name='guardar' value='Guardar'/>";
+				else
+					echo"<input type='submit' name='agregar' value='Agregar'/>";
+			?>
 			<input type="button" name="cancelar" value="Cancelar"/>
         </div>
         <br/>                    

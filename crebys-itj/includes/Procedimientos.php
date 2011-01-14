@@ -432,7 +432,7 @@
 		}
 		// Devuelve datos básicos para la pagina metas-accioes
 		function datosMeta($Id_Meta){
-			$this->conexion->executeSQL("SELECT Me_Nombre, Pc_Nombre, Pe_Nombre,proc_estrategicos.Id_Proc_Estrategico,Me_Unidad_M,Me_Cantidad,Me_Nombre
+			$this->conexion->executeSQL("SELECT Me_Nombre, Pc_Nombre, Pe_Nombre,proc_estrategicos.Id_Proc_Estrategico,Me_Unidad_M,Me_Cantidad,Me_Nombre,proc_claves.Id_Proc_Clave
 										 FROM metas
 											INNER JOIN (
 												proc_claves
@@ -461,6 +461,11 @@
 		function eliminarAccion($Id_Meta,$Num_Accion){
 			$this->conexion->executeSQL("call eliminarAccion(".$Id_Meta.",".$Num_Accion.",@error); select @error");
 			return $this->conexion->error();
+		}
+		// Modificar meta
+		function modMeta($Id_Meta,$Id_Proc_Clave,$Me_Nombre,$Me_Unidad_M,$Me_Cantidad){
+			$this->conexion->executeSQL("update Metas set Id_Proc_Clave=$Id_Proc_Clave, Me_Nombre=$Me_Nombre, Me_Unidad_M=$Me_Unidad_M, Me_Cantidad=$Me_Cantidad where Id_Meta=$Id_Meta;");
+			return true;
 		}
 	}
 ?>
