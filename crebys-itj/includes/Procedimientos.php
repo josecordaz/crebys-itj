@@ -464,8 +464,12 @@
 		}
 		// Modificar meta
 		function modMeta($Id_Meta,$Id_Proc_Clave,$Me_Nombre,$Me_Unidad_M,$Me_Cantidad){
-			$this->conexion->executeSQL("update Metas set Id_Proc_Clave=$Id_Proc_Clave, Me_Nombre=$Me_Nombre, Me_Unidad_M=$Me_Unidad_M, Me_Cantidad=$Me_Cantidad where Id_Meta=$Id_Meta;");
+			$this->conexion->executeSQL("update Metas set Id_Proc_Clave=".$Id_Proc_Clave.", Me_Nombre='$Me_Nombre', Me_Unidad_M='$Me_Unidad_M', Me_Cantidad=$Me_Cantidad where Id_Meta=$Id_Meta;");
 			return true;
+		}// Saber ID de un proceso clave en base a su nombre
+		function saberIdProcClave($Pc_Nombre){
+			$this->conexion->executeSQL("select Id_Proc_Clave from proc_claves where Pc_Nombre=$Pc_Nombre");
+			return $this->conexion->error();
 		}
 	}
 ?>

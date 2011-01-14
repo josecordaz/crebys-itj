@@ -164,11 +164,11 @@
 			$_SESSION['meta']=$_GET['meta'];
 		for($e=0;$e<count($metas);$e++){
 			if(!isset($_GET['meta'])&&$e==0){
-				echo "<li class='current'><a href=''><span>".$metas[$e][0]."</span></a></li>";
+				echo "<li class='current'><a href=''><span>Meta ".$metas[$e][0]."</span></a></li>";
 				$_SESSION['meta']=$metas[$e][0];
 			}else{
 				if($metas[$e][0]==$_SESSION['meta'])
-					echo "<li class='current'><a href=''><span>".$metas[$e][0]."</span></a></li>";
+					echo "<li class='current'><a href=''><span>Meta ".$metas[$e][0]."</span></a></li>";
 				else
 					echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
 			}
