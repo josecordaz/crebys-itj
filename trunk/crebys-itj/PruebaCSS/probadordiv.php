@@ -5,14 +5,26 @@
 <title>Probando divs</title>
 <link href="probadordiv.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
 
 <div id="principal">
-
-		<div id="uno">uno</div>
-   		<div id="dos">dos</div>
-        
+	<div class="ren">
+		<div class="celda">
+			Concepto		
+		</div>
+		<div class="celda">
+			Unidad de Medida
+		</div>
+    </div>
+	<div class="ren">
+		<div class="celda">
+			Caja para archivo muerto tamaño oficio		
+		</div>
+		<div class="celda">
+			Unidad de Medida
+		</div>
+    </div>
 </div>
 
-<body>
 </body>
 </html>

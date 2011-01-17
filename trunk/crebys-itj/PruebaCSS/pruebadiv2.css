@@ -1,0 +1,31 @@
+@CHARSET "ISO-8859-1";
+div#contenido {
+   width:100%;
+}
+
+div#contenido div#interior {
+   
+   width:900px;
+   height:auto;
+   margin-left:auto;
+   margin-right:auto;
+   border-bottom:solid 12px #00FF66;
+}
+
+div#contenido div#interior div#menu {
+   width:200px;
+   height:auto;
+   float:left;
+   background-color:#CC3300;
+}
+
+div#contenido div#interior div#contenedor {
+   position:relative;
+   width:700px;
+   height:auto;
+   float:right;
+}
+
+div.clearfix {
+   clear:both;
+}

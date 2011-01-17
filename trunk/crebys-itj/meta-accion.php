@@ -206,7 +206,10 @@
 						echo $namep[0][0];
 					?>
 		</div>
-                   	<div ><input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>'"/></div>
+                   	<div >
+                    	<input type="button" value="Agregar" onclick="location='meta.php'"/>
+                        <input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>'"/>
+                    </div>
 
             		<br/>
 
