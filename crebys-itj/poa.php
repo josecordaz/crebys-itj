@@ -28,7 +28,6 @@
 <title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
 <!-- #EndEditable -->
-
 </head>
 
 <body>
@@ -135,7 +134,7 @@
 	<div style="clear:both"></div>
     <div id="divmeta">    
 	
-    	<div id="info-meta">
+    	<div id="info-meta2">
         	<br/>
 	        Proceso Estratégico:
             <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Académico</div>
@@ -146,40 +145,93 @@
         	Meta 28:
 			<div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
             <br/>
-            Acción 1:
-            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordinar,  verificar y administrar que personal directivo, funcionarios docentes y de apoyo participen en eventos de formación y actualización profesional que coadyuve a su desarrollo integral.</div>
+
+
             
     	</div>
         
-       	<div id="insumos-meta">
+       	<div id="insumos-meta2">
         
         	<div class="menup-partida">
-			<ul>
-        		<li class="current-partida"><a href="#"><span>P1</span></a></li>
-		        <li ><a href="#"><span>P2</span></a></li>
-		        <li ><a href="#"><span>P3</span></a></li>
-		        <li ><a href="#"><span>P4</span></a></li>
-		        <li ><a href="#"><span>P5</span></a></li>        
-		    </ul>
-		</div>
-		<div style="clear:both"></div>
-		<div id="info-partida">
-			Insumos:
-		    <div id="tabla-partida">
-                <div class="ren">
-                  	<div class="celda"><span id="nombre">Nombre</span></div>
-                   	<div class="celda">Unidad de Medida</div>                   	<div class="celda">Precio Unitario</div><div class="celda">Subtotal</div>
-                </div>
+				<ul>
+        			<li class="current-partida"><a href="#"><span>Acción 1</span></a></li>
+		    	    <li ><a href="#"><span>Acción 2</span></a></li>
+		        	<li ><a href="#"><span>Acción 3</span></a></li>
+			        <li ><a href="#"><span>Acción 4</span></a></li>
+                    <span>[+] Expandir todo</span>
+			    </ul>
+			</div>
+            <div style="clear:both"></div>
+            <div id="info-partida">
+			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
+            <br/>
+		    	<div id="tabla-partida">
+                	<div class="renglon2">
+                        <div class="celda">Nombre</div>
+                        <div class="celda">Unidad de Medida</div>
+                        <div class="celda">Precio Unitario</div>                        
+                        <div class="celda">Cantidad</div>                        
+                        <div class="celda">Subtotal</div>
+                    </div>
+                    <div class="renglon2">
+                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 68.00</div>
+                        <div class="celda2">6</div>
+                        <div class="celda2">$408.00</div>
+                    </div>
+                    <div class="renglon3">
+                        <div class="celda2">Carpeta de 3 argollas</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 72.00</div>
+                        <div class="celda2">80</div>
+                        <div class="celda2">$5,760.00</div>
+                    </div>
+                    <div class="subtotal">
+                    <input type="button" value="Agregar"/>
+                    Subtotal $ 6,168.00
+                    </div>
+   		        </div>
 
-	        </div>
-        
+
+            <p/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+   			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2106:</a></span>
+            <br/>
+		    	<div id="tabla-partida">
+                	<div class="renglon2">
+                  		<div class="celda"><span id="nombre">Nombre</span></div>
+	                   	<div class="celda">Unidad de Medida</div>
+                        <div class="celda">Precio Unitario</div>
+                        <div class="celda">Cantidad</div>
+                        <div class="celda">Subtotal</div>
+    	            </div>
+                    <div class="renglon2">
+                        <div class="celda2">CD -R Verbatim</div>
+                        <div class="celda2">Torre c/ 50 Pzas</div>
+                        <div class="celda2">$ 132.00</div>
+                        <div class="celda2">2</div>
+                        <div class="celda2">$264.00</div>
+                    </div>
+                    <div class="renglon3">
+                        <div class="celda2">Thoner para impresora HP Láser 2200 D</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 1700.00</div>
+                        <div class="celda2">1</div>
+                        <div class="celda2">$1,700.00</div>
+                    </div>
+                    <div class="subtotal">
+                    <input type="button" value="Agregar"/>
+                    Subtotal $ 1,964.00
+                    </div>
+		        </div>
+        	</div>
         </div>
-        
-        
-        </div>
-    
 	</div>
-    
 </div>
 
 

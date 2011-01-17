@@ -21,7 +21,7 @@
 	font-size: 13px;
 	background-color: rgb(234, 233, 253);
 	float: left;
-	width: 100%;
+	width: 633px;
 	border-bottom: 2px solid rgb(7, 40, 252);
 	margin-top: 0.3em;
 	margin-right: 0em;
@@ -404,12 +404,12 @@ BODY
 #info-partida
 {
 	border-left: 2px solid rgb(8, 41, 253);
-	border-bottom: 2px solid rgb(8, 41, 253);
-	border-right: 2px solid rgb(8, 41, 253);
 	height: auto;
 	text-align: left;
 	padding-left: 0.5em;
 	padding-top: 0.5em;
+	float: left;
+	width: 625px;
 }
 .ren
 {
@@ -419,14 +419,20 @@ BODY
 .celda
 {
 	float: left;
-	border: thin solid rgb(0, 0, 0);
+	text-align: center;
+	width: 11.2em;
+	padding: 2px 0;
+	background-color: #1E00D0;
+	margin: 1px 0 0px 1px;
+	color: #FFFFFF;
 }
 #tabla-partida
 {
 	float: left;
 	border: 1 solid rgb(0, 0, 0);
-	margin: 4px 0 0 0px;
-	width: 581px;
+	margin: 4px 0 0;
+	width: 56.5em;
+	height: auto;
 }
 .cortita
 {
@@ -453,7 +459,7 @@ BODY
 {
 	font: normal bolder 16pt monospace;
 	color: #1405BC;
-	border-left: thick groove;
+	border-left: thick groove #000000;
 	padding: 0 0 0 7px;
 }
 .izquierda
@@ -479,4 +485,79 @@ BODY
 {
 	text-decoration: line-through;
 	color: #1203BA;
+}
+#insumos-meta
+{
+	float: left;
+	padding: 0 0 0 0px;
+	margin: 0 0 0 -2px;
+}
+#info-meta2
+{
+	width: 18.4em;
+	margin-top: 8px;
+	text-align: left;
+	font-size: small;
+	margin-left: 6px;
+	height: auto;
+	float: left;
+	border-right: 0.2em solid #0728FC;
+	padding-top: 4px;
+	margin-bottom: 3px;
+}
+.label-partida
+{
+	color: #840000;
+	font-size: small;
+	text-decoration: none;
+}
+.datos
+{
+	float: left;
+	padding: 3px 0 3px 7px;
+	width: 93%;
+	text-align: center;
+	height: 100%;
+}
+.columna
+{
+	float: left;
+	width: 118px;
+}
+.renglon2
+{
+	width: 100%;
+	float: left;
+	background-color: #FFFFFF;
+}
+.celda2
+{
+	float: left;
+	text-align: center;
+	width: 11.2em;
+	padding: 2px 0;
+	margin: 1px 0 0 1px;
+}
+.renglon3
+{
+	width: 100%;
+	float: left;
+	background-color: #D2C7FE;
+}
+.subtotal
+{
+	text-align: right;
+	color: #000005;
+	float: left;
+	background-color: #E9E8FC;
+	width: 100%;
+	padding: 2px 0px 0px;
+	margin: 0 0 0 -5px;
+}
+#insumos-meta2
+{
+	float: left;
+	padding: 0 0 0 0px;
+	margin: 0 0 0 -2px;
+	width: 21.2em;
 }

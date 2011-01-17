@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+.central {
+	float: none;
+	width: 640px;
+	height:auto;
+	position: absolute;
+	visibility: visible;
+	left: 200px;
+	background-color: #FFFFFF;
+	z-index: 1;
+}
+#central {
+	overflow: visible;
+}
+
+.cuadrotexto {
+	width: 580px;
+	height: auto;
+	overflow:visible;
+	position: relative;
+	visibility: visible;
+	left: 200;
+	background-color: #FFFFFF;
+}
+
+#cuadro {
+	text-align:justify;
+	color:#FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 0 auto 0 auto;
+	margin-top: 6 px;
+	font-size: 10px;
+	color:#000000;
+	font-weight: normal;
+	top: 20px;
+	clear: right;
+	z-index: 1;
+}
+
+.cuadrofoto {
+	float: left;
+	width: 200px;
+	overflow: visible;
+	visibility: visible;
+	z-index: 1;
+	height: 200px;
+	left: 20px;
+	top: 0px;
+}
+
+#foto {
+	z-index: 1;
+	margin: 0 auto 0 auto;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color:#FF0000;
+	font-size:16px;
+	font-weight:bold;
+}
