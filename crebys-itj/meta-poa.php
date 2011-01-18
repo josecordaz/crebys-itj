@@ -78,7 +78,15 @@
                         <tr>
                         	<td><!-- InstanceBeginEditable name="Bienvenida" -->
 							
-							hola
+<?php
+	// Bienvenido al usuario
+    echo "Bienvenido ".$_SESSION['nick']."<p>";
+	echo "Jefe del departamento de ";
+	// Mostramos el departamento al cual pertenece el usuario a partir de su nick
+	echo $proc->saberDepartamento($_SESSION['nick']);
+	// Eliminamos la cookie de usuario
+	unset($_POST['usuario']);
+?>
 							
 							<!-- InstanceEndEditable --></td>
                         </tr>
@@ -87,8 +95,22 @@
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
+<a href="/crebys-itj/admin.php" class="menu-on">Inicio</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/meta.php" class="menu-off">Aceptar</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="/crebys-itj/accion.php" class="menu-off">Cancelar</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesion</a>
                 <!-- InstanceEndEditable --></td>
             </tr>
             <tr bgcolor="#FFFFFF">
@@ -149,9 +171,10 @@
 		</div>
         <div id="info-meta3">
         	<div class="detalle-meta">
-           		<span class="label-detalle">Departamento:</span> 
-				<br/>
-                <br/>
+            	<?php
+	                $namep=$proc->datosMeta($_SESSION['meta']);
+
+				?>
                 <br/>
 	        	<span class="label-detalle">Proceso Estratégico:</span>
                 <br/>
@@ -164,19 +187,25 @@
   	        	<span class="label-detalle">Descripción de la meta:</span>
             </div>
             <div id="detalles2">
-    			<span class="res-detalle">Desarrollo Académico</span>
-	            <br/>
-    	        <br/>
                 <br/>
-        	    <span class="res-detalle">Académico</span>
+        	    <span class="res-detalle">
+                	<?php
+						echo $namep[0][2];
+					?>
+                </span>
 				<br/>
 	            <br/>
                 <br/>
-	            <span class="res-detalle">Formación Docente</span>
+	            <span class="res-detalle">
+					<?php
+						echo $namep[0][1];
+					?></span>
 	            <br/>
                 <br/>
 	            <br/>
-				<span class="res-detalle">Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</span>
+				<span class="res-detalle"><?php
+						echo $namep[0][0];
+					?></span>
                 
             </div>
     	</div>
@@ -184,7 +213,7 @@
     <div class="centrado">
 		<div id="line-up-cen">    	
             <br/>
-            <input value="Aceptar" name="aceptar" type="button"/>
+            <input value="Agregar" name="agregar" type="button"/>
             <input value="Cancelar" name="cancelar" type="button"/>
             <br/>
         </div>
