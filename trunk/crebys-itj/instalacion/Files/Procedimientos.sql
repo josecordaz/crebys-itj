@@ -332,5 +332,7 @@ a	!-- PARTIDAS
 		END WHILE;
 		DELETE FROM Acciones WHERE Id_Accion=error;
 	END;&
+	!-- Agregar una meta al POA de alguien
+	
 	
 	!-- Simpre dejar espacion al final para que no marque error
