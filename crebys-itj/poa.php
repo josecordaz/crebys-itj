@@ -94,7 +94,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/meta-poa.php" class="menu-off">Agregar Meta</a>
+		<a href="/crebys-itj/meta-poa2.php" class="menu-off">Agregar Relación Meta - Acción</a>
         &nbsp;
         &nbsp;
         &nbsp;

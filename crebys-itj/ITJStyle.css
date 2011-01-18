@@ -722,8 +722,8 @@ BODY
 }
 #line-up-cen
 {
-	width: 847px;
-	border-top: medium solid #1203BA;
+	width: 100%;
+	border-bottom: medium solid #1203BA;
 }
 .menup-partida2
 {
