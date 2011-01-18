@@ -333,6 +333,22 @@ a	!-- PARTIDAS
 		DELETE FROM Acciones WHERE Id_Accion=error;
 	END;&
 	!-- Agregar una meta al POA de alguien
+	&CREATE PROCEDURE insMetaAccionPOA(IN Us_Nic varchar(20),IN Id_Accio int,OUT error INT)
+	BEGIN
+		DECLARE Id_Usuari INT default(0);
+		DECLARE Id_PO INT default(0);
+		set error=1;
+		set Id_Usuari=(select Id_Usuario from usuarios where Us_Nick=Us_Nic);
+		IF(select count(*) from  poa where Id_Usuario=Id_Usuari)=0 then
+			BEGIN
+				set Id_PO=10;
+				insert into poa values(Id_PO,Id_Usuari,date())
+			END
+		ELSE
+			set Id_PO=(select max(Id_POA) from poa where Id_Usuario=Id_Usuari)+5;
+		END IF;
+		insert into acciones_poa values(Id_Accio,Id_PO);
+	END;&
 	
 	
 	!-- Simpre dejar espacion al final para que no marque error
