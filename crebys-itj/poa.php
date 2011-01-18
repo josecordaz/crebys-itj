@@ -94,7 +94,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/poa.php" class="menu-off">Agregar Meta</a>
+		<a href="/crebys-itj/meta-poa.php" class="menu-off">Agregar Meta</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -124,7 +124,7 @@
     
     <div class="menup">
 	<ul>
-        <li class="current"><a href="#"><span>M1-A1</span></a></li>
+        <li class="current"><a href="#"><span>Meta 1</span></a></li>
         <li ><a href="#"><span>M2</span></a></li>
         <li ><a href="#"><span>M3</span></a></li>
         <li ><a href="#"><span>M4</span></a></li>
@@ -133,21 +133,34 @@
 	</div>
 	<div style="clear:both"></div>
     <div id="divmeta">    
-	
     	<div id="info-meta2">
-        	<br/>
-	        Proceso Estratégico:
-            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Académico</div>
-            <br/>
-            Proceso Clave:
-            <div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formación Docente</div>
-            <br/>
-        	Meta 28:
-			<div class="info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.</div>
-            <br/>
-
-
-            
+        	<div class="detalle-meta">
+           		<span class="label-detalle">Departamento:</span> 
+				<br/>
+                <br/>
+	        	<span class="label-detalle">Proceso Estratégico:</span>
+                <br/>
+                <br/>
+            	<span class="label-detalle">Proceso Clave: </span>
+                <br/>
+                <br/>
+            </div>
+            <div id="detalles">
+    			<span class="res-detalle">Desarrollo Académico</span>
+	            <br/>
+    	        <br/>
+        	    <span class="res-detalle">Académico</span>
+				<br/>
+	            <br/>
+	            <span class="res-detalle">Formación Docente</span>
+	            <br/>
+	            <br/>
+            </div>
+            <div id="desc-meta">
+	        	<span class="label-detalle">Descripción de la meta:</span>
+				<div class="info2">Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.
+                </div>
+            </div>
     	</div>
         
        	<div id="insumos-meta2">
@@ -162,6 +175,11 @@
 			    </ul>
 			</div>
             <div style="clear:both"></div>
+            <div id="desc-accion">
+	        	<span class="label">Descripción:</span>
+				<div class="info2">Fortalecer el programa de actualización profesional a través de la incorporación de un modelo de actualización profesional basado en competencias profesionales.
+                </div>
+            </div>
             <div id="info-partida">
 			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
             <br/>
@@ -188,47 +206,113 @@
                         <div class="celda2">$5,760.00</div>
                     </div>
                     <div class="subtotal">
-                    <input type="button" value="Agregar"/>
-                    Subtotal $ 6,168.00
+	                    <div class="agregar-insumo">
+              	            <input type="button" value="Agregar"/>
+                        </div>
+        	            Subtotal $ 6,168.00
                     </div>
    		        </div>
-
-
-            <p/>
             <br/>
             <br/>
             <br/>
             <br/>
             <br/>
-   			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2106:</a></span>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+   			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
             <br/>
 		    	<div id="tabla-partida">
                 	<div class="renglon2">
-                  		<div class="celda"><span id="nombre">Nombre</span></div>
-	                   	<div class="celda">Unidad de Medida</div>
-                        <div class="celda">Precio Unitario</div>
-                        <div class="celda">Cantidad</div>
+                        <div class="celda">Nombre</div>
+                        <div class="celda">Unidad de Medida</div>
+                        <div class="celda">Precio Unitario</div>                        
+                        <div class="celda">Cantidad</div>                        
                         <div class="celda">Subtotal</div>
-    	            </div>
+                    </div>
                     <div class="renglon2">
-                        <div class="celda2">CD -R Verbatim</div>
-                        <div class="celda2">Torre c/ 50 Pzas</div>
-                        <div class="celda2">$ 132.00</div>
-                        <div class="celda2">2</div>
-                        <div class="celda2">$264.00</div>
+                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 68.00</div>
+                        <div class="celda2">6</div>
+                        <div class="celda2">$408.00</div>
                     </div>
                     <div class="renglon3">
-                        <div class="celda2">Thoner para impresora HP Láser 2200 D</div>
+                        <div class="celda2">Carpeta de 3 argollas</div>
                         <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 1700.00</div>
-                        <div class="celda2">1</div>
-                        <div class="celda2">$1,700.00</div>
+                        <div class="celda2">$ 72.00</div>
+                        <div class="celda2">80</div>
+                        <div class="celda2">$5,760.00</div>
                     </div>
                     <div class="subtotal">
-                    <input type="button" value="Agregar"/>
-                    Subtotal $ 1,964.00
+	                    <div class="agregar-insumo">
+              	            <input type="button" value="Agregar"/>
+                        </div>
+        	            Subtotal $ 6,168.00
                     </div>
-		        </div>
+   		        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
+            <br/>
+		    	<div id="tabla-partida">
+                	<div class="renglon2">
+                        <div class="celda">Nombre</div>
+                        <div class="celda">Unidad de Medida</div>
+                        <div class="celda">Precio Unitario</div>                        
+                        <div class="celda">Cantidad</div>                        
+                        <div class="celda">Subtotal</div>
+                    </div>
+                    <div class="renglon2">
+                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 68.00</div>
+                        <div class="celda2">6</div>
+                        <div class="celda2">$408.00</div>
+                    </div>
+                    <div class="renglon3">
+                        <div class="celda2">Carpeta de 3 argollas</div>
+                        <div class="celda2">Pieza</div>
+                        <div class="celda2">$ 72.00</div>
+                        <div class="celda2">80</div>
+                        <div class="celda2">$5,760.00</div>
+                    </div>
+                    <div class="subtotal">
+	                    <div class="agregar-insumo">
+              	            <input type="button" value="Agregar"/>
+                        </div>
+        	            Subtotal $ 6,168.00
+                    </div>
+                    <div class="subtotal-accion">
+                    	<span class="lineasupcorta">Subtotal Acción 1: $ 18,504.00</span>
+                    </div>
+                    <div class="subtotal-meta">
+                    	<span class="lineasupcorta">Subtotal Meta 1: $ 36,504.00</span>
+                    </div>
+                    <div class="total">
+                    	<span class="lineasupcorta">Total : $ 72,504.00</span>
+                    </div>
+   		        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         	</div>
         </div>
 	</div>
