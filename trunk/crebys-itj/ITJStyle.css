@@ -21,7 +21,7 @@
 	font-size: 13px;
 	background-color: rgb(234, 233, 253);
 	float: left;
-	width: 633px;
+	width: 100%;
 	border-bottom: 2px solid rgb(7, 40, 252);
 	margin-top: 0.3em;
 	margin-right: 0em;
@@ -80,8 +80,8 @@
 	font-size: 13px;
 	background-color: rgb(255, 255, 255);
 	float: left;
-	width: 100%;
-	border-bottom: 2px solid rgb(21, 85, 35);
+	width: 68.3em;
+	border-bottom: 2px solid rgb(0, 0, 151);
 }
 .menup UL
 {
@@ -99,7 +99,7 @@
 	float: left;
 	margin: 0 1px 0 0;
 	padding: 0px;
-	color: rgb(18, 126, 41);
+	color: rgb(0, 0, 186);
 	text-decoration: none;
 }
 .menup A SPAN
@@ -115,7 +115,7 @@
 .menup A:hover SPAN
 {
 	background-position: 0% -75px;
-	color: rgb(21, 85, 35);
+	color: rgb(0, 0, 186);
 }
 .menup LI.current A
 {
@@ -126,7 +126,7 @@
 .menup LI.current A SPAN
 {
 	background-position: 0% -75px;
-	color: rgb(21, 85, 35);
+	color: rgb(0, 0, 186);
 }
 .blur
 {
@@ -189,7 +189,7 @@ BODY
 }
 .FondoTabla
 {
-	width: 900px;
+	width: 100%;
 	vertical-align: middle;
 	height: 90px;
 	background-color: rgb(102, 102, 102);
@@ -202,6 +202,7 @@ BODY
 .style6
 {
 	text-align: center;
+	padding-top: 0px;
 }
 .style7
 {
@@ -212,6 +213,7 @@ BODY
 {
 	width: 658px;
 	height: 42px;
+	/*[empty]margin-top:;*/
 }
 .style9
 {
@@ -234,7 +236,7 @@ BODY
 }
 .style16
 {
-	width: 900px;
+	width: 100%;
 	height: 56px;
 }
 .style17
@@ -357,8 +359,8 @@ BODY
 	border-left: 2px solid rgb(0, 0, 152);
 	float: left;
 	height: auto;
-	width: 879px;
-	padding-left: 1px;
+	width: 100%;
+	padding-left: 0px;
 }
 #info-meta
 {
@@ -392,7 +394,6 @@ BODY
 {
 	background-color: transparent;
 	border: 2px hidden rgb(0, 0, 0);
-	overflow: auto;
 	float: none;
 	text-align: justify;
 	margin: 0.5em;
@@ -409,7 +410,7 @@ BODY
 	padding-left: 0.5em;
 	padding-top: 0.5em;
 	float: left;
-	width: 625px;
+	width: 100%;
 }
 .ren
 {
@@ -420,7 +421,7 @@ BODY
 {
 	float: left;
 	text-align: center;
-	width: 11.2em;
+	width: 15.7em;
 	padding: 2px 0;
 	background-color: #1E00D0;
 	margin: 1px 0 0px 1px;
@@ -431,7 +432,7 @@ BODY
 	float: left;
 	border: 1 solid rgb(0, 0, 0);
 	margin: 4px 0 0;
-	width: 56.5em;
+	width: 79.1em;
 	height: auto;
 }
 .cortita
@@ -494,16 +495,15 @@ BODY
 }
 #info-meta2
 {
-	width: 18.4em;
+	width: auto;
 	margin-top: 8px;
 	text-align: left;
 	font-size: small;
 	margin-left: 6px;
 	height: auto;
 	float: left;
-	border-right: 0.2em solid #0728FC;
-	padding-top: 4px;
-	margin-bottom: 3px;
+	padding-top: 0px;
+	margin-bottom: 2px;
 }
 .label-partida
 {
@@ -534,7 +534,7 @@ BODY
 {
 	float: left;
 	text-align: center;
-	width: 11.2em;
+	width: 15.7em;
 	padding: 2px 0;
 	margin: 1px 0 0 1px;
 }
@@ -551,13 +551,233 @@ BODY
 	float: left;
 	background-color: #E9E8FC;
 	width: 100%;
-	padding: 2px 0px 0px;
-	margin: 0 0 0 -5px;
+	padding: 8px 0px 0px;
+	margin: 0px 0 0 -5px;
 }
 #insumos-meta2
 {
 	float: left;
 	padding: 0 0 0 0px;
 	margin: 0 0 0 -2px;
-	width: 21.2em;
+	width: 100%;
+	height: auto;
+}
+.agregar-insumo
+{
+	float: left;
+	width: auto;
+	height: auto;
+	margin: -6px 0 0 3px;
+}
+.detalle-meta
+{
+	float: left;
+	width: 156px;
+	padding: 8px 0 0 10px;
+}
+#desc-meta
+{
+	float: left;
+	width: 529px;
+	padding: 8px 0 0 29px;
+}
+#detalles
+{
+	float: left;
+	padding: 8px 0 0 0px;
+}
+.label-detalle
+{
+	color: #130083;
+	text-decoration: underline;
+}
+.res-detalle
+{
+	color: #1E1AF9;
+}
+.info2
+{
+	background-color: transparent;
+	border: 2px hidden rgb(0, 0, 0);
+	float: none;
+	text-align: justify;
+	margin: 0.5em;
+	font-family: Consolas;
+	font-size: 14px;
+	text-decoration: none;
+	padding-left: 1.3em;
+	color: #2E2AED;
+}
+#desc-accion
+{
+	float: left;
+	width: 76.1em;
+	padding: 8px 0 0 29px;
+	text-align: justify;
+}
+.label
+{
+	color: #120082;
+	text-decoration: underline;
+	font-size: small;
+}
+.subtotal-meta
+{
+	text-align: right;
+	color: #000005;
+	float: left;
+	background-color: #E9E8FC;
+	width: 100%;
+	padding: 12px 0px 0px;
+	margin: 0px 0 0 -5px;
+}
+.subtotal-accion
+{
+	text-align: right;
+	color: #000005;
+	float: left;
+	background-color: #E9E8FC;
+	width: 100%;
+	padding: 0px;
+	margin: 9px 0 1px -5px;
+}
+.lineasupcorta
+{
+	border-top: thin solid #1D00CF;
+}
+.total
+{
+	text-align: right;
+	color: #000005;
+	float: left;
+	background-color: #E9E8FC;
+	width: 100%;
+	padding: 12px 0px 0px;
+	margin: 0px 0 8px -5px;
+	font-size: 14.2pt;
+}
+#menu-vertical
+{
+	float: left;
+	text-align: left;
+	width: 52%;
+	padding-left: 86px;
+}
+#area2
+{
+	float: left;
+	width: 80.4em;
+	height: auto;
+	border-top-color: rgb(0, 0, 0);
+	border-right-color: rgb(0, 0, 0);
+	border-bottom-color: rgb(0, 0, 0);
+	border-left-color: rgb(0, 0, 0);
+	margin: 5px;
+	padding: 1px;
+	background-color: #FEFEFE;
+}
+#parte-izquierda
+{
+	float: left;
+	width: 27.1em;
+}
+#parte-derecha
+{
+	float: left;
+	width: 52.2em;
+}
+.centrado
+{
+	text-align: inherit;
+	width: 100%;
+	float: left;
+}
+#desc-meta2
+{
+	float: left;
+	width: 43.3em;
+	padding: 0px 0 0 10px;
+}
+#info-meta3
+{
+	width: auto;
+	margin-top: 0px;
+	text-align: left;
+	font-size: small;
+	margin-left: 1px;
+	height: auto;
+	float: left;
+	padding-top: 0px;
+	margin-bottom: 2px;
+	background-color: #E8E7FB;
+}
+#detalles2
+{
+	float: left;
+	padding: 8px 0 0 25px;
+	width: 29.2em;
+}
+#line-up-cen
+{
+	width: 847px;
+	border-top: medium solid #1203BA;
+}
+.menup-partida2
+{
+	font-weight: bold;
+	font-family: "Arial ", "Helvetica ", sans-serif;
+	font-size: 13px;
+	background-color: rgb(253, 253, 253);
+	float: left;
+	width: 100%;
+	border-bottom: 2px solid rgb(7, 40, 252);
+	margin-top: 0.3em;
+	margin-right: 0em;
+	margin-bottom: 0em;
+	margin-left: 0em;
+}
+.menup-partida2 UL
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px 0px 0;
+}
+.menup-partida2 LI
+{
+	display: inline;
+}
+.menup-partida2 A
+{
+	background: url(menup_dcha-p.gif) no-repeat right top;
+	float: left;
+	margin: 0 1px 0 0;
+	padding: 0px;
+	color: rgb(0, 0, 151);
+	text-decoration: none;
+}
+.menup-partida2 A SPAN
+{
+	background: url(menup_izda-p.gif) no-repeat left top;
+	display: block;
+	padding: 5px 15px;
+}
+.menup-partida2 A:hover
+{
+	background-position: 100% -75px;
+}
+.menup-partida2 A:hover SPAN
+{
+	background-position: 0% -75px;
+	color: rgb(0, 0, 151);
+}
+.menup-partida2 LI.current-partida A
+{
+	background-position: 100% -75px;
+	position: relative;
+	top: 2px;
+}
+.menup-partida2 LI.current-partida A SPAN
+{
+	background-position: 0% -75px;
+	color: rgb(0, 0, 151);
 }
