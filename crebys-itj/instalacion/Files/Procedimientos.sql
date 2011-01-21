@@ -333,22 +333,32 @@ a	!-- PARTIDAS
 		DELETE FROM Acciones WHERE Id_Accion=error;
 	END;&
 	!-- Agregar una meta al POA de alguien
+
 	&CREATE PROCEDURE insMetaAccionPOA(IN Us_Nic varchar(20),IN Id_Accio int,OUT error INT)
 	BEGIN
 		DECLARE Id_Usuari INT default(0);
 		DECLARE Id_PO INT default(0);
-		set error=1;
-		set Id_Usuari=(select Id_Usuario from usuarios where Us_Nick=Us_Nic);
-		IF(select count(*) from  poa where Id_Usuario=Id_Usuari)=0 then
+		SET error=1;
+		SET Id_Usuari=(select Id_Usuario from usuarios where Us_Nick=Us_Nic);
+		If(select count(*) from poa)=0 THEN
 			BEGIN
-				set Id_PO=10;
-				insert into poa values(Id_PO,Id_Usuari,date())
-			END
+				SET Id_PO=10;
+				INSERT INTO poa VALUES(Id_PO,Id_Usuari,(select LocalTime()));
+			END;
 		ELSE
-			set Id_PO=(select max(Id_POA) from poa where Id_Usuario=Id_Usuari)+5;
+			IF(select count(*) from  poa where Id_Usuario=Id_Usuari)=0 THEN
+				BEGIN
+					SET Id_PO=(select max(Id_POA) from poa)+5;
+					INSERT INTO poa VALUES(Id_PO,Id_Usuari,(select LocalTime()));
+				END;
+			ELSE
+				SET Id_PO=(select Id_POA from poa where Id_Usuario=Id_Usuari);
+			END IF;
 		END IF;
-		insert into acciones_poa values(Id_Accio,Id_PO);
+		IF(select count(*) from acciones_poa where Id_POA=Id_PO and Id_Accion=Id_Accio)=0 THEN
+			insert into acciones_poa values(Id_Accio,Id_PO);
+		END IF;
 	END;&
-	
+
 	
 	!-- Simpre dejar espacion al final para que no marque error
