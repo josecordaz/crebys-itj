@@ -19,6 +19,12 @@
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
+
+	// Si recivimos estos parametros nos indica que hemos de agregarlos al usuario 'nick' en su apoa
+	if(isset($_GET['meta'])&&isset($_GET['accion'])){
+		$proc->insMetaAccionPOA($_SESSION['nick'],$proc->saberIdAccion($_GET['meta'],$_GET['accion']))."<br/>";
+	}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -124,11 +130,16 @@
     
     <div class="menup">
 	<ul>
-        <li class="current"><a href="#"><span>Meta 1</span></a></li>
-        <li ><a href="#"><span>M2</span></a></li>
-        <li ><a href="#"><span>M3</span></a></li>
-        <li ><a href="#"><span>M4</span></a></li>
-        <li ><a href="#"><span>M5</span></a></li>        
+    	<?php
+			$metas=$proc->devolverMetasPOA($_SESSION['nick']);
+			//echo ":::[".$_SESSION['consulta']."]:::";
+        	for($i=0;$i<count($metas);$i++){
+				if($metas[$i][0]==$_GET['meta'])
+					echo "<li class='current'><a href='#'><span>Meta ".$metas[$i][0]."</span></a></li>";
+				else
+					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."&accion=1'><span>M ".$metas[$i][0]."</span></a></li>";
+			}
+		?>
     </ul>
 	</div>
 	<div style="clear:both"></div>
@@ -146,19 +157,22 @@
                 <br/>
             </div>
             <div id="detalles">
-    			<span class="res-detalle">Desarrollo Académico</span>
+            	<?php 
+					$dmetas=$proc->datosMeta($_GET['meta']);
+				?>
+    			<span class="res-detalle"><?php echo $proc->saberDepartamento($_SESSION['nick']);?></span>
 	            <br/>
     	        <br/>
-        	    <span class="res-detalle">Académico</span>
+        	    <span class="res-detalle"><?php echo $dmetas[0][2]?></span>
 				<br/>
 	            <br/>
-	            <span class="res-detalle">Formación Docente</span>
+	            <span class="res-detalle"><?php echo $dmetas[0][1]?></span>
 	            <br/>
 	            <br/>
             </div>
             <div id="desc-meta">
 	        	<span class="label-detalle">Descripción de la meta:</span>
-				<div class="info2">Gestionar y Fomentar que el 100% de los directivos y personal de apoyo y asistencia a la educación participen en cursos de capacitación y desarrollo.
+				<div class="info2"><?php echo $dmetas[0][0]?>
                 </div>
             </div>
     	</div>
@@ -167,17 +181,25 @@
         
         	<div class="menup-partida">
 				<ul>
-        			<li class="current-partida"><a href="#"><span>Acción 1</span></a></li>
-		    	    <li ><a href="#"><span>Acción 2</span></a></li>
-		        	<li ><a href="#"><span>Acción 3</span></a></li>
-			        <li ><a href="#"><span>Acción 4</span></a></li>
+                	<?php
+                    	$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$_GET['meta']);
+						//echo "sql:=[".count($accionesMeta)."]";
+						//echo "count de acciones:=[".count($accioensMeta)."]";
+						for($i=0;$i<count($accionesMeta);$i++)
+							if(($i+1)==$_GET['accion']){
+								echo "<li class='current-partida'><a href='#'><span>Acción ".($i+1)."</span></a></li>";
+								$id_accion=$i;
+							}
+							else
+					    	    echo "<li ><a href='poa.php?meta=".$_GET['meta']."&accion=".($i+1)."'><span>A - ".($i+1)."</span></a></li>";
+					?>
                     <span>[+] Expandir todo</span>
 			    </ul>
 			</div>
             <div style="clear:both"></div>
             <div id="desc-accion">
 	        	<span class="label">Descripción:</span>
-				<div class="info2">Fortalecer el programa de actualización profesional a través de la incorporación de un modelo de actualización profesional basado en competencias profesionales.
+				<div class="info2"><?php echo $accionesMeta[$id_accion][0]?>
                 </div>
             </div>
             <div id="info-partida">

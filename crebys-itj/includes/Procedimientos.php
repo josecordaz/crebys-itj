@@ -471,5 +471,27 @@
 			$this->conexion->executeSQL("select Id_Proc_Clave from proc_claves where Pc_Nombre=$Pc_Nombre");
 			return $this->conexion->error();
 		}
+		// Prodecimiento para agregar Meta-Accion a un poa
+		function insMetaAccionPOA($Us_Nick,$Id_Accion){
+			$this->conexion->executeSQL("call insMetaAccionPOA('".$Us_Nick."',".$Id_Accion.",@error); select @error");	
+			if($this->conexion->error()==1)
+				return "Inserción correcta";
+			else
+				return "Hubo un error al insertar la relación";
+		}
+		// Devolver metas POA
+		function devolverMetasPOA($Us_Nick){
+			$this->conexion->executeSQL("select DISTINCT metas.Id_Meta,metas.Id_Proc_Clave,metas.Me_Nombre,metas.Me_Unidad_M,metas.Me_Cantidad
+from metas inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=acciones_poa.Id_POA)on acciones_poa.Id_Accion=acciones.Id_Accion)on acciones.Id_Meta=metas.Id_Meta
+where Us_Nick='$Us_Nick'");
+			return $this->conexion->getArray();
+		}
+		// Devolver acciones de una meta de un poa
+		function devolverAccionesMetaPOA($Us_Nick,$Id_Meta){
+			$this->conexion->executeSQL("select Ac_Descripcion, acciones.Id_Accion
+from metas inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=acciones_poa.Id_POA)on acciones_poa.Id_Accion=acciones.Id_Accion)on acciones.Id_Meta=metas.Id_Meta
+where Us_Nick='$Us_Nick' and metas.Id_Meta=$Id_Meta ORDER BY acciones.Id_Accion");
+			return $this->conexion->getArray();
+		}
 	}
 ?>
