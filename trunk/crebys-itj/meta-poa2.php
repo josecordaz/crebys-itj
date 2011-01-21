@@ -227,19 +227,22 @@
 						else
 						{
 							for($i=0;$i<count($acciones);$i++){
-								echo "<input type='radio' name='raccion' value='".($i+1)."' />";
+								if(isset($_GET['accion'])&&$_GET['accion']==($i+1))
+echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value\" checked>";
+								else
+echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value\">";
 								echo "<span class='titaccion'>A-".($i+1).":</span>";
 							
-					?>
-	            	<div class="cortita">
-    	       		<hr>
-        	    	</div>
-        			<div class="info">
+							?>
+	    		        	<div class="cortita">
+    	       				<hr>
+		        	    	</div>
+		        			<div class="info">
                 	
-					<?php
-        			   	echo $acciones[$i][0];
-						echo "</div>";
-					}
+							<?php
+    		                    echo $acciones[$i][0];
+	                            echo "</div>";
+                            }
 					?>
 
             
@@ -260,8 +263,8 @@
         <div class="centrado">
 		<div id="line-up-cen">    	
             <br/>
-            <input value="Agregar" name="agregar" type="button"/>
-            <input value="Cancelar" name="cancelar" type="button"/>
+            <input value="Agregar" name="agregar" type="button" onclick="location='poa.php?meta=<?php echo $_GET['meta']?>&accion=<?php echo $_GET['accion']?>'"/>
+            <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php'"/>
             <br/>
             <br/>
         </div>

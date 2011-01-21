@@ -578,13 +578,14 @@ BODY
 #desc-meta
 {
 	float: left;
-	width: 529px;
+	width: 37.5em;
 	padding: 8px 0 0 29px;
 }
 #detalles
 {
 	float: left;
 	padding: 8px 0 0 0px;
+	width: 12.9em;
 }
 .label-detalle
 {
