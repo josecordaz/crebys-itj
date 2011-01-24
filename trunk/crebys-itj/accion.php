@@ -25,6 +25,8 @@
 		$proc->eliminarAccion($_SESSION['meta'],$_POST['raccion']);
 		header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
 	}
+	if(isset($_POST['editar']))
+		echo "Se precionó editar";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -127,11 +129,12 @@
     <form action="guardar-accion.php" method="post">	                
     	<br/>
         <div id="caja-peque">
-                <textarea id="textarea" name="textarea"><?php if(isset($_POST['raccion'])){
-					  	echo $proc->devolverAccion($_SESSION['meta'],$_POST['raccion']);
+                <textarea id="textarea" name="textarea"><?php 
+					if(isset($_POST['raccion'])){
+						echo $proc->devolverAccion($_SESSION['meta'],$_POST['raccion']);
 						//echo "Devolver acción de la meta:=[".$_SESSION['meta']."] Accion:=[".$_POST['raccion']."]<br>";
-						$_SESSION['nummeta']=$_POST['raccion'];
-					  }
+						$_SESSION['numaccion']=$_POST['raccion'];
+					}
 				?></textarea>
             <br/>
             <br/>

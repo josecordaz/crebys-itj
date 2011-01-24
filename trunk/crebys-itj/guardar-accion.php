@@ -14,32 +14,40 @@ session_start();
 if(isset($_POST['cancelar']) and $_POST['cancelar']='cancelar')
 	header("Location: http://$host$uri/meta-accion.php");	
 	
-if(isset($_POST['textarea'])){
-	if(isset($_SESSION['meta'])){
-		// Libreria para la utilización de procedimientos
-		include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+// Libreria para la utilización de procedimientos
+include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+
+// Objeto para la manipulación de procedimientos
+$proc=new Procedimientos();
 	
-		// Objeto para la manipulación de procedimientos
-		$proc=new Procedimientos();
-		
-		// Guardamos la accion
-		/*
-		echo "Meta:=[".$_SESSION['meta']."]";
-		echo "<br>";
-		echo "Numero de Accion de la meta:=[".$_SESSION['nummeta']."]";
-		echo "<br>";
-		echo "Descripción:=[".$_POST['textarea'].".]";
-		*/
-		
-		$proc->guardarAccion($_SESSION['meta'],$_SESSION['nummeta'],$_POST['textarea']);
-		//echo "contulta:=[".$_SESSION['consulta']."]";
-		// Salimos 
-		header("Location: http://$host$uri/meta-accion.php");
+if(isset($_SESSION['numaccion']))
+	if(isset($_POST['textarea'])){
+		if(isset($_SESSION['meta'])){
+
+			
+			// Guardamos la accion
+			/*
+			echo "Meta:=[".$_SESSION['meta']."]";
+			echo "<br>";
+			echo "Numero de Accion de la meta:=[".$_SESSION['nummeta']."]";
+			echo "<br>";
+			echo "Descripción:=[".$_POST['textarea'].".]";
+			*/
+			
+			$proc->guardarAccion($_SESSION['meta'],$_SESSION['numaccion'],$_POST['textarea']);
+			//echo "contulta:=[".$_SESSION['consulta']."]";
+			// Salimos 
+			header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
+		}else{
+			header("Location: http://$host$uri/login.php");		
+			}
 	}else{
-		header("Location: http://$host$uri/login.php");		
-		}
-}else{
-	header("Location: http://$host$uri/login.php");
+		header("Location: http://$host$uri/login.php");
+	}
+else{
+	$proc->agregarAccion($_SESSION['meta'],$_POST['textarea']);
+	//echo $_SESSION['consulta'];
+	header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
 }
 
 ?>
