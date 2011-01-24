@@ -127,15 +127,21 @@
 
                                             
 	<div id="area">
-    
+ 	<?php
+				$metas=$proc->devolverMetasPOA($_SESSION['nick']);
+			//echo ":::[".$_SESSION['consulta']."]:::";
+if(count($metas)!=0){    
+	?>   
     <div class="menup">
 	<ul>
     	<?php
-			$metas=$proc->devolverMetasPOA($_SESSION['nick']);
-			//echo ":::[".$_SESSION['consulta']."]:::";
+
         	for($i=0;$i<count($metas);$i++){
-				if($metas[$i][0]==$_GET['meta'])
+				if($metas[$i][0]==$_GET['meta']||($i==0&&(!isset($_GET['meta'])))){
 					echo "<li class='current'><a href='#'><span>Meta ".$metas[$i][0]."</span></a></li>";
+					if(($i==0&&(!isset($_GET['meta']))))
+						$tmp_meta=$metas[$i][0];
+				}
 				else
 					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."&accion=1'><span>M ".$metas[$i][0]."</span></a></li>";
 			}
@@ -158,7 +164,10 @@
             </div>
             <div id="detalles">
             	<?php 
-					$dmetas=$proc->datosMeta($_GET['meta']);
+					if(isset($_GET['meta']))
+						$dmetas=$proc->datosMeta($_GET['meta']);
+					else
+						$dmetas=$proc->datosMeta($tmp_meta);
 				?>
     			<span class="res-detalle"><?php echo $proc->saberDepartamento($_SESSION['nick']);?></span>
 	            <br/>
@@ -182,16 +191,19 @@
         	<div class="menup-partida">
 				<ul>
                 	<?php
-                    	$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$_GET['meta']);
+						if(isset($_GET['meta']))
+	                    	$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$_GET['meta']);
+						else
+	                    	$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$tmp_meta);
 						//echo "sql:=[".count($accionesMeta)."]";
 						//echo "count de acciones:=[".count($accioensMeta)."]";
 						for($i=0;$i<count($accionesMeta);$i++)
-							if(($i+1)==$_GET['accion']){
-								echo "<li class='current-partida'><a href='#'><span>Acción ".($i+1)."</span></a></li>";
+							if($proc->numAccion($accionesMeta[$i][1])==$_GET['accion']||(($i==0)&&(!isset($_GET['accion'])))){
+								echo "<li class='current-partida'><a href='#'><span>Acción ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 								$id_accion=$i;
 							}
 							else
-					    	    echo "<li ><a href='poa.php?meta=".$_GET['meta']."&accion=".($i+1)."'><span>A - ".($i+1)."</span></a></li>";
+					    	    echo "<li ><a href='poa.php?meta=".$_GET['meta']."&accion=".($i+1)."'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 					?>
                     <span>[+] Expandir todo</span>
 			    </ul>
@@ -338,6 +350,10 @@
         	</div>
         </div>
 	</div>
+<?php
+}else
+	echo "Para iniciar a elaborar el POA haga click en 'Agregar Relación Meta - Acción'";
+?>
 </div>
 
 

@@ -278,7 +278,7 @@ a	!-- PARTIDAS
 		DECLARE Id_Accio INT;
 		SET error=1;
 		IF(select count(*) from acciones)>0 THEN
-			SET Id_Accio=(select max(Id_Accio) from Acciones)+8;
+			SET Id_Accio=(select max(Id_Accion) from Acciones)+8;
 		ELSE
 			SET Id_Accio=50;
 		END IF;
@@ -359,6 +359,26 @@ a	!-- PARTIDAS
 			insert into acciones_poa values(Id_Accio,Id_PO);
 		END IF;
 	END;&
+	
+	!-- Procedimiento para encontrar el numero de accion al que pertenece de acuerdo a su
+	!-- correspondiente meta
+	
+	&CREATE PROCEDURE numAccion(IN Id_Accio INT,OUT error INT)
+	BEGIN
+		DECLARE Id_Met INT default(0);
+		DECLARE cont2 INT default(0);
+		SET Id_Met=(select Id_Meta from acciones where Id_Accion=Id_Accio);
+		SET error=1;
+		SET cont2=(select min(Id_Accion) from acciones where Id_Meta=Id_Met);
+		WHILE (select Id_Accion from acciones where Id_Accion=cont2)<>Id_Accio DO
+			IF(select Id_Meta from acciones where Id_Accion=cont2)=Id_Met THEN
+				SET error=error+1;
+			END IF;
+			SET cont2=cont2+1;
+		END WHILE;
+	END;&
+	
+	!-- Procedimiento para saber cual es la primera acción correspondiente a una acción
 
 	
 	!-- Simpre dejar espacion al final para que no marque error

@@ -170,7 +170,10 @@
 				if($metas[$e][0]==$_SESSION['meta'])
 					echo "<li class='current'><a href=''><span>Meta ".$metas[$e][0]."</span></a></li>";
 				else
-					echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+					if(isset($_GET['proc-est']))
+						echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+					else
+						echo "<li ><a href='meta-accion.php?proc-est=2&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
 			}
 		}
 		?>
@@ -232,7 +235,10 @@
 						else
 						{
 							for($i=0;$i<count($acciones);$i++){
-								echo "<input type='radio' name='raccion' value='".($i+1)."' />";
+								if($i==0)
+									echo "<input type='radio' name='raccion' value='".($i+1)."' checked/>";
+								else
+																		echo "<input type='radio' name='raccion' value='".($i+1)."'/>";	
 								echo "<span class='titaccion'>A-".($i+1).":</span>";
 							
 					?>

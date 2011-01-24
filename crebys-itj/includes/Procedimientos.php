@@ -483,7 +483,7 @@
 		function devolverMetasPOA($Us_Nick){
 			$this->conexion->executeSQL("select DISTINCT metas.Id_Meta,metas.Id_Proc_Clave,metas.Me_Nombre,metas.Me_Unidad_M,metas.Me_Cantidad
 from metas inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=acciones_poa.Id_POA)on acciones_poa.Id_Accion=acciones.Id_Accion)on acciones.Id_Meta=metas.Id_Meta
-where Us_Nick='$Us_Nick'");
+where Us_Nick='$Us_Nick' ORDER BY metas.Id_Meta");
 			return $this->conexion->getArray();
 		}
 		// Devolver acciones de una meta de un poa
@@ -492,6 +492,11 @@ where Us_Nick='$Us_Nick'");
 from metas inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=acciones_poa.Id_POA)on acciones_poa.Id_Accion=acciones.Id_Accion)on acciones.Id_Meta=metas.Id_Meta
 where Us_Nick='$Us_Nick' and metas.Id_Meta=$Id_Meta ORDER BY acciones.Id_Accion");
 			return $this->conexion->getArray();
+		}
+		//Procedimiento para encontrar el numero de accion al que pertenece de acuerdo a su correspondiente meta
+		function numAccion($Id_Accion){
+			$this->conexion->executeSQL("call numAccion($Id_Accion,@error); select @error");
+			return $this->conexion->error();
 		}
 	}
 ?>
