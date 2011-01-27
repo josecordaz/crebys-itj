@@ -13,6 +13,12 @@
 		// Redireccionamos a login.php
 		header("Location: http://$host$uri/login.php");
 	}
+	
+	// Librería para manipulación de procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+
+	// Objeto para la manipulación de procedimientos
+	$proc=new Procedimientos();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -82,7 +88,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu-on">Inicio</a>
+        <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -92,7 +98,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/lista-insumos.php" class="menu-off">Insumos</a>
+        <a href="/crebys-itj/admin-proc.php" class="menu-on">Insumos</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -117,20 +123,65 @@
                                             
 
                                             
-                                            
-											<div class="content">                                            
-<div id="principal">
-
-		<div id="uno">uno <?php ?></div>
-   		<div id="dos">dos <?php ?></div>
-        
+<div id="area">                                            
+<div id="insumos-meta2">
+	<div id="info-partida">
+	   	<?php
+    		$insumos=$proc->devDatosInsumos();    	
+			$id_partida=$insumos[0][0];
+			echo "<span class='label-partida'><a class='label-partida' href='#'>[+] Partida ".$id_partida.":</a></span>";					
+?>
+					<br>
+                    <div id="tabla-partida">
+			           	<div class="renglon2">
+            		    <div class="celda">Nombre</div>
+		                <div class="celda">Unidad de Medida</div>
+		                <div class="celda">Precio Unitario</div>
+        		    </div>
+<?php				
+			for($i=0;$i<count($insumos);$i++)
+				if($insumos[$i][0]!=$id_partida){
+					$id_partida=$insumos[$i][0];
+					echo "<br>";
+					echo "<br>";
+					echo "<br>";
+					echo "<br>";
+					echo "<span class='label-partida'><a class='label-partida' href='#'>[+] Partida ".$id_partida.":</a></span>";
+?>
+					<br>
+                    <div id="tabla-partida">
+			           	<div class="renglon2">
+            		    <div class="celda">Nombre</div>
+		                <div class="celda">Unidad de Medida</div>
+		                <div class="celda">Precio Unitario</div>
+        		    </div>
+<?php				
+				}else{
+					if(($i%2)==0){
+						echo "<div class='renglon2'>";
+							echo "<div class='celda2'>".$insumos[$i][2]."</div>";
+							echo "<div class='celda2'>".$insumos[$i][4]."</div>";
+							echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+						echo "</div>";
+					}else{
+						echo "<div class='renglon3'>";
+							echo "<div class='celda2'>".$insumos[$i][2]."</div>";
+							echo "<div class='celda2'>".$insumos[$i][4]."</div>";
+							echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+						echo "</div>";	
+					}
+					
+				}
+		?>
+            <div class="subtotal">
+	        	<div class="agregar-insumo">
+              		<input type="button" value="Agregar"/>
+                </div>
+        	    Subtotal $ 6,168.00
+            </div>
+		</div>
+	</div>
 </div>
-
-											</div>
-
-
-
-
 
 
 

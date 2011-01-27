@@ -21,10 +21,9 @@
 	font-size: 13px;
 	background-color: rgb(234, 233, 253);
 	float: left;
-	width: 100%;
+	width: 67.5em;
 	border-bottom: 2px solid rgb(7, 40, 252);
 	margin-top: 0.3em;
-	margin-right: 0em;
 	margin-bottom: 0em;
 	margin-left: 0em;
 }
@@ -408,9 +407,9 @@ BODY
 	height: auto;
 	text-align: left;
 	padding-left: 0.5em;
-	padding-top: 0.5em;
+	padding-top: 0.1em;
 	float: left;
-	width: 100%;
+	width: 15em;
 }
 .ren
 {
@@ -421,10 +420,10 @@ BODY
 {
 	float: left;
 	text-align: center;
-	width: 15.7em;
-	padding: 2px 0;
+	width: 12.8em;
+	padding: 3px 0;
 	background-color: #1E00D0;
-	margin: 1px 0 0px 1px;
+	margin: 0px 0 0px 1px;
 	color: #FFFFFF;
 }
 #tabla-partida
@@ -432,7 +431,7 @@ BODY
 	float: left;
 	border: 1 solid rgb(0, 0, 0);
 	margin: 4px 0 0;
-	width: 79.1em;
+	width: auto;
 	height: auto;
 }
 .cortita
@@ -526,7 +525,7 @@ BODY
 }
 .renglon2
 {
-	width: 100%;
+	width: 77.4em;
 	float: left;
 	background-color: #FFFFFF;
 }
@@ -534,13 +533,13 @@ BODY
 {
 	float: left;
 	text-align: center;
-	width: 15.7em;
+	width: 12.8em;
 	padding: 2px 0;
 	margin: 1px 0 0 1px;
 }
 .renglon3
 {
-	width: 100%;
+	width: auto;
 	float: left;
 	background-color: #D2C7FE;
 }
@@ -549,7 +548,7 @@ BODY
 	text-align: right;
 	color: #000005;
 	float: left;
-	background-color: #E9E8FC;
+	background-color: transparent;
 	width: 100%;
 	padding: 8px 0px 0px;
 	margin: 0px 0 0 -5px;
@@ -557,10 +556,9 @@ BODY
 #insumos-meta2
 {
 	float: left;
-	padding: 0 0 0 0px;
-	margin: 0 0 0 -2px;
 	width: 100%;
 	height: auto;
+	margin: 0 0 0 6px;
 }
 .agregar-insumo
 {
@@ -784,4 +782,10 @@ BODY
 {
 	background-position: 0% -75px;
 	color: rgb(0, 0, 151);
+}
+#info-subtotales
+{
+	text-align: right;
+	width: 78em;
+	float: left;
 }

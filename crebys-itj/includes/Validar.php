@@ -46,6 +46,16 @@
 				else
 					return false;
 		}
+		// Función para validar cadenas con números
+		function validarCadena2($cadena,$longitud){
+			$patron="(^([a-zA-Z]|é|á|í|ó|ú)([^\S]|[a-zA-Z]|[é|á|í|ó|ú]|[0-9])*$)";
+			if(ereg($patron, $cadena))
+				if(strlen($cadena)<=$longitud)
+					return true;
+				else
+					return false;
+			else
+				return false;
+		}
 	}
-
 ?>

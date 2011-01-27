@@ -124,7 +124,11 @@
 
                                             
 <div id="tres">
-	<span id="titulo">Unidad de Medida</span>                 
+	<span id="titulo">Unidad de Medida</span>              
+    <?php
+    	if(isset($_COOKIE['error']))
+			echo "<br>".$_COOKIE['error'];
+	?>
 	<hr id="corta"/>
     
     <form action="redir-insumo.php" method="post">	                
@@ -140,8 +144,14 @@
                 &nbsp;
                 &nbsp;
                 Nombre:
-                <input name="medidaname"/>
-
+                <?php 
+					if(isset($_COOKIE['error'])){
+						echo "<input name='medidaname' value='".$_COOKIE['medida']."'>";
+						unset($_COOKIE['error']);
+					}
+					else
+		                echo "<input name='medidaname'/>";						
+				?>
             </div>
             <br/>
         </div>
