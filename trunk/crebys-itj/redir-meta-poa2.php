@@ -1,10 +1,30 @@
 <?php
-	// Esta página rediccionará a poa.php
-	if(isset($_GET['meta']))
-		echo "Se recivió meta:=[".$_GET['meta']."]";
-	echo "<br>";
-	if(isset($_GET['accion']))
-		echo "Se recivió acción:=[".$_GET['accion']."]";
+	///////// Esta página rediccionará a poa.php
+	
+	// Inicializamos las variables para un redireccionamiento
+	// Guardamos el nombre del servidor
+	$host  = $_SERVER['HTTP_HOST'];
+	// Guardamos la carpeta
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
+	// Si no existe la variable de sesión redir
+	if(!isset($_SESSION['nick'])){
+		// Redireccionamos a login.php
+		header("Location: http://$host$uri/login.php");
+	}
+	
+	// Libreria para la utilización de procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+
+	// Objeto para la manipulación de procedimientos
+	$proc=new Procedimientos();
+
+	// Si recivimos estos parametros nos indica que hemos de agregarlos al usuario 'nick' en su apoa
+	if(isset($_GET['meta'])&&isset($_GET['accion'])){
+		$proc->insMetaAccionPOA($_SESSION['nick'],$proc->saberIdAccion($_GET['meta'],$_GET['accion']))."<br/>";
+	}
+	
+	// Nos vamos a poa
+	header("Location: http://$host$uri/poa.php");
 ?>
 

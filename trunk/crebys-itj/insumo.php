@@ -125,9 +125,16 @@
                                             
 <div id="tres">
 	<span id="titulo">Insumo</span>                 
+    	<?php
+			if(isset($_COOKIE['error'])){
+				echo "<br/>".$_COOKIE['error']."<br/>";
+				unset($_COOKIE['error']);
+			}
+		?>
+    
 	<hr id="corta"/>
     
-    <form action="poa.php" method="post">	                
+    <form action="guardar-insumo.php" method="post">	                
     	<br/>
         <div id="caja-peque">
                         
@@ -150,18 +157,13 @@
             <br/>
             <div class="caja-left">
                 Nombre:
-                <select name="insumo" onchange="location = 'redir-insumo.php?nombre='+this.value">
                 <?php
-					
-					$arre=array();
-					$arre=$proc->devolverInsumos($_SESSION['partida']);
-					for($i=0;$i<count($arre);$i++)
-						if(isset($_SESSION['nombre'])&&$_SESSION['nombre']==$arre[$i][0])
-						    echo "<option value='".$arre[$i][0]."'selected=\"selected\">".$arre[$i][0]."</option>";
-						else
-						    echo "<option value='".$arre[$i][0]."'>".$arre[$i][0]."</option>";
+                if(isset($_SESSION['nombre'])){
+					echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\" value='".$_SESSION['nombre']."'>";
+				}
+				else{
+					echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\">";}
 				?>
-                </select>
             </div>
             <br/>
             <div class="caja-left">
@@ -173,7 +175,7 @@
 					$arrm=$proc->devolverMedidas();
 					for($i=0;$i<count($arrm);$i++)
 						if(isset($_SESSION['medida'])&&$_SESSION['medida']==$arrm[$i][0])
-							echo "<option value=\"".$_SESSION['medida']."\" selected=\"selected\">".$_SESSION['medida']."</option>";
+							echo "<option value='".$_SESSION['medida']."' selected=\"selected\">".$_SESSION['medida']."</option>";
 						else
 							echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
 				?>
@@ -185,7 +187,7 @@
                 Precio:
                 <?php
 				if(isset($_SESSION['precio']))
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value=".$_SESSION['precio'].">";
+					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value='".$_SESSION['precio']."'>";
 				else
 					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
 				?>

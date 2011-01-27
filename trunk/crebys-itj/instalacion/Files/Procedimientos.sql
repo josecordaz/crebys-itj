@@ -254,7 +254,7 @@ a	!-- PARTIDAS
 		!-- error=0 Error de consulta
 		!-- error=1 Medida agregada con éxito
 		!-- error=2 Medida repetida
-	&CREATE PROCEDURE agregarMedida(IN Un_Nombr VARCHAR(20),OUT error INT)
+	&CREATE PROCEDURE agregarMedida(IN Un_Nombr VARCHAR(30),OUT error INT)
 	BEGIN
 		DECLARE Id_Unidad_Medid INT;
 		SET error=1;
@@ -378,7 +378,9 @@ a	!-- PARTIDAS
 		END WHILE;
 	END;&
 	
-	!-- Procedimiento para saber cual es la primera acción correspondiente a una acción
+	!-- Procedimiento para saber cual es la primera acción correspondiente de una meta que tiene un poa de una usuario
+	
+	
 
 	
 	!-- Simpre dejar espacion al final para que no marque error

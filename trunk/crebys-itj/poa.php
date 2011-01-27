@@ -19,11 +19,9 @@
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
-
-	// Si recivimos estos parametros nos indica que hemos de agregarlos al usuario 'nick' en su apoa
-	if(isset($_GET['meta'])&&isset($_GET['accion'])){
-		$proc->insMetaAccionPOA($_SESSION['nick'],$proc->saberIdAccion($_GET['meta'],$_GET['accion']))."<br/>";
-	}
+	
+	if(isset($_GET['meta']))
+		$_SESSION['meta']=$_GET['meta'];
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -143,7 +141,7 @@ if(count($metas)!=0){
 						$tmp_meta=$metas[$i][0];
 				}
 				else
-					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."&accion=1'><span>M ".$metas[$i][0]."</span></a></li>";
+					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."'><span>M ".$metas[$i][0]."</span></a></li>";
 			}
 		?>
     </ul>
@@ -203,29 +201,31 @@ if(count($metas)!=0){
 								$id_accion=$i;
 							}
 							else
-					    	    echo "<li ><a href='poa.php?meta=".$_GET['meta']."&accion=".($i+1)."'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
+					    	    echo "<li ><a href='poa.php?meta=".$_SESSION['meta']."&accion=".($i+1)."'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 					?>
                     <span>[+] Expandir todo</span>
 			    </ul>
 			</div>
             <div style="clear:both"></div>
-            <div id="desc-accion">
-	        	<span class="label">Descripción:</span>
-				<div class="info2"><?php echo $accionesMeta[$id_accion][0]?>
-                </div>
-            </div>
             <div id="info-partida">
-			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
-            <br/>
+            	<div id="desc-accion">
+	        		<span class="label">Descripción:</span>
+					<div class="info2"><?php echo $accionesMeta[$id_accion][0]?>
+    	            </div>
+        	    </div>
+				<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
+            	<br/>
 		    	<div id="tabla-partida">
                 	<div class="renglon2">
+                        <div class="celda">Activar</div>                    
                         <div class="celda">Nombre</div>
                         <div class="celda">Unidad de Medida</div>
-                        <div class="celda">Precio Unitario</div>                        
-                        <div class="celda">Cantidad</div>                        
+                        <div class="celda">Precio Unitario</div>
+                        <div class="celda">Cantidad</div>
                         <div class="celda">Subtotal</div>
                     </div>
                     <div class="renglon2">
+                        <div class="celda2"><input type="checkbox"/></div>
                         <div class="celda2">Caja para archivo muerto tamaño oficio</div>
                         <div class="celda2">Pieza</div>
                         <div class="celda2">$ 68.00</div>
@@ -233,6 +233,7 @@ if(count($metas)!=0){
                         <div class="celda2">$408.00</div>
                     </div>
                     <div class="renglon3">
+                        <div class="celda2"><input type="checkbox"/></div>
                         <div class="celda2">Carpeta de 3 argollas</div>
                         <div class="celda2">Pieza</div>
                         <div class="celda2">$ 72.00</div>
@@ -255,78 +256,7 @@ if(count($metas)!=0){
             <br/>
             <br/>
             <br/>
-            <br/>
-   			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
-            <br/>
-		    	<div id="tabla-partida">
-                	<div class="renglon2">
-                        <div class="celda">Nombre</div>
-                        <div class="celda">Unidad de Medida</div>
-                        <div class="celda">Precio Unitario</div>                        
-                        <div class="celda">Cantidad</div>                        
-                        <div class="celda">Subtotal</div>
-                    </div>
-                    <div class="renglon2">
-                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 68.00</div>
-                        <div class="celda2">6</div>
-                        <div class="celda2">$408.00</div>
-                    </div>
-                    <div class="renglon3">
-                        <div class="celda2">Carpeta de 3 argollas</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 72.00</div>
-                        <div class="celda2">80</div>
-                        <div class="celda2">$5,760.00</div>
-                    </div>
-                    <div class="subtotal">
-	                    <div class="agregar-insumo">
-              	            <input type="button" value="Agregar"/>
-                        </div>
-        	            Subtotal $ 6,168.00
-                    </div>
-   		        </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-			<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
-            <br/>
-		    	<div id="tabla-partida">
-                	<div class="renglon2">
-                        <div class="celda">Nombre</div>
-                        <div class="celda">Unidad de Medida</div>
-                        <div class="celda">Precio Unitario</div>                        
-                        <div class="celda">Cantidad</div>                        
-                        <div class="celda">Subtotal</div>
-                    </div>
-                    <div class="renglon2">
-                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 68.00</div>
-                        <div class="celda2">6</div>
-                        <div class="celda2">$408.00</div>
-                    </div>
-                    <div class="renglon3">
-                        <div class="celda2">Carpeta de 3 argollas</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 72.00</div>
-                        <div class="celda2">80</div>
-                        <div class="celda2">$5,760.00</div>
-                    </div>
-                    <div class="subtotal">
-	                    <div class="agregar-insumo">
-              	            <input type="button" value="Agregar"/>
-                        </div>
-        	            Subtotal $ 6,168.00
-                    </div>
+            	<div id="info-subtotales">
                     <div class="subtotal-accion">
                     	<span class="lineasupcorta">Subtotal Acción 1: $ 18,504.00</span>
                     </div>
@@ -336,7 +266,7 @@ if(count($metas)!=0){
                     <div class="total">
                     	<span class="lineasupcorta">Total : $ 72,504.00</span>
                     </div>
-   		        </div>
+                </div>
             <br/>
             <br/>
             <br/>

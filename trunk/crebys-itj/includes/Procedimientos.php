@@ -1,5 +1,4 @@
 <?php
-
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Validar.php');
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Base_de_Datos.php');
 	//Clase para la manipulación de los
@@ -125,7 +124,6 @@
 		function insInsumo($In_Nombre,$In_Precio,$In_Unidad_M,$Id_Partida){
 			if($this->validar->validarCadena($In_Nombre,$this->sacarLongitud("Insumos", "In_Nombre"))){
 				if($this->validar->validarDouble($In_Precio)){
-					if($this->validar->validarCadena($In_Unidad_M, $this->sacarLongitud("Insumos","In_Unidad_M"))){
 						if($this->validar->validarNumero($Id_Partida)){
 							$this->conexion->executeSQL("call insInsumo('".$In_Nombre."',".$In_Precio.",'".$In_Unidad_M."',".$Id_Partida.",@error);select @error");
 							switch ($this->conexion->error()){
@@ -133,12 +131,7 @@
 								$this->error="[-] Error en la consulta";
 								break;
 							case 1:
-								$this->error="[-] El insumo se insertó correctamente:
-													Id_Insumo: ".$this->getId_Insumo($In_Nombre)."
-													In_Nombre: ".$In_Nombre."
-													In_Precio: ".$In_Precio."
-													In_Unidad_M: ".$In_Unidad_M."
-													Id_Partida: ".$Id_Partida;
+								$this->error="[-] El insumo se insertó correctamente";
 								return 1;
 							case 2:
 								$this->error="[-] Ya existe el insumo: ".$In_Nombre;
@@ -148,13 +141,15 @@
 							}
 						}else
 							$this->error="[-] Id_Partida no válido";	
-					}else
-						$this->error="[-] In_Unidad_M no válido";
 				}else
 					$this->error="[-] In_Precio no válido";
 			}else 
 				$this->error="[-] In_Nombre no válido";
 			return 0;
+		}
+		//Función para devolver el error de uno de los procedimientos
+		function devError(){
+			return $this->error;
 		}
 		//Funcion para la modificacion de un 
 		//registro en la tabla Insumos 
@@ -175,12 +170,7 @@
 										$this->error="[-] Error en la consulta";
 										break;
 									case 1:
-										$this->error="[-] El insumo se insertó correctamente:
-													Id_Insumo: ".$this->getId_Insumo($arreglo[1])."
-													In_Nombre: ".$arreglo[1]."
-													In_Precio: ".$arreglo[2]."
-													In_Unidad_M: ".$arreglo[3]."
-													Id_Partida: ".$arreglo[4];
+										$this->error="[-] El insumo se insertó correctamente:";
 										return 1;
 									case 2:
 										$this->error="[-] No existe el insumo: ".$Id_Insumo;
@@ -331,6 +321,11 @@
 		function devolverInsumos($Id_Partida){
 			$this->conexion->executeSQL("select In_Nombre from Insumos where Id_Partida=$Id_Partida");
 			return $this->conexion->getArray();
+		}
+		// Devuelve el indice de una unidad de medida
+		function devolverIdUnidadM($Un_Nombre){
+			$this->conexion->executeSQL("select Id_Unidad_Medida from medidas where Un_Nombre='$Un_Nombre'");
+			return $this->conexion->error();
 		}
 		// Develve todas las medidas
 		function devolverMedidas(){
@@ -497,6 +492,13 @@ where Us_Nick='$Us_Nick' and metas.Id_Meta=$Id_Meta ORDER BY acciones.Id_Accion"
 		function numAccion($Id_Accion){
 			$this->conexion->executeSQL("call numAccion($Id_Accion,@error); select @error");
 			return $this->conexion->error();
+		}
+		// Devolver datos de insumos
+		function devDatosInsumos(){
+			$this->conexion->executeSQL("select insumos.Id_Partida,Id_Insumo,In_Nombre,insumos.Id_Unidad_Medida,Un_Nombre,In_Precio
+from medidas inner join (insumos inner join partidas on partidas.Id_Partida=insumos.Id_Partida)on insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida
+order by insumos.Id_Partida");
+			return $this->conexion->getArray();
 		}
 	}
 ?>
