@@ -14,13 +14,15 @@
 		header("Location: http://$host$uri/login.php");
 	}
 	
-	
-		// Libreria para la utilización de procedimientos
+	// Libreria para la utilización de procedimientos
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 
+	// Si se recive el id de un insumo es que se va a modificar
+	if(isset($_GET['id_insumo']))
+		$datosInsumo=$proc->devDatosInsumo($_GET['id_insumo']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -148,10 +150,14 @@
 						for($i=0;$i<count($arr);$i++)
 							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
 		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
-							elseif(isset($_GET['partida']))
-									echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$_GET['partida']."</option>";
+							else
+								if(count($datosInsumo)>0&&$arr[$i][0]==$datosInsumo[0][0])
+									echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$datosInsumo[0][0]."--".$datosInsumo[0][6]."</option>";
 								else
-									echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+									if(isset($_GET['id_partida'])&&$arr[$i][0]==$_GET['id_partida'])
+										echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$_GET['id_partida']." -- ".$arr[$i][1]."</option>";
+									else
+										echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
 
 					?>
                 </select>
@@ -163,8 +169,11 @@
                 if(isset($_SESSION['nombre'])){
 					echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\" value='".$_SESSION['nombre']."'>";
 				}
-				else{
-					echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\">";}
+				elseif(count($datosInsumo)>0)
+						echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\" value='".$datosInsumo[0][2]."'>";
+					else{
+						echo "<input name='insumo' onblur=\"location = 'redir-insumo.php?nombre='+this.value\">";
+					}
 				?>
             </div>
             <br/>
@@ -178,8 +187,10 @@
 					for($i=0;$i<count($arrm);$i++)
 						if(isset($_SESSION['medida'])&&$_SESSION['medida']==$arrm[$i][0])
 							echo "<option value='".$_SESSION['medida']."' selected=\"selected\">".$_SESSION['medida']."</option>";
-						else
-							echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
+						elseif(count($datosInsumo)>0&&$arrm[$i][0]==$datosInsumo[0][4])
+								echo "<option value='".$datosInsumo[0][4]."' selected=\"selected\">".$datosInsumo[0][4]."</option>";
+							else
+								echo "<option value=\"".$arrm[$i][0]."\">".$arrm[$i][0]."</option>";
 				?>
                 </select>
 	            <input type="button" value="Agregar" onclick="location = 'unidad_m.php'"/>
@@ -190,8 +201,10 @@
                 <?php
 				if(isset($_SESSION['precio']))
 					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value='".$_SESSION['precio']."'>";
-				else
-					echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
+				elseif(count($datosInsumo)>0)
+						echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\" value='".$datosInsumo[0][5]."'>";
+					else
+						echo "<input name=\"precio\" onblur=\"location = 'redir-insumo.php?precio='+this.value\">";
 				?>
             </div>
             <br/>
@@ -201,7 +214,7 @@
         <div class="caja">
             <input type="submit" name="aceptar" value="Agregar"/>
 
-			<input type="button" name="cancelar" value="Cancelar"/>
+			<input type="button" name="cancelar" value="Cancelar" onclick="location='lista-insumos.php'"/>
         </div>
         <br/>                    
          </form>
