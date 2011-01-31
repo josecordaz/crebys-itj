@@ -148,8 +148,10 @@
 						for($i=0;$i<count($arr);$i++)
 							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
 		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
-							else
-		                    	echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
+							elseif(isset($_GET['partida']))
+									echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$_GET['partida']."</option>";
+								else
+									echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
 
 					?>
                 </select>

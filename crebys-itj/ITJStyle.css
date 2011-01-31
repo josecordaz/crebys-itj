@@ -409,7 +409,7 @@ BODY
 	padding-left: 0.5em;
 	padding-top: 0.1em;
 	float: left;
-	width: 15em;
+	width: auto;
 }
 .ren
 {
@@ -420,19 +420,20 @@ BODY
 {
 	float: left;
 	text-align: center;
-	width: 12.8em;
+	width: 12.5em;
 	padding: 3px 0;
 	background-color: #1E00D0;
-	margin: 0px 0 0px 1px;
+	margin: 0px 0 1px 1px;
 	color: #FFFFFF;
 }
 #tabla-partida
 {
 	float: left;
 	border: 1 solid rgb(0, 0, 0);
-	margin: 4px 0 0;
-	width: auto;
+	width: 55.1em;
 	height: auto;
+	margin-left: 6px;
+	margin-top: 3px;
 }
 .cortita
 {
@@ -508,7 +509,11 @@ BODY
 {
 	color: #840000;
 	font-size: small;
+	float: left;
+	width: 100%;
+	text-align: left;
 	text-decoration: none;
+	margin-bottom: 2px;
 }
 .datos
 {
@@ -525,23 +530,25 @@ BODY
 }
 .renglon2
 {
-	width: 77.4em;
+	width: 555px;
 	float: left;
 	background-color: #FFFFFF;
+	margin-bottom: 1px;
 }
 .celda2
 {
 	float: left;
 	text-align: center;
-	width: 12.8em;
+	width: 12.5em;
 	padding: 2px 0;
 	margin: 1px 0 0 1px;
 }
 .renglon3
 {
-	width: auto;
+	width: 554px;
 	float: left;
 	background-color: #D2C7FE;
+	margin-bottom: 1px;
 }
 .subtotal
 {
@@ -550,15 +557,16 @@ BODY
 	float: left;
 	background-color: transparent;
 	width: 100%;
-	padding: 8px 0px 0px;
+	padding: 7px 0px 0px;
 	margin: 0px 0 0 -5px;
 }
 #insumos-meta2
 {
 	float: left;
-	width: 100%;
+	width: auto;
 	height: auto;
-	margin: 0 0 0 6px;
+	/*[empty]left:;*/
+	background: #E3E6FE;
 }
 .agregar-insumo
 {
@@ -788,4 +796,48 @@ BODY
 	text-align: right;
 	width: 78em;
 	float: left;
+}
+#area-partidas
+{
+	border-left: 2px solid #1D00CF;
+	border-right: 2px solid #1D00CF;
+	border-bottom: 2px solid #1D00CF;
+	float: left;
+	width: auto;
+	text-align: center;
+}
+#titulo-area-partidas
+{
+	width: 68.7em;
+	float: left;
+	padding-top: 7px;
+	padding-bottom: 8px;
+}
+#titulo-capitulo
+{
+	float: left;
+	padding-left: 57px;
+}
+#atajo
+{
+	float: right;
+}
+.subtitulo2
+{
+	font: normal bolder 16pt monospace;
+	color: #B61515;
+	padding: 0 0 0 7px;
+}
+.linea-larga
+{
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-top: -9px;
+}
+.color-linea-larga
+{
+	color: #931414;
+	border: thin solid #1D00CF;
+	width: 75.4em;
 }
