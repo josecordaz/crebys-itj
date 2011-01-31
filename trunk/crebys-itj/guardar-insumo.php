@@ -32,6 +32,6 @@
 		header("Location: http://$host$uri/insumo.php");
 	}else
 		//
-	header("Location: http://$host$uri/admin.php");
+	header("Location: http://$host$uri/lista-insumos.php");
 	
 ?>

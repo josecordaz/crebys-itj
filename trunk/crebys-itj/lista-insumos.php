@@ -11,7 +11,7 @@
 	// Si no existe la variable de sesión redir
 	if(!isset($_SESSION['nick'])){
 		// Redireccionamos a login.php
-		header("Location: http://$host$uri/login.php");
+//		header("Location: http://$host$uri/login.php");
 	}
 	
 	// Librería para manipulación de procedimientos
@@ -123,64 +123,141 @@
                                             
 
                                             
-<div id="area">                                            
-<div id="insumos-meta2">
-	<div id="info-partida">
-	   	<?php
-    		$insumos=$proc->devDatosInsumos();    	
-			$id_partida=$insumos[0][0];
-			echo "<span class='label-partida'><a class='label-partida' href='#'>[+] Partida ".$id_partida.":</a></span>";					
-?>
-					<br>
-                    <div id="tabla-partida">
-			           	<div class="renglon2">
-            		    <div class="celda">Nombre</div>
-		                <div class="celda">Unidad de Medida</div>
-		                <div class="celda">Precio Unitario</div>
-        		    </div>
-<?php				
-			for($i=0;$i<count($insumos);$i++)
-				if($insumos[$i][0]!=$id_partida){
-					$id_partida=$insumos[$i][0];
-					echo "<br>";
-					echo "<br>";
-					echo "<br>";
-					echo "<br>";
-					echo "<span class='label-partida'><a class='label-partida' href='#'>[+] Partida ".$id_partida.":</a></span>";
-?>
-					<br>
-                    <div id="tabla-partida">
-			           	<div class="renglon2">
-            		    <div class="celda">Nombre</div>
-		                <div class="celda">Unidad de Medida</div>
-		                <div class="celda">Precio Unitario</div>
-        		    </div>
-<?php				
-				}else{
-					if(($i%2)==0){
-						echo "<div class='renglon2'>";
-							echo "<div class='celda2'>".$insumos[$i][2]."</div>";
-							echo "<div class='celda2'>".$insumos[$i][4]."</div>";
-							echo "<div class='celda2'>".$insumos[$i][5]."</div>";
-						echo "</div>";
-					}else{
-						echo "<div class='renglon3'>";
-							echo "<div class='celda2'>".$insumos[$i][2]."</div>";
-							echo "<div class='celda2'>".$insumos[$i][4]."</div>";
-							echo "<div class='celda2'>".$insumos[$i][5]."</div>";
-						echo "</div>";	
-					}
-					
-				}
-		?>
-            <div class="subtotal">
-	        	<div class="agregar-insumo">
-              		<input type="button" value="Agregar"/>
-                </div>
-        	    Subtotal $ 6,168.00
-            </div>
+<div id="area">                  
+	<div id="titulo">Lista de Insumos</div>                          
+    <div id="insumos-meta2">
+		 <div class="menup">
+		 	<ul>
+            	<?php
+					for($i=1;$i<6;$i++)
+						if(isset($_GET['cap'])&&$_GET['cap']==$i||!isset($_GET['cap'])&&$i==1){
+							echo "<li class='current'><a href'#'><span>".$i."0,000</span></a></li>";
+							$insumos=$proc->devDatosInsumos($i);    	
+						}
+						else
+							echo "<li ><a href='lista-insumos.php?cap=".$i."'><span>".$i."0,000</span></a></li>";	
+				?>
+	    	</ul>
 		</div>
+	<div style="clear:both"></div>
+	<div id="area-partidas">
+		
+     <?php
+     	if(isset($_GET['cap']))
+			$capitulo=$_GET['cap'];
+		else
+			$capitulo=1;
+	 ?>
+
+        <div id="titulo-area-partidas">
+            <div id="titulo-capitulo">
+            	<span class="subtitulo2">Este es el titulo del capitulo 10,000</span>
+            </div>
+            <div id="atajo">
+                Atajo:
+                <?php
+				    $id_partida=$insumos[0][0];
+					$Pa_Nombre=$insumos[0][6];
+	                echo "<select name='atajos' class='s-corto' onchange=\"location='lista-insumos.php?cap=".$capitulo."&li-'+this.value+'='+this.value\">";
+	                echo "<option value='0'></option>";
+                	for($i=0;$i<count($insumos);$i=$i+1){
+						if($insumos[$i][0]!=$id_partida){ // If para verificar si se ha cambiado de partida					
+		                	echo "<option value='$id_partida'>$id_partida - $Pa_Nombre </option>";
+						    $id_partida=$insumos[$i][0];
+							$Pa_Nombre=$insumos[$i][6];
+						}
+					}
+                	echo "<option value='$id_partida'>$id_partida - $Pa_Nombre </option>";
+				?>
+               </select>
+            </div>
+        </div>
+        <div class="linea-larga">
+        	<hr class="color-linea-larga">
+        </div>
+<?php
+
+    $id_partida=$insumos[0][0];
+	$Pa_Nombre=$insumos[0][6];
+	echo "<div id='tabla-partida'>";
+		if(!isset($_GET['li-'.$id_partida])&&!isset($_SESSION['li-'.$id_partida])){
+			echo "<span class='label-partida'><a class='label-partida' href='lista-insumos.php?cap=".$capitulo."&li-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
+		}else{
+			$_SESSION['li-'.$id_partida]=$id_partida;
+echo "<span class='label-partida'><a class='label-partida' href='redir-lista-insumos.php?cap=".$capitulo."&li=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+?>
+
+			<div class="renglon2">
+    			<div class="celda">Modificar</div>
+    			<div class="celda">Nombre</div>
+	            <div class="celda">Unidad de Medida</div>
+	            <div class="celda">Precio Unitario</div>
+	        </div>
+<?php
+		}
+// For para recorrer todos los insumos
+for($i=0;$i<count($insumos);$i=$i+1){
+	if($insumos[$i][0]!=$id_partida){ // If para verificar si se ha cambiado de partida
+		$id_partida=$insumos[$i][0];
+		$Pa_Nombre=$insumos[$i][6];
+		if(isset($_GET['li-'.$insumos[$i-1][0]])||isset($_SESSION['li-'.$insumos[$i-1][0]])){
+ ?>
+	   		<div class="subtotal">
+				<div class="agregar-insumo">
+					<input type="button" value="Agregar" onclick="location='insumo.php'"/>
+		        </div>
+			</div>
+<?php
+		}
+		echo "</div>";
+		echo "<div id='tabla-partida'>";
+		if(!isset($_GET['li-'.$id_partida])&&!isset($_SESSION['li-'.$id_partida])){
+			echo "<span class='label-partida'><a class='label-partida' href='lista-insumos.php?cap=".$capitulo."&li-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
+		}else{
+			$_SESSION['li-'.$id_partida]=$id_partida;
+echo "<span class='label-partida'><a class='label-partida' href='redir-lista-insumos.php?cap=".$capitulo."&li=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+?>
+						<div class="renglon2">
+							<div class="celda">Modificar</div>
+							<div class="celda">Nombre</div>
+							<div class="celda">Unidad de Medida</div>
+							<div class="celda">Precio Unitario</div>
+						</div>
+<?php
+			}
+		}
+		if(isset($_GET['li-'.$id_partida])||isset($_SESSION['li-'.$id_partida])){
+			if(($i%2)==0||$insumos[$i][0]!=$id_partida){
+				echo "<div class='renglon2'>";
+					echo "<div class='celda2'><input type='checkbox' onChange=\"location= 'insumo.php?id_insumo=".$insumos[$i][1]."'\"/></div>";
+					echo "<div class='celda2'>".$insumos[$i][2]."</div>";
+					echo "<div class='celda2'>".$insumos[$i][4]."</div>";
+					echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+				echo "</div>";
+			}else{
+				echo "<div class='renglon3'>";
+					echo "<div class='celda2'><input type='checkbox' onChange=\"location= 'insumo.php?id_insumo=".$insumos[$i][1]."'\"/></div>";
+					echo "<div class='celda2'>".$insumos[$i][2]."</div>";
+					echo "<div class='celda2'>".$insumos[$i][4]."</div>";
+					echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+				echo "</div>";
+			}
+		}
+}
+		if(isset($_GET['li-'.$id_partida])||isset($_SESSION['li-'.$id_partida])){
+?>
+        <div class="subtotal">
+            <div class="agregar-insumo">
+                <input type="button" value="Agregar" onclick="location='insumo.php'"/>
+                </div>
+            </div>
+        </div>
+        <?php
+		}
+		?>
 	</div>
+</div>
+</div>
 </div>
 
 
