@@ -501,5 +501,12 @@ where insumos.Id_Partida between ".$cap."0000 and ".($cap+1)."0000
 order by insumos.Id_Partida");
 			return $this->conexion->getArray();
 		}
+				// Devolver todos los datos de todos los insumos
+		function devDatosInsumo($id_insumo){
+			$this->conexion->executeSQL("select insumos.Id_Partida,Id_Insumo,In_Nombre,insumos.Id_Unidad_Medida,Un_Nombre,In_Precio,Pa_Nombre
+from medidas inner join (insumos inner join partidas on partidas.Id_Partida=insumos.Id_Partida)on insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida
+where Id_Insumo=$id_insumo");
+			return $this->conexion->getArray();
+		}
 	}
 ?>

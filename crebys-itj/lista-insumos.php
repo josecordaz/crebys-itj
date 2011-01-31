@@ -242,13 +242,16 @@ echo "<span class='label-partida'><a class='label-partida' href='redir-lista-ins
 					echo "<div class='celda2'>".$insumos[$i][5]."</div>";
 				echo "</div>";
 			}
+			$id_i=$i;
 		}
 }
 		if(isset($_GET['li-'.$id_partida])||isset($_SESSION['li-'.$id_partida])){
 ?>
         <div class="subtotal">
             <div class="agregar-insumo">
-                <input type="button" value="Agregar" onclick="location='insumo.php'"/>
+            	<?php
+					echo "<input type=\"button\" value=\"Agregar\" onclick=\"location= 'insumo.php?id_partida=".$insumos[$id_i][0]."'\"/>";
+				?>
                 </div>
             </div>
         </div>
