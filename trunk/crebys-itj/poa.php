@@ -123,7 +123,8 @@
 
                                             
 
-                                            
+	<div id="titulo">POA</div>     
+    <div class="sub-titulo">Programa Operativo Anual</div>
 	<div id="area">
  	<?php
 				$metas=$proc->devolverMetasPOA($_SESSION['nick']);
@@ -199,6 +200,8 @@ if(count($metas)!=0){
 							if($proc->numAccion($accionesMeta[$i][1])==$_GET['accion']||(($i==0)&&(!isset($_GET['accion'])))){
 								echo "<li class='current-partida'><a href='#'><span>Acción ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 								$id_accion=$i;
+								// Se guardar esta variable para utilizarla al cargar insumos para esta acción
+								$_SESSION['accion-cargar']=$accionesMeta[$i][1];
 							}
 							else
 					    	    echo "<li ><a href='poa.php?meta=".$_SESSION['meta']."&accion=".($i+1)."'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
@@ -213,34 +216,37 @@ if(count($metas)!=0){
 					<div class="info2"><?php echo $accionesMeta[$id_accion][0]?>
     	            </div>
         	    </div>
+
+                <input type="button" value="Cargar Insumos" onclick="location='cargar-insumos-poa.php'"/>
+                
 				<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
             	<br/>
-		    	<div id="tabla-partida">
-                	<div class="renglon2">
-                        <div class="celda">Activar</div>                    
-                        <div class="celda">Nombre</div>
-                        <div class="celda">Unidad de Medida</div>
-                        <div class="celda">Precio Unitario</div>
-                        <div class="celda">Cantidad</div>
-                        <div class="celda">Subtotal</div>
+		    	<div id="tabla-partida2">
+                	<div class="renglon4">
+                        <div class="celda3">Activar</div>                    
+                        <div class="celda3">Nombre</div>
+                        <div class="celda3">Unidad de Medida</div>
+                        <div class="celda3">Precio Unitario</div>
+                        <div class="celda3">Cantidad</div>
+                        <div class="celda3">Subtotal</div>
                     </div>
-                    <div class="renglon2">
-                        <div class="celda2"><input type="checkbox"/></div>
-                        <div class="celda2">Caja para archivo muerto tamaño oficio</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 68.00</div>
-                        <div class="celda2">6</div>
-                        <div class="celda2">$408.00</div>
+                    <div class="renglon4">
+                        <div class="celda4"><input type="checkbox"/></div>
+                        <div class="celda4">Caja para archivo muerto tamaño oficio</div>
+                        <div class="celda4">Pieza</div>
+                        <div class="celda4">$ 68.00</div>
+                        <div class="celda4">6</div>
+                        <div class="celda4">$408.00</div>
                     </div>
-                    <div class="renglon3">
-                        <div class="celda2"><input type="checkbox"/></div>
-                        <div class="celda2">Carpeta de 3 argollas</div>
-                        <div class="celda2">Pieza</div>
-                        <div class="celda2">$ 72.00</div>
-                        <div class="celda2">80</div>
-                        <div class="celda2">$5,760.00</div>
+                    <div class="renglon5">
+                        <div class="celda4"><input type="checkbox"/></div>
+                        <div class="celda4">Carpeta de 3 argollas</div>
+                        <div class="celda4">Pieza</div>
+                        <div class="celda4">$ 72.00</div>
+                        <div class="celda4">80</div>
+                        <div class="celda4">$5,760.00</div>
                     </div>
-                    <div class="subtotal">
+                    <div class="subtotal2">
 	                    <div class="agregar-insumo">
               	            <input type="button" value="Agregar"/>
                         </div>
