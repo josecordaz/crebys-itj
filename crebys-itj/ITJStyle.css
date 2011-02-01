@@ -841,3 +841,115 @@ BODY
 	border: thin solid #1D00CF;
 	width: 75.4em;
 }
+.renglon4
+{
+	width: 75.8em;
+	float: left;
+	background-color: #FFFFFF;
+	margin-bottom: 1px;
+}
+.celda3
+{
+	float: left;
+	text-align: center;
+	width: 12.5em;
+	padding: 3px 0;
+	background-color: #1E00D0;
+	margin: 0px 0 1px 1px;
+	color: #FFFFFF;
+}
+.celda4
+{
+	float: left;
+	text-align: center;
+	width: 12.5em;
+	padding: 2px 0;
+	margin: 1px 0 0 1px;
+}
+.renglon5
+{
+	width: 75.8em;
+	float: left;
+	background-color: #D2C7FE;
+	margin-bottom: 1px;
+}
+.subtotal2
+{
+	text-align: right;
+	color: #000005;
+	float: left;
+	background-color: transparent;
+	width: 100%;
+	padding: 7px 0px 0px;
+	margin: 0px 0 0 -5px;
+}
+#tabla-partida2
+{
+	float: left;
+	border: 1 solid rgb(0, 0, 0);
+	width: 75.6em;
+	height: auto;
+	margin-left: 6px;
+	margin-top: 3px;
+}
+.renglon-blanco
+{
+	width: 75.8em;
+	float: left;
+	background-color: #FFFFFF;
+	margin-bottom: 1px;
+}
+.renglon-morado
+{
+	width: 75.8em;
+	float: left;
+	background-color: #D2C7FE;
+	margin-bottom: 1px;
+}
+.celda-azul
+{
+	float: left;
+	text-align: center;
+	width: 12.5em;
+	padding: 3px 0 0px;
+	background-color: #1E00D0;
+	margin: 0px 0 0 1px;
+	color: #FFFFFF;
+	height: 2.6em;
+}
+.celda-normal
+{
+	float: left;
+	text-align: center;
+	width: 12.5em;
+	padding: 2px 0;
+	margin: 1px 0 0 1px;
+}
+#tabla-partida-cip
+{
+	float: left;
+	border: 1 solid rgb(0, 0, 0);
+	width: 75.6em;
+	height: auto;
+	margin-left: 6px;
+	margin-top: 3px;
+}
+.at-corto
+{
+	width: 4.7em;
+}
+.tit-sem
+{
+	float: left;
+	width: 50%;
+}
+.tit-medida
+{
+	float: left;
+	width: 100%;
+}
+.tit-cantidades
+{
+	float: left;
+	width: 100%;
+}
