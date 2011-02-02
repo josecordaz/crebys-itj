@@ -169,8 +169,14 @@
                 <?php
 				    $id_partida=$insumos[0][0];
 					$Pa_Nombre=$insumos[0][6];
-	                echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-poa.php?cap=".$capitulo."&cip-'+this.value+'='+this.value\">";
-	                echo "<option value='0'></option>";
+                	for($i=0;$i<count($insumos);$i++)
+						if($_GET['cip-'.$insumos[$i][0]]==$insumos[$i][0]){
+							$partida_actual=$_GET['cip-'.$insumos[$i][0]];
+							echo $partida_actual."<br>";
+						}
+					echo "a ver:=[".$partida_actual."]<br>";
+echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-poa.php?#$partida_actual?cap=".$capitulo."&cip-'+this.value+'='+this.value'\">";
+	                echo "<option value='0'>$partida_actual</option>";
                 	for($i=0;$i<count($insumos);$i=$i+1){
 						if($insumos[$i][0]!=$id_partida){ // If para verificar si se ha cambiado de partida					
 		                	echo "<option value='$id_partida'>$id_partida - $Pa_Nombre </option>";
@@ -195,7 +201,7 @@
 			echo "<span class='label-partida'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
-echo "<span class='label-partida'><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
 ?>
 
 			<div class="renglon-blanco">
@@ -232,7 +238,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 			echo "<span class='label-partida'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
-echo "<span class='label-partida'><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
 ?>
 						<div class="renglon-blanco">
     			<div class="celda-azul">Agregar</div>

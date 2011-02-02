@@ -11,11 +11,11 @@
 <body>
 
 
-<a href="#ref">el finalde esta p&aacute;gina</a>
+<a href="target.php?er=34#ref">el finalde esta p&aacute;gina</a>
 <?php 
 	for($i=0;$i<200;$i++)
 		if($i==150)
-			echo "<a name=\"ref\">REFERENCIAS</a>"; 
+			echo "<a name=\"ref\"/>"; 
 		else
 			echo"<p>skdkdkfkf</p>"; 
 ?>
