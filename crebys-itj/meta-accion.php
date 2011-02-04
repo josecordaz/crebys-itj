@@ -126,19 +126,19 @@
                                             
                                             
 <div id="area">
-    <div class="izquierda"><span class="subtitulo">Procesos Estratégicos:</span></div>
+    <div class="izquierda"><a name="pe"><span class="subtitulo">Procesos Estratégicos:</span></div>
     <br/>
 	<div>
     	<?php
         	$proc_est=$proc->devolverProcesos_Estrategicos();
 				for($i=0;$i<count($proc_est);$i++){
 					if(!isset($_GET['proc-est'])&&$i==0){
-						echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+						echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}else{
 						if($proc_est[$i][0]==$_GET['proc-est'])
-							echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+							echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 						else
-							echo "<a class='link-unselected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+							echo "<a class='link-unselected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}
 				}
 
@@ -171,9 +171,9 @@
 					echo "<li class='current'><a href=''><span>Meta ".$metas[$e][0]."</span></a></li>";
 				else
 					if(isset($_GET['proc-est']))
-						echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+						echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 					else
-						echo "<li ><a href='meta-accion.php?proc-est=2&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+						echo "<li ><a href='meta-accion.php?proc-est=2&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 			}
 		}
 		?>

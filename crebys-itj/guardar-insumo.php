@@ -20,18 +20,31 @@
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 	
+	
 	// Guardamos los datos del insumo
-	$val=$proc->insInsumo($_SESSION['nombre'],$_SESSION['precio'],$proc->devolverIdUnidadM($_SESSION['medida']),$_SESSION['partida']);
-	
+	if(!isset($_SESSION['mod']))
+		$val=$proc->insInsumo($_SESSION['nombre'],$_SESSION['precio'],$proc->devolverIdUnidadM($_SESSION['medida']),$_SESSION['partida']);
+	else{
+		//echo "session nombre:=[".$_SESSION['nombre']."]";
+		$arreglo=array($_SESSION['id_insumo'],"".$_SESSION['nombre'],$_SESSION['precio'],$_SESSION['medida'],$_SESSION['partida']);
+		$val=$proc->modInsumo($arreglo);
+	}
 	// Validamos
-	
 	if($val!=1){
 		// Establecemos el error en una cokkie
+		//echo $proc->devError();
+		//echo $_SESSION['consulta'];
 		setcookie("error",$proc->devError(), time()+20);
 		// Redireccionamos a insumo.php para mostrar el error
 		header("Location: http://$host$uri/insumo.php");
-	}else
-		//
-	header("Location: http://$host$uri/lista-insumos.php");
+	}else{
+		if(isset($_SESSION['mod'])){
+			unset($_SESSION['mod']);
+			header("Location: http://$host$uri/lista-insumos.php?cap=".$_SESSION['cap']."#".$_SESSION['id_insumo']."");
+		}else{
+			$datoInsumo=$proc->devIdInsumo($_SESSION['nombre']);
+			header("Location: http://$host$uri/lista-insumos.php?cap=".substr($_SESSION['partida'],0,1)."#".$datoInsumo."");
+		}
+	}
 	
 ?>

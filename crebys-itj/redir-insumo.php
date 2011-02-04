@@ -57,5 +57,5 @@ if(isset($_POST['medidaname'])){
 }
 
 // Redireccionamos a insumo.php
-header("Location: http://$host$uri/insumo.php");
+	header("Location: http://$host$uri/insumo.php");
 ?>

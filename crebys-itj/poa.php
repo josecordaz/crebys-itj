@@ -22,6 +22,8 @@
 	
 	if(isset($_GET['meta']))
 		$_SESSION['meta']=$_GET['meta'];
+	else 
+		$_SESSION['meta']=1
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -142,7 +144,7 @@ if(count($metas)!=0){
 						$tmp_meta=$metas[$i][0];
 				}
 				else
-					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."'><span>M ".$metas[$i][0]."</span></a></li>";
+					echo "<li ><a name=\"pe\"><a href='poa.php?meta=".$metas[$i][0]."#pe'><span>M ".$metas[$i][0]."</span></a></li>";
 			}
 		?>
     </ul>
@@ -204,7 +206,7 @@ if(count($metas)!=0){
 								$_SESSION['accion-cargar']=$accionesMeta[$i][1];
 							}
 							else
-					    	    echo "<li ><a href='poa.php?meta=".$_SESSION['meta']."&accion=".($i+1)."'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
+					    	    echo "<li ><a href='poa.php?meta=".$_SESSION['meta']."&accion=".($i+1)."#pe'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 					?>
                     <span>[+] Expandir todo</span>
 			    </ul>

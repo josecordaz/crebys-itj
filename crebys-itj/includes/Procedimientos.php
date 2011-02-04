@@ -159,10 +159,11 @@
 			// In_Precio = 2
 			// In_Unidad_M = 3
 			// Id_Partida = 4
+			//echo "el nombre del insumo modificado es:=[".$arreglo[1]."]";
 			if($this->validar->validarNumero($arreglo[0])){
 				if($this->validar->validarCadena($arreglo[1],$this->sacarLongitud("Insumos","In_Nombre"))){
 					if($this->validar->validarDouble($arreglo[2])){
-						if($this->validar->validarCadena($arreglo[3],$this->sacarLongitud("Insumos","In_Unidad_M"))){
+						if($this->validar->validarCadena2($arreglo[3],$this->sacarLongitud("medidas","Un_Nombre"))){
 							if($this->validar->validarNumero($arreglo[4])){
 								$this->conexion->executeSQL("call modInsumo(".$arreglo[0].",'".$arreglo[1]."',".$arreglo[2].",'".$arreglo[3]."',".$arreglo[4].",@error); select @error");
 								switch ($this->conexion->error()){
@@ -173,21 +174,25 @@
 										$this->error="[-] El insumo se insertó correctamente:";
 										return 1;
 									case 2:
-										$this->error="[-] No existe el insumo: ".$Id_Insumo;
+										$this->error="[-] No existe el insumo: ".$arreglo[0];
 										break;
 									case 3:
-										$this->error="[-] No existe la partida: ".$Id_Partida;																		
+										$this->error="[-] No existe la partida: ".$arreglo[4];
+										break;
+									case 4:
+										$this->error="[-] No existe la medida señalada: ".$arreglo[3];
 								}
 							}else
 								$this->error="[-] Id_Partida no válido";
 						}else
-							$this->error="[-] In_Unidad_M no válido";
+							$this->error="[-] Un_Nombre no válido";
 					}else 
 						$this->error="[-] In_Precio no válido";
 				}else
 					$this->error="[-] In_Nombre no válido";
 			}else
 				$this->error="[-] Id_Insumo no válido";
+			return 0;
 		}
 		//Función que nos devuelve el Id de In_Nombre 
 		//que acaba de ser innsertado en la tabla
@@ -498,15 +503,25 @@ where Us_Nick='$Us_Nick' and metas.Id_Meta=$Id_Meta ORDER BY acciones.Id_Accion"
 			$this->conexion->executeSQL("select insumos.Id_Partida,Id_Insumo,In_Nombre,insumos.Id_Unidad_Medida,Un_Nombre,In_Precio,Pa_Nombre
 from medidas inner join (insumos inner join partidas on partidas.Id_Partida=insumos.Id_Partida)on insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida
 where insumos.Id_Partida between ".$cap."0000 and ".($cap+1)."0000
-order by insumos.Id_Partida");
+order by insumos.Id_Partida, In_Nombre");
 			return $this->conexion->getArray();
 		}
-				// Devolver todos los datos de todos los insumos
+		// Devolver todos los datos de todos los insumos
 		function devDatosInsumo($id_insumo){
 			$this->conexion->executeSQL("select insumos.Id_Partida,Id_Insumo,In_Nombre,insumos.Id_Unidad_Medida,Un_Nombre,In_Precio,Pa_Nombre
 from medidas inner join (insumos inner join partidas on partidas.Id_Partida=insumos.Id_Partida)on insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida
 where Id_Insumo=$id_insumo");
 			return $this->conexion->getArray();
+		}
+		// Devolver identificador de un nombre de insumo
+		function devIdInsumo($In_Nombre){
+			$this->conexion->executeSQL("select Id_Insumo from Insumos where In_Nombre='$In_Nombre'");
+			return $this->conexion->error();
+		}
+		// Eliminar Insumos
+		function eliminarInsumo($Id_Insumo){
+			$this->conexion->executeSQL("delete from insumos where Id_Insumo=$Id_Insumo");
+			return $this->conexion->error();
 		}
 	}
 ?>
