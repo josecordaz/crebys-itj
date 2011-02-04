@@ -87,18 +87,27 @@ a	!-- PARTIDAS
 		!-- 1 modificación correcta
 		!-- 2 no existe el Id_Insumo proporcionado
 		!-- 3 no existe la partida Id_Partida
+		!-- 4 no existe la medida señalada
 	
-	&CREATE PROCEDURE modInsumo(IN Id_Insum INT,IN In_Nombr VARCHAR(100),IN In_Preci DOUBLE,IN In_Unidad VARCHAR(20),IN Id_Partid INT,OUT error INT)
+	&CREATE PROCEDURE modInsumo(IN Id_Insum INT,IN In_Nombr VARCHAR(100),IN In_Preci DOUBLE,IN Un_Nombr VARCHAR(30),IN Id_Partid INT,OUT error INT)
 	BEGIN
+		DECLARE Id_Unidad_Medid int default(0);
 		SET error=1;
-		IF(select count(*) from Insumos where Id_Insumo=Id_Insum)=0 THEN
-			SET error=2;
+		IF(select count(Un_Nombre) from medidas where Un_Nombre like Un_Nombr)=0 THEN
+			SET error=4;
 		ELSE
-			If(select count(*) from Partidas where Id_Partida=Id_Partid)>0 THEN
-				update Insumos set In_Nombre=In_nombre,In_Precio=In_Preci,In_Unidad_M=In_Unidad,Id_Partida=Id_Partid where Id_Insumo=Id_Insum;
-			ELSE
-				SET error=3;
-			END IF;
+			BEGIN
+				SET Id_Unidad_Medid=(select Id_Unidad_Medida from medidas where Un_Nombre=Un_Nombr);
+				IF(select count(*) from Insumos where Id_Insumo=Id_Insum)=0 THEN
+					SET error=2;
+				ELSE
+					If(select count(*) from Partidas where Id_Partida=Id_Partid)>0 THEN
+						update Insumos set In_Nombre=In_Nombr,In_Precio=In_Preci,Id_Unidad_Medida=Id_Unidad_Medid,Id_Partida=Id_Partid where Id_Insumo=Id_Insum;
+					ELSE
+						SET error=3;
+					END IF;
+				END IF;
+			END;
 		END IF;
 	END;&
 	

@@ -169,14 +169,8 @@
                 <?php
 				    $id_partida=$insumos[0][0];
 					$Pa_Nombre=$insumos[0][6];
-                	for($i=0;$i<count($insumos);$i++)
-						if($_GET['cip-'.$insumos[$i][0]]==$insumos[$i][0]){
-							$partida_actual=$_GET['cip-'.$insumos[$i][0]];
-							echo $partida_actual."<br>";
-						}
-					echo "a ver:=[".$partida_actual."]<br>";
-echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-poa.php?#$partida_actual?cap=".$capitulo."&cip-'+this.value+'='+this.value'\">";
-	                echo "<option value='0'>$partida_actual</option>";
+echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-poa.php?cap=".$capitulo."&cip-'+this.value+'='+this.value+'#'+this.value\">";
+					echo "<option value=0></option>";
                 	for($i=0;$i<count($insumos);$i=$i+1){
 						if($insumos[$i][0]!=$id_partida){ // If para verificar si se ha cambiado de partida					
 		                	echo "<option value='$id_partida'>$id_partida - $Pa_Nombre </option>";
@@ -198,10 +192,10 @@ echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-
 	$Pa_Nombre=$insumos[0][6];
 	echo "<div id='tabla-partida-cip'>";
 		if(!isset($_GET['cip-'.$id_partida])&&!isset($_SESSION['cip-'.$id_partida])){
-			echo "<span class='label-partida'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
+			echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."#".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
-echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+			echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."#".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
 ?>
 
 			<div class="renglon-blanco">
@@ -235,10 +229,10 @@ for($i=0;$i<count($insumos);$i=$i+1){
 		echo "</div>";
 		echo "<div id='tabla-partida-cip'>";
 		if(!isset($_GET['cip-'.$id_partida])&&!isset($_SESSION['cip-'.$id_partida])){
-			echo "<span class='label-partida'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
+			echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."#".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
-echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+			echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."#".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
 ?>
 						<div class="renglon-blanco">
     			<div class="celda-azul">Agregar</div>
@@ -260,9 +254,9 @@ echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida
 				echo "<div class='renglon-blanco'>";
 					echo "<div class='celda-normal'>";
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'id_insumo']))
-							echo "<input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\" checked='checked'/>";							
+							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\" checked='checked'/>";							
 						else
-							echo "<input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
+							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
 					echo "</div>";
 					echo "<div class='celda-normal'>".$insumos[$i][2]."</div>";
 					echo "<div class='celda-normal'>";
@@ -305,9 +299,9 @@ echo "<span class='label-partida'><a href='$id_partida'/><a class='label-partida
 				echo "<div class='renglon-morado'>";
 					echo "<div class='celda-normal'>";
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'id_insumo']))
-							echo "<input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\" checked='checked'/>";							
+							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\" checked='checked'/>";							
 						else
-							echo "<input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
+							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
 					echo "</div>";
 					echo "<div class='celda-normal'>".$insumos[$i][2]."</div>";
 					echo "<div class='celda-normal'>";

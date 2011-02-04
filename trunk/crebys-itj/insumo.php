@@ -19,10 +19,47 @@
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
+	
+	// Si id_insumo=modificar no se selecciono nada
+	if(isset($_GET['id_insumo'])&&$_GET['id_insumo']=='modificar')
+		header("location: lista-insumos.php");
 
 	// Si se recive el id de un insumo es que se va a modificar
-	if(isset($_GET['id_insumo']))
+	if(isset($_GET['id_insumo'])){
 		$datosInsumo=$proc->devDatosInsumo($_GET['id_insumo']);
+		$_SESSION['id_insumo']=$_GET['id_insumo'];
+		$_SESSION['nombre_partida']=$datosInsumo[0][6];
+	}
+	
+	// Si entra aquí es para modificaciones
+	if(isset($_GET['mod'])){
+		$_SESSION['mod']=$_GET['mod'];
+		unset($_SESSION['partida']);
+		unset($_SESSION['nombre']);
+		unset($_SESSION['medida']);
+		unset($_SESSION['precio']);
+		$_SESSION['nombre']=$datosInsumo[0][2];
+		$_SESSION['precio']=$datosInsumo[0][5];
+		$_SESSION['medida']=$datosInsumo[0][4];
+		$_SESSION['partida']=$datosInsumo[0][0];
+	}
+	
+	// Si se agrego un insumo a una partida se eliminan las variables de sessión
+	if(isset($_GET['id_partida'])){
+		unset($_SESSION['id_insumo']);
+		unset($_SESSION['partida']);
+		unset($_SESSION['partida']);
+		unset($_SESSION['nombre']);
+		unset($_SESSION['medida']);
+		unset($_SESSION['precio']);	
+		unset($_SESSION['mod']);
+		$_SESSION['partida']=$_GET['id_partida'];
+	}
+	
+	// Si recivimos get cap
+	if(isset($_GET['cap'])){
+		$_SESSION['cap']=$_GET['cap'];
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -136,17 +173,24 @@
     
 	<hr id="corta"/>
     
-    <form action="guardar-insumo.php" method="post">	                
+
+    <form action="guardar-insumo.php?mod=0" method="post">	                
     	<br/>
         <div id="caja-peque">
                         
             <div class="caja-left">
                 Partida:
-                <select name="partida" class="s-corto" onchange="location = 'redir-insumo.php?partida='+this.value">
+				<select id=\"block\" name=\"partida\" class=\"s-corto\" onchange=\"location = 'redir-insumo.php?partida='+this.value\" readonly>        	
+                <?php
+					$arr=array();
+					$arr=$proc->devolverPartidas();
+                	if(isset($_SESSION['mod']))
+                    	echo "<option value=\"".$_SESSION['partida']."\" selected=\"selected\">".$_SESSION['partida']."--".$_SESSION['nombre_partida']."</option>";
+					else{
+				?>	
                 <option value="0"></option>
                 	<?php
-						$arr=array();
-						$arr=$proc->devolverPartidas();
+
 						for($i=0;$i<count($arr);$i++)
 							if(isset($_SESSION['partida'])&&$_SESSION['partida']==$arr[$i][0])
 		                    	echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
@@ -158,7 +202,7 @@
 										echo "<option value=\"".$arr[$i][0]."\" selected=\"selected\">".$_GET['id_partida']." -- ".$arr[$i][1]."</option>";
 									else
 										echo "<option value=\"".$arr[$i][0]."\">".$arr[$i][0]."--".$arr[$i][1]."</option>";
-
+					}
 					?>
                 </select>
             </div>
@@ -212,8 +256,12 @@
         <hr id="corta"/>
         <br/>
         <div class="caja">
-            <input type="submit" name="aceptar" value="Agregar"/>
-
+			<?php
+            	if(isset($_SESSION['id_insumo']))
+					echo "<input type=\"submit\" name=\"aceptar\" value=\"Guardar Cambios\"/>";
+				else
+					echo "<input type=\"submit\" name=\"aceptar\" value=\"Agregar\"/>";
+			?>
 			<input type="button" name="cancelar" value="Cancelar" onclick="location='lista-insumos.php'"/>
         </div>
         <br/>                    

@@ -803,7 +803,7 @@ BODY
 	border-right: 2px solid #1D00CF;
 	border-bottom: 2px solid #1D00CF;
 	float: left;
-	width: auto;
+	width: 79.4em;
 	text-align: center;
 }
 #titulo-area-partidas
@@ -936,7 +936,7 @@ BODY
 }
 .at-corto
 {
-	width: 4.7em;
+	width: 4.6em;
 }
 .tit-sem
 {
@@ -952,4 +952,7 @@ BODY
 {
 	float: left;
 	width: 100%;
+}
+#block
+{
 }
