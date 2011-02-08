@@ -225,7 +225,7 @@
                    	<div ><?php
                   echo "<input type=\"button\" value=\"Agregar\" onclick=\"location='meta.php?proc-est=".$_SESSION['proc-est']."#pe'\"/>"?>
                         <input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>#pe'"/>
-                        <input type="button" value="Eliminar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>#pe'"/>
+                        <input type="button" value="Eliminar" onclick="location='eliminar-meta.php'"/>
                     </div>
 
             		<br/>
