@@ -528,5 +528,10 @@ where Id_Insumo=$id_insumo");
 			$this->conexion->executeSQL("select Id_Meta from metas where Me_Nombre='$Me_Nombre'");
 			return $this->conexion->error();
 		}
+		// Eliminar una meta con todas sus acciones
+		function eliminarMeta($Id_Meta){
+			$this->conexion->executeSQL("call eliminarMeta($Id_Meta,@error); select @error");
+			return $this->conexion->error();
+		}
 	}
 ?>

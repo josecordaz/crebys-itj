@@ -388,7 +388,14 @@ a	!-- PARTIDAS
 		END WHILE;
 	END;&
 	
-	!-- Procedimiento para saber cual es la primera acción correspondiente de una meta que tiene un poa de una usuario
+	!-- Eliminar una meta con todas sus acciones
+	&CREATE PROCEDURE eliminarMeta(IN Id_Met INT,OUT error INT)
+	BEGIN
+		SET error=1;
+		delete from acciones where Id_Meta=Id_Met;
+		delete from metas where Id_Meta=Id_Met;
+	END;&
+	
 	
 	
 

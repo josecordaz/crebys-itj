@@ -11,7 +11,7 @@
 	// Si no existe la variable de sesión redir
 	if(!isset($_SESSION['nick'])){
 		// Redireccionamos a login.php
-//		header("Location: http://$host$uri/login.php");
+		header("Location: http://$host$uri/login.php");
 	}
 	
 	// Librería para manipulación de procedimientos
