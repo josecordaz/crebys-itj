@@ -91,22 +91,13 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+        <a name="pe">
         <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <a href="/crebys-itj/admin-proc.php" class="menu-on">Insumos</a>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <a href="/crebys-itj/meta-accion.php" class="menu-off">Metas - Acciones</a>
+        <a href="/crebys-itj/poa.php#pe" class="menu-off">POA</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -146,7 +137,7 @@
 							$insumos=$proc->devDatosInsumos($i);    	
 						}
 						else
-							echo "<li ><a href='cargar-insumos-poa.php?cap=".$i."'><span>".$i."0,000</span></a></li>";	
+							echo "<li ><a href='cargar-insumos-poa.php?cap=".$i."#pe'><span>".$i."0,000</span></a></li>";	
 				?>
 	    	</ul>
 		</div>
@@ -284,7 +275,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						else
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant2='+this.value\">";
 					echo "</div>";
-					echo "<div class='celda-normal'>".$insumos[$i][5]."</div>";
+					echo "<div class='celda-normal'>$ ".$insumos[$i][5]."</div>";
 					echo "<div class='celda-normal'>";
 						$subtotal1=0;
 						$subtotal2=0;
@@ -329,7 +320,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						else
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant2='+this.value\">";
 					echo "</div>";
-					echo "<div class='celda-normal'>".$insumos[$i][5]."</div>";
+					echo "<div class='celda-normal'>$ ".$insumos[$i][5]."</div>";
 					echo "<div class='celda-normal'>";
 						$subtotal1=0;
 						$subtotal2=0;
@@ -364,7 +355,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 		<div id="line-up-cen">    	
             <br/>
             <input value="Agregar" name="agregar" type="button" onclick="location='poa.php'"/>
-            <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php'"/>
+            <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php#pe'"/>
             <br/>
             <br/>
         </div>

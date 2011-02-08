@@ -26,6 +26,10 @@
 	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
 	// Objeto 
 	$proc=new Procedimientos();
+	
+	// Guardamos el proceso estrategico
+	if(isset($_GET['proc-est']))
+		$_SESSION['proc-est']=$_GET['proc-est'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -94,17 +98,23 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu-on">Inicio</a>
+        <a name="pe"/>
+        <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/meta.php" class="menu-off">Agregar Meta</a>
+		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/accion.php" class="menu-off">Agregar Accion</a>
+        <a href="/crebys-itj/lista-insumos.php#pe" class="menu-off">Insumos</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a href="/crebys-itj/meta-accion.php#pe" class="menu-on">Metas - Acciones</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -134,9 +144,12 @@
 				for($i=0;$i<count($proc_est);$i++){
 					if(!isset($_GET['proc-est'])&&$i==0){
 						echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+						$_SESSION['proc-est']=$proc_est[$i][0];
 					}else{
-						if($proc_est[$i][0]==$_GET['proc-est'])
+						if($proc_est[$i][0]==$_GET['proc-est']){
 							echo "<a class='link-selected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+							$_SESSION['proc-est']=$proc_est[$i][0];
+						}
 						else
 							echo "<a class='link-unselected' href='meta-accion.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}
@@ -150,7 +163,7 @@
     <?php
 		$metas=array();
 		if(!isset($_GET['proc-est']))
-			$metas=$proc->devolverMetasPE(2);
+			$metas=$proc->devolverMetasPE(1);
 		else
 			$metas=$proc->devolverMetasPE($_GET['proc-est']);
 		if(count($metas)==0)
@@ -173,7 +186,7 @@
 					if(isset($_GET['proc-est']))
 						echo "<li ><a href='meta-accion.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 					else
-						echo "<li ><a href='meta-accion.php?proc-est=2&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
+						echo "<li ><a href='meta-accion.php?proc-est=1&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 			}
 		}
 		?>
@@ -209,15 +222,16 @@
 						echo $namep[0][0];
 					?>
 		</div>
-                   	<div >
-                    	<input type="button" value="Agregar" onclick="location='meta.php'"/>
-                        <input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>'"/>
+                   	<div ><?php
+                  echo "<input type=\"button\" value=\"Agregar\" onclick=\"location='meta.php?proc-est=".$_SESSION['proc-est']."#pe'\"/>"?>
+                        <input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>#pe'"/>
+                        <input type="button" value="Eliminar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>#pe'"/>
                     </div>
 
             		<br/>
 
     				</div>
-        			<form action="accion.php" method="post">
+        			<form action="accion.php#pe" method="post">
    					<div id="acciones-meta">
                     <div class="divtextcentrado">
                     	<span class="espaciorayado">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

@@ -131,6 +131,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+        <a name="pe"/>
         <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -261,8 +262,9 @@
 					echo "<input type=\"submit\" name=\"aceptar\" value=\"Guardar Cambios\"/>";
 				else
 					echo "<input type=\"submit\" name=\"aceptar\" value=\"Agregar\"/>";
+				echo "<input type=\"button\" name=\"cancelar\" value=\"Cancelar\" onclick=\"location='lista-insumos.php?cap=".$_SESSION['cap']."#".$_SESSION['id_insumo']."'\"/>";
 			?>
-			<input type="button" name="cancelar" value="Cancelar" onclick="location='lista-insumos.php'"/>
+
         </div>
         <br/>                    
          </form>

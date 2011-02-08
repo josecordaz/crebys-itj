@@ -95,18 +95,17 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+       	<a name="pe"/>
         <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/meta-poa2.php" class="menu-off">Agregar Relación Meta - Acción</a>
+		<a href="/crebys-itj/meta-poa2.php#pe" class="menu-off">Agregar Relación Meta - Acción</a>
         &nbsp;
         &nbsp;
         &nbsp;
-        &nbsp;
-		<a href="/crebys-itj/requisiciones.php" class="menu-off">Agregar Partida</a>
-        &nbsp;
+        
         &nbsp;
         &nbsp;
         &nbsp;
@@ -144,7 +143,7 @@ if(count($metas)!=0){
 						$tmp_meta=$metas[$i][0];
 				}
 				else
-					echo "<li ><a name=\"pe\"><a href='poa.php?meta=".$metas[$i][0]."#pe'><span>M ".$metas[$i][0]."</span></a></li>";
+					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."#pe'><span>M ".$metas[$i][0]."</span></a></li>";
 			}
 		?>
     </ul>

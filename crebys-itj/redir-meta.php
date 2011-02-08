@@ -21,15 +21,17 @@ if(isset($_GET['proc-est'])){
 	
 	
 	// Si se a aceptado el botón de aceptar
-	if(isset($_POST['aceptar'])){
+	if(isset($_POST['agregar'])){
 		$error=$proc->agregarMeta($_POST['proc-clav'],$_POST['descrip-meta'],$_POST['unidad-m'],$_POST['cantidadmeta']);
 		if($error===true){
+			$id_meta=$proc->devIdMeta($_POST['descrip-meta']);
+			$id_proc_est=$_SESSION['proc-est'];
 			unset($_SESSION['proc-est']);
 			unset($_SESSION['proc-clave']);
 			unset($_SESSION['unidad-meta']);
 			unset($_SESSION['cantidad-meta']);
 			unset($_SESSION['desc-meta']);
-			header("Location: http://$host$uri/meta-accion.php");
+			header("Location: http://$host$uri/meta-accion.php?meta=$id_meta&proc-est=$id_proc_est");
 		}else{
 			// Guardamos lo contenido en el selector de Proceso Estratégico
 				$_SESSION['proc-est']=$_POST['proc-estr'];
@@ -42,13 +44,13 @@ if(isset($_GET['proc-est'])){
 			// Guardamos la descripción de la meta
 				$_SESSION['desc-meta']=$_POST['descrip-meta'];
 			setcookie("error",$error,time()+20);
-			header("Location: http://$host$uri/meta.php");
+			header("Location: http://$host$uri/meta.php#pe");
 		}
 	}elseif(isset($_POST['guardar'])){
 		$proc->modMeta($_SESSION['meta'],$_POST['proc-clav'],$_POST['descrip-meta'],$_POST['unidad-m'],$_POST['cantidadmeta']);
 		//echo $_SESSION['consulta'];
 		unset($_SESSION['proc-clave']);
-		header("Location: http://$host$uri/meta-accion.php?proc-est=".$_SESSION['proc-est']."&meta=".$_SESSION['meta']);
+		header("Location: http://$host$uri/meta-accion.php?proc-est=".$_SESSION['proc-est']."&meta=".$_SESSION['meta']."#pe");
 	}else
 		header("Location: http://$host$uri/meta-accion.php");
 }	

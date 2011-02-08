@@ -22,8 +22,9 @@
 	
 	
 	// Guardamos los datos del insumo
-	if(!isset($_SESSION['mod']))
+	if(!isset($_SESSION['mod'])){
 		$val=$proc->insInsumo($_SESSION['nombre'],$_SESSION['precio'],$proc->devolverIdUnidadM($_SESSION['medida']),$_SESSION['partida']);
+	}
 	else{
 		//echo "session nombre:=[".$_SESSION['nombre']."]";
 		$arreglo=array($_SESSION['id_insumo'],"".$_SESSION['nombre'],$_SESSION['precio'],$_SESSION['medida'],$_SESSION['partida']);

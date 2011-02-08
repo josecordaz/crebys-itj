@@ -97,7 +97,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/meta-accion.php" class="menu-off">Metas - Acciones</a>
+        <a href="/crebys-itj/meta-accion.php#pe" class="menu-off">Metas - Acciones</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -118,15 +118,9 @@
 
                                             
                                             
-											<div class="content">                                            
-<div id="principal">
+<span id="titulo">Crebys-ITJ</span>
 
-		<div id="uno">uno <?php ?></div>
-   		<div id="dos">dos <?php ?></div>
-        
-</div>
-
-											</div>
+<p id="desc"> El sistema Crebys-ITJ le permitirá elaborar el Programa Operativo Anual (POA) apartir de la fecha en la que le sea solicitado por la subdirección de Planeación y Vinculación, además también le permitirá elaborar requisiciones cuando dicho POA sea revisado y aceptado.</p>
 
 
 

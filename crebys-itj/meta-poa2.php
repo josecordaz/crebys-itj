@@ -94,17 +94,18 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a href="/crebys-itj/admin.php" class="menu-on">Inicio</a>
+        <a name="pe"/>
+        <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/meta.php" class="menu-off">Agregar Meta</a>
+        <a href="/crebys-itj/poa.php#pe" class="menu-off">POA</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/accion.php" class="menu-off">Agregar Accion</a>
+        <a href="#pe" class="menu-on">Agregar Meta-Accion</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -133,12 +134,12 @@
         	$proc_est=$proc->devolverProcesos_Estrategicos();
 				for($i=0;$i<count($proc_est);$i++){
 					if(!isset($_GET['proc-est'])&&$i==0){
-						echo "<a class='link-selected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+						echo "<a class='link-selected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}else{
 						if($proc_est[$i][0]==$_GET['proc-est'])
-							echo "<a class='link-selected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+							echo "<a class='link-selected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 						else
-							echo "<a class='link-unselected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+							echo "<a class='link-unselected' href='meta-poa2.php?proc-est=".$proc_est[$i][0]."#pe'>".$proc_est[$i][1]."</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}
 				}
 
@@ -171,9 +172,9 @@
 					echo "<li class='current'><a href=''><span>Meta ".$metas[$e][0]."</span></a></li>";
 				else
 					if(isset($_GET['proc-est']))
-						echo "<li ><a href='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+						echo "<li ><a href='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 					else
-						echo "<li ><a href='meta-poa2.php?proc-est=2&meta=".$metas[$e][0]."'><span>".$metas[$e][0]."</span></a></li>";
+						echo "<li ><a href='meta-poa2.php?proc-est=2&meta=".$metas[$e][0]."#pe'><span>".$metas[$e][0]."</span></a></li>";
 			}
 		}
 		?>
@@ -231,14 +232,14 @@
 						{
 							for($i=0;$i<count($acciones);$i++){
 								if((isset($_GET['accion'])&&$_GET['accion']==($i+1))||(!isset($_GET['accion'])&&$i==0)){
-echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value\" checked>";
+echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value+'#pe'\" checked>";
 									$tmp_accion=($i+1);
 									}
 								else
 									if(isset($_GET['proc-est']))
-										echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value\">";
+										echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=".$_GET['proc-est']."&meta=".$_SESSION['meta']."&accion='+this.value+'#pe'\">";
 									else
-										echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=2&meta=".$_SESSION['meta']."&accion='+this.value\">";
+										echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location ='meta-poa2.php?proc-est=2&meta=".$_SESSION['meta']."&accion='+this.value+'#pe'\">";
 									
 								echo "<span class='titaccion'>A-".($i+1).":</span>";
 							
@@ -278,7 +279,7 @@ echo "<input type='radio'  name='raccion' value='".($i+1)."' onchange=\"location
 				else
 					echo $tmp_accion;
 			?>'"/>
-            <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php'"/>
+            <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php#pe'"/>
             <br/>
             <br/>
         </div>
