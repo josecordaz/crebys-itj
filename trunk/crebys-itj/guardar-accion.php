@@ -12,7 +12,7 @@ session_start();
 
 // Verificamos que existan las variables necesarias
 if(isset($_POST['cancelar']) and $_POST['cancelar']='cancelar')
-	header("Location: http://$host$uri/meta-accion.php");	
+	header("Location: http://$host$uri/meta-accion.php#pe");	
 	
 // Libreria para la utilización de procedimientos
 include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
@@ -20,7 +20,7 @@ include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php
 // Objeto para la manipulación de procedimientos
 $proc=new Procedimientos();
 	
-if(isset($_SESSION['numaccion']))
+if(isset($_SESSION['numaccion'])){
 	if(isset($_POST['textarea'])){
 		if(isset($_SESSION['meta'])){
 
@@ -37,17 +37,18 @@ if(isset($_SESSION['numaccion']))
 			$proc->guardarAccion($_SESSION['meta'],$_SESSION['numaccion'],$_POST['textarea']);
 			//echo "contulta:=[".$_SESSION['consulta']."]";
 			// Salimos 
-			header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
+			header("Location: http://$host$uri/meta-accion.php?proc-est=".$_SESSION['proc-est']."&meta=".$_SESSION['meta']."#pe");
 		}else{
 			header("Location: http://$host$uri/login.php");		
 			}
 	}else{
 		header("Location: http://$host$uri/login.php");
 	}
+}
 else{
 	$proc->agregarAccion($_SESSION['meta'],$_POST['textarea']);
 	//echo $_SESSION['consulta'];
-	header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
+	header("Location: http://$host$uri/meta-accion.php?proc-est=".$_SESSION['proc-est']."&meta=".$_SESSION['meta']."#pe");
 }
 
 ?>

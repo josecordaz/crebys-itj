@@ -23,11 +23,13 @@
 	// Checamos si llegamos aquí atravez del botón eliminar
 	if(isset($_POST['eliminar'])){
 		$proc->eliminarAccion($_SESSION['meta'],$_POST['raccion']);
-		header("Location: http://$host$uri/meta-accion.php?meta=".$_SESSION['meta']."");
+		//echo "[".$_SESSION['consulta']."]";
+		header("Location: http://$host$uri/meta-accion.php?proc-est=".$_SESSION['proc-est']."&meta=".$_SESSION['meta']."");
+		exit();
 	}
-	if(isset($_POST['editar']))
-		echo "Se precionó editar";
-
+	
+	// Borramos la variable de session
+	unset($_SESSION['numaccion']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -96,6 +98,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+        <a name="pe">
         <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -130,7 +133,7 @@
     	<br/>
         <div id="caja-peque">
                 <textarea id="textarea" name="textarea"><?php 
-					if(isset($_POST['raccion'])){
+					if(isset($_POST['raccion'])&&!isset($_POST['agregar'])){
 						echo $proc->devolverAccion($_SESSION['meta'],$_POST['raccion']);
 						//echo "Devolver acción de la meta:=[".$_SESSION['meta']."] Accion:=[".$_POST['raccion']."]<br>";
 						$_SESSION['numaccion']=$_POST['raccion'];
@@ -144,7 +147,7 @@
         <div class="caja">
             <input type="submit" name="aceptar" value="Guardar"/>
 
-</form>			<input type="button" name="cancelar" value="Cancelar" onclick="location = 'meta-accion.php'"/>
+</form>			<input type="button" name="cancelar" value="Cancelar" onclick="location = 'meta-accion.php?proc-est=<?php echo $_SESSION['proc-est']?>&meta=<?php echo $_SESSION['meta']?>#pe'"/>
         </div>
         <br/>                    
 

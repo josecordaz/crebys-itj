@@ -21,9 +21,19 @@
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 	
+	// Si eciste get proc-est indica que se accionó 
+	//agregar meta y debemos borrar session proc-est para que todo quede en blanco
+	
 	// Si recivimos la variable $_get['meta']
 	if(isset($_GET['meta']))
 		$namep=$proc->datosMeta($_GET['meta']);
+	else{
+		$_SESSION['proc-est']=$_GET['proc-est'];
+			unset($_SESSION['proc-clave']);
+			unset($_SESSION['unidad-meta']);
+			unset($_SESSION['cantidad-meta']);
+			unset($_SESSION['desc-meta']);
+		}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -95,6 +105,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+        <a name="pe">
         <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -165,19 +176,23 @@
                 <select name="proc-clav">
                 <?php
 					$arre=array();
-					if(isset($namep)){
+					if(isset($namep))
 						$arre=$proc->devolverProcesos_Clave($namep[0][3]);
-					}
 					else	
 						$arre=$proc->devolverProcesos_Clave($_SESSION['proc-est']);
-					for($i=0;$i<count($arre);$i++)
-							if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1])
+					if(!isset($_GET['meta']))
+						echo "<option value=0 selected=\"selected\"></option>";
+					for($i=0;$i<count($arre);$i++){
+							if(isset($_SESSION['proc-clave'])&&$_SESSION['proc-clave']==$arre[$i][1]){
 								echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
+							}
 							elseif(isset($namep)&&$namep[0][1]==$arre[$i][1]){
 								echo "<option value='".$arre[$i][0]."' selected=\"selected\">".$arre[$i][1]."</option>";
 								$_SESSION['proc-clave']=$namep[0][7];
-							}else
+							}else{
 								echo "<option value='".$arre[$i][0]."'>".$arre[$i][1]."</option>";
+							}
+					}
 				?>
                 </select>
             </div>
@@ -239,12 +254,12 @@
         <br/>
         <div class="caja">
         	<?php
-            	if(isset($namep)||isset($_SESSION['proc-est']))
+            	if(isset($namep))
 					echo "<input type='submit' name='guardar' value='Guardar'/>";
 				else
 					echo"<input type='submit' name='agregar' value='Agregar'/>";
 			?>
-			<input type="button" name="cancelar" value="Cancelar"/>
+			<input type="button" name="cancelar" value="Cancelar" onclick="location='meta-accion.php#pe'"/>
         </div>
         <br/>                    
          </form>

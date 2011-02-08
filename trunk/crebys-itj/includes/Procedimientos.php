@@ -400,7 +400,7 @@
 		}
 		// Devolvemos los procesos estratégicos
 		function devolverProcesos_Estrategicos(){
-			$this->conexion->executeSQL("select * from proc_estrategicos");
+			$this->conexion->executeSQL("select * from proc_estrategicos ORDER BY Id_Proc_Estrategico");
 			return $this->conexion->getArray();
 		}
 		// Devolver procesos clave del proceso estratégico
@@ -427,7 +427,7 @@
 		}
 		// Funsción para devolver todas las Acciones de una Meta
 		function devolverAcciones($Id_Meta){
-			$this->conexion->executeSQL("select Ac_Descripcion from Acciones where Id_Meta=$Id_Meta");
+			$this->conexion->executeSQL("select Ac_Descripcion,Id_Accion from Acciones where Id_Meta=$Id_Meta order by Id_Accion");
 			return $this->conexion->getArray();
 		}
 		// Devuelve datos básicos para la pagina metas-accioes
@@ -454,7 +454,7 @@
 												proc_claves
 												INNER JOIN proc_estrategicos ON proc_estrategicos.Id_Proc_Estrategico = proc_claves.Id_Proc_Estrategico
 											) ON proc_claves.Id_Proc_Clave = metas.Id_Proc_Clave
-										 WHERE proc_estrategicos.Id_Proc_Estrategico ='.$Id_Proc_Estrategico.'');
+										 WHERE proc_estrategicos.Id_Proc_Estrategico ='.$Id_Proc_Estrategico.' ORDER BY	Id_Meta');
 			return $this->conexion->getArray();
 		}
 		// Eliminar Accion
@@ -521,6 +521,11 @@ where Id_Insumo=$id_insumo");
 		// Eliminar Insumos
 		function eliminarInsumo($Id_Insumo){
 			$this->conexion->executeSQL("delete from insumos where Id_Insumo=$Id_Insumo");
+			return $this->conexion->error();
+		}
+		// Devuelve el Id de la meta que corresponda con la descripción dada
+		function devIdMeta($Me_Nombre){
+			$this->conexion->executeSQL("select Id_Meta from metas where Me_Nombre='$Me_Nombre'");
 			return $this->conexion->error();
 		}
 	}

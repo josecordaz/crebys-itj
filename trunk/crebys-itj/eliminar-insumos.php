@@ -40,6 +40,6 @@
 			break;
 		}while(next($_POST));
 		// Redireccionamos
-		header("location: http://$host$uri/insumo.php?mod=1&id_insumo=".$id_insumo."");
+		header("location: http://$host$uri/insumo.php?mod=1&id_insumo=".$id_insumo."#pe");
 	}
 ?>

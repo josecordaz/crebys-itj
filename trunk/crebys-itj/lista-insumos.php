@@ -19,6 +19,13 @@
 
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
+	
+	// Guardamos session cap=1 si no existe get cap
+	if(!isset($_GET['cap']))
+		$_SESSION['cap']=1;
+	else
+		$_SESSION['cap']=$_GET['cap'];
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -88,6 +95,7 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
+        <a name="pe">
         <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -98,7 +106,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/admin-proc.php" class="menu-on">Insumos</a>
+        <a href="/crebys-itj/lista-insumos.php" class="menu-on">Insumos</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -135,7 +143,7 @@
 							$insumos=$proc->devDatosInsumos($i);    	
 						}
 						else
-							echo "<li ><a href='lista-insumos.php?cap=".$i."'><span>".$i."0,000</span></a></li>";	
+							echo "<li ><a href='lista-insumos.php?cap=".$i."#pe'><span>".$i."0,000</span></a></li>";	
 				?>
 	    	</ul>
 		</div>

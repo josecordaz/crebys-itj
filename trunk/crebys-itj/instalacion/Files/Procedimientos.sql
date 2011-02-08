@@ -328,18 +328,19 @@ a	!-- PARTIDAS
 		END WHILE;
 	END;&
 	
-	!-- Eliminar una accion de una meta
+	!-- Eliminar accion de una meta
 	&CREATE PROCEDURE eliminarAccion(IN Id_Met INT,IN Num_Accion INT,OUT error INT)
 	BEGIN
 		DECLARE ban INT default(0);
+		DECLARE cont INT default(0);
 		SET error=0;
 		WHILE ban<Num_Accion DO
-			SET error=error+1;
-			IF(select Id_Meta from Acciones where Id_Accion=error)=Id_Met THEN
+			SET cont=cont+1;
+			IF(select Id_Meta from Acciones where Id_Accion=cont)=Id_Met THEN
 				SET ban=ban+1;
 			END IF;
 		END WHILE;
-		DELETE FROM Acciones WHERE Id_Accion=error;
+		DELETE FROM Acciones WHERE Id_Accion=cont;
 	END;&
 	!-- Agregar una meta al POA de alguien
 

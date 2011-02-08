@@ -95,7 +95,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/poa.php" class="menu-off">POA</a>
+		<a href="/crebys-itj/poa.php#pe" class="menu-off">POA</a>
         &nbsp;
         &nbsp;
         &nbsp;
