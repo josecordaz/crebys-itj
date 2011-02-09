@@ -218,72 +218,66 @@ if(count($metas)!=0){
     	            </div>
         	    </div>
 
-                <input type="button" value="Cargar Insumos" onclick="location='cargar-insumos-poa.php'"/>
-                
-				<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
-            	<br/>
-		    	<div id="tabla-partida2">
-                	<div class="renglon4">
-                        <div class="celda3">Activar</div>                    
-                        <div class="celda3">Nombre</div>
-                        <div class="celda3">Unidad de Medida</div>
-                        <div class="celda3">Precio Unitario</div>
-                        <div class="celda3">Cantidad</div>
-                        <div class="celda3">Subtotal</div>
-                    </div>
-                    <div class="renglon4">
-                        <div class="celda4"><input type="checkbox"/></div>
-                        <div class="celda4">Caja para archivo muerto tamaño oficio</div>
-                        <div class="celda4">Pieza</div>
-                        <div class="celda4">$ 68.00</div>
-                        <div class="celda4">6</div>
-                        <div class="celda4">$408.00</div>
-                    </div>
-                    <div class="renglon5">
-                        <div class="celda4"><input type="checkbox"/></div>
-                        <div class="celda4">Carpeta de 3 argollas</div>
-                        <div class="celda4">Pieza</div>
-                        <div class="celda4">$ 72.00</div>
-                        <div class="celda4">80</div>
-                        <div class="celda4">$5,760.00</div>
-                    </div>
-                    <div class="subtotal2">
-	                    <div class="agregar-insumo">
-              	            <input type="button" value="Agregar"/>
-                        </div>
-        	            Subtotal $ 6,168.00
-                    </div>
-   		        </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            	<div id="info-subtotales">
-                    <div class="subtotal-accion">
-                    	<span class="lineasupcorta">Subtotal Acción 1: $ 18,504.00</span>
-                    </div>
-                    <div class="subtotal-meta">
-                    	<span class="lineasupcorta">Subtotal Meta 1: $ 36,504.00</span>
-                    </div>
-                    <div class="total">
-                    	<span class="lineasupcorta">Total : $ 72,504.00</span>
-                    </div>
+				<?php
+                	if($proc->existenInsumosCargados($_SESSION['nick'],$_SESSION['accion-cargar'])==1){
+					?>
+                    
+<span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
+<br/>
+<div id="tabla-partida2">
+	<div class="renglon4">
+    	<div class="celda3">Activar</div>                    
+        <div class="celda3">Nombre</div>
+            <div class="celda3">Unidad de Medida</div>
+            <div class="celda3">Precio Unitario</div>
+            <div class="celda3">Cantidad</div>
+            <div class="celda3">Subtotal</div>
+        </div>
+        <div class="renglon4">
+            <div class="celda4"><input type="checkbox"/></div>
+            <div class="celda4">Caja para archivo muerto tamaño oficio</div>
+            <div class="celda4">Pieza</div>
+            <div class="celda4">$ 68.00</div>
+            <div class="celda4">6</div>
+            <div class="celda4">$408.00</div>
+        </div>
+        <div class="renglon5">
+            <div class="celda4"><input type="checkbox"/></div>
+            <div class="celda4">Carpeta de 3 argollas</div>
+            <div class="celda4">Pieza</div>
+            <div class="celda4">$ 72.00</div>
+            <div class="celda4">80</div>
+            <div class="celda4">$5,760.00</div>
+        </div>
+        <div class="subtotal2">
+            <div class="agregar-insumo">
+                <input type="button" value="Agregar"/>
+            </div>
+            Subtotal $ 6,168.00
+        </div>
+        <br/>
+        <br/>
+            <div id="info-subtotales">
+                <div class="subtotal-accion">
+                    <span class="lineasupcorta">Subtotal Acción 1: $ 18,504.00</span>
                 </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+                <div class="subtotal-meta">
+                    <span class="lineasupcorta">Subtotal Meta 1: $ 36,504.00</span>
+                </div>
+                <div class="total">
+                    <span class="lineasupcorta">Total : $ 72,504.00</span>
+                </div>
+            </div>
+        <br/>
+</div>
+                                        
+                    <?php
+					}
+				?>
+                <input type="button" value="Cargar Insumos" onclick="location='cargar-insumos-poa.php'"/>
+			                
+			<br/>
+			<br/>
         	</div>
         </div>
 	</div>

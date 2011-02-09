@@ -396,8 +396,17 @@ a	!-- PARTIDAS
 		delete from metas where Id_Meta=Id_Met;
 	END;&
 	
-	
-	
-
+	!-- Guardar los insumos que se contemplaran en el APOA
+	&CREATE PROCEDURE guardarInsumosPOA(IN Id_Accio INT,OUT id_insumo_acci INT)
+	BEGIN
+		DECLARE id_insumo_accio INT default(0);
+		IF(select count(*) from insumos_acciones)=0 THEN
+			SET id_insumo_accio=20;
+		ELSE
+			SET	id_insumo_accio=(select max(Id_Insumo_Accion) from insumos_acciones)+3;
+		END IF;
+		insert into insumos_acciones(Id_Insumo_Accion,Id_Insumo,Id_Accion,Ia_Cantidad) values(id_insumo_accio,0,Id_Accio,0);
+		SET id_insumo_acci=id_insumo_accio;
+	END;&
 	
 	!-- Simpre dejar espacion al final para que no marque error

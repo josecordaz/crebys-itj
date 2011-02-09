@@ -22,7 +22,6 @@
 	
 	if($_GET['cap'])
 		$_SESSION['cap']=$_GET['cap'];
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -92,7 +91,7 @@
 
         <!--Mostramos la opcion Procedimientos-->
         <a name="pe">
-        <a href="/crebys-itj/admin.php" class="menu-off">Inicio</a>
+        <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -158,6 +157,16 @@
             <div id="atajo">
                 Atajo:
                 <?php
+					// Inicializamos la variable que guardará el total de la partida mostrada
+					if(!isset($_GET['cap'])){
+						unset($_SESSION['sub-cap-1']);
+						$_SESSION['sub-cap-1']=0;
+					}
+					else{
+						unset($_SESSION['sub-cap-'.$capitulo]);
+						$_SESSION['sub-cap-'.$capitulo]=0;
+					}
+						
 				    $id_partida=$insumos[0][0];
 					$Pa_Nombre=$insumos[0][6];
 echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-poa.php?cap=".$capitulo."&cip-'+this.value+'='+this.value+'#'+this.value\">";
@@ -187,6 +196,9 @@ echo "<select name='atajos' class='s-corto' onchange=\"location='cargar-insumos-
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
 			echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."#".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+			
+			// Variable para el subtotal de una partida
+			$_SESSION['sub-par-'.$id_partida.'']=0;
 ?>
 
 			<div class="renglon-blanco">
@@ -217,6 +229,11 @@ for($i=0;$i<count($insumos);$i=$i+1){
 			</div>
 <?php
 		}
+		if($_SESSION['sub-par-'.$insumos[$i-1][0].'']!=0){
+			echo "<div class='sub-par'>Subtotal = $".$_SESSION['sub-par-'.$insumos[$i-1][0].'']."</div>";
+			$_SESSION['sub-cap-'.$capitulo.'']+=$_SESSION['sub-par-'.$insumos[$i-1][0].''];
+		}
+			
 		echo "</div>";
 		echo "<div id='tabla-partida-cip'>";
 		if(!isset($_GET['cip-'.$id_partida])&&!isset($_SESSION['cip-'.$id_partida])){
@@ -224,19 +241,22 @@ for($i=0;$i<count($insumos);$i=$i+1){
 		}else{
 			$_SESSION['cip-'.$id_partida]=$id_partida;
 			echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."#".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+			
+		// Inicializamos la variable de la partida en proceso
+		$_SESSION['sub-par-'.$id_partida.'']=0;
 ?>
-						<div class="renglon-blanco">
+			<div class="renglon-blanco">
     			<div class="celda-azul">Agregar</div>
     			<div class="celda-azul">Nombre</div>
 	            <div class="celda-azul">Unidad de Medida</div>
                 <div class="celda-azul">
- 					<div class="tit-cantidades">Cantidades</div>
+					<div class="tit-cantidades">Cantidades</div>
                     <div class="tit-sem">Sem 1</div>
                     <div class="tit-sem">Sem 2</div>
                 </div>
 	            <div class="celda-azul">Precio Unitario</div>
                 <div class="celda-azul">Subtotal</div>
-						</div>
+			</div>
                         <?php
 			}
 		}
@@ -250,21 +270,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
 					echo "</div>";
 					echo "<div class='celda-normal'>".$insumos[$i][2]."</div>";
-					echo "<div class='celda-normal'>";
-						echo "<select class='tit-medida' name='sel-".$insumos[$i][1]."' onchange=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&Un_Medida='+this.value\">";
-							for($e=0;$e<count($unidades_medida);$e++){
-								if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'un_medida']))
-									if($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'un_medida']==$unidades_medida[$e][0])
-								    	echo "<option  value=".$unidades_medida[$e][0]." selected='selected'>".$unidades_medida[$e][0]."</option>";										
-									else
-										echo "<option  value=".$unidades_medida[$e][0].">".$unidades_medida[$e][0]."</option>";
-								elseif($unidades_medida[$e][0]==$insumos[$i][4])
-								    	echo "<option  value=".$insumos[$i][4]." selected='selected'>".$unidades_medida[$e][0]."</option>";
-									else
-										echo "<option  value=".$unidades_medida[$e][0].">".$unidades_medida[$e][0]."</option>";
-							}
-						echo "</select>";
-					echo "</div>";
+					echo "<div class='celda-normal'>".$insumos[$i][4]."</div>";
 					echo "<div class='celda-normal'>";
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1']))
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant1='+this.value\" value=".$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1'].">";
@@ -284,6 +290,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
 						echo "$ ".($subtotal1+$subtotal2)."";
+						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
 			}else{
@@ -295,21 +302,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 							echo "<a name='".$insumos[$i][1]."'><input type='checkbox' onChange=\"location= 'redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."'\"/>";
 					echo "</div>";
 					echo "<div class='celda-normal'>".$insumos[$i][2]."</div>";
-					echo "<div class='celda-normal'>";
-						echo "<select class='tit-medida' name='sel-".$insumos[$i][1]."' onchange=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&Un_Medida='+this.value\">";
-							for($e=0;$e<count($unidades_medida);$e++){
-								if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'un_medida']))
-									if($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'un_medida']==$unidades_medida[$e][0])
-								    	echo "<option  value=".$unidades_medida[$e][0]." selected='selected'>".$unidades_medida[$e][0]."</option>";										
-									else
-										echo "<option  value=".$unidades_medida[$e][0].">".$unidades_medida[$e][0]."</option>";
-								elseif($unidades_medida[$e][0]==$insumos[$i][4])
-								    	echo "<option  value=".$insumos[$i][4]." selected='selected'>".$unidades_medida[$e][0]."</option>";
-									else
-										echo "<option  value=".$unidades_medida[$e][0].">".$unidades_medida[$e][0]."</option>";
-							}
-						echo "</select>";
-					echo "</div>";
+					echo "<div class='celda-normal'>".$insumos[$i][4]."</div>";
 					echo "<div class='celda-normal'>";
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1']))
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant1='+this.value\" value=".$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1'].">";
@@ -329,6 +322,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
 						echo "$ ".($subtotal1+$subtotal2)."";
+						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
 			}
@@ -340,11 +334,26 @@ for($i=0;$i<count($insumos);$i=$i+1){
         <div class="subtotal">
             <div class="agregar-insumo">
 
-                </div>
             </div>
         </div>
         <?php
 		}
+		if($_SESSION['sub-par-'.$insumos[$i-1][0].'']!=0){		
+			echo "<div class='sub-par'>Subtotal = $".$_SESSION['sub-par-'.$insumos[$i-1][0].'']."</div>";
+			$_SESSION['sub-cap-'.$capitulo.'']+=$_SESSION['sub-par-'.$insumos[$i-1][0].''];
+		}
+		
+			
+
+		$total=0;
+		for($i=0;$i<6;$i++)
+			$total+=$_SESSION['sub-cap-'.$i.''];
+			
+		echo "<div class='subcap'>Capitulo ".$capitulo."0,000 = $".$_SESSION['sub-cap-'.$capitulo]."</div>";				
+		echo "<div class='total'>Total= $".$total."</div>";
+
+		
+        echo "</div>";
 		?>
 	</div>
 </div>
@@ -354,7 +363,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 	<div class="centrado">
 		<div id="line-up-cen">    	
             <br/>
-            <input value="Agregar" name="agregar" type="button" onclick="location='poa.php'"/>
+            <input value="Agregar" name="agregar" type="button" onclick="location='guardar-insumos-poa.php'"/>
             <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php#pe'"/>
             <br/>
             <br/>
