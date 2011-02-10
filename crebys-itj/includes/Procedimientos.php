@@ -536,9 +536,12 @@ where Id_Insumo=$id_insumo");
 		// Existen Insumos Cargados()
 		function existenInsumosCargados($Us_Nick,$Id_Accion){
 			$this->conexion->executeSQL("select count(Id_Insumo_Accion) from Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion
-where Us_Nick=$Us_Nick and Insumos_Acciones.Id_Accion=$Id_Accion");
+where Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion");
 
-			return $this->conexion->error();
+			if($this->conexion->error()>0)
+				return 1;
+			else
+				return 0;
 		}
 		// Guardar los insumos seleccionados en el POA 
 		function guardarInsumosPOA($Us_Nick,$Id_Accion,$insumos,$cantidades){
@@ -606,6 +609,27 @@ where Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion");
 			}
 			
 			return "$ ".$incompletos.$numComas.".".$decimales;
+		}
+		// Funcion para determinar los capitulos de quien existen insumos agregados en un POA
+		function partidasCargadas($Us_Nick){
+			$this->conexion->executeSQL("select partidas.Id_Partida
+from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida
+where Us_Nick='$Us_Nick'");
+			return $this->conexion->getArray();
+		}
+		// Función para separar los capitulos 
+		function separarCapitulos($partidas){
+			$capitulo=substr($partidas[0][0],0,1);
+			$capitulos[0]=substr($partidas[0][0],0,1);
+			$id=1;
+			for($i=0;$i<count($partidas);$i++){
+				if(substr($partidas[$i][0],0,1)!=$capitulo){
+					$capitulo=substr($partidas[$i][0],0,1);
+					$capitulos[$id]=substr($partidas[$i][0],0,1);
+					$id++;
+				}
+			}
+			return $capitulos;
 		}
 	}
 ?>
