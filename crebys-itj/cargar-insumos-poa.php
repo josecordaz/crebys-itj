@@ -230,7 +230,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 <?php
 		}
 		if($_SESSION['sub-par-'.$insumos[$i-1][0].'']!=0){
-			echo "<div class='sub-par'>Subtotal = $".$_SESSION['sub-par-'.$insumos[$i-1][0].'']."</div>";
+			echo "<div class='sub-par'>Subtotal = ".$proc->convertirFMoneda($_SESSION['sub-par-'.$insumos[$i-1][0].''])."</div>";
 			$_SESSION['sub-cap-'.$capitulo.'']+=$_SESSION['sub-par-'.$insumos[$i-1][0].''];
 		}
 			
@@ -281,7 +281,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						else
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant2='+this.value\">";
 					echo "</div>";
-					echo "<div class='celda-normal'>$ ".$insumos[$i][5]."</div>";
+					echo "<div class='celda-normal'>".$proc->convertirFMoneda($insumos[$i][5])."</div>";
 					echo "<div class='celda-normal'>";
 						$subtotal1=0;
 						$subtotal2=0;
@@ -289,7 +289,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 							$subtotal1=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1']*$insumos[$i][5];
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
-						echo "$ ".($subtotal1+$subtotal2)."";
+						echo $proc->convertirFMoneda(($subtotal1+$subtotal2));
 						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
@@ -313,7 +313,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						else
 							echo "<input type='text' class='at-corto'/ onblur=\"location='redir-guardar-variables.php?id_insumo=".$insumos[$i][1]."&cant2='+this.value\">";
 					echo "</div>";
-					echo "<div class='celda-normal'>$ ".$insumos[$i][5]."</div>";
+					echo "<div class='celda-normal'>".$proc->convertirFMoneda($insumos[$i][5])."</div>";
 					echo "<div class='celda-normal'>";
 						$subtotal1=0;
 						$subtotal2=0;
@@ -321,7 +321,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
 							$subtotal1=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant1']*$insumos[$i][5];
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
-						echo "$ ".($subtotal1+$subtotal2)."";
+						echo $proc->convertirFMoneda(($subtotal1+$subtotal2));
 						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
@@ -339,7 +339,7 @@ for($i=0;$i<count($insumos);$i=$i+1){
         <?php
 		}
 		if($_SESSION['sub-par-'.$insumos[$i-1][0].'']!=0){		
-			echo "<div class='sub-par'>Subtotal = $".$_SESSION['sub-par-'.$insumos[$i-1][0].'']."</div>";
+			echo "<div class='sub-par'>Subtotal = ".$proc->convertirFMoneda($_SESSION['sub-par-'.$insumos[$i-1][0].''])."</div>";
 			$_SESSION['sub-cap-'.$capitulo.'']+=$_SESSION['sub-par-'.$insumos[$i-1][0].''];
 		}
 		
@@ -349,8 +349,8 @@ for($i=0;$i<count($insumos);$i=$i+1){
 		for($i=0;$i<6;$i++)
 			$total+=$_SESSION['sub-cap-'.$i.''];
 			
-		echo "<div class='subcap'>Capitulo ".$capitulo."0,000 = $".$_SESSION['sub-cap-'.$capitulo]."</div>";				
-		echo "<div class='total'>Total= $".$total."</div>";
+		echo "<div class='subcap'>Capitulo ".$capitulo."0,000 = ".$proc->convertirFMoneda($_SESSION['sub-cap-'.$capitulo])."</div>";				
+		echo "<div class='total'>Total= ".$proc->convertirFMoneda($total)."</div>";
 
 		
         echo "</div>";

@@ -533,31 +533,79 @@ where Id_Insumo=$id_insumo");
 			$this->conexion->executeSQL("call eliminarMeta($Id_Meta,@error); select @error");
 			return $this->conexion->error();
 		}
-		// Guardar los insumos seleccionados en el POA 
-		function guardarInsumosPOA($Id_Accion,$insumos,$cantidades){
-			$consulta="";
-			for($i=0;$i<count($insumos);$i++){
-				// Creamos un registro en blanco en Insumos_Acciones
-				$this->conexion->executeSQL("call guardarInsumosPOA(".$Id_Accion.",@error); select @error");
-				// Guardar Id_Insumo_Accion
-				$Id_Insumo_Accion=$this->conexion->error();
-				// Guardamos la consulta de actualización
-				$consulta.="update insumos_acciones set Id_Insumo=".$insumos[$i].",Ia_Cantidad=".$cantidades[$i]." where Id_Insumo_Accion=".$Id_Insumo_Accion." and Id_Accion=$Id_Accion; ";
-			}
-			// Ejecutamos la consulta							
-			$this->conexion->executeSQL($consulta);
-			// Retornamos el posibles error
-			return $this->conexion->erroraiz();
-		}
-		// Procedimiento para conocer si existen insumos cargados en esta meta y accion correspondiente
+		// Existen Insumos Cargados()
 		function existenInsumosCargados($Us_Nick,$Id_Accion){
-			$this->conexion->executeSQL("select count(Id_Insumo_Accion)
-from Insumos_Acciones inner join(Acciones inner join (Acciones_POA inner join(POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion
+			$this->conexion->executeSQL("select count(Id_Insumo_Accion) from Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion
+where Us_Nick=$Us_Nick and Insumos_Acciones.Id_Accion=$Id_Accion");
+
+			return $this->conexion->error();
+		}
+		// Guardar los insumos seleccionados en el POA 
+		function guardarInsumosPOA($Us_Nick,$Id_Accion,$insumos,$cantidades){
+			$this->conexion->executeSQL("delete Insumos_Acciones.*
+			from Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion
 where Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion");
-			if($this->conexion->error()>0)
+
+			
+			$error="bien";
+			for($i=0;$i<count($insumos);$i++){
+				$this->conexion->executeSQL("call guardarInsumosPOA('$Us_Nick',".$insumos[$i].",".$Id_Accion.",".$cantidades[$i].",@error); select @error;");
+				if($this->conexion->error()!=1&&$error=="bien")
+					$error=$this->conexion->erroraiz();
+			}
+			if($error="bien")
 				return 1;
 			else
-				return 0;
+				return $error;
+		}
+		// Prodedimiento para dar formato tipo moneda
+		function convertirFMoneda($cadena){
+			// Guardamos la cadena redondeando los decimales a 2
+			$subCadena=sprintf("%.2f",$cadena);
+	
+			// Encontramos la posicion del punto
+			$posPunto=strpos($subCadena,'.');
+			
+			// Variable para los decimales
+			$decimales=substr($subCadena,$posPunto+1,2);
+			
+			// Parte entera
+			$enteros=substr($subCadena,0,$posPunto);
+			
+			// Guardamos el primer grupo incompleto a 3 
+				//por ejemplo 
+					//3 de 3,456
+					//34 de 34,567
+					 
+			// Calculamos el residuo de primer grupo sobre 3 
+			$residuo=strlen($enteros)%3;
+			$incompletos="";
+			switch ($residuo){
+				case 0:
+					$incompletos="";
+					break;
+				case 1:
+					$incompletos=substr($enteros,0,1);
+					if(floor(strlen($enteros)/3)>0)
+						$incompletos.=",";
+					break;
+				case 2:
+					$incompletos=substr($enteros,0,2);
+					if(floor(strlen($enteros)/3)>0)
+						$incompletos.=",";
+					break;
+	
+			}
+			
+			// Cilo para dar comillas a las tercias de enteros
+			$numComas="";
+			for($i=0;$i<floor(strlen($enteros)/3);$i++){
+				$numComas=$numComas.substr($enteros,$residuo+(3*$i),3);
+				if(($i+1)<floor((strlen($enteros)/3)))
+					$numComas=$numComas.",";
+			}
+			
+			return "$ ".$incompletos.$numComas.".".$decimales;
 		}
 	}
 ?>
