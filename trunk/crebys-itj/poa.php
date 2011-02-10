@@ -218,9 +218,16 @@ if(count($metas)!=0){
     	            </div>
         	    </div>
 
-				<?php
-                	if($proc->existenInsumosCargados($_SESSION['nick'],$_SESSION['accion-cargar'])==1){
-					?>
+			<?php
+					//echo "nick:= $_SESSION[nick]"."  - accion".$_SESSION['accion-cargar']."<br>";
+                	if($proc->existenInsumosCargados($_SESSION['nick'],$_SESSION['accion-cargar'])>0){
+						$partidas=$proc->partidasCargadas($_SESSION['nick']);
+						for($i=0;$i<count($partidas);$i++)
+							echo " partida ".$partidas[$i][0]."<br>";
+						echo "<p>";
+						$proc->separarCapitulos($partidas);
+
+?>
                     
 <span class="label-partida"><a class="label-partida" href="#">[+] Partida 2101:</a></span>
 <br/>
