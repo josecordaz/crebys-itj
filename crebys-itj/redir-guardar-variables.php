@@ -31,6 +31,8 @@
 	echo "segundo parametro:=["."".$_GET["id_insumo"]."]<br>";
 	echo "tercero parametro:=[".'id_insumo'."]<br>";*/
 	
+	krsort($_SESSION);
+	
 	if(isset($_SESSION['cap']))
 		header("location:cargar-insumos-poa.php?cap=".$_SESSION['cap']."#".$_GET['id_insumo']);
 	else

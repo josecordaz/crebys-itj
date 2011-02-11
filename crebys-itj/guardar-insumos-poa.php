@@ -11,7 +11,20 @@
 //Guardar los insumos seleccionados en cargar-insumos-poa.php
 	
 	// Ordenamos el arreglo se $_SESSION por clave
-	krsort($_SESSION);
+	//krsort($_SESSION);
+	//echo " guardar-insumos-poa.php<p>";
+	
+	// Mostramos todas las variables de session;
+	/*do{
+		echo "".key($_SESSION)."<br>";
+	}while(next($_SESSION));
+	echo "<br>";
+	
+	header("location: pruebacss/mvs.php");
+	exit();*/
+	
+	
+	//$_SESSION;
 	
 	// Inicializamos el indice de los arreglos además de estos
 	$i=0;	
@@ -19,11 +32,22 @@
 	$insumos=array();
 	$cantidades=array();
 	
-	// Iniciamos ciclo
+	//echo "count session ".count($_SESSION)."<br>";
+	//echo "session accion-cargar ".$_SESSION['accion-cargar']."<br>";
+	
+	/*krsort($_SESSION);
+	
 	do{
+		echo "".key($_SESSION)."<br>";
+	}while(next($_SESSION));
+	echo "<br>";*/
+	
+	// Iniciamos ciclo
+	do{ 
 		// Inicializamos la bandera
 
 		// Aquí solo guardaremos las variables de session que tengan el formato de Accion-Insumo-Cantidad
+		//echo "Se compara esto [".key($_SESSION)."] con esto [".$_SESSION['accion-cargar']."]<br>";
 		if(substr(key($_SESSION),0,strlen($_SESSION['accion-cargar']))==$_SESSION['accion-cargar']){
 			$ban=true;
 			//Si ban es igual a false significa que ya se habia guardado el insumo
@@ -34,7 +58,7 @@
 next($_SESSION);
 			$ban=true;
 			
-			$cantidades[$i]=current($_SESSION);
+			$cantidades[$i][1]=current($_SESSION);
 			//echo "Se guardó la siguiente cantidad individual correctamente = ".current($_SESSION)."<br>";
 next($_SESSION);
 			
@@ -46,9 +70,9 @@ next($_SESSION);
 				//echo "Se guardó la siguiente id_insumo correctamente en el if = ".current($_SESSION)."<br>";
 				$insumos[$i+1]=current($_SESSION);
 				$ban=false;
-				prev($_SESSION);
+prev($_SESSION);
 			}else{
-				$cantidades[$i]+=current($_SESSION);
+				$cantidades[$i][0]=current($_SESSION);
 				//echo "Se guardó la siguiente cantidad mas la individual = ".current($_SESSION)."<br>";
 			}
 			$i++;
@@ -58,11 +82,13 @@ next($_SESSION);
 	
 	
 	/*for($i=0;$i<count($insumos);$i++)
-		echo $insumos[$i]."=".$cantidades[$i]."<br>";*/
+		echo $insumos[$i]."=[".$cantidades[$i][0]."][".$cantidades[$i][1]."]<br>";*/
 		
 	
 	// Ejecutamos el procedimiento para saber el Id_Insumo_Accion
 	$error=$proc->guardarInsumosPOA($_SESSION['nick'],$_SESSION['accion-cargar'],$insumos,$cantidades);
+	
+	//echo $error;
 	
 	// Redireccionamos a poa.php
 	header('location: poa.php#pe')

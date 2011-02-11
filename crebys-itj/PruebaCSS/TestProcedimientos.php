@@ -14,12 +14,12 @@
 	$procedimiento=new Procedimientos($conexion);
 	
 	//Probamos los procedimientos
-	$procedimiento->modProcEst(60,"Vinculacion");
-	echo $procedimiento->mostrarError();
-		
-	//Terminamos la conexión
-	$conexion->desconectar();
+	$arreglo=$procedimiento->calcularTotal('sonykarl');
 	
-
+	$total=0;
+	for($i=0;$i<count($arreglo);$i++)
+		$total+=$arreglo[$i][0]*$arreglo[$i][1];
+		
+	echo "Total:=[".$procedimiento->convertirFMoneda($total)."]";
 	
 	?>
