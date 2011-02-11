@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-01-2011 a las 14:53:11
+-- Tiempo de generación: 11-02-2011 a las 15:02:53
 -- Versión del servidor: 5.1.41
 -- Versión de PHP: 5.3.1
 
@@ -37,9 +37,16 @@ CREATE TABLE IF NOT EXISTS `acciones` (
 --
 
 INSERT INTO `acciones` (`Id_Accion`, `Id_Meta`, `Ac_Descripcion`) VALUES
-(1, 1, 'Integrar las carpetas de autoevaluación de los programas académicos acreditables.'),
-(3, 1, 'Definir líneas de investigación pertinentes al desarrollo económico regional y al avance científico tecnológico.'),
-(6, 2, 'Gestionar los recursos para cubrir las actividades docentes de los profesores que se incorporen a estudios de posgrado.');
+(50, 1, 'Integrar las carpetas de autoevaluación de los programas académicos acreditables.'),
+(74, 7, 'Incentivar la participación de los profesores e investigadores al trabajo de los cuerpos académicos.'),
+(58, 1, 'Definir líneas de investigación pertinentes al desarrollo económico regional y al avance científico tecnológico.'),
+(202, 9, 'carta vez'),
+(178, 9, 'acción 3 para la meta 9'),
+(154, 2, 'incentivo'),
+(210, 5, 'primera accion de meta 5'),
+(146, 2, 'Probamos el enlace'),
+(218, 19, 'No se nada de nada'),
+(130, 2, 'Esta es la buena');
 
 -- --------------------------------------------------------
 
@@ -56,6 +63,11 @@ CREATE TABLE IF NOT EXISTS `acciones_poa` (
 -- Volcar la base de datos para la tabla `acciones_poa`
 --
 
+INSERT INTO `acciones_poa` (`Id_Accion`, `Id_POA`) VALUES
+(74, 10),
+(58, 10),
+(50, 10),
+(50, 15);
 
 -- --------------------------------------------------------
 
@@ -132,7 +144,8 @@ CREATE TABLE IF NOT EXISTS `disminuciones` (
   `Id_Requisicion` int(11) NOT NULL,
   `Di_Disminucion` int(11) NOT NULL,
   `Di_Precio` double NOT NULL,
-  `Di_Justificacion` varchar(150) NOT NULL
+  `Di_Justificacion` varchar(150) NOT NULL,
+  `Di_Contemplado` bit(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -160,12 +173,30 @@ CREATE TABLE IF NOT EXISTS `insumos` (
 --
 
 INSERT INTO `insumos` (`Id_Insumo`, `In_Nombre`, `In_Precio`, `Id_Unidad_Medida`, `Id_Partida`) VALUES
-(203, 'Lápiz', 300, 0, 21101),
-(202, 'Elemento 1', 400, 0, 13404),
-(201, 'Fumigación', 400, 0, 12301),
-(200, 'Curso de Actualización', 200, 0, 12101),
-(205, 'Franela', 15, 0, 21601),
-(475, 'Elemento 2', 34, 0, 12101);
+(203, 'Lápiz', 50, 100, 21101),
+(201, 'Fumigación', 400, 111, 12301),
+(200, 'Curso de Actualización', 200, 119, 12101),
+(483, 'Numer One', 3, 119, 13404),
+(491, 'Impuesto Uno', 657, 102, 32654),
+(479, 'Hojas', 12, 175, 21101),
+(487, 'Engrapadora', 65, 102, 21101),
+(495, 'Desconocido Uno', 657, 102, 48653),
+(499, 'Microsoft Office', 32000, 167, 50764),
+(503, 'Insumo Uno', 456, 151, 12101),
+(507, 'Insumo Dos', 765, 111, 12101),
+(511, 'Insumo Tres', 23, 143, 12101),
+(515, 'Insumo Cuatro', 34, 103, 12101),
+(523, 'Insumo Seis', 67, 103, 12101),
+(527, 'Insumo Siete', 12, 135, 12101),
+(535, 'sony', 67, 119, 12101),
+(539, 'Insumo Diez', 98, 111, 12101),
+(543, 'Insumo Primero', 98, 111, 12301),
+(547, 'Insumo Segundo', 23, 102, 12301),
+(551, 'Elemento Dos', 76, 143, 12301),
+(555, 'Elemento Dosony', 76, 102, 12301),
+(559, 'Mantenimiento', 2000, 159, 12301),
+(563, 'ddd', 4000, 167, 12301),
+(571, 'bbb', 765, 167, 12301);
 
 -- --------------------------------------------------------
 
@@ -177,8 +208,8 @@ CREATE TABLE IF NOT EXISTS `insumos_acciones` (
   `Id_Insumo_Accion` int(11) NOT NULL,
   `Id_Insumo` int(11) NOT NULL,
   `Id_Accion` int(11) NOT NULL,
-  `Ia_Cantidad` int(11) NOT NULL,
-  `Ia_Contemplado` bit(1) NOT NULL,
+  `Ia_Cantidad1` int(11) NOT NULL,
+  `Ia_Cantidad2` int(11) NOT NULL,
   PRIMARY KEY (`Id_Insumo_Accion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -186,8 +217,13 @@ CREATE TABLE IF NOT EXISTS `insumos_acciones` (
 -- Volcar la base de datos para la tabla `insumos_acciones`
 --
 
-INSERT INTO `insumos_acciones` (`Id_Insumo_Accion`, `Id_Insumo`, `Id_Accion`, `Ia_Cantidad`, `Ia_Contemplado`) VALUES
-(877, 50, 852, 76, b'0');
+INSERT INTO `insumos_acciones` (`Id_Insumo_Accion`, `Id_Insumo`, `Id_Accion`, `Ia_Cantidad1`, `Ia_Cantidad2`) VALUES
+(35, 200, 50, 0, 0),
+(32, 479, 50, 0, 0),
+(29, 499, 50, 0, 0),
+(26, 515, 50, 0, 0),
+(23, 539, 50, 0, 0),
+(20, 563, 50, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -197,7 +233,7 @@ INSERT INTO `insumos_acciones` (`Id_Insumo_Accion`, `Id_Insumo`, `Id_Accion`, `I
 
 CREATE TABLE IF NOT EXISTS `medidas` (
   `Id_Unidad_Medida` int(11) NOT NULL,
-  `Un_Nombre` varchar(20) NOT NULL,
+  `Un_Nombre` varchar(32) NOT NULL,
   PRIMARY KEY (`Id_Unidad_Medida`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -214,7 +250,11 @@ INSERT INTO `medidas` (`Id_Unidad_Medida`, `Un_Nombre`) VALUES
 (119, 'Bola de 4m'),
 (127, 'Caja con 40 Piezas'),
 (135, 'Paquete'),
-(143, 'Costal');
+(143, 'Costal'),
+(151, 'Paquete con 500 hojas'),
+(159, 'Día'),
+(167, 'Licencia'),
+(175, 'Paquete con 100 piezas');
 
 -- --------------------------------------------------------
 
@@ -240,18 +280,21 @@ INSERT INTO `metas` (`Id_Meta`, `Id_Proc_Clave`, `Me_Nombre`, `Me_Unidad_M`, `Me
 (2, 605, 'Lograr al 2012 que el 30% de los profesores de tiempo completo cuenten con estudios de posgrado.', 'Profesores de tiempo completo que cuenten con estudios de posgrado', 22),
 (3, 600, 'Alcanzar en el 2012, una eficiencia terminal (Índice de Egreso) del 70% en los programas educativos de licenciatura.', 'Índice de Egreso', 238),
 (4, 605, 'Para el 2012, incrementar del 0 al 6 los profesores de tiempo completo con reconocimiento del perfil deseable.', 'Profesor', 1),
-(5, 650, 'Para el 2012, el Instituto mantiene certificado su proceso educativo, conforme a la norma ISO 9001:2008. y su certificación en la Norma ISO 14001:2004', 'Certificado', 2),
+(5, 650, 'Esta es la descripción de la meta 5 del proceso estratégico calidad 2', 'Certificado', 2),
+(17, 655, 'tres', 'uno', 34),
 (6, 605, 'Para el 2012 incrementar del 84.37% al 94% de profesores que participan en eventos de formación docente y profesional', 'Profesores participando en eventos de formación docente y profesional', 108),
 (7, 620, 'Para el 2012 lograr que el Instituto Tecnológico cuente con 1 Cuerpo Académico consolidado.', 'Cuerpo Académico', 0),
 (8, 675, 'Nada de descripción', 'Ahora si tengo medida', 12),
-(9, 660, 'Lograr al 2012, incrementar del 22% al 31% los estudiantes del Instituto que son apoyados en el PRONABES.', 'Alumno Becado ', 400),
+(18, 665, 'dos', 'uno', 34),
+(19, 675, 'cuatro', 'tres', 45),
+(9, 645, 'descripción de la meta de aseguramiento de la calidad', 'medida de aseguramiento de la calidad', 76),
 (10, 600, 'Lograr para el 2012, incrementar de 1706 a 1900 estudiantes la matrícula de licenciatura.', 'Estudiantes en modalidad escolarizada', 1750),
 (11, 600, 'Para el 2012, incrementar a 50 estudiantes la matrícula en programas no presenciales.', 'Alumnos', 0),
-(12, 605, 'Alcanzar en el 2012, una matrícula de 15 estudiantes en los programas de posgrado.', 'Estudiantes', 0),
 (13, 635, 'Lograr para el 2012, se tengan 40 computadoras conectadas en internet  en el Centro de Información.', 'Computadora ', 10),
 (14, 635, 'Incrementar la Infraestructura en Cómputo para lograr un indicador de 10 estudiantes por computadora.', 'Computadora', 15),
-(15, 635, 'Para el 2012, incrementar del 18% al 45% las aulas equipadas con TIC´s.', 'Aula Equipada', 17),
-(16, 635, 'Lograr que se tengan 200 computadoras conectadas en internet II  en el instituto.', 'Computadoras', 144);
+(16, 635, 'Lograr que se tengan 200 computadoras conectadas en internet II  en el instituto.', 'Computadoras', 144),
+(20, 680, 'seis', 'cinco', 45),
+(21, 665, 'ocho', 'siete', 65);
 
 -- --------------------------------------------------------
 
@@ -274,7 +317,10 @@ INSERT INTO `partidas` (`Id_Partida`, `Pa_Nombre`) VALUES
 (12301, 'Retribuciones por servicios de carácter social'),
 (13404, 'Compensaciones por Servicios Eventuales'),
 (21101, 'Materiales y Útiles de Oficina'),
-(21601, 'Material de Limpieza');
+(21601, 'Material de Limpieza'),
+(32654, 'Otros Impuesto y Derechos'),
+(48653, 'Desconocida'),
+(50764, 'Licencias Informaticas');
 
 -- --------------------------------------------------------
 
@@ -293,6 +339,9 @@ CREATE TABLE IF NOT EXISTS `poa` (
 -- Volcar la base de datos para la tabla `poa`
 --
 
+INSERT INTO `poa` (`Id_Poa`, `Id_Usuario`, `Po_Fecha`) VALUES
+(15, 723, '2011-02-01 09:46:50'),
+(10, 726, '2011-01-24 15:23:11');
 
 -- --------------------------------------------------------
 
@@ -333,7 +382,6 @@ INSERT INTO `proc_claves` (`Id_Proc_Clave`, `Id_Proc_Estrategico`, `Pc_Nombre`, 
 (655, 4, 'Capacitación y Desarrollo', 2, 0, 3, 5, 'E008', 43, '2035E00843'),
 (660, 4, 'Servicios Escolares', 2, 0, 3, 5, 'E008', 44, '2035E00844'),
 (665, 5, 'Administración de Recursos Financieros', 2, 0, 3, 5, 'E008', 51, '2035E00851'),
-(670, 5, 'Administración de Recursos Financieros', 2, 0, 3, 5, 'E008', 52, '2035E00852'),
 (675, 5, 'Apoyo Jurídico', 2, 0, 3, 5, 'E008', 53, '2035E00853'),
 (680, 5, 'Administración de Recursos Materiales y Servicios', 2, 0, 3, 5, 'E008', 54, '2035E00854');
 

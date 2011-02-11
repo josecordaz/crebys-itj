@@ -397,7 +397,7 @@ a	!-- PARTIDAS
 	END;&
 	
 	!-- Guardar los insumos que se contemplaran en el APOA
-	&CREATE PROCEDURE guardarInsumosPOA(IN Us_Nic VARCHAR(20),IN Id_Insum INT,IN Id_Accio INT,IN Ia_Cantida INT,OUT error INT)
+	&CREATE PROCEDURE guardarInsumosPOA(IN Us_Nic VARCHAR(20),IN Id_Insum INT,IN Id_Accio INT,IN Ia_Cantid1 INT,IN Ia_Cantid2 INT,OUT error INT)
 	BEGIN
 		DECLARE id_insumo_accio INT default(0);
 		SET error=1;
@@ -409,11 +409,11 @@ a	!-- PARTIDAS
 		END IF;
 		
 		IF(select count(*) from Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion where Insumos_Acciones.Id_Accion=Id_Accio and Insumos_Acciones.Id_Insumo=Id_Insum and Us_Nick=Us_Nic)=0 THEN
-			insert into insumos_acciones(Id_Insumo_Accion,Id_Insumo,Id_Accion,Ia_Cantidad) values(id_insumo_accio,Id_Insum,Id_Accio,Ia_Cantida);
+			insert into insumos_acciones(Id_Insumo_Accion,Id_Insumo,Id_Accion,Ia_Cantidad1,Ia_Cantidad2) values(id_insumo_accio,Id_Insum,Id_Accio,Ia_Cantid1,Ia_Cantid2);
 		ELSE
 			BEGIN
 			 SET id_insumo_accio=(select Id_Insumo_Accion from Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion where Insumos_Acciones.Id_Accion=Id_Accio and Insumos_Acciones.Id_Insumo=Id_Insum and Us_Nick=Us_Nic);
-			 update insumos_acciones set Ia_Cantidad=Ia_Cantida where Id_Insumo_Accion=id_insumo_accio;
+			 update insumos_acciones set Ia_Cantidad1=Ia_Cantid1 and Ia_Cantidad2=Ia_Cantid2 where Id_Insumo_Accion=id_insumo_accio;
 			END;
 		END IF;
 	END;&
