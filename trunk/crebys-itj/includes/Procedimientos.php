@@ -650,5 +650,16 @@ where Us_Nick='$Us_Nick' order by partidas.Id_Partida");
 			
 			return $this->conexion->getArray();
 		}
+		function calcularTotalMeta($Us_Nick,$Id_Meta){
+			$this->conexion->executeSQL("select Insumos.In_Precio,Ia_Cantidad1,Ia_Cantidad2,Insumos_Acciones.Id_Insumo from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Us_Nick='$Us_Nick' and Acciones.Id_Meta=$Id_Meta");
+			
+			$totales=$this->conexion->getArray();
+			
+			$total=0;
+			for($i=0;$i<count($totales);$i++){	
+				$total+=$totales[$i][0]*($totales[$i][1]+$totales[$i][2]);
+			}
+			return $total;
+		}
 	}
 ?>
