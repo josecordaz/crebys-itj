@@ -20,10 +20,7 @@
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 	
-	if(isset($_GET['meta']))
-		$_SESSION['meta']=$_GET['meta'];
-	else 
-		$_SESSION['meta']=1
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -95,7 +92,6 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-       	<a name="pe"/>
         <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -125,6 +121,7 @@
                                             
 
 	<div id="titulo">POA</div>     
+	<a name="pe"/>
     <div class="sub-titulo">Programa Operativo Anual</div>
 	<div id="area">
  	<?php
@@ -135,12 +132,15 @@ if(count($metas)!=0){
     <div class="menup">
 	<ul>
     	<?php
-
+			if(isset($_GET['meta']))
+				$_SESSION['meta']=$_GET['meta'];
+			else 
+				$_SESSION['meta']=$metas[0][0];
         	for($i=0;$i<count($metas);$i++){
 				if($metas[$i][0]==$_GET['meta']||($i==0&&(!isset($_GET['meta'])))){
 					echo "<li class='current'><a href='#'><span>Meta ".$metas[$i][0]."</span></a></li>";
 					if(($i==0&&(!isset($_GET['meta']))))
-						$tmp_meta=$metas[$i][0];
+						$tmp_meta=$metas[$i][0];	
 				}
 				else
 					echo "<li ><a href='poa.php?meta=".$metas[$i][0]."#pe'><span>M ".$metas[$i][0]."</span></a></li>";
@@ -207,7 +207,6 @@ if(count($metas)!=0){
 							else
 					    	    echo "<li ><a href='poa.php?meta=".$_SESSION['meta']."&accion=".($i+1)."#pe'><span>A - ".$proc->numAccion($accionesMeta[$i][1])."</span></a></li>";
 					?>
-                    <span>[+] Expandir todo</span>
 			    </ul>
 			</div>
             <div style="clear:both"></div>
@@ -242,6 +241,7 @@ if(count($metas)!=0){
     <?php                
 		// Imprimimos los insumos organizados por partidas
 		for($i=0;$i<count($partidas);$i++){
+			$subtotal_capitulo=0;
 			// Cargamos las partidas que correspondan con el capitulo seleccionado
 			if(substr($partidas[$i][0],0,1)==$_GET['cap']||(!isset($_GET['cap'])&&substr($partidas[$i][0],0,1)==1)){
 			echo "<div id=\"tabla-partida-poa\">";
@@ -273,6 +273,7 @@ if(count($metas)!=0){
 <?php
 				// Ciclo para imprimir los insumos de este partida
 				for($e=0;$e<count($insumos);$e++){
+					$subtotal_partida=0;
 					if($e%2==0){
 						echo "<div class=\"renglon-blanco-corto\">";
 							echo "<div class=\"celda4\">".$insumos[$e][0]."</div>";
@@ -280,6 +281,7 @@ if(count($metas)!=0){
 							echo "<div class=\"celda4\">".$proc->convertirFMoneda($insumos[$e][2])."</div>";
 							echo "<div class=\"celda4\">".($insumos[$e][3]+$insumos[$e][4])."</div>";					
 							echo "<div class=\"celda4\">".$proc->convertirFMoneda(($insumos[$e][4]+$insumos[$e][3])*$insumos[$e][2])."</div>";						
+							$subtotal_partida+=($insumos[$e][4]+$insumos[$e][3])*$insumos[$e][2];
 						echo "</div>";
 					}else{
 						echo "<div class=\"renglon-morado-corto\">";
@@ -288,10 +290,12 @@ if(count($metas)!=0){
 							echo "<div class=\"celda4\">".$proc->convertirFMoneda($insumos[$e][2])."</div>";
 							echo "<div class=\"celda4\">".($insumos[$e][3]+$insumos[$e][4])."</div>";					
 							echo "<div class=\"celda4\">".$proc->convertirFMoneda(($insumos[$e][4]+$insumos[$e][3])*$insumos[$e][2])."</div>";						
+							$subtotal_partida+=($insumos[$e][4]+$insumos[$e][3])*$insumos[$e][2];
 						echo "</div>";
 					}
 				}
-				echo "<div class=\"sub-par\">".$proc->convertirFMoneda($_SESSION['sub-par-'.$partidas[$i][0]])."</div>";
+				echo "<div class=\"sub-par\">".$proc->convertirFMoneda($subtotal_partida)."</div>";
+				$subtotal_capitulo+=$subtotal_partida;
 		echo "</div>";
 	}
 }
@@ -305,11 +309,18 @@ if(count($metas)!=0){
         <br/>
             <div id="info-subtotales"><?php
 				if(isset($_GET['cap']))
-       				echo "<div class='subcap'>Capitulo ".$_GET['cap']."0,000 = ".$proc->convertirFMoneda($_SESSION['sub-cap-'.$_GET['cap']])."</div>";				
+       				echo "<div class='subcap'>Capitulo ".$_GET['cap']."0,000 = ".$proc->convertirFMoneda($subtotal_capitulo)."</div>";				
 				else
-					echo "<div class='subcap'>Capitulo ".$capitulos[0][0]."0,000 = ".$proc->convertirFMoneda($_SESSION['sub-cap-'.$capitulos[0][0]])."</div>";				
+					echo "<div class='subcap'>Capitulo ".$capitulos[0][0]."0,000 = ".$proc->convertirFMoneda($subtotal_capitulo)."</div>";				
 			?>
-            
+            <div class="totalmeta">
+            Total Meta 
+            <?php
+				echo $_SESSION['meta'];
+				echo ": ";
+            	echo $proc->convertirFMoneda($proc->calcularTotalMeta($_SESSION['nick'],$_SESSION['meta']));
+			?>
+            </div>
                 <div class="total">
                     <span >Total : 
 <?php       
