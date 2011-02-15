@@ -21,7 +21,7 @@
 	font-size: 13px;
 	background-color: rgb(226, 229, 253);
 	float: left;
-	width: 100%;
+	width: 882px;
 	border-bottom: 2px solid rgb(7, 40, 252);
 	margin-top: 0.3em;
 	margin-bottom: 0em;
@@ -79,7 +79,7 @@
 	font-size: 13px;
 	background-color: rgb(255, 255, 255);
 	float: left;
-	width: 68.3em;
+	width: 888px;
 	border-bottom: 2px solid rgb(0, 0, 151);
 }
 .menup UL
@@ -358,7 +358,7 @@ BODY
 	border-left: 2px solid rgb(0, 0, 152);
 	float: left;
 	height: auto;
-	width: 100%;
+	width: 884px;
 }
 #info-meta
 {

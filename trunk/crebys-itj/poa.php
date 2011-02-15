@@ -20,8 +20,15 @@
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 	
+	// Eliminamos las variables sub-par
+	$arreglosp=$_SESSION;
 
-
+	do{
+		if(substr(key($arreglosp),0,7)=='sub-par'){
+			$indice=key($arreglosp);
+			unset($_SESSION[$indice]);
+		}
+	}while(next($arreglosp))
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -101,9 +108,6 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        
-        &nbsp;
-        &nbsp;
         &nbsp;
 		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesi&oacute;n</a>
 		
@@ -126,7 +130,7 @@
 	<div id="area">
  	<?php
 				$metas=$proc->devolverMetasPOA($_SESSION['nick']);
-			//echo ":::[".$_SESSION['consulta']."]:::";
+				//echo ":::[".$_SESSION['consulta']."]:::";
 if(count($metas)!=0){    
 	?>   
     <div class="menup">
@@ -148,8 +152,7 @@ if(count($metas)!=0){
 		?>
     </ul>
 	</div>
-	<div style="clear:both"></div>
-    <div id="divmeta">    
+	    <div id="divmeta">    
     	<div id="info-meta2">
         	<div class="detalle-meta">
            		<span class="label-detalle">Departamento:</span> 
@@ -221,7 +224,8 @@ if(count($metas)!=0){
 					//echo "nick:= $_SESSION[nick]"."  - accion".$_SESSION['accion-cargar']."<br>";
                 	if($proc->existenInsumosCargados($_SESSION['nick'],$_SESSION['accion-cargar'])>0){
 						// Obtenemos las partidas en Insumos_Acciones
-						$partidas=$proc->partidasCargadas($_SESSION['nick']);
+						$partidas=$proc->partidasCargadas($_SESSION['nick'],$_SESSION['meta'],$_SESSION['accion-cargar']);
+						//echo "[".$_SESSION['consulta']."]<br>";
 						// Extraemos los capitulos de las partidas
 						$capitulos=$proc->separarCapitulos($partidas);
 						// Ordenamos los capitulos
@@ -231,27 +235,35 @@ if(count($metas)!=0){
 		 	<ul>
             	<?php
 					for($i=0;$i<count($capitulos);$i++)
-						if((isset($_GET['cap'])&&$_GET['cap']==$capitulos[$i])||(!isset($_GET['cap'])&&$i==0))
+						if((isset($_GET['cap'])&&$_GET['cap']==$capitulos[$i])||(!isset($_GET['cap'])&&$i==0)){
 							echo "<li class='current-partida'><a href'#'><span>".$capitulos[$i]."0,000</span></a></li>";
+							$resp_cap=$capitulos[$i];
+						}
 						else
-							echo "<li ><a href='poa.php?cap=".$capitulos[$i]."#pe'><span>".$capitulos[$i]."0,000</span></a></li>";	
+							echo "<li ><a href='poa.php?cap=".$capitulos[$i]."&accion=".$proc->NumAccion($_SESSION['accion-cargar'])."&meta=".$_SESSION['meta']."#pe'><span>".$capitulos[$i]."0,000</span></a></li>";	
 				?>
 	    	</ul>
 		</div>
     <?php                
 		// Imprimimos los insumos organizados por partidas
+		$subtotal_capitulo=0;
 		for($i=0;$i<count($partidas);$i++){
-			$subtotal_capitulo=0;
+			
+			// Obtenemos los insumos cargados de esta partida
+			//echo "Capitulo=".$resp_cap."<br>";
+			$insumos=$proc->devolverInsumosCargados($partidas[$i][0],$_SESSION['nick'],$_SESSION['accion-cargar']);
+			
 			// Cargamos las partidas que correspondan con el capitulo seleccionado
-			if(substr($partidas[$i][0],0,1)==$_GET['cap']||(!isset($_GET['cap'])&&substr($partidas[$i][0],0,1)==1)){
-			echo "<div id=\"tabla-partida-poa\">";
+			if((substr($partidas[$i][0],0,1)==$_GET['cap']||(!isset($_GET['cap'])))&&count($insumos)>0&&$resp_cap==substr($partidas[$i][0],0,1)){
+
+				
+				echo "<div id=\"tabla-partida-poa\">";
+	
+				
 				// Mostramos las partidas que correspondan con el capitulo seleccionado
 				echo "<span class=\"label-partida\">[-] Partida ".$partidas[$i][0].":</span>";
-				// Obtenemos los insumos cargados de esta partida
-				$insumos=$proc->devolverInsumosCargados($partidas[$i][0],$_SESSION['nick'],$_SESSION['accion-cargar']);
-				
+			
 				// Ciclo para crear las variables de session de los insumos cargados
-				
 				$ses_insumos=$proc->calcularTotal($_SESSION['nick']);
 				for($a=0;$a<count($ses_insumos);$a++){
 					$_SESSION[$ses_insumos[$a][4].$ses_insumos[$a][3].'id_insumo']=$ses_insumos[$a][3];
@@ -263,17 +275,18 @@ if(count($metas)!=0){
 				// Mostramos la barra de titulos Insumos -- Unidad de Medida -- Cantidad -- Precio -- Subtotal
 ?>
 
-			<div class="renglon-titulos">
-				<div class="celda3">Nombre</div>
-				<div class="celda3">Unidad de Medida</div>
-				<div class="celda3">Precio Unitario</div>
-				<div class="celda3">Cantidad</div>
-				<div class="celda3">Subtotal</div>
-		    </div>
+                <div class="renglon-titulos">
+                    <div class="celda3">Nombre</div>
+                    <div class="celda3">Unidad de Medida</div>
+                    <div class="celda3">Precio Unitario</div>
+                    <div class="celda3">Cantidad</div>
+                    <div class="celda3">Subtotal</div>
+                </div>
 <?php
 				// Ciclo para imprimir los insumos de este partida
+				$subtotal_partida=0;
 				for($e=0;$e<count($insumos);$e++){
-					$subtotal_partida=0;
+
 					if($e%2==0){
 						echo "<div class=\"renglon-blanco-corto\">";
 							echo "<div class=\"celda4\">".$insumos[$e][0]."</div>";
@@ -326,12 +339,12 @@ if(count($metas)!=0){
 <?php       
 					
              
-					$arreglo=$proc->calcularTotal($_SESSION['nick']);
-					$total=0;
-					for($i=0;$i<count($arreglo);$i++)
-						$total+=$arreglo[$i][0]*($arreglo[$i][1]+$arreglo[0][2]);
+					$cantidades=$proc->calcularTotal($_SESSION['nick']);
+					$totalfinal=0;
+					for($i=0;$i<count($cantidades);$i++)
+						$totalfinal+=$cantidades[$i][0]*($cantidades[$i][1]+$cantidades[$i][2]);
 						
- 					echo $proc->convertirFMoneda($total); 
+ 					echo $proc->convertirFMoneda($totalfinal); 
 ?>					
                     </span>
                 </div>
@@ -340,9 +353,9 @@ if(count($metas)!=0){
 </div>
                                         
                     <?php
-				echo "<input type=\"button\" value=\"Modificar Insumos\" onclick=\"location='cargar-insumos-poa.php'\"/>";
+				echo "<input type=\"button\" value=\"Modificar Insumos\" onclick=\"location='cargar-insumos-poa.php#pe'\"/>";
 }else
-				echo "<input type=\"button\" value=\"Cargar Insumos\" onclick=\"location='cargar-insumos-poa.php'\"/>";	
+				echo "<input type=\"button\" value=\"Cargar Insumos\" onclick=\"location='cargar-insumos-poa.php#pe'\"/>";	
 				?>
 
 			                
