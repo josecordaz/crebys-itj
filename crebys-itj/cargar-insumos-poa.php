@@ -22,6 +22,10 @@
 	
 	if($_GET['cap'])
 		$_SESSION['cap']=$_GET['cap'];
+	else
+		$_SESSION['cap']=1;
+		
+	//echo "Tengo ".$_SESSION['cap']." en la session[cap]";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -90,7 +94,6 @@
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
 
         <!--Mostramos la opcion Procedimientos-->
-        <a name="pe">
         <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
         &nbsp;
         &nbsp;
@@ -117,6 +120,7 @@
 
                                             
 <div id="area">                  
+    <a name="pe">
 	<div id="titulo">Insumos en POA</div>
     <div class="sub-titulo">
     	<?php
@@ -220,27 +224,18 @@ for($i=0;$i<count($insumos);$i=$i+1){
 	if($insumos[$i][0]!=$id_partida){ // If para verificar si se ha cambiado de partida
 		$id_partida=$insumos[$i][0];
 		$Pa_Nombre=$insumos[$i][6];
-		if(isset($_GET['cip-'.$insumos[$i-1][0]])||isset($_SESSION['cip-'.$insumos[$i-1][0]])){
- ?>
-	   		<div class="subtotal">
-				<div class="agregar-insumo">
-
-		        </div>
-			</div>
-<?php
-		}
-		if($_SESSION['sub-par-'.$insumos[$i-1][0].'']!=0){
+		
+		if($_SESSION['sub-par-'.$insumos[$i-1][0]]!=0){
 			echo "<div class='sub-par'>Subtotal = ".$proc->convertirFMoneda($_SESSION['sub-par-'.$insumos[$i-1][0].''])."</div>";
 			$_SESSION['sub-cap-'.$capitulo.'']+=$_SESSION['sub-par-'.$insumos[$i-1][0].''];
 		}
-			
 		echo "</div>";
 		echo "<div id='tabla-partida-cip'>";
-		if(!isset($_GET['cip-'.$id_partida])&&!isset($_SESSION['cip-'.$id_partida])){
-			echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."#".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
-		}else{
-			$_SESSION['cip-'.$id_partida]=$id_partida;
-			echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."#".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
+if(!isset($_GET['cip-'.$id_partida])&&!isset($_SESSION['cip-'.$id_partida])){
+echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-partida' href='cargar-insumos-poa.php?cap=".$capitulo."&cip-".$id_partida."=".$id_partida."#".$id_partida."'>[+] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a></span>";
+}else{
+$_SESSION['cip-'.$id_partida]=$id_partida;
+echo "<span class='label-partida'><a name='".$id_partida."'><a name='$id_partida'/><a class='label-partida' href='redir-cargar-insumos-poa.php?cap=".$capitulo."&cip=".$id_partida."'>[-] Partida ".$id_partida.": \"".$Pa_Nombre."\"</a> </span>";
 			
 		// Inicializamos la variable de la partida en proceso
 		$_SESSION['sub-par-'.$id_partida.'']=0;
@@ -290,7 +285,10 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
 						echo $proc->convertirFMoneda(($subtotal1+$subtotal2));
-						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
+						if(isset($_SESSION['sub-par-'.$id_partida.'']))
+							$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
+						else
+							$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
 			}else{
@@ -322,7 +320,10 @@ for($i=0;$i<count($insumos);$i=$i+1){
 						if(isset($_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']))
 							$subtotal2=$_SESSION["".$_SESSION['accion-cargar'].$insumos[$i][1].'cant2']*$insumos[$i][5];
 						echo $proc->convertirFMoneda(($subtotal1+$subtotal2));
-						$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
+						if(isset($_SESSION['sub-par-'.$id_partida.'']))
+							$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
+						else
+							$_SESSION['sub-par-'.$id_partida.'']+=($subtotal1+$subtotal2);
 					echo "</div>";
 				echo "</div>";
 			}
@@ -354,6 +355,11 @@ for($i=0;$i<count($insumos);$i=$i+1){
 
 		
         echo "</div>";
+		
+		// En esta página creamos varias variables de session
+		// Es necesario que el arreglo sesion siempre este en orden
+		// Por esa razón aquí reiniciaremos su ordenación
+		//krsort($_SESSION);
 		?>
 	</div>
 </div>

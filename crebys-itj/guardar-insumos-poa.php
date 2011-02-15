@@ -1,5 +1,5 @@
 <?php
-	// Iniciamos el uso de variables de session
+	// Iniciamos el uso de variables de _SESSION
 	session_start();
 	
 	// Librería para manipulación de procedimientos
@@ -8,89 +8,101 @@
 	// Objeto para la manipulación de procedimientos
 	$proc=new Procedimientos();
 		
-//Guardar los insumos seleccionados en cargar-insumos-poa.php
+	//Guardar los insumos seleccionados en cargar-insumos-poa.php
 	
-	// Ordenamos el arreglo se $_SESSION por clave
+	// Ordenamos el arreglo se $__SESSION por clave
+	//$_SESSION=$__SESSION;
+	//reset($_SESSION);
 	//krsort($_SESSION);
 	//echo " guardar-insumos-poa.php<p>";
-	
-	// Mostramos todas las variables de session;
-	/*do{
-		echo "".key($_SESSION)."<br>";
-	}while(next($_SESSION));
-	echo "<br>";
-	
-	header("location: pruebacss/mvs.php");
-	exit();*/
-	
-	
-	//$_SESSION;
-	
-	// Inicializamos el indice de los arreglos además de estos
-	$i=0;	
 	
 	$insumos=array();
 	$cantidades=array();
 	
-	//echo "count session ".count($_SESSION)."<br>";
-	//echo "session accion-cargar ".$_SESSION['accion-cargar']."<br>";
+	// Mostramos todas las variables de _SESSION;
+	$arr=$_SESSION;
+	krsort($arr);
 	
-	/*krsort($_SESSION);
+	$cont_insumo=0;
+	$cont_cantidades=0;
+	$_SESSION['contador']=0;
+	$ban=1;
 	
-	do{
-		echo "".key($_SESSION)."<br>";
-	}while(next($_SESSION));
-	echo "<br>";*/
-	
-	// Iniciamos ciclo
-	do{ 
-		// Inicializamos la bandera
-
-		// Aquí solo guardaremos las variables de session que tengan el formato de Accion-Insumo-Cantidad
-		//echo "Se compara esto [".key($_SESSION)."] con esto [".$_SESSION['accion-cargar']."]<br>";
-		if(substr(key($_SESSION),0,strlen($_SESSION['accion-cargar']))==$_SESSION['accion-cargar']){
-			$ban=true;
-			//Si ban es igual a false significa que ya se habia guardado el insumo
-			if(ban){
-				$insumos[$i]=current($_SESSION);
-				//echo "Se guardó la siguiente id_insumo correctamente = ".current($_SESSION)."<br>";
-			}
-next($_SESSION);
-			$ban=true;
-			
-			$cantidades[$i][1]=current($_SESSION);
-			//echo "Se guardó la siguiente cantidad individual correctamente = ".current($_SESSION)."<br>";
-next($_SESSION);
-			
-			//Guardamos los primero digitos del insumo que se guardo al principio del if(sbrtr
-			$comp=$_SESSION['accion-cargar'].$insumos[$i];
-			
-			//Si entra aquí significa que solo tiene una cantidad y por lo tanto current session actul tiene el siguiente insumo
-			if($comp!=substr(key($_SESSION),0,strlen($comp))){
-				//echo "Se guardó la siguiente id_insumo correctamente en el if = ".current($_SESSION)."<br>";
-				$insumos[$i+1]=current($_SESSION);
-				$ban=false;
-prev($_SESSION);
-			}else{
-				$cantidades[$i][0]=current($_SESSION);
-				//echo "Se guardó la siguiente cantidad mas la individual = ".current($_SESSION)."<br>";
-			}
-			$i++;
+	/*foreach($arr as $key => $value){
+		if(substr($key,0,strlen($_SESSION['accion-cargar']))==$_SESSION['accion-cargar']){
+			echo "key= ".$key." valor=".$value."<br>";
 		}
-
-	}while(next($_SESSION));
+	}
+	echo "<p>";*/
 	
+	foreach($arr as $key => $value){
+		if(substr($key,0,strlen($_SESSION['accion-cargar']))==$_SESSION['accion-cargar']){
+			switch($_SESSION['contador']%3){
+				case 0:
+				//echo "residuo vale ".($_SESSION['contador']%3)." == 0<br>";
+					if($ban){
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guardo Id_Insumo[".$cont_insumo."]=".$value."<br>";
+						$insumos[$cont_insumo]=$value;
+						$cont_insumo++;
+					
+					}
+					$_SESSION['contador']++;	
+					$bsn=true;
+					break;
+				case 1:
+					//echo "residuo vale ".($_SESSION['contador']%3)." == 1<br>";				
+					if(substr($key,strlen($key)-1,1)==2){
+						$cantidades[$cont_cantidades][1]=$value;
+						$cantidades[$cont_cantidades][0]=0;
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guardo la segunda cantidad[".$cont_cantidades."][1]:= ".$value."<br>";
+					}
+					else{
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guardo la primera cantidad[".$cont_cantidades."][0]:= ".$value."<br>";
+						$cantidades[$cont_cantidades][1]=0;						
+						$cantidades[$cont_cantidades][0]=$value;
+					}
+					$_SESSION['contador']++;					
+					break;
+				case 2:
+				//echo "residuo vale ".($_SESSION['contador']%3)." ==2 <br>";				
+					$cadena1=$key+0;
+					$cadena2=$insumos[$cont_insumo-1];
+					$sub1=substr($cadena1,strlen($_SESSION['accion-cargar']),strlen($cadena1)-strlen($_SESSION['accion-cargar']));
+					if($cadena2==$sub1)	{
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guardo la primera cantidad[".$cont_cantidades."][0]:= ".$value."<br>";
+						$cantidades[$cont_cantidades][0]=$value;
+						//echo "<p>";
+					}
+					else{
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guardo la segunda cantidad[".$cont_cantidades."][0]:= 0<br>";		
+						//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key= ".$key."  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guardo abajo insumo[".$cont_insumo."]:= ".$value."<br>";
+						//echo "<p>";
+						// Al entrar aquí significa que no existe cantidad 1
+						//$cantidades[$cont_cantidades][0]=0;
+						//$_SESSION['contador']++;
+						$insumos[$cont_insumo]=$value;
+						$cont_insumo++;
+						$ban=false;
+						$_SESSION['contador']++;
+					}
+					$_SESSION['contador']++;
+					$cont_cantidades++;					
+					break;
+			}
+		}
+	}
 	
-	/*for($i=0;$i<count($insumos);$i++)
+	/*echo "<p>Insumos<p>";
+	for($i=0;$i<count($insumos);$i++)
 		echo $insumos[$i]."=[".$cantidades[$i][0]."][".$cantidades[$i][1]."]<br>";*/
-		
 	
+
 	// Ejecutamos el procedimiento para saber el Id_Insumo_Accion
 	$error=$proc->guardarInsumosPOA($_SESSION['nick'],$_SESSION['accion-cargar'],$insumos,$cantidades);
 	
 	//echo $error;
-	
+
 	// Redireccionamos a poa.php
-	header('location: poa.php#pe')
+	header("location: poa.php?meta=".$_SESSION['meta']."&accion=".$proc->numAccion($_SESSION['accion-cargar'])."#pe");
 
 ?>

@@ -614,10 +614,10 @@ $this->conexion->executeSQL("call guardarInsumosPOA('$Us_Nick',".$insumos[$i].",
 			return "$ ".$incompletos.$numComas.".".$decimales;
 		}
 		// Funcion para determinar los capitulos de quien existen insumos agregados en un POA
-		function partidasCargadas($Us_Nick){
+		function partidasCargadas($Us_Nick,$Id_Meta,$Id_Accion){
 			$this->conexion->executeSQL("select DISTINCT(partidas.Id_Partida)
 from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida
-where Us_Nick='$Us_Nick' order by partidas.Id_Partida");
+where Us_Nick='$Us_Nick' and Id_Meta=$Id_Meta and Insumos_Acciones.Id_Accion=$Id_Accion order by partidas.Id_Partida");
 			return $this->conexion->getArray();
 		}
 		// Función para separar los capitulos 

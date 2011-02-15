@@ -1,13 +1,12 @@
 <?php
 	session_start();
 
-	//krsort($_SESSION);
-	//ksort($_SESSION);
 	
+	$arr=$_SESSION;
+	krsort($arr);
 	
-	do{	
-		echo "".key($_SESSION)." = ".current($_SESSION)."<br>";
-	}while(next($_SESSION));
-	echo "<br>";
+	foreach($arr as $key => $value){
+    	echo $key."= ".$value."<br>";
+	}
 
 ?>

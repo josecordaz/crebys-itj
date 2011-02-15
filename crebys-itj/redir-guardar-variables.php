@@ -23,15 +23,25 @@
 				$_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'un_medida']=$_GET['Un_Medida'];
 			if(isset($_GET['cant1']))
 				$_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant1']=$_GET['cant1'];		
+				
+			if(!isset($_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant1']))
+				$_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant1']=0;		
+				
 			if(isset($_GET['cant2']))
 				$_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant2']=$_GET['cant2'];
+				
+			if(!isset($_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant2']))
+				$_SESSION["".$_SESSION['accion-cargar']."".$_GET["id_insumo"].'cant2']=0;						
+
 		}
 	}
 	/*echo "primer parametro:=["."".$_SESSION['accion-cargar']."]<br>";
 	echo "segundo parametro:=["."".$_GET["id_insumo"]."]<br>";
 	echo "tercero parametro:=[".'id_insumo'."]<br>";*/
 	
-	krsort($_SESSION);
+	//krsort($_SESSION);
+	
+	//echo "Tengo ".$_SESSION['cap']." en la session[cap]";
 	
 	if(isset($_SESSION['cap']))
 		header("location:cargar-insumos-poa.php?cap=".$_SESSION['cap']."#".$_GET['id_insumo']);
