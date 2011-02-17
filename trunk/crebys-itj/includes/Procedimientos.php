@@ -636,7 +636,7 @@ where Us_Nick='$Us_Nick' and Id_Meta=$Id_Meta and Insumos_Acciones.Id_Accion=$Id
 		}
 		// Devolver Insumos Cargados
 		function devolverInsumosCargados($Id_Partida,$Us_Nick,$Id_Accion){
-			$this->conexion->executeSQL("select Insumos.In_Nombre,Id_Unidad_Medida,In_Precio,Ia_Cantidad1,Ia_Cantidad2 from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Insumos.Id_Partida=$Id_Partida and Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion");
+			$this->conexion->executeSQL("select Insumos.In_Nombre,Id_Unidad_Medida,In_Precio,Ia_Cantidad1,Ia_Cantidad2 from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Insumos.Id_Partida=$Id_Partida and Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion order by Insumos.In_Nombre");
 			return $this->conexion->getArray();
 		}
 		// Devolver el nombre de una medida
@@ -660,6 +660,49 @@ where Us_Nick='$Us_Nick' and Id_Meta=$Id_Meta and Insumos_Acciones.Id_Accion=$Id
 				$total+=$totales[$i][0]*($totales[$i][1]+$totales[$i][2]);
 			}
 			return $total;
+		}
+		function devolverTotalAccion($Us_Nick,$Id_Accion){
+			$this->conexion->executeSQL("select In_Precio,Ia_Cantidad1,Ia_Cantidad2 from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=$Id_Accion");
+			$arreg=$this->conexion->getArray();
+			$total=0;
+			for($i=0;$i<count($arreg);$i++)
+				$total+=$arreg[$i][0]*($arreg[$i][1]+$arreg[$i][2]);
+			return $this->convertirFMoneda($total);
+		}
+		// Devolver los capitulos de los insumos agregados en el poa según esta meta y esta acción y este usuario
+		function devolverCapitulosPOA($Us_Nick){
+			$this->conexion->executeSQL("select DISTINCT(Insumos.Id_Partida) from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Us_Nick='$Us_Nick' order by Insumos.Id_Partida");
+			
+			$partidas=$this->conexion->getArray();
+			
+			$capitulo=substr($partidas[0][0],0,1);
+			$capitulos[0]=substr($partidas[0][0],0,1);
+			$id=1;
+			for($i=0;$i<count($partidas);$i++){
+				if(substr($partidas[$i][0],0,1)!=$capitulo){
+					$capitulo=substr($partidas[$i][0],0,1);
+					$capitulos[$id]=substr($partidas[$i][0],0,1);
+					$id++;
+				}
+			}
+			return $capitulos;
+		}
+		// Devuelve los insumos cargados en POA de meta,accion, y capitulo determinado
+		function devolverInsumosPOA($Us_Nick,$Id_Capitulo){
+			$this->conexion->executeSQL("select DISTINCT(Insumos.In_Nombre),Un_Nombre,Insumos.Id_Partida,Insumos_Acciones.Id_Insumo from medidas inner join(insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida where Us_Nick='$Us_Nick' and substring(Insumos.Id_Partida,1,1)='$Id_Capitulo' order by Id_Partida");
+			return $this->conexion->getArray();
+		}// Devuelve lo que resta de un insumo en una requisición
+		function devolverResto($Us_Nick,$Id_Insumo){
+		    $this->conexion->executeSQL("select sum(Ia_Cantidad1),sum(Ia_Cantidad2) from 
+Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion where Id_Insumo=$Id_Insumo and Us_Nick='$Us_Nick'");
+			$resultado=$this->conexion->getArray();
+			$pedido=$resultado[0][0]+$resultado[0][1];
+			
+		    $this->conexion->executeSQL("select sum(Di_Disminucion)
+from disminuciones inner join(Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo_Accion=Disminuciones.Id_Insumo_Accion where Id_Insumo=$Id_Insumo and Us_Nick=$Us_Nick");
+			$gastado=$this->conexion->error();
+			
+			return $pedido-$gastados;
 		}
 	}
 ?>

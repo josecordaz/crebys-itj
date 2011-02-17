@@ -1026,3 +1026,12 @@ BODY
 	font-weight: bold;
 	font-family: "Courier New";
 }
+#insumos-disponibles
+{
+	float: right;
+	width: 100%;
+	font-family: Consolas;
+	font-size: 19.4pt;
+	background-color: #150999;
+	color: #FFFFFF;
+}
