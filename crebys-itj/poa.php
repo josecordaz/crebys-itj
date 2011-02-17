@@ -153,40 +153,39 @@ if(count($metas)!=0){
     </ul>
 	</div>
 	    <div id="divmeta">    
-    	<div id="info-meta2">
-        	<div class="detalle-meta">
-           		<span class="label-detalle">Departamento:</span> 
-				<br/>
-                <br/>
-	        	<span class="label-detalle">Proceso Estratégico:</span>
-                <br/>
-                <br/>
-            	<span class="label-detalle">Proceso Clave: </span>
-                <br/>
-                <br/>
-            </div>
-            <div id="detalles">
-            	<?php 
-					if(isset($_GET['meta']))
-						$dmetas=$proc->datosMeta($_GET['meta']);
-					else
-						$dmetas=$proc->datosMeta($tmp_meta);
-				?>
-    			<span class="res-detalle"><?php echo $proc->saberDepartamento($_SESSION['nick']);?></span>
-	            <br/>
-    	        <br/>
-        	    <span class="res-detalle"><?php echo $dmetas[0][2]?></span>
-				<br/>
-	            <br/>
-	            <span class="res-detalle"><?php echo $dmetas[0][1]?></span>
-	            <br/>
-	            <br/>
-            </div>
-            <div id="desc-meta">
-	        	<span class="label-detalle">Descripción de la meta:</span>
-				<div class="info2"><?php echo $dmetas[0][0]?>
-                </div>
-            </div>
+	    	<div id="info-meta2">
+    	    	<div class="detalle-meta">
+        	   		<span class="label-detalle">Departamento:</span> 
+					<br/>
+                	<br/>
+		        	<span class="label-detalle">Proceso Estratégico:</span>
+    	            <br/>
+        	        <br/>
+	            	<span class="label-detalle">Proceso Clave: </span>
+	                <br/>
+    	            <br/>
+        	    </div>
+            	<div id="detalles">
+					<?php 
+                        if(isset($_GET['meta']))
+                            $dmetas=$proc->datosMeta($_GET['meta']);
+                        else
+                            $dmetas=$proc->datosMeta($tmp_meta);
+                    ?>
+	    			<span class="res-detalle"><?php echo $proc->saberDepartamento($_SESSION['nick']);?></span>
+		            <br/>
+	    	        <br/>
+	        	    <span class="res-detalle"><?php echo $dmetas[0][2]?></span>
+					<br/>
+		            <br/>
+		            <span class="res-detalle"><?php echo $dmetas[0][1]?></span>
+		            <br/>
+		            <br/>
+    	        </div>
+        	    <div id="desc-meta">
+	        		<span class="label-detalle">Descripción de la meta:</span>
+					<div class="info2"><?php echo $dmetas[0][0]?></div>
+	            </div>
     	</div>
         
        	<div id="insumos-meta2">
@@ -216,8 +215,7 @@ if(count($metas)!=0){
             <div id="info-partida">
             	<div id="desc-accion">
 	        		<span class="label">Descripción:</span>
-					<div class="info2"><?php echo $accionesMeta[$id_accion][0]?>
-    	            </div>
+					<div class="info2"><?php echo $accionesMeta[$id_accion][0]?></div>
         	    </div>
 
 			<?php
@@ -325,6 +323,8 @@ if(count($metas)!=0){
        				echo "<div class='subcap'>Capitulo ".$_GET['cap']."0,000 = ".$proc->convertirFMoneda($subtotal_capitulo)."</div>";				
 				else
 					echo "<div class='subcap'>Capitulo ".$capitulos[0][0]."0,000 = ".$proc->convertirFMoneda($subtotal_capitulo)."</div>";				
+					
+				echo "<div class='subcap'>Acción ".$proc->NumAccion($_SESSION['accion-cargar'])." = ".$proc->devolverTotalAccion($_SESSION['nick'],$_SESSION['accion-cargar'])."</div>";				
 			?>
             <div class="totalmeta">
             Total Meta 
