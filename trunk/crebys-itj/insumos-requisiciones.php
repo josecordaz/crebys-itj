@@ -211,8 +211,25 @@ else{
    	</div>
 <?php // Establecemos una división ?>
 
+<div class="none-space"><p></div>
 <div id="insumos-disponibles">Insumos Disponibles</div>
-<form action="redir-insumos-requisiciones.php" METHOD="POST">
+<div class="none-space">
+<p>
+<?php
+	// Espacio para mostrar error en caso de que hubiera                
+	if(isset($_COOKIE['error'])){
+		echo $_COOKIE['error'];
+			echo "&nbsp;";
+			echo "<a href=\"#".$_SESSION['insumo-pasado']."\">Ir al insumo</a>";
+		echo "<br/>";
+		unset($_COOKIE['error']);
+	}
+?>
+<p></div>
+
+
+
+<form method="post" action="redir-insumos-requisiciones.php">
     <div id="info-partida">    
     <?php
         // Obtenemos los capitulos que tiene el POA en esta acción con este nick determinados
@@ -260,20 +277,30 @@ else{
                     echo "</div>";
             }// Aquí mostramos los insumos
             if($i%2==0){
+				echo "<a name=".$insumosPOA[$i][3].">";
                 echo "<div class=\"renglon-blanco-corto\">";
-                    echo "<div class=\"celda4\"><input type=\"checkbox\"/></div>";
+                    echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
                     echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
+					$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
                     echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
-                    echo "<div class=\"celda4\">".$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3])."</div>";
-                    echo "<div class=\"celda4\"><input class=\"at-corto\"type=\"text\"/></div>";								
+					$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3]);
+                    echo "<div class=\"celda4\">".$cantidad_restante."</div>";
+					// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
+						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;
+                    echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
                 echo "</div>";
             }else{
+				echo "<a name=".$insumosPOA[$i][3].">";
                 echo "<div class=\"renglon-morado-corto\">";
-                    echo "<div class=\"celda4\"><input type=\"checkbox\"/></div>";
+                    echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
                     echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
+					$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
                     echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
-                    echo "<div class=\"celda4\">".$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3])."</div>";
-                    echo "<div class=\"celda4\"><input class=\"at-corto\"type=\"text\"/></div>";								
+					$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3]);
+                    echo "<div class=\"celda4\">".$cantidad_restante."</div>";
+					// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
+						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;					
+                    echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
                 echo "</div>";
             }
         }

@@ -359,6 +359,7 @@ BODY
 	float: left;
 	height: auto;
 	width: 884px;
+	text-align: center;
 }
 #info-meta
 {
@@ -1034,4 +1035,13 @@ BODY
 	font-size: 19.4pt;
 	background-color: #150999;
 	color: #FFFFFF;
+}
+.none-space
+{
+	float: right;
+	width: 100%;
+	background-color: #FFFFFF;
+	height: auto;
+	text-align: center;
+	color: #FA1D1D;
 }
