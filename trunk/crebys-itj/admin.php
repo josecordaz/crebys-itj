@@ -87,12 +87,12 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<!--<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
+		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
-        <a href="/crebys-itj/lista-insumos.php" class="menu-off">Insumos</a>
+        <!--<a href="/crebys-itj/lista-insumos.php" class="menu-off">Insumos</a>
         &nbsp;
         &nbsp;
         &nbsp;
