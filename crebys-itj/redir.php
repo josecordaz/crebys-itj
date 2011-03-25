@@ -40,6 +40,7 @@
 
 		// Validamos los datos del usuario
 		$res=$proc->iniciarSesion($_POST['usuario'],$_POST['password']);
+		//echo $_SESSION['consulta'];
 		// Si se puede iniciarsesion
 		if($res===true){
 			// Verificamos el nombre de usuario

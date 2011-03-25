@@ -349,6 +349,7 @@ BODY
 	border-left-color: rgb(0, 0, 0);
 	margin: 5px;
 	padding: 1px;
+	/*[empty]text-align:;*/
 }
 #divmeta
 {
@@ -574,7 +575,7 @@ BODY
 	float: left;
 	width: auto;
 	height: auto;
-	margin: -6px 0 0 3px;
+	margin: 2px 0 0 -3px;
 }
 .detalle-meta
 {
@@ -744,7 +745,7 @@ BODY
 	background-color: rgb(253, 253, 253);
 	float: left;
 	width: 100%;
-	border-bottom: 2px solid rgb(7, 40, 252);
+	border-bottom: 2px solid rgb(6, 39, 251);
 	margin-top: 0.3em;
 	margin-right: 0em;
 	margin-bottom: 0em;
@@ -1038,10 +1039,59 @@ BODY
 }
 .none-space
 {
-	float: right;
+	float: left;
 	width: 100%;
 	background-color: #FFFFFF;
-	height: auto;
+	height: 18px;
 	text-align: center;
 	color: #FA1D1D;
+	margin-bottom: 1px;
+}
+#info-partida2
+{
+	height: auto;
+	float: left;
+	width: auto;
+	text-align: left;
+	background-color: #E3E6FE;
+	border-left: 2px solid #0829FD;
+	border-bottom: 2px solid #0728FC;
+	border-right: 2px solid #0627FB;
+}
+#separador
+{
+	float: left;
+	border-left: 7px double #140898;
+	border-right: 7px double #140898;
+	font-size: 14.2pt;
+	font-family: Tahoma;
+	padding-left: 16px;
+	padding-right: 16px;
+	width: 612px;
+	text-align: center;
+	color: #120082;
+}
+#ckeck2
+{
+	float: left;
+	text-align: center;
+}
+#mismo-renglon
+{
+	float: left;
+}
+#des-req
+{
+	border: 1px double #140898;
+}
+.boton-izquierda
+{
+	float: left;
+	margin: 4px 0 10px 5px;
+}
+.align-izquierda
+{
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 6px;
 }

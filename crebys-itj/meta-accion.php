@@ -104,7 +104,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
+		<!--<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -113,8 +113,8 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        &nbsp;
-        <a href="/crebys-itj/meta-accion.php#pe" class="menu-on">Metas - Acciones</a>
+        &nbsp;-->
+        <a href="/crebys-itj/meta-accion.php#pe" class="menu-on">PIIT</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -158,7 +158,12 @@
 		?>
     </div>
  	<br/>
-   	<div class="izquierda"><span class="subtitulo">Metas</span></div>
+   	<div class="izquierda"><span class="subtitulo">Metas:</span></div>
+    <div class="align-izquierda">
+    <?php
+    	echo "<input type=\"button\" value=\"Agregar Meta\" onclick=\"location='meta.php?proc-est=".$_SESSION['proc-est']."#pe'\"/>"
+	?>
+    </div>
    	<br/>
     <?php
 		$metas=array();
@@ -222,8 +227,7 @@
 						echo $namep[0][0];
 					?>
 		</div>
-                   	<div ><?php
-                  echo "<input type=\"button\" value=\"Agregar\" onclick=\"location='meta.php?proc-est=".$_SESSION['proc-est']."#pe'\"/>"?>
+                   	<div >
                         <input type="button" value="Editar" onclick="location='meta.php?meta=<?php echo $_SESSION['meta']?>#pe'"/>
                         <input type="button" value="Eliminar" onclick="location='eliminar-meta.php'"/>
                     </div>

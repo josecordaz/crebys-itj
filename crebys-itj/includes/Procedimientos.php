@@ -42,7 +42,7 @@
 		function insPartida($Id_Partida,$Pa_Nombre){
 			if($this->validar->validarNumero($Id_Partida)){
 				if($this->validar->validarCadena($Pa_Nombre,$this->sacarLongitud("Partidas","Pa_Nombre"))){
-					$this->conexion->executeSQL("call insPartida('.$Id_Partida.','.$Pa_Nombre.',@error); select @error");
+					$this->conexion->executeSQL("call insPartida(".$Id_Partida.",'".$Pa_Nombre."',@error); select @error");
 					//$this->conexion->mostrarResSQL();
 					switch ($this->conexion->error()){
 						case 0:
@@ -54,7 +54,10 @@
 													"."- Pa_Nombre:=".$Pa_Nombre;
 							return 1;
 						case 2:
-							$this->error="[-] El registro ya existe";	
+							$this->error="[-] El identificador ya existe";	
+							return 0;
+						case 3:
+							$this->error="[-] El nombre de partida ya existe";
 							return 0;
 					}
 				}else{
@@ -670,8 +673,8 @@ where Us_Nick='$Us_Nick' and Id_Meta=$Id_Meta and Insumos_Acciones.Id_Accion=$Id
 			return $this->convertirFMoneda($total);
 		}
 		// Devolver los capitulos de los insumos agregados en el poa según esta meta y esta acción y este usuario
-		function devolverCapitulosPOA($Us_Nick){
-			$this->conexion->executeSQL("select DISTINCT(Insumos.Id_Partida) from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Us_Nick='$Us_Nick' order by Insumos.Id_Partida");
+		function devolverCapitulosPOA($Us_Nick,$Id_Meta,$Num_Accion){
+			$this->conexion->executeSQL("select DISTINCT(Insumos.Id_Partida) from partidas inner join (insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Partida=Partidas.Id_Partida where Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion)." order by Insumos.Id_Partida");
 			
 			$partidas=$this->conexion->getArray();
 			
@@ -688,21 +691,22 @@ where Us_Nick='$Us_Nick' and Id_Meta=$Id_Meta and Insumos_Acciones.Id_Accion=$Id
 			return $capitulos;
 		}
 		// Devuelve los insumos cargados en POA de meta,accion, y capitulo determinado
-		function devolverInsumosPOA($Us_Nick,$Id_Capitulo){
-			$this->conexion->executeSQL("select DISTINCT(Insumos.In_Nombre),Un_Nombre,Insumos.Id_Partida,Insumos_Acciones.Id_Insumo from medidas inner join(insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida where Us_Nick='$Us_Nick' and substring(Insumos.Id_Partida,1,1)='$Id_Capitulo' order by Id_Partida");
+		function devolverInsumosPOA($Us_Nick,$Id_Capitulo,$Id_Meta,$Num_Accion){
+			$this->conexion->executeSQL("select DISTINCT(Insumos.In_Nombre),Un_Nombre,Insumos.Id_Partida,Insumos_Acciones.Id_Insumo from medidas inner join(insumos inner join (insumos_acciones inner join (acciones inner join (acciones_poa inner join (poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario)on poa.Id_Poa=Acciones_POA.Id_Poa)on Acciones_POA.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo=Insumos.Id_Insumo)on Insumos.Id_Unidad_Medida=medidas.Id_Unidad_Medida where Us_Nick='$Us_Nick' and substring(Insumos.Id_Partida,1,1)='$Id_Capitulo' and Insumos_Acciones.Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion)." order by Id_Partida");
 			return $this->conexion->getArray();
 		}// Devuelve lo que resta de un insumo en una requisición
-		function devolverResto($Us_Nick,$Id_Insumo){
+		function devolverResto($Us_Nick,$Id_Insumo,$Id_Meta,$Num_Accion){
 		    $this->conexion->executeSQL("select sum(Ia_Cantidad1),sum(Ia_Cantidad2) from 
-Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion where Id_Insumo=$Id_Insumo and Us_Nick='$Us_Nick'");
+Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion where Id_Insumo=$Id_Insumo and Us_Nick='$Us_Nick' and Insumos_Acciones.Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion)."");
 			$resultado=$this->conexion->getArray();
 			$pedido=$resultado[0][0]+$resultado[0][1];
 			
 		    $this->conexion->executeSQL("select sum(Di_Disminucion)
-from disminuciones inner join(Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo_Accion=Disminuciones.Id_Insumo_Accion where Id_Insumo=$Id_Insumo and Us_Nick=$Us_Nick");
+from disminuciones inner join(Insumos_Acciones inner join (Acciones inner join (Acciones_POA inner join (POA inner join Usuarios on Usuarios.Id_Usuario=POA.Id_Usuario)on POA.Id_Poa=Acciones_Poa.Id_Poa)on Acciones_Poa.Id_Accion=Acciones.Id_Accion)on Acciones.Id_Accion=Insumos_Acciones.Id_Accion)on Insumos_Acciones.Id_Insumo_Accion=Disminuciones.Id_Insumo_Accion where Id_Insumo=$Id_Insumo and Us_Nick=$Us_Nick and Insumos_Acciones.Id_Accion=".$this->saberIdAccion($Id_Meta,$Num_Accion)." ");
 			$gastado=$this->conexion->error();
 			
 			return $pedido-$gastados;
 		}
+
 	}
 ?>
