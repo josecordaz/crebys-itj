@@ -392,7 +392,6 @@ a	!-- PARTIDAS
 	&CREATE PROCEDURE eliminarMeta(IN Id_Met INT,OUT error INT)
 	BEGIN
 		SET error=1;
-		if()
 		delete from acciones where Id_Meta=Id_Met;
 		delete from metas where Id_Meta=Id_Met;
 	END;&
