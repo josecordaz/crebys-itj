@@ -87,7 +87,7 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
+		<!--<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -96,8 +96,8 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        &nbsp;
-        <a href="/crebys-itj/meta-accion.php#pe" class="menu-off">Metas - Acciones</a>
+        &nbsp;-->
+        <a href="/crebys-itj/meta-accion.php#pe" class="menu-off">PIIT</a>
         &nbsp;
         &nbsp;
         &nbsp;

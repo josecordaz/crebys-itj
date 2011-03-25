@@ -1,9 +1,37 @@
+<?php
+	// Inicamos la sesion
+	session_start();
+	
+	// Inicializamos las variables para en redireccionamiento
+	// Guardamos el nombre del servidor
+	$host  = $_SERVER['HTTP_HOST'];
+	// Guardamos la carpeta
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+
+	// Si no existe la variable de sesión redir
+	if(!isset($_SESSION['nick'])){
+		// Redireccionamos a login.php
+		header("Location: http://$host$uri/login.php");
+	}
+	
+	
+		// Libreria para la utilización de procedimientos
+	include_once ($_SERVER['DOCUMENT_ROOT'].'/CREBYS-ITJ/includes/Procedimientos.php');
+
+	// Objeto para la manipulación de procedimientos
+	$proc=new Procedimientos();
+	
+	// Si eciste get proc-est indica que se accionó 
+	//agregar meta y debemos borrar session proc-est para que todo quede en blanco
+	
+	// Si recivimos la variable $_get['meta']
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <!-- #BeginEditable "doctitle" -->
-<title>Crebys-ITJ Crontrol de requisiciones de bienes y servicios del ITJ </title>
+<title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
 <!-- #EndEditable -->
 
@@ -47,13 +75,40 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                        	<td><!-- InstanceBeginEditable name="Bienvenida" --><!-- InstanceEndEditable --></td>
+                        	<td><!-- InstanceBeginEditable name="Bienvenida" -->
+<?php
+		// Bienvenido al usuario
+    	echo "Bienvenido ".$_SESSION['nick']."<p>";
+		echo "Jefe del departamento de ";
+		// Mostramos el departamento al cual pertenece el usuario a partir de su nick
+		echo $proc->saberDepartamento($_SESSION['nick']);
+		// Eliminamos la cookie de usuario
+		unset($_POST['usuario']);
+
+?>
+
+<!-- InstanceEndEditable --></td>
                         </tr>
                     </table>
               	</td>
             </tr>
             <tr>
                 <td class="style2" bgcolor="#FF9900"><!-- InstanceBeginEditable name="menu" -->
+
+        <!--Mostramos la opcion Procedimientos-->
+        <a name="pe">
+        <a href="/crebys-itj/jefe.php" class="menu-off">Inicio</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/meta-accion.php" class="menu-off">Metas-Acciones</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+		<a href="/crebys-itj/sesion-off.php" class="menu-off">Cerrar Sesi&oacute;n</a>
+		
 
                 <!-- InstanceEndEditable --></td>
             </tr>
@@ -63,51 +118,47 @@
             			<tr align ="center">
 										<td align ="center">  					
 											<!-- #BeginEditable "RE" -->
+											
 
-<div class="content">
+                                            
 
-
-
-    	<div >
-        
-        		<?php
-                
-				if(isset($_COOKIE['error'])){
-					echo $_COOKIE['error']."<br/>";
-					unset($_COOKIE['error']);
-				}
-				
-				?>
-        	
-                <form ACTION="redir.php" METHOD="post">	
-                
-                    <hr/>        
-                    
-                    <br/>
-                    
-                    <div class="caja">
-                    	Usuario: <input TYPE="text" NAME="usuario" value=""/><br/>
-                    </div>
-            
-                    <br/>
-                    
-                    <div class="caja">
-	                    Contraseña: <input TYPE="password" NAME="password" value=""/><br/>
-                    </div>
-                    
-                    <br/>
-                    
-                    <input TYPE="submit" NAME="proc" value="Iniciar Sesión CREBYS-ITJ"/>
-                
-                    <hr/>
-            
-                </form>
-		</div>
-
-
+                                            
+<div id="tres">
+	<span id="titulo">Partida</span>
+   	<div>
+    	<?php
+			if(isset($_COOKIE['error'])){
+				echo "<hr id='corta'/>";
+				echo $_COOKIE['error'];
+				unset($_COOKIE['error']);
+			}
+        ?>
+    </div>                    
+	<hr id="corta"/>
+    <form action="redir-partida.php" method="post">	                
+    	
+        Identificador:
+		<input name="id" type="text"/>
+        <p/>
+        Nombre:
+        <input name="nombre" type="text"/>
+        <p/>
+   		<input type="submit" name="agregar" value="Agregar" />
+		<input type="button" name="cancelar" value="Cancelar" onclick="location='insumo.php#pe'"/>
+     </form>
+     <hr id="corta" />
 </div>
 
-											<!-- #EndEditable -->
+
+
+
+
+
+
+
+
+
+                                         	<!-- #EndEditable -->
             				</td>
             			</tr>
             		</table>

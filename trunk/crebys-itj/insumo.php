@@ -181,7 +181,7 @@
                         
             <div class="caja-left">
                 Partida:
-				<select id=\"block\" name=\"partida\" class=\"s-corto\" onchange=\"location = 'redir-insumo.php?partida='+this.value\" readonly>        	
+				<select id="block" name="partida" class="s-corto" onchange="location = 'redir-insumo.php?partida='+this.value" readonly>        	
                 <?php
 					$arr=array();
 					$arr=$proc->devolverPartidas();
@@ -206,6 +206,7 @@
 					}
 					?>
                 </select>
+                <input type="button" value="Agregar" onclick="location= 'partida.php'"/>
             </div>
             <br/>
             <div class="caja-left">

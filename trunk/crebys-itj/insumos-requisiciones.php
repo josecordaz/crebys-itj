@@ -25,18 +25,22 @@
 	// 3 parámetros dentro del get
 	$metas=$proc->devolverMetasPOA($_SESSION['nick']);
 	
-	// Obtenemos todas las partidas
-	$capitulosPOA=$proc->devolverCapitulosPOA($_SESSION['nick']);
-	
 	if(!(isset($_GET['meta'])&&isset($_GET['accion'])&&isset($_GET['cap']))){
 		$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$metas[0][0]);				
+		$capitulosPOA=$proc->devolverCapitulosPOA($_SESSION['nick'],$metas[0][0],$proc->NumAccion($accionesMeta[0][1]));
 	}
-
+	
 	// Si recivimos los tres parámetros	
 	if(isset($_GET['meta'])&&isset($_GET['accion'])&&isset($_GET['cap'])){
 		$accionesMeta=$proc->devolverAccionesMetaPOA($_SESSION['nick'],$_GET['meta']);	
+		// Obtenemos todas las partidas de la meta, acicon y usuario señalado
+		$capitulosPOA=$proc->devolverCapitulosPOA($_SESSION['nick'],$_GET['meta'],$_GET['accion']);
 	}else
-		header("Location: http://$host$uri/insumos-requisiciones.php?meta=".$metas[0][0]."&accion=".$proc->NumAccion($accionesMeta[0][1])."&cap=".$capitulosPOA[0]."#pe");
+	{
+		header("Location: http://$host$uri/insumos-requisiciones.php?meta=".$metas[0][0]."&accion=".$proc->NumAccion($accionesMeta[0][1])."&cap=".$capitulosPOA[0]."#pa");
+	}
+		
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -131,6 +135,25 @@
 											<!-- #BeginEditable "RE" -->
 <a name="pe"></a>
 <div id="titulo">Requisiciones</div>
+
+<div id="separador">
+	<div id="mismo-renglon">
+	Los bienes o servicios están contemplados en el POA?
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;            
+    </div>
+    <div id="ckeck2">
+    	Si
+    	<input type="radio" vale=1 name="contemplado" checked="checked"/>
+        No
+      	<input type="radio" vale=2 name="contemplado"/>
+    </div>
+</div>
+<p>
+&nbsp;
+<p>
 <div class="menup">
 <ul>
 <?php
@@ -211,110 +234,123 @@ else{
    	</div>
 <?php // Establecemos una división ?>
 
-<div class="none-space"><p></div>
+<!--Cerramos divmeta-->
+</div>
+
+<div class="none-space"></div>
+<a name="pa"></a>
 <div id="insumos-disponibles">Insumos Disponibles</div>
 <div class="none-space">
-<p>
 <?php
 	// Espacio para mostrar error en caso de que hubiera                
-	if(isset($_COOKIE['error'])){
-		echo $_COOKIE['error'];
+	if(isset($_COOKIE['mensaje'])){
+		echo $_COOKIE['mensaje'];
 			echo "&nbsp;";
 			echo "<a href=\"#".$_SESSION['insumo-pasado']."\">Ir al insumo</a>";
 		echo "<br/>";
-		unset($_COOKIE['error']);
 	}
 ?>
-<p></div>
+</div>
 
 
 
-<form method="post" action="redir-insumos-requisiciones.php">
-    <div id="info-partida">    
-    <?php
+<?php
+	echo "<form method=\"post\" action=\"redir-insumos-requisiciones.php?meta=".$_GET['meta']."&accion=".$_GET['accion']."&cap=".$_GET['cap']."\">";
+
         // Obtenemos los capitulos que tiene el POA en esta acción con este nick determinados
-    ?>
-        <div class="menup-partida">
+?>
+        <div class="menup">
             <ul> 
     <?php
             for($i=0;$i<count($capitulosPOA);$i++)
                 if($_GET['cap']==$capitulosPOA[$i])
-                    echo "<li class=\"current-partida\"><a href=\"#\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+                    echo "<li class=\"current\"><a href=\"#\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
                 else
-                    echo "<li><a href=\"insumos-requisiciones.php?meta=".$_GET['meta']."&accion=".$_GET['accion']."&cap=".$capitulosPOA[$i]."#pe\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+                    echo "<li><a href=\"insumos-requisiciones.php?meta=".$_GET['meta']."&accion=".$_GET['accion']."&cap=".$capitulosPOA[$i]."#pa\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
                     
     ?>
             </ul>
         </div>
-    <?php
-        // Obtenemos los insumos de este usuario con esta meta con esta accion con este capitulo
-        $insumosPOA=$proc->devolverInsumosPOA($_SESSION['nick'],$_GET['cap']);
+		<div id="info-partida2">            
+	    <?php
+    	    // Obtenemos los insumos de este usuario con esta meta con esta accion con este capitulo
+	        $insumosPOA=$proc->devolverInsumosPOA($_SESSION['nick'],$_GET['cap'],$_GET['meta'],$_GET['accion']);
         
-        // Hacemos el recorrido de los insumos por partida
-        $Id_Partida=$insumosPOA[0][2];
-        echo "<div id=\"tabla-partida-poa\">";
-            echo "<span class=\"label-partida\">[-] Partida ".$Id_Partida."</span>";
-            echo "<div class=\"renglon-titulos\"";
-                echo "<div class=\"celda3\">Agregar</div>";
-                echo "<div class=\"celda3\">Nombre</div>";
-                echo "<div class=\"celda3\">Medida</div>";
-                echo "<div class=\"celda3\">Cantidad Restante</div>";		
-                echo "<div class=\"celda3\">Catidad a solicitar</div>";					
-            echo "</div>";
-        for($i=0;$i<count($insumosPOA);$i++){
-            // Aquí mostramos los encabezados
-            if($Id_Partida!=$insumosPOA[$i][2]){
-                $Id_Partida=$insumosPOA[$i][2];
-                echo "</div>";
-                echo "<div id=\"tabla-partida-poa\">";
-                    echo "<span class=\"label-partida\">[-] Partida ".$Id_Partida."</span>";
-                    echo "<div class=\"renglon-titulos\"";
-                        echo "<div class=\"celda3\">Agregar</div>";
-                        echo "<div class=\"celda3\">Nombre</div>";
-                        echo "<div class=\"celda3\">Medida</div>";
-                        echo "<div class=\"celda3\">Cantidad Restante</div>";		
-                        echo "<div class=\"celda3\">Catidad a solicitar</div>";					
-                    echo "</div>";
-            }// Aquí mostramos los insumos
-            if($i%2==0){
-				echo "<a name=".$insumosPOA[$i][3].">";
-                echo "<div class=\"renglon-blanco-corto\">";
-                    echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
-                    echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
-					$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
-                    echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
-					$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3]);
-                    echo "<div class=\"celda4\">".$cantidad_restante."</div>";
-					// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
+    	    // Hacemos el recorrido de los insumos por partida
+	        $Id_Partida=$insumosPOA[0][2];
+	        echo "<div id=\"tabla-partida-poa\">";
+    	        echo "<span class=\"label-partida\">[-] Partida ".$Id_Partida."</span>";
+	            echo "<div class=\"renglon-titulos\"";
+    	            echo "<div class=\"celda3\">Contemplar</div>";
+        	        echo "<div class=\"celda3\">Nombre</div>";
+            	    echo "<div class=\"celda3\">Medida</div>";
+                	echo "<div class=\"celda3\">Cantidad Restante</div>";		
+	                echo "<div class=\"celda3\">Catidad a solicitar</div>";					
+    	        echo "</div>";
+        	for($i=0;$i<count($insumosPOA);$i++){
+            	// Aquí mostramos los encabezados
+	            if($Id_Partida!=$insumosPOA[$i][2]){
+	                $Id_Partida=$insumosPOA[$i][2];
+	                echo "</div>";
+	                echo "<div id=\"tabla-partida-poa\">";
+	                    echo "<span class=\"label-partida\">[-] Partida ".$Id_Partida."</span>";
+	                    echo "<div class=\"renglon-titulos\"";
+	                        echo "<div class=\"celda3\">Contemplar</div>";
+	                        echo "<div class=\"celda3\">Nombre</div>";
+	                        echo "<div class=\"celda3\">Medida</div>";
+	                        echo "<div class=\"celda3\">Cantidad Restante</div>";		
+	                        echo "<div class=\"celda3\">Catidad a solicitar</div>";					
+    	                echo "</div>";
+        	    }// Aquí mostramos los insumos
+            	if($i%2==0){
+					echo "<a name=".$insumosPOA[$i][3].">";
+		                echo "<div class=\"renglon-blanco-corto\">";
+        	            echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
+            	        echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
+						$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
+                    	echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
+						$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3],$_GET['meta'],$_GET['accion']);
+    	                echo "<div class=\"celda4\">".$cantidad_restante."</div>";
+						// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;
-                    echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
-                echo "</div>";
-            }else{
-				echo "<a name=".$insumosPOA[$i][3].">";
-                echo "<div class=\"renglon-morado-corto\">";
-                    echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
-                    echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
-					$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
-                    echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
-					$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3]);
-                    echo "<div class=\"celda4\">".$cantidad_restante."</div>";
-					// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
+            	        echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
+                		echo "</div>";
+	            }else{
+					echo "<a name=".$insumosPOA[$i][3].">";
+	                echo "<div class=\"renglon-morado-corto\">";
+    	                echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/></div>";
+        	            echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
+						$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
+                	    echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
+						$cantidad_restante=$proc->devolverResto($_SESSION['nick'],$insumosPOA[$i][3],$_GET['meta'],$_GET['accion']);
+	                    echo "<div class=\"celda4\">".$cantidad_restante."</div>";
+						// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;					
-                    echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
-                echo "</div>";
-            }
-        }
+        	            echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\"/></div>";								
+            	    echo "</div>";
+            	}
+	        }
         echo "</div>";			
-            
-                
     ?>
     </div>
-</div>
+    
+    <div class="none-space">
+    	<p>
+    </div>
+	<a name="pa"></a>
+	<div id="insumos-disponibles">
+    	Lo anterior para ser utilizado en:
+    </div>
+	<div class="none-space">
+    </div>
+    <div ><textarea cols="60" rows="6" id="des-req"></textarea></div>
+
+
 
 	<div class="centrado">
 		<div id="line-up-cen">    	
             <br/>
-            <input value="Agregar" name="agregar" type="submit"/>
+            <input value="Enviar" name="agregar" type="submit"/>
             <input value="Cancelar" name="cancelar" type="button" onclick="location='poa.php#pe'"/>
             <br/>
             <br/>
@@ -358,3 +394,4 @@ else{
 	</div>
 </body>
 <!-- InstanceEnd --></html>
+

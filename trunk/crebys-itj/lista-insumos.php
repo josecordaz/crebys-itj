@@ -101,11 +101,11 @@
         &nbsp;
         &nbsp;
         &nbsp;
-		<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
+		<!--<a href="/crebys-itj/admin-proc.php" class="menu-off">Procedimientos</a>
         &nbsp;
         &nbsp;
         &nbsp;
-        &nbsp;
+        &nbsp;-->
         <a href="/crebys-itj/lista-insumos.php" class="menu-on">Insumos</a>
         &nbsp;
         &nbsp;
@@ -162,7 +162,7 @@
             	<span class="subtitulo2">Este es el titulo del capitulo 10,000</span>
             </div>
             <div id="atajo">
-                Atajo:
+                Atajo de Partidas:
                 <?php
 				    $id_partida=$insumos[0][0];
 					$Pa_Nombre=$insumos[0][6];
@@ -247,14 +247,14 @@ echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-part
 					echo "<div class='celda2'><a name='".$insumos[$i][1]."'><input type='radio' name='".$insumos[$i][1]."' value='".$id_partida."'/></div>";
 					echo "<div class='celda2'>".$insumos[$i][2]."</div>";
 					echo "<div class='celda2'>".$insumos[$i][4]."</div>";
-					echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+					echo "<div class='celda2'>".$proc->convertirFMoneda($insumos[$i][5])."</div>";
 				echo "</div>";
 			}else{
 				echo "<div class='renglon3'>";
 					echo "<div class='celda2'><a name='".$insumos[$i][1]."'><input type='radio'/ name='".$insumos[$i][1]."' value='".$id_partida."'/></div>";
 					echo "<div class='celda2'>".$insumos[$i][2]."</div>";
 					echo "<div class='celda2'>".$insumos[$i][4]."</div>";
-					echo "<div class='celda2'>".$insumos[$i][5]."</div>";
+					echo "<div class='celda2'>".$proc->convertirFMoneda($insumos[$i][5])."</div>";					
 				echo "</div>";
 			}
 			$id_i=$i;
@@ -262,7 +262,7 @@ echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-part
 }
 		if(isset($_GET['li-'.$id_partida])||isset($_SESSION['li-'.$id_partida])){
 ?>
-        <div class="subtotal">
+
             <div class="agregar-insumo">
             	<?php
 					echo "<input type=\"button\" value=\"Agregar\" onclick=\"location= 'insumo.php?id_partida=".$insumos[$id_i][0]."'\"/>";
@@ -271,12 +271,27 @@ echo "<span class='label-partida'><a name='".$id_partida."'><a class='label-part
 					echo "</form>";
 				?>
                 </div>
-            </div>
-        </div>
+
+            
+	       </div>
+           
+       
         <?php
 		}
 		?>
+        
+        
+        
 	</div>
+    	<p/>&nbsp;</p>
+       	<p/>&nbsp;</p>
+    	<p/>&nbsp;</p>
+       	<p/>&nbsp;</p>
+       	<p/>&nbsp;</p>        
+        <div class="linea-larga">
+        	<hr class="color-linea-larga">
+        </div>
+    	<input class="boton-izquierda" type="button" value="Agregar Partida" onclick="location= 'partida.php'"/>
 </div>
 </div>
 </div>

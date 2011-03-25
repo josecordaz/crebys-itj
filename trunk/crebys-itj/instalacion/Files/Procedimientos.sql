@@ -6,7 +6,7 @@ a	!-- PARTIDAS
 		!-- error 1:=	Inserción correcta;
 		!-- error 2:=	Ya existe la partida;
 
-	&CREATE PROCEDURE insPartida(IN Id_Partid INT,IN Pa_Nombr VARCHAR(30),OUT error INT)
+	&CREATE PROCEDURE insPartida2(IN Id_Partid INT,IN Pa_Nombr VARCHAR(30),OUT error INT)
 	BEGIN
 		SET error=1;
 		IF(select count(*)from Partidas where Id_Partida=Id_Partid)>0 THEN
@@ -392,6 +392,7 @@ a	!-- PARTIDAS
 	&CREATE PROCEDURE eliminarMeta(IN Id_Met INT,OUT error INT)
 	BEGIN
 		SET error=1;
+		if()
 		delete from acciones where Id_Meta=Id_Met;
 		delete from metas where Id_Meta=Id_Met;
 	END;&
@@ -418,6 +419,74 @@ a	!-- PARTIDAS
 		END IF;
 	END;&
 	
+	!-- Agregar una requisicion
+	&CREATE PROCEDURE insertarRequisicion(IN Re_Proposit VARCHAR(50),IN Us_Nic VARCHAR(20),OUT Id_Requisicio INT)
+	BEGIN
+		DECLARE Re_Foli INT;
+		
+		IF(select count(*) from requisiciones)=0 THEN
+			SET Id_Requisicio=5;
+		ELSE
+			SET Id_Requisicio=(select max(Id_Requisicion) from requisiciones)+1;
+		END IF;
+		
+		IF(select count(*) 
+			from requisiciones inner join 
+			( disminuciones inner join
+			( insumos inner join
+			( insumos_acciones inner join 
+			( acciones inner join 
+			( acciones_poa inner join
+			( poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario
+			)on poa.Id_Poa=acciones_poa.Id_Poa
+			)on acciones_poa.Id_Accion=acciones.Id_Accion
+			)on acciones.Id_Accion=insumos_acciones.Id_Accion
+			)on insumos_acciones.Id_Insumo=insumos.Id_Insumo
+			)on insumos.Id_Insumo=disminuciones.Id_Insumo
+			)on disminuciones.Id_Requisicion=requisiciones.Id_Requisicion
+			where Us_Nick=Us_Nic
+		   )=0 THEN
+			SET Re_Foli=10;
+		ELSE
+			SET Re_Foli=(select max(Re_Folio) 
+			from requisiciones inner join 
+			( disminuciones inner join
+			( insumos inner join
+			( insumos_acciones inner join 
+			( acciones inner join 
+			( acciones_poa inner join
+			( poa inner join usuarios on usuarios.Id_Usuario=poa.Id_Usuario
+			)on poa.Id_Poa=acciones_poa.Id_Poa
+			)on acciones_poa.Id_Accion=acciones.Id_Accion
+			)on acciones.Id_Accion=insumos_acciones.Id_Accion
+			)on insumos_acciones.Id_Insumo=insumos.Id_Insumo
+			)on insumos.Id_Insumo=disminuciones.Id_Insumo
+			)on disminuciones.Id_Requisicion=requisiciones.Id_Requisicion
+			where Us_Nick=Us_Nic
+		   )+1;
+		END IF;
+		
+		insert into requisiciones(Id_Requisicion,Re_Proposito,Re_Fecha,Re_Folio) values(Id_Requisicio,Re_Proposit,(select LocalTime()),Re_Foli);
+	END;&
+	
+	!-- Procedimiento para agregar partidas
+		!-- error=0 Error en la consulta
+		!-- error=1 Inserción correcta
+		!-- error=2 Identificador de Partida Repetido
+		!-- error=3 Nombre de partida repetido
+	&CREATE PROCEDURE insPartida(IN Id_Partid INT,IN Pa_Nombr VARCHAR(350),OUT error INT)
+	BEGIN
+		SET error=1;
+		IF(select count(*) from partidas where Id_Partida=Id_Partid)=0 THEN
+			IF(select count(*) from partidas where Pa_Nombre=Pa_Nombr)=0 THEN
+				insert into partidas values(Id_Partid,Pa_Nombr);
+			ELSE
+				SET error=3;
+			END IF;
+		ELSE
+			SET error=2;
+		END IF;
+	END;&
 	
 	
 	!-- Simpre dejar espacion al final para que no marque error
