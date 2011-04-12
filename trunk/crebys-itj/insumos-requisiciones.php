@@ -74,27 +74,35 @@
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- InstanceBegin template="/Templates/tecplt.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <!-- #BeginEditable "doctitle" -->
 <title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
+
+<script languaje="JavaScript">
+
 
 	function SetToHidden(valor) {
 		var obj = document.getElementById("cap");
-		alert(valor);
+		obj.value = valor;
+        Enviar();
+	}
+	
+	function SetCapAnt(valor) {
+		var obj = document.getElementById("cap-ant");
 		obj.value = valor;
 	}
  
-	function enviar() { 
+	function Enviar() { 
 		document.form2.submit(); 
 		return false 
 	}
 	
 </script>
-
 <!-- #EndEditable -->
 
 </head>
@@ -307,6 +315,12 @@ echo "<form name=\"form2\" action=\"redir-insumos-requisiciones.php\" method=\"p
 	echo "<input type=\"hidden\" name=\"accion\" id=\"accion\" value=\"".$_GET['accion']."\"/>";
 
 	echo "<input type=\"hidden\" name=\"cap\" id=\"cap\" value=\"\"/>";
+	echo "<input type=\"hidden\" name=\"cap-ant\" id=\"cap-ant\" value=\"\"/>";
+?>
+	<script languaje="javascript">
+		SetCapAnt(<?php echo $_GET['cap']?>);
+	</script> 
+<?php
     // Obtenemos los capitulos que tiene el POA en esta acción con este nick determinados
 ?>
         <div class="menup">
@@ -314,12 +328,15 @@ echo "<form name=\"form2\" action=\"redir-insumos-requisiciones.php\" method=\"p
     <?php
 for($i=0;$i<count($capitulosPOA);$i++){
 	if($_GET['cap']==$capitulosPOA[$i]){
-	   echo "<li class=\"current\"><a href=\"untitled.php\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+	   echo "<li class=\"current\"><a ><span>".$capitulosPOA[$i]."0,000 ";
 	}else{
-	   echo "<li ><a href=\"#pa\" onClick=\"SetToHidden('".$capitulosPOA[$i]."'); enviar();\" ><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+	   echo "<li ><a onClick=\"SetToHidden('".$capitulosPOA[$i]."');\" ><span>".$capitulosPOA[$i]."0,000 ";
 	}
+	if(isset($_SESSION[$capitulosPOA[$i].'-err'])&&$_SESSION[$capitulosPOA[$i].'-err']>0)
+		echo "<ver class=\"insumo-error\">( err:= ".$_SESSION[$capitulosPOA[$i].'-err'].") </var></span></a></li>";
 }
     ?>
+ <!--   <a href="dkkd" onblur=""-->
             </ul>
         </div>
 		<div id="info-partida2">            
@@ -356,8 +373,12 @@ for($i=0;$i<count($capitulosPOA);$i++){
         	    }// Aquí mostramos los insumos
             	if($i%2==0){
 					echo "<a name=\"".$insumosPOA[$i][3]."\" id=\"n".$insumosPOA[$i][3]."\"></a>";
-	                echo "<div class=\"renglon-blanco-corto\">";
-						if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))	
+					if(isset($_SESSION['mal-'.$insumosPOA[$i][3]]))
+		                echo "<div class=\"limite-error-blanco\">";
+					else
+						echo "<div class=\"renglon-blanco-corto\">";
+						
+						if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))	
 							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\" checked='checked'/>";
 						else
 							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/>";
@@ -371,17 +392,24 @@ for($i=0;$i<count($capitulosPOA);$i++){
 							// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 							$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;
 							echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\" value=\"";
-								if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))
+								if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))
 									echo $_SESSION["cant-sol-".$insumosPOA[$i][3]];
 							echo "\"/></div>";
 						echo "</div>";
 	            }else{
 					echo "<a name=\"".$insumosPOA[$i][3]."\" ></a>";
-	                echo "<div class=\"renglon-morado-corto\">";
-						echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"";
-							if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))	
-								echo " checked='checked' ";
-						echo " /></div>";
+					if(isset($_SESSION['mal-'.$insumosPOA[$i][3]]))
+		                echo "<div class=\"limite-error-morado\">";
+					else
+						echo "<div class=\"renglon-morado-corto\">";
+						
+						if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))	
+							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\" checked='checked'/>";
+						else
+							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/>";
+							
+						echo "</div>";
+						
 						echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
 						$_SESSION["insumo-".$insumosPOA[$i][3]]=$insumosPOA[$i][0];
 						echo "<div class=\"celda4\">".$insumosPOA[$i][1]."</div>";
@@ -390,7 +418,7 @@ for($i=0;$i<count($capitulosPOA);$i++){
 						// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;					
 							echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\" value=\"";
-								if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))
+								if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))
 									echo $_SESSION["cant-sol-".$insumosPOA[$i][3]];
 							echo "\"/></div>";
             	    echo "</div>";
