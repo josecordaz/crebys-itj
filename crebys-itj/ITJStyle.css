@@ -100,6 +100,7 @@
 	padding: 0px;
 	color: rgb(0, 0, 186);
 	text-decoration: none;
+	cursor: pointer;
 }
 .menup A SPAN
 {
@@ -1099,4 +1100,26 @@ BODY
 	text-align: left;
 	margin-left: 10px;
 	margin-top: 6px;
+}
+.limite-error-blanco
+{
+	width: auto;
+	float: left;
+	background-color: #FED1D1;
+	margin-bottom: 1px;
+	margin: 0 0 0 69px;
+	color: #ED0C28;
+}
+.limite-error-morado
+{
+	width: auto;
+	float: left;
+	background-color: #F78686;
+	margin-bottom: 1px;
+	margin: 0 0 0 69px;
+	color: #9A0315;
+}
+.insumo-error
+{
+	color: #EB041F;
 }
