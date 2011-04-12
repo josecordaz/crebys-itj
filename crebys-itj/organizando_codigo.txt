@@ -1,0 +1,5 @@
+for(recorremos las variables de session    $session_key $session_valor)
+
+	if(empieza con "cant-sel")
+	
+		if()

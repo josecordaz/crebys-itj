@@ -38,7 +38,6 @@
 		
 		// Verificamos si hubo un cambio de meta o accion
 		if($_SESSION['res_accion']!=$_GET['accion']||$_SESSION['res_meta']!=$_GET['meta']){
-			echo "entre";
 			// Borramos las variables de session
 				
 			// Declaramos arreglo para respaldar $_SESSION
@@ -68,12 +67,8 @@
 			// Respaldamos meta
 			$_SESSION['res_meta']=$_GET['meta'];
 		}
-
-		
-		
-	}else
-	{
-		header("Location: http://$host$uri/insumos-requisiciones.php?meta=".$metas[0][0]."&amp;accion=".$proc->NumAccion($accionesMeta[0][1])."&amp;cap=".$capitulosPOA[0]."#pa");
+	}else{
+	header("Location: http://$host$uri/insumos-requisiciones.php?meta=".$metas[0][0]."&accion=".$proc->NumAccion($accionesMeta[0][1])."&cap=".$capitulosPOA[0]."");
 	}
 		
 
@@ -85,6 +80,21 @@
 <!-- #BeginEditable "doctitle" -->
 <title>Crebys-ITJ(Crontrol de requisiciones de bienes y servicios del ITJ) </title>
 <link href="ITJStyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+	function SetToHidden(valor) {
+		var obj = document.getElementById("cap");
+		alert(valor);
+		obj.value = valor;
+	}
+ 
+	function enviar() { 
+		document.form2.submit(); 
+		return false 
+	}
+	
+</script>
+
 <!-- #EndEditable -->
 
 </head>
@@ -273,7 +283,7 @@ else{
 
 <div class="none-space"></div>
 <a name="pa"></a>
-<div id="insumos-disponibles">Insumos Disponibles</div>
+<div class="insumos-disponibles">Insumos Disponibles</div>
 <div class="none-space">
 <?php
 	// Espacio para mostrar error en caso de que hubiera                
@@ -288,21 +298,27 @@ else{
 
 
 
-<?php
-echo "Que está pasando por aquí";
-echo "<form name=\"form1\" method=\"post\" action=\"redir-insumos-requisiciones.php?meta=".$_GET['meta']."&amp;accion=".$_GET['accion']."&amp;cap=".$_GET['cap']."\">";
 
-        // Obtenemos los capitulos que tiene el POA en esta acción con este nick determinados
+<?php
+echo "<form name=\"form2\" action=\"redir-insumos-requisiciones.php\" method=\"post\">";
+
+	// Variables ocultas para enviar la meta y accion
+	echo "<input type=\"hidden\" name=\"meta\" id=\"meta\" value=\"".$_GET['meta']."\"/>";
+	echo "<input type=\"hidden\" name=\"accion\" id=\"accion\" value=\"".$_GET['accion']."\"/>";
+
+	echo "<input type=\"hidden\" name=\"cap\" id=\"cap\" value=\"\"/>";
+    // Obtenemos los capitulos que tiene el POA en esta acción con este nick determinados
 ?>
         <div class="menup">
             <ul> 
     <?php
-            for($i=0;$i<count($capitulosPOA);$i++)
-                if($_GET['cap']==$capitulosPOA[$i])
-                    echo "<li class=\"current\"><a href=\"#\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
-                else
-                    echo "<li ><a href=\"#\" ><span>".$capitulosPOA[$i]."0,000</span></a></li>";
-                    
+for($i=0;$i<count($capitulosPOA);$i++){
+	if($_GET['cap']==$capitulosPOA[$i]){
+	   echo "<li class=\"current\"><a href=\"untitled.php\"><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+	}else{
+	   echo "<li ><a href=\"#pa\" onClick=\"SetToHidden('".$capitulosPOA[$i]."'); enviar();\" ><span>".$capitulosPOA[$i]."0,000</span></a></li>";
+	}
+}
     ?>
             </ul>
         </div>
@@ -339,9 +355,9 @@ echo "<form name=\"form1\" method=\"post\" action=\"redir-insumos-requisiciones.
     	                echo "</div>";
         	    }// Aquí mostramos los insumos
             	if($i%2==0){
-					echo "<a name=".$insumosPOA[$i][3]."/>";
+					echo "<a name=\"".$insumosPOA[$i][3]."\" id=\"n".$insumosPOA[$i][3]."\"></a>";
 	                echo "<div class=\"renglon-blanco-corto\">";
-						if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))	
+						if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))	
 							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\" checked='checked'/>";
 						else
 							echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"/>";
@@ -354,16 +370,16 @@ echo "<form name=\"form1\" method=\"post\" action=\"redir-insumos-requisiciones.
 							echo "<div class=\"celda4\">".$cantidad_restante."</div>";
 							// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 							$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;
-							echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\" value=\" ";
-								if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))
+							echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\" value=\"";
+								if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))
 									echo $_SESSION["cant-sol-".$insumosPOA[$i][3]];
 							echo "\"/></div>";
 						echo "</div>";
 	            }else{
-					echo "<a name=".$insumosPOA[$i][3]."/>";
+					echo "<a name=\"".$insumosPOA[$i][3]."\" ></a>";
 	                echo "<div class=\"renglon-morado-corto\">";
 						echo "<div class=\"celda4\"><input name=\"cant-sel-".$insumosPOA[$i][3]."\" type=\"checkbox\"";
-							if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))	
+							if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))	
 								echo " checked='checked' ";
 						echo " /></div>";
 						echo "<div class=\"celda4\">".$insumosPOA[$i][0]."</div>";
@@ -374,7 +390,7 @@ echo "<form name=\"form1\" method=\"post\" action=\"redir-insumos-requisiciones.
 						// Creamos un variable de session que guarde la cantidad máxima que en usuario puedes solicitar del producto $insumosPOA[$i][3]
 						$_SESSION['cant-'.$insumosPOA[$i][3]]=$cantidad_restante;					
 							echo "<div class=\"celda4\"><input class=\"at-corto\" name=\"cant-sol-".$insumosPOA[$i][3]."\" type=\"text\" value=\"";
-								if(isset($_SESSION["cant-sol-".$insumosPOA[$i][3]]))
+								if(isset($_SESSION["cant-sel-".$insumosPOA[$i][3]]))
 									echo $_SESSION["cant-sol-".$insumosPOA[$i][3]];
 							echo "\"/></div>";
             	    echo "</div>";
@@ -399,11 +415,7 @@ echo "<form name=\"form1\" method=\"post\" action=\"redir-insumos-requisiciones.
 	<div class="centrado">
 		<div id="line-up-cen">    	
             <br/>
-            <input value="" name="agregar" type="submit" style="display:none"/>
-           <?php
-				echo  "<input value=\"Enviar\" name=\"enviar\" type=\"button\" onclick=\"location='guardar-requisicion.php?meta=".$_GET['meta']."&amp;accion=".$_GET['accion']."'\"/>";           
-		   ?>
-           
+            <input value="Enviar" name="enviar" type="submit"/>
             <input value="Cancelar" name="cancelar" type="button" onclick="location='borrar-var-req.php#pe'"/>
             <br/>
             <br/>
