@@ -1,69 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Centrador</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<style type="text/css">
-.subcontainer2 {
-
-	height: 190px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	border:1px solid #000;
-	background-color:White;
-	font-family:Arial;
-	font-size:small;
-	color:Black;
-
-}
-.buttonNormal{
-	float:left;
-	width:110px;
-	height:125px;
-	border:1px solid #000;
-	background-color:#E2EBED;
-	font-family:Arial;
-	font-size:small;
-	color:Gray;
-	text-align:center;
-	
-}
-.buttonClicked{
-	float:left;
-	width:110px;
-	height:125px;
-	border:1px solid #000;
-	background-color:#FF6633;
-	font-family:Arial;
-	font-size:small;
-	color:#DDDDDD;
-
-
-}
-.centrador {
-
-}
-</style>
+<title>Untitled Document</title>
+<script type="text/javascript">
+	function SetToHidden(valor) {
+		var obj = document.getElementById("order");
+		obj.value = valor;
+		alert(obj);
+	}
+ 
+	function enviar() { 
+		document.form2.submit(); 
+		return false 
+	}
+</script>
 </head>
 <body>
 
-	<div class="subcontainer2">
-		<div class="centrador">
-            <div class="buttonClicked" >
-                <div>
-            
-                    <label><strong>Vertical</strong></label>
-                    
-                </div>
-        
-            </div>
 
-            <div class="buttonNormal">
-                <div>
-                    <label><strong>Horizontal</strong></label>
-                </div>
-            </div>
-		</div>
-	</div>
+<!--
+<form name="formulario" action="search.php?adssss=2" method=\"post\">
+	<input type="hidden" name="order" id="order" value=""/>
+	<a href="#" onClick="SetToHidden('1'); enviar();">ID</a><br>
+	<a href="#" onClick="SetToHidden('2'); enviar();">ID</a><br>
+	<a href="#" onClick="SetToHidden('3'); enviar();">ID</a>
+   	<input type="text" name="or" id="or" value="23"/>
+</form>
+-->
+
+<form name="form2" action="search.php" method="post">
+	<input type="hidden" name="meta" id="meta" value="1"/>
+	<input type="hidden" name="accion" id="accion" value="1"/>
+
+	<input type="hidden" name="order" id="order" value=""/>
+	<div class="menup">
+    	<ul> 
+			<li class="current"><a href="untitled.php"><span>10,000</span></a></li>
+			<li ><a href="#" onClick="SetToHidden('9'); enviar();" ><span>20,000</span></a></li>
+        </ul>
+    </div>
+</form>
+
 </body>
 </html>

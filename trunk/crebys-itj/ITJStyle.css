@@ -512,7 +512,9 @@ BODY
 	width: 100%;
 	text-align: left;
 	text-decoration: none;
-	margin-bottom: 2px;
+	margin-bottom: 4px;
+	margin-left: 6px;
+	margin-top: 5px;
 }
 .datos
 {
@@ -942,6 +944,7 @@ BODY
 .at-corto
 {
 	width: 4.6em;
+	text-align: center;
 }
 .tit-sem
 {
@@ -1029,7 +1032,7 @@ BODY
 	font-weight: bold;
 	font-family: "Courier New";
 }
-#insumos-disponibles
+.insumos-disponibles
 {
 	float: right;
 	width: 100%;
@@ -1058,6 +1061,7 @@ BODY
 	border-left: 2px solid #0829FD;
 	border-bottom: 2px solid #0728FC;
 	border-right: 2px solid #0627FB;
+	padding-bottom: 10px;
 }
 #separador
 {
