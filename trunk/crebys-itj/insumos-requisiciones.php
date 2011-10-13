@@ -436,7 +436,7 @@ for($i=0;$i<count($capitulosPOA);$i++){
     </div>
 	<div class="none-space">
     </div>
-    <div ><textarea cols="60" rows="6" id="des-req"></textarea></div>
+    <div ><textarea name="des-req" id="des-req" cols="60" rows="6" ></textarea></div>
 
 
 

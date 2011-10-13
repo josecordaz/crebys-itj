@@ -96,6 +96,7 @@
 		// Si es así, redireccionamos a la pagina que 
 		// gardará en la base de datos los insumos 
 		// solicitados
+		$_SESSION['des-req']=$_POST['des-req'];
 		header("location: guardar-requisicion.php?meta=".$_POST['meta']."&accion=".$_POST['accion']);
 	}else{
 		// De lo contrario
