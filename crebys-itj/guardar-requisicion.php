@@ -14,4 +14,6 @@
 	foreach($res_session as $key => $value)
 		if(substr($key,0,9)=='cant-sol-')
 			echo "Insumo[".substr($key,9,strlen($key)-9)."]=-=- ".$value."<br>";
+	
+	echo "<br>".$_SESSION['des-req'];
 ?>

@@ -486,6 +486,60 @@ a	!-- PARTIDAS
 			SET error=2;
 		END IF;
 	END;&
-	
+
+	!-- Procedimiento para agregar requisiciones
+		!-- error=0 Error en la consulta
+		!-- error=1 Inserción correcta
+		!-- error=2 
+	&CREATE PROCEDURE insRequisicion(IN Us_Nic VARCHAR(20),OUT val VARCHAR(30))
+	BEGIN
+		DECLARE Re_Folio VARCHAR(30);
+		SET val=(select saberF(Us_Nic));
+	END;&
+
+	!-- Función para obtener del departamento
+	!-- al que pertenece un usuario
+	CREATE FUNCTION saberD(Us_Nic varchar(20)) RETURNS varchar(45)
+	BEGIN
+		DECLARE departamento VARCHAR(45);
+		SET departamento=(select De_Nombre
+				from Usuarios inner join
+						(departamentos_puestos inner join departamentos on departamentos.Id_Departamento=departamentos_puestos.Id_Departamento)
+					 on departamentos_puestos.Id_Departamento_Puesto=Usuarios.Id_Departamento_Puesto
+				where Us_Nick=Us_Nic);
+		RETURN departamento;
+	END;&
+	!-- Función para saber el número de requisicion
+	!-- en el que se quedó un departamento
+	CREATE FUNCTION saberF(Us_Nic varchar(20)) 
+		RETURNS varchar(30)
+	BEGIN
+		DECLARE refolio VARCHAR(30);
+		SET refolio=(select max(Re_Folio)
+		              from requisiciones inner join 
+					        (disminuciones inner join 
+							  (insumos inner join 
+							    (insumos_acciones inner join 
+							      (acciones inner join 
+								    (acciones_poa inner join 
+								      (poa inner join 
+								        (usuarios inner join 
+									      (departamentos_puestos inner join departamentos
+                                          on departamentos.Id_Departamento=departamentos_puestos.Id_Departamento)
+									    on departamentos_puestos.Id_Departamento_Puesto=Usuarios.Id_Departamento_Puesto)
+								      on usuarios.Id_Usuario=poa.Id_Usuario)
+								    on poa.Id_POA=acciones_poa.Id_POA)
+								  on acciones_poa.Id_Accion=acciones.Id_Accion)
+								on acciones.Id_Accion=insumos_acciones.Id_Accion)
+							  on insumos_acciones.Id_Insumo=insumos.Id_Insumo)
+							on insumos.Id_Insumo=disminuciones.Id_Insumo)
+						  on disminuciones.Id_Requisicion=requisiciones.Id_Requisicion
+					  where De_Nombre=(select saberD(Us_Nic)));
+		RETURN refolio;
+	END;
+
 	
 	!-- Simpre dejar espacion al final para que no marque error
+
+	
+	
