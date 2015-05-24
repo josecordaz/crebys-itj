@@ -1,0 +1,1 @@
+La idea es implementar una herramienta WEB que ayude en el control de requisiciónes de bienes y/o servicios del ITJ.
